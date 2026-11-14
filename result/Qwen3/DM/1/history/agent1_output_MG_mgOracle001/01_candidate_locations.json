@@ -1,0 +1,102 @@
+[
+  {
+    "location_ref": "LINE_0011",
+    "line": 11,
+    "code": "                    f1 = False"
+  },
+  {
+    "location_ref": "LINE_0021",
+    "line": 21,
+    "code": "                result += A[i * n + i] "
+  },
+  {
+    "location_ref": "LINE_0024",
+    "line": 24,
+    "code": "        elif f3 or f4:  #  The anti-diagonal contains non- 0 Triangular matrix of elements "
+  },
+  {
+    "location_ref": "LINE_0030",
+    "line": 30,
+    "code": "            return self.DeterComp(A, n), symbol"
+  },
+  {
+    "location_ref": "LINE_0033",
+    "line": 33,
+    "code": "        mid = 0"
+  },
+  {
+    "location_ref": "LINE_0034",
+    "line": 34,
+    "code": "        temp = []"
+  },
+  {
+    "location_ref": "LINE_0035",
+    "line": 35,
+    "code": "        for i in range(n * n):"
+  },
+  {
+    "location_ref": "LINE_0036",
+    "line": 36,
+    "code": "            temp.append(A[i])"
+  },
+  {
+    "location_ref": "LINE_0037",
+    "line": 37,
+    "code": "        if n == 1:"
+  },
+  {
+    "location_ref": "LINE_0038",
+    "line": 38,
+    "code": "            result = A[0]"
+  },
+  {
+    "location_ref": "LINE_0040",
+    "line": 40,
+    "code": "            for i in range(n):"
+  },
+  {
+    "location_ref": "LINE_0041",
+    "line": 41,
+    "code": "                mid += int(math.pow(-1, 2 + i)) * A[i] * self.DeterComp(self.AlgComp(temp, n, i), n - 1)"
+  },
+  {
+    "location_ref": "LINE_0042",
+    "line": 42,
+    "code": "            result = mid"
+  },
+  {
+    "location_ref": "LINE_0043",
+    "line": 43,
+    "code": "        return result"
+  },
+  {
+    "location_ref": "LINE_0046",
+    "line": 46,
+    "code": "        array = []"
+  },
+  {
+    "location_ref": "LINE_0047",
+    "line": 47,
+    "code": "        for j in range(n, n * n):"
+  },
+  {
+    "location_ref": "LINE_0048",
+    "line": 48,
+    "code": "            if j % n == i:"
+  },
+  {
+    "location_ref": "LINE_0049",
+    "line": 49,
+    "code": "                pass"
+  },
+  {
+    "location_ref": "LINE_0051",
+    "line": 51,
+    "code": "                array.append(x[j])"
+  },
+  {
+    "location_ref": "LINE_0052",
+    "line": 52,
+    "code": "        return array"
+  }
+]

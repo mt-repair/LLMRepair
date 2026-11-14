@@ -1,0 +1,10 @@
+{
+  "model": "deepseek-r1:14b",
+  "available_models": [
+    "Qwen3:14b",
+    "deepseek-r1:14b",
+    "deepcoder:latest",
+    "deepcoder:14b",
+    "granite3.3:8b"
+  ]
+}

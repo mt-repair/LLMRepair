@@ -1,0 +1,44 @@
+[
+  {
+    "test_id": "input1",
+    "input": "[6, 9, 4, 2, 8, 0, 4, 0, 0] ",
+    "actual_output": "15",
+    "expected_output": "missing",
+    "test_status": "unknown"
+  },
+  {
+    "test_id": "input2",
+    "input": "[6, 9, 4, 4, 0, 0, 2, 8, 0]",
+    "actual_output": "128",
+    "expected_output": "missing",
+    "test_status": "unknown"
+  },
+  {
+    "test_id": "input3",
+    "input": "[2, 4, 7, 3, 9, 0, 0, 0, 0]",
+    "actual_output": "15",
+    "expected_output": "missing",
+    "test_status": "unknown"
+  },
+  {
+    "test_id": "input4",
+    "input": "[2, 4, 7, -9, -27, 0, 3, 9, 0]",
+    "actual_output": "0",
+    "expected_output": "missing",
+    "test_status": "unknown"
+  },
+  {
+    "test_id": "input5",
+    "input": "[7, 4, 8, 2, 7, 0, 8, 0, 0]",
+    "actual_output": "22",
+    "expected_output": "missing",
+    "test_status": "unknown"
+  },
+  {
+    "test_id": "input6",
+    "input": "[0.0, 0.0, 0.125, 0.0, 0.14285714285714285, -0.03571428571428571, 0.125, -0.07142857142857142, -0.09151785714285715]",
+    "actual_output": "-0.6071428571428572",
+    "expected_output": "missing",
+    "test_status": "unknown"
+  }
+]

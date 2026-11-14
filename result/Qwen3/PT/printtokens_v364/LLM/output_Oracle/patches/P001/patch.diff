@@ -1,0 +1,73 @@
+--- a/print_tokens.c
++++ b/print_tokens.c
+@@ -194,7 +194,69 @@
+       cu_state=token_ind=token_found=0;
+       while(!token_found)
+       {
+-	  if(token_ind >= 80) /* ADDED ERROR CHECK - hf */
++    if(token_ind >= 80) /* ADDED ERROR CHECK - hf */
++    {
++        token_str[token_ind++]=ch;
++        next_st=next_state(cu_state,ch);
++    }
++    else
++    {
++        next_st = -1; /* - hf */
++    }
++    if (next_st == -1) { /* ERROR or EOF case */
++        return(error_or_eof_case(tstream_ptr,
++                token_ptr,cu_state,token_str,token_ind,ch));
++    } else if (next_st == -2) {/* This is numeric case. */
++        return(numeric_case(tstream_ptr,token_ptr,ch,
++                token_str,token_ind));
++    } else if (next_st == -3) {/* This is the IDENTIFIER case */
++        token_ptr->token_id=IDENTIFIER;
++        unget_char(ch,tstream_ptr->ch_stream);
++        token_ind--;
++        get_actual_token(token_str,token_ind);
++        strcpy(token_ptr->token_string,token_str);
++        return(token_ptr);
++    }
++    switch(next_st)
++    {
++        default : break;
++        case 6  : /* These are all KEYWORD cases. */
++        case 9  :
++        case 11 :
++        case 13 :
++        case 16 : ch=get_char(tstream_ptr->ch_stream);
++                  if(check_delimiter(ch)==TRUE)
++                  {
++                        token_ptr->token_id=keyword(next_st);
++                        unget_char(ch,tstream_ptr->ch_stream);
++                        token_ptr->token_string[0]='\0';
++                        return(token_ptr);
++                  }
++                  unget_char(ch,tstream_ptr->ch_stream);
++                  break;
++        case 19 : /* These are all special SPECIAL character */
++        case 20 : /* cases */
++        case 21 :
++        case 22 :
++        case 23 :
++        case 24 :
++        case 25 :
++        case 32 : token_ptr->token_id=special(next_st);
++                  token_ptr->token_string[0]='\0';
++                  return(token_ptr);
++        case 27 : /* These are constant cases */
++        case 29 : token_ptr->token_id=constant(next_st,token_str,token_ind);
++                  get_actual_token(token_str,token_ind);
++                  strcpy(token_ptr->token_string,token_str);
++                  return(token_ptr);
++        case 30 :  /* This is COMMENT case */
++                  skip(tstream_ptr->ch_stream);
++                  token_ind=next_st=0;
++                  break;
++    }
++    cu_state=next_st;
++    ch=get_char(tstream_ptr->ch_stream);
++  }
+ 	  {
+ 	      token_str[token_ind++]=ch;
+ 	      next_st=next_state(cu_state,ch);

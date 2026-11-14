@@ -1,0 +1,103 @@
+{
+  "program_path": "e:\\LLMProgramRepair\\LLM\\MSBF\\code\\deepseek-r1\\SMM\\Mutant4.py",
+  "project_root": "e:\\LLMProgramRepair\\LLM\\MSBF\\code\\deepseek-r1\\SMM",
+  "program_function": "\n         Program: Sparse Matrix Multiplication  SMM。  Entry function: `MatMul(mat)` \n         Input: Contains two dense matrices  A、B  Container, Requirements  A  The number of columns is equal to  B  Number of rows.  \n         Output: Tuple  `(C, symbol)`，C  It’s a matrix product.  \\(A× B\\)  Dense matrix of ; symbol  As a flag bit, it has no practical significance. \n         Function: Convert a dense matrix to  CSR  Perform matrix multiplication in sparse format, then convert the sparse computation results back into a dense matrix. \n    ",
+  "requested_mode": "MR",
+  "effective_mode": "MR",
+  "known_fault_lines": [
+    48
+  ],
+  "test_executions": [
+    {
+      "test_id": "input1",
+      "input": "[[[0, 0, 0, 7], [2, 0, 1, 0], [3, 4, 7, 0], [0, 0, 0, 0]], [[0, 0, 4, 6], [0, 4, 0, 5], [0, 4, 0, 0], [0, 7, 0, 0]]]",
+      "actual_output": "[[0, 49, 0, 0], [0, 4, 8, 12], [0, 23, 12, 22], [0, 0, 0, 0]]",
+      "test_status": "unknown"
+    },
+    {
+      "test_id": "input2",
+      "input": "[[[0, 0, 0, 0], [0, 4, 4, 7], [4, 0, 0, 0], [6, 5, 0, 0]], [[0, 2, 3, 0], [0, 0, 4, 0], [0, 1, 7, 0], [7, 0, 0, 0]]]",
+      "actual_output": "[[0, 0, 0, 0], [49, 4, 20, 0], [0, 8, 12, 0], [0, 12, 23, 0]]",
+      "test_status": "unknown"
+    },
+    {
+      "test_id": "input3",
+      "input": "[[[3, 6, 0, 9], [0, 9, 0, 7], [0, 0, 0, 0], [0, 0, 6, 7]], [[0, 0, 0, 0], [0, 0, 1, 0], [4, 0, 0, 0], [2, 0, 0, 5]]]",
+      "actual_output": "[[18, 0, 6, 45], [14, 0, 9, 35], [0, 0, 0, 0], [31, 0, 0, 35]]",
+      "test_status": "unknown"
+    },
+    {
+      "test_id": "input4",
+      "input": "[[[3, 6, 0, 9], [0, 9, 0, 7], [0, 0, 0, 0], [0, 0, 6, 7]], [[0, 0, 0, 0], [0, 0, 4, 0], [16, 0, 0, 0], [8, 0, 0, 20]]]",
+      "actual_output": "[[72, 0, 24, 180], [56, 0, 36, 140], [0, 0, 0, 0], [103, 0, 0, 140]]",
+      "test_status": "unknown"
+    },
+    {
+      "test_id": "input5",
+      "input": "[[[0, 0, 0, 0], [0, 0, 5, 0], [2, 7, 0, 0], [2, 0, 0, 6]], [[0, 8, 9, 0], [0, 8, 0, 0], [0, 4, 0, 0], [0, 0, 0, 0]]]",
+      "actual_output": "[[0, 0, 0, 0], [0, 20, 0, 0], [0, 23, 18, 0], [0, 16, 18, 0]]",
+      "test_status": "unknown"
+    },
+    {
+      "test_id": "input6",
+      "input": "[[[0, 0, 0, 0], [0, 0, 5, 0], [2, 7, 0, 0], [2, 0, 0, 6]], [[0, 56, 63, 0], [0, 56, 0, 0], [0, 28, 0, 0], [0, 0, 0, 0]]]",
+      "actual_output": "[[0, 0, 0, 0], [0, 140, 0, 0], [0, 119, 126, 0], [0, 112, 126, 0]]",
+      "test_status": "unknown"
+    },
+    {
+      "test_id": "input7",
+      "input": "[[[0, 0, 6, 0], [0, 0, 0, 0], [0, 8, 0, 0], [6, 0, 8, 9]], [[0, 0, 1, 0], [0, 0, 4, 0], [0, 0, 0, 4], [0, 0, 0, 7]]]",
+      "actual_output": "[[0, 0, 0, 24], [0, 0, 0, 0], [0, 0, 32, 0], [0, 0, 6, 41]]",
+      "test_status": "unknown"
+    },
+    {
+      "test_id": "input8",
+      "input": "[[[1, 0, 6, 0], [0, 1, 0, 0], [0, 8, 1, 0], [6, 0, 8, 10]], [[0, 0, 1, 0], [0, 0, 4, 0], [0, 0, 0, 4], [0, 0, 0, 7]]]",
+      "actual_output": "[[0, 0, 1, 24], [0, 0, 4, 0], [0, 0, 32, 4], [0, 0, 6, 42]]",
+      "test_status": "unknown"
+    }
+  ],
+  "mg_relation": [
+    {
+      "mr_id": "MR1",
+      "source_test_id": "input1",
+      "followup_test_id": "input2",
+      "input_transformation": " Input Matrix for a Given Source Test Case  (A, B) , first transpose the two matrices separately, and then swap their positions in the matrix multiplication. Specifically, let  A' = B^T，B' = A^T , therefore, the input for the follow-up test case is  (B^T, A^T) . That is, the original first input matrix  A  After being transposed, it is placed in the second position, the original second input matrix  B  After being transposed, it is placed in the first position. ",
+      "output_relation": " Set the output of the source test case to  C = A × B , the follow-up test case output is  C' = B^T × A^T . According to the transpose property of matrix multiplication  (A × B)^T = B^T × A^T Get  C' = C^T Therefore, the output matrix of the follow-up test case should be equal to the transpose of the output matrix of the source test case. ",
+      "actual_relation_status": "VMG"
+    },
+    {
+      "mr_id": "MR2",
+      "source_test_id": "input3",
+      "followup_test_id": "input4",
+      "input_transformation": " First, construct a diagonal matrix.  Q , where all elements on the main diagonal are  4 , the remaining elements are all  0 Therefore,  Q = 4I Hold.  A  Unchanged, the matrix will be  B  Right Multiplication  Q Specifically, let  A' = A，B' = B × Q When  Q  Dimensions and  B  When the number of columns matches, there are  B × Q = 4B Therefore, this transformation is essentially a matrix  B  All elements of  are multiplied by  4 . The resulting follow-up test case input is  (A, 4B)。",
+      "output_relation": " Set the output of the source test case to  C = A × B . The output of the follow-up test case is  C' = A × (4B) . According to the scalar multiplication property of matrix multiplication, we have  C' = 4 × (A × B) = 4C Therefore, each element in the follow-up test case output matrix should be equal to the corresponding element in the source test case output matrix.  4  times. The expected relationship is  C' = 4C。",
+      "actual_relation_status": "VMG"
+    },
+    {
+      "mr_id": "MR3",
+      "source_test_id": "input5",
+      "followup_test_id": "input6",
+      "input_transformation": " Hold Matrix  A  No change, directly use the matrix  B  Multiply each element in  by the scalar  7 Specifically, let  A' = A，B' = 7B AND:  MR5  differed MR7  It is done directly by element-wise multiplication.  B  Perform scaling. The resulting follow-up test case input is  (A, 7B)。",
+      "output_relation": " Set the output of the source test case to  C = A × B . The output of the follow-up test case is  C' = A × (7B) . According to the scalar multiplication property of matrix multiplication, we have  C' = 7 × (A × B) = 7C Therefore, each element in the follow-up test case output matrix should be equal to the corresponding element in the source test case output matrix.  7  times. The expected relationship is  C' = 7C。",
+      "actual_relation_status": "VMG"
+    },
+    {
+      "mr_id": "MR4",
+      "source_test_id": "input7",
+      "followup_test_id": "input8",
+      "input_transformation": " First, construct an identity matrix.  I , whose dimensions are equal to the matrix  A  the number of rows of . Then, the identity matrix  I  Add to Matrix  A  upward, while maintaining  B  remains unchanged. Specifically, let  A' = A + I，B' = B . This operation is equivalent to  A  Add to each main diagonal element of  1 , while the remaining non-diagonal elements remain unchanged. The resulting follow-up test case input is  (A + I, B)。",
+      "output_relation": " Set the output of the source test case to  C = A × B . The output of the follow-up test case is  C' = (A + I) × B . According to the distributive law of matrix multiplication over addition, we have  C' = A × B + I × B  out of   I  is the identity matrix, so  I × B = B Therefore,  C' = C + B . That is, the output of the follow-up test case should be equal to the output matrix of the source test case.  C  With Source Input Matrix  B  The result of matrix addition for . The expected relationship is  C' = C + B。",
+      "actual_relation_status": "VMG"
+    }
+  ],
+  "patch_budget": 5,
+  "generation_limits": {
+    "num_ctx": 32768,
+    "num_predict": 8192,
+    "max_edits_per_candidate": 3,
+    "max_total_touched_lines_per_candidate": 20,
+    "require_known_line_coverage": true
+  },
+  "policy": "One LLM response performs one shared evidence analysis and returns all patch candidates; no Agent1/Agent2 artifacts are used."
+}

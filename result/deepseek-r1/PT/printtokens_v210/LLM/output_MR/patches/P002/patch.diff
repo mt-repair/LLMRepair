@@ -1,0 +1,25 @@
+--- a/print_tokens.c
++++ b/print_tokens.c
+@@ -251,7 +251,7 @@
+                            strcpy(token_ptr->token_string,token_str);
+                            return(token_ptr);
+                  case 30 :  /* This is COMMENT case */
+-                           return(error_or_eof_case(tstream_ptr,token_ptr,cu_state,token_str,token_ind,ch));
++case 30 : return(skip_comment(tstream_ptr,token_ptr,cu_state,token_str,token_ind,ch));
+                            token_ind=next_st=0;
+                            break;
+             }
+@@ -420,6 +420,13 @@
+              ; /* Skip the characters until EOF or EOL found. */
+ 	if(c==EOF) unget_char(c, stream_ptr); /* Put back to leave gracefully - hf */
+         return;
++static void skip_comment(token_stream tstream_ptr, token token_ptr, int cu_state, char token_str[], int token_ind, char ch) {
++    // Skip until end of line or EOF
++    while((ch=get_char(tstream_ptr->ch_stream)) != '\n' && !is_end_of_character_stream(tstream_ptr->ch_stream)) {
++        if(token_ind >= 80) break;
++        token_str[token_ind++] = ch;
++    }
++    return(error_or_eof_case(tstream_ptr,token_ptr,cu_state,token_str,token_ind,ch));
+ }
+ 
+ /* *********************************************************************

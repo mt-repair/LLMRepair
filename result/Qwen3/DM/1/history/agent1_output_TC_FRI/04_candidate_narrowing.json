@@ -1,0 +1,42 @@
+{
+  "candidates": [
+    {
+      "line": 21,
+      "selection_reason": "Uses addition instead of multiplication for diagonal elements in triangular matrices.",
+      "fault_mechanism": "Incorrect determinant calculation for triangular matrices.",
+      "test_evidence_refs": [
+        "TC008"
+      ],
+      "mr_evidence_refs": [],
+      "confidence": "high",
+      "candidate_id": "RC001"
+    },
+    {
+      "line": 41,
+      "selection_reason": "Incorrect sign calculation in determinant expansion affects the sign of minors.",
+      "fault_mechanism": "Sign error in Laplace expansion.",
+      "test_evidence_refs": [
+        "TC008"
+      ],
+      "mr_evidence_refs": [],
+      "confidence": "medium",
+      "candidate_id": "RC002"
+    },
+    {
+      "line": 47,
+      "selection_reason": "Loop starts at n, potentially skipping necessary elements for submatrix creation.",
+      "fault_mechanism": "Incorrect submatrix construction in determinant expansion.",
+      "test_evidence_refs": [
+        "TC008"
+      ],
+      "mr_evidence_refs": [],
+      "confidence": "low",
+      "candidate_id": "RC003"
+    }
+  ],
+  "summary": "The primary issues are incorrect operations in determinant calculation for triangular matrices and errors in sign calculation during expansion. The submatrix creation may also contribute to the problem.",
+  "uncertainties": [
+    "Unclear if all determinant calculation paths are affected",
+    "Potential off-by-one errors in submatrix indices"
+  ]
+}

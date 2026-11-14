@@ -1,0 +1,31 @@
+--- a/print_tokens2.c
++++ b/print_tokens2.c
+@@ -149,7 +149,27 @@
+   int i=0,j;
+   int id=0;
+   char ch,ch1[2];
+-  for (j=0;j>80;j++)          /* initial the buffer   */
++   for (j=0;j<80;j++)          /* initial the buffer   */
++       { buffer[j]='\0';} 
++    ch1[0]='\0';
++    ch1[1]='\0';
++    ch=get_char(tp);
++    while(ch==' '||ch=='\n')      /* strip all blanks until meet characters */
++       {
++        ch=get_char(tp);
++       } 
++    buffer[i]=ch;
++    if(is_eof_token(buffer)==TRUE)return(buffer);
++    if(is_spec_symbol(buffer)==TRUE)return(buffer); 
++    if(ch =='"')id=1;    /* prepare for string */
++    if(ch ==59)id=2;    /* prepare for comment */
++    ch=get_char(tp);
++    while (is_token_end(id,ch) == FALSE)/* until meet the end character */
++    {
++        i++;
++        buffer[i]=ch;
++        ch=get_char(tp);
++    }
+       { buffer[j]='\0';} 
+    ch1[0]='\0';
+    ch1[1]='\0';

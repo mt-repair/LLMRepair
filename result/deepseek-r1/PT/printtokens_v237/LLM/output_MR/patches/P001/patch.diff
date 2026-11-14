@@ -1,0 +1,11 @@
+--- a/print_tokens.c
++++ b/print_tokens.c
+@@ -359,7 +359,7 @@
+ static int keyword(state)
+ int state;
+ {
+-      switch(0)
++default: { fprintf(stderr, "Invalid state %d\n", state); exit(1); }
+       {   /* Return the respective macro for the Keyword. */
+           case 6 : return(LAMBDA);
+           case 9 : return(AND);

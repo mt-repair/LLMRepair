@@ -1,0 +1,43 @@
+{
+  "candidates": [
+    {
+      "line": 21,
+      "selection_reason": "Incorrectly sums diagonal elements instead of multiplying them for triangular matrices.",
+      "fault_mechanism": "Summing instead of multiplying diagonal elements leads to wrong determinant for triangular matrices.",
+      "test_evidence_refs": [
+        "TC007"
+      ],
+      "mr_evidence_refs": [
+        "MG004"
+      ],
+      "confidence": "high",
+      "candidate_id": "RC001"
+    },
+    {
+      "line": 41,
+      "selection_reason": "Incorrect sign calculation for cofactor expansion.",
+      "fault_mechanism": "Sign error in cofactor expansion affects determinant calculation for non-triangular matrices.",
+      "test_evidence_refs": [
+        "TC008"
+      ],
+      "mr_evidence_refs": [],
+      "confidence": "medium",
+      "candidate_id": "RC002"
+    },
+    {
+      "line": 47,
+      "selection_reason": "Incorrect minor construction starting index.",
+      "fault_mechanism": "Off-by-one error in minor construction affects determinant calculation for non-triangular matrices.",
+      "test_evidence_refs": [
+        "TC008"
+      ],
+      "mr_evidence_refs": [],
+      "confidence": "medium",
+      "candidate_id": "RC003"
+    }
+  ],
+  "summary": "The primary issue is incorrect summation of diagonal elements for triangular matrices. Secondary issues include sign errors and incorrect minor construction in the determinant calculation for non-triangular matrices.",
+  "uncertainties": [
+    "Unclear if all minor elements are correctly excluded in line 51."
+  ]
+}

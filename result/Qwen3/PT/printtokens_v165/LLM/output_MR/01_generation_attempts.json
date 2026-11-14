@@ -1,0 +1,26 @@
+[
+  {
+    "attempt": 1,
+    "errors": [
+      "Model output is not valid JSON: Unterminated string starting at: line 2 column 16 (char 17)"
+    ],
+    "raw_tail": "ctly handling all cases. The `token_stream` structure holds the token stream information, but it may not be correctly handling all cases. The `get_actual_token` function is responsible for trimming whitespace, but it may not be correctly handling the token string in all cases. The `check_delimiter` function checks if a character is a delimiter, but it may not be correctly identifying all delimiters. The `next_state` function determines the next state in the DFA, but it may not be correctly transitioning between states. The `print_token` function prints the token, but it may not be correctly handling all token types. The `error_or_eof_case` function handles errors and end-of-file cases, but it may not be correctly identifying these cases. The `constant` function handles constants, but it may not be correctly identifying all constants. The `skip` function skips comments, but it may not be correctly handling all comment cases. The `numeric_case` function handles numeric tokens, but it may",
+    "response_metadata": {
+      "model": "Qwen3:14b",
+      "temperature": 0.09,
+      "seed": 0,
+      "num_ctx": 32768,
+      "num_predict": 8192,
+      "prompt_chars": 30739,
+      "done": true,
+      "done_reason": "length",
+      "prompt_eval_count": 9585,
+      "eval_count": 8192,
+      "prompt_eval_duration": 1355959000,
+      "eval_duration": 74753330000,
+      "total_duration": 77095704459,
+      "load_duration": 167192527,
+      "client_elapsed_seconds": 77.098
+    }
+  }
+]

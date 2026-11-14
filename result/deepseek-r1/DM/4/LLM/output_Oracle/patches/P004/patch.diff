@@ -1,0 +1,16 @@
+--- a/Mutant4.py
++++ b/Mutant4.py
+@@ -18,9 +18,11 @@
+         if f1 or f2:  #  The main diagonal contains non- 0 Triangular matrix of elements 
+             result = 1
+             for i in range(n):
+-                result *= A[i * n + 1]
++result *= A[i * n + i]
+                 symbol = 1
+-            return result, symbol
++if result == 0:
++    return 0, symbol
++return result, symbol
+         elif f3 or f4:  #  The anti-diagonal contains non- 0 Triangular matrix of elements 
+             result = int(math.pow(-1, n * (n - 1) / 2))
+             for i in range(n):

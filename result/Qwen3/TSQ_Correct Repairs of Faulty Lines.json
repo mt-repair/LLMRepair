@@ -1,0 +1,32 @@
+[
+  {
+    "version": 1,
+    "fault_line": 21,
+    "repaired_code": "   h = math.sqrt(pow(Max,2)-pow(Min/2,2)) "
+  },
+  {
+    "version": 2,
+    "fault_line": 26,
+    "repaired_code": "   h = math.sqrt(pow(Min,2)-pow(Max/2,2)) "
+  },
+  {
+    "version": 3,
+    "fault_line": 29,
+    "repaired_code": "    p = (Max + mid + Min)/2 "
+  },
+  {
+    "version": 4,
+    "fault_line": 34,
+    "repaired_code": "   area =  mid * Min/2 "
+  },
+  {
+    "version": 5,
+    "fault_line": 40,
+    "repaired_code": "   Max * h/2 "
+  },
+  {
+    "version": 6,
+    "fault_line": 42,
+    "repaired_code": "   x = (pow(Max, 2) + pow(Min, 2) - pow(mid, 2)) / (2 * Max) "
+  }
+]

@@ -1,0 +1,58 @@
+[
+  {
+    "test_id": "source_s5_mr2",
+    "input": ";if i ` ;nd5 ;YfI8\n",
+    "actual_output": "error,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\neof.",
+    "expected_output": "eof.",
+    "test_status": "nopass"
+  },
+  {
+    "test_id": "followup_s5_mr2",
+    "input": ";\n",
+    "actual_output": "error,\t\"\".\nerror,\t\"\".\neof.",
+    "expected_output": "eof.",
+    "test_status": "nopass"
+  },
+  {
+    "test_id": "source_s1_mr3",
+    "input": ";and \"vY\" (  ;Fzr7\nand \"vY\" (  ;Fzr7\n",
+    "actual_output": "error,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\neof.",
+    "expected_output": "keyword,\t\"and\".\nstring,\t\"vY\".\nlparen.\neof.",
+    "test_status": "nopass"
+  },
+  {
+    "test_id": "followup_s1_mr3",
+    "input": ";;and \"vY\" (  ;Fzr7\nand \"vY\" (  ;Fzr7\n",
+    "actual_output": "error,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\neof.",
+    "expected_output": "keyword,\t\"and\".\nstring,\t\"vY\".\nlparen.\neof.",
+    "test_status": "nopass"
+  },
+  {
+    "test_id": "source_s4_mr4",
+    "input": ";7bTQLAMBDA\n;7bTQLAMBDA\n",
+    "actual_output": "error,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\neof.",
+    "expected_output": "eof.",
+    "test_status": "nopass"
+  },
+  {
+    "test_id": "followup_s4_mr4",
+    "input": ";\n;\n",
+    "actual_output": "error,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\neof.",
+    "expected_output": "eof.",
+    "test_status": "nopass"
+  },
+  {
+    "test_id": "source_s3_mr5",
+    "input": ";`6#l\n93\n",
+    "actual_output": "error,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\neof.",
+    "expected_output": "numeric,\t93.\neof.",
+    "test_status": "nopass"
+  },
+  {
+    "test_id": "followup_s3_mr5",
+    "input": ";\n93\n",
+    "actual_output": "error,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\nerror,\t\"\".\neof.",
+    "expected_output": "numeric,\t93.\neof.",
+    "test_status": "nopass"
+  }
+]

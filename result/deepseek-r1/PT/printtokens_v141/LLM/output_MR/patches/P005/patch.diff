@@ -1,0 +1,15 @@
+--- a/print_tokens.c
++++ b/print_tokens.c
+@@ -229,7 +229,11 @@
+                            if(check_delimiter(ch)==TRUE)
+                            {
+                                  token_ptr->token_id=keyword(next_st);
+-                                 unget_char(2,tstream_ptr->ch_stream);
++token_ptr->token_id=keyword(next_st);
++unget_char(ch,tstream_ptr->ch_stream);
++token_ind--;
++get_actual_token(token_str,token_ind);
++strcpy(token_ptr->token_string,token_str);
+                                  token_ptr->token_string[0]='\0';
+                                  return(token_ptr);
+                            }

@@ -1,0 +1,20 @@
+--- a/Mutant20.py
++++ b/Mutant20.py
+@@ -13,7 +13,7 @@
+         return self.Own_Tracked_Alt < self.Other_Tracked_Alt
+ 
+     def Own_Above_Threat(self):
+-        return self.Other_Tracked_Alt <= self.Own_Tracked_Alt
++         return self.Other_Tracked_Alt < self.Own_Tracked_Alt
+ 
+     def Non_Crossing_Biased_Climb(self):
+         self.upward_preferred = self.Inhibit_Biased_Climb() > self.Down_Separation
+@@ -56,7 +56,7 @@
+         self.TCAS_TA = 1
+         self.NO_INTENT = 0
+         enabled = self.High_Confidence and (self.Own_Tracked_Alt_Rate <= self.OLEV) and (
+-                    self.Cur_Vertical_Sep > self.MAXALTDIFF)
++                     self.Cur_Vertical_Sep >= self.MAXALTDIFF)
+         tcas_equipped = self.Other_Capability == self.TCAS_TA
+         intent_not_known = self.Two_of_Three_Reports_Valid and self.Other_RAC == self.NO_INTENT
+         alt_sep = 'UNRESOLVED'

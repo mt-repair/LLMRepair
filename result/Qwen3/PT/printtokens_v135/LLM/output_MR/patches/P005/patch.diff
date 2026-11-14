@@ -1,0 +1,14 @@
+--- a/print_tokens.c
++++ b/print_tokens.c
+@@ -228,7 +228,10 @@
+                  case 16 : ch=get_char(tstream_ptr->ch_stream);
+                            if(check_delimiter(ch)==TRUE)
+                            {
+-                                 next_st = keyword(next_st);
++next_st = keyword(next_st);
++	      unget_char(ch,tstream_ptr->ch_stream);
++	      token_ptr->token_string[0]='\0';
++	      return(token_ptr);
+                                  unget_char(ch,tstream_ptr->ch_stream);
+                                  token_ptr->token_string[0]='\0';
+                                  return(token_ptr);

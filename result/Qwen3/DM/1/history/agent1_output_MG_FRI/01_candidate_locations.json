@@ -1,0 +1,182 @@
+[
+  {
+    "line": 11,
+    "code": "                    f1 = False"
+  },
+  {
+    "line": 24,
+    "code": "        elif f3 or f4:  #  The anti-diagonal contains non- 0 Triangular matrix of elements "
+  },
+  {
+    "line": 30,
+    "code": "            return self.DeterComp(A, n), symbol"
+  },
+  {
+    "line": 33,
+    "code": "        mid = 0"
+  },
+  {
+    "line": 34,
+    "code": "        temp = []"
+  },
+  {
+    "line": 35,
+    "code": "        for i in range(n * n):"
+  },
+  {
+    "line": 36,
+    "code": "            temp.append(A[i])"
+  },
+  {
+    "line": 37,
+    "code": "        if n == 1:"
+  },
+  {
+    "line": 38,
+    "code": "            result = A[0]"
+  },
+  {
+    "line": 40,
+    "code": "            for i in range(n):"
+  },
+  {
+    "line": 41,
+    "code": "                mid += int(math.pow(-1, 2 + i)) * A[i] * self.DeterComp(self.AlgComp(temp, n, i), n - 1)"
+  },
+  {
+    "line": 42,
+    "code": "            result = mid"
+  },
+  {
+    "line": 43,
+    "code": "        return result"
+  },
+  {
+    "line": 46,
+    "code": "        array = []"
+  },
+  {
+    "line": 47,
+    "code": "        for j in range(n, n * n):"
+  },
+  {
+    "line": 48,
+    "code": "            if j % n == i:"
+  },
+  {
+    "line": 49,
+    "code": "                pass"
+  },
+  {
+    "line": 51,
+    "code": "                array.append(x[j])"
+  },
+  {
+    "line": 52,
+    "code": "        return array"
+  },
+  {
+    "line": 17,
+    "code": "                    f4 = False"
+  },
+  {
+    "line": 1,
+    "code": "import math"
+  },
+  {
+    "line": 4,
+    "code": "class Mutant1:"
+  },
+  {
+    "line": 5,
+    "code": "    def Determinant(self, A, n):"
+  },
+  {
+    "line": 6,
+    "code": "        f1 = f2 = f3 = f4 = True  #  Separate identification 4 Triangular matrix "
+  },
+  {
+    "line": 7,
+    "code": "        symbol = 0"
+  },
+  {
+    "line": 8,
+    "code": "        for i in range(n):"
+  },
+  {
+    "line": 9,
+    "code": "            for j in range(n):"
+  },
+  {
+    "line": 10,
+    "code": "                if f1 and j > i and A[i * n + j] != 0:"
+  },
+  {
+    "line": 12,
+    "code": "                if f2 and i > j and A[i * n + j] != 0:"
+  },
+  {
+    "line": 14,
+    "code": "                if f3 and i + j < n - 1 and A[i * n + j] != 0:"
+  },
+  {
+    "line": 15,
+    "code": "                    f3 = False"
+  },
+  {
+    "line": 16,
+    "code": "                if f4 and i + j > n - 1 and A[i * n + j] != 0:"
+  },
+  {
+    "line": 18,
+    "code": "        if f1 or f2:  #  The main diagonal contains non- 0 Triangular matrix of elements "
+  },
+  {
+    "line": 25,
+    "code": "            result = int(math.pow(-1, n * (n - 1) / 2))"
+  },
+  {
+    "line": 26,
+    "code": "            for i in range(n):"
+  },
+  {
+    "line": 27,
+    "code": "                result *= A[i * n + (n - 1 - i)]"
+  },
+  {
+    "line": 28,
+    "code": "            return result, symbol"
+  },
+  {
+    "line": 32,
+    "code": "    def DeterComp(self, A, n):"
+  },
+  {
+    "line": 45,
+    "code": "    def AlgComp(self, x, n, i):"
+  },
+  {
+    "line": 19,
+    "code": "            result = 1"
+  },
+  {
+    "line": 20,
+    "code": "            for i in range(n):"
+  },
+  {
+    "line": 21,
+    "code": "                result += A[i * n + i] "
+  },
+  {
+    "line": 22,
+    "code": "                symbol = 1"
+  },
+  {
+    "line": 23,
+    "code": "            return result, symbol"
+  },
+  {
+    "line": 13,
+    "code": "                    f2 = False"
+  }
+]

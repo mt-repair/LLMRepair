@@ -1,0 +1,12 @@
+--- a/print_tokens.c
++++ b/print_tokens.c
+@@ -229,7 +229,8 @@
+                            if(check_delimiter(ch)==TRUE)
+                            {
+                                  token_ptr->token_id=keyword(next_st);
+-                                 return(error_or_eof_case(tstream_ptr,token_ptr,cu_state,token_str,token_ind,ch));
++error_or_eof_case(tstream_ptr,token_ptr,cu_state,token_str,token_ind,ch);
++break;
+                                  token_ptr->token_string[0]='\0';
+                                  return(token_ptr);
+                            }

@@ -1,0 +1,132 @@
+[
+  {
+    "name": "06_repair_plan_RC001",
+    "attempts": [
+      {
+        "attempt": 1,
+        "kind": "validation",
+        "validation_errors": [],
+        "response_metadata": {
+          "num_ctx": 8192,
+          "num_predict": 6400,
+          "prompt_chars": 6320,
+          "format_mode": "json",
+          "done": true,
+          "done_reason": "stop",
+          "prompt_eval_count": 1901,
+          "eval_count": 689,
+          "prompt_eval_duration": 1105033000,
+          "eval_duration": 24227943000,
+          "total_duration": 29283853800,
+          "load_duration": 3939433300,
+          "client_elapsed_seconds": 31.312,
+          "raw_chars": 1304
+        }
+      }
+    ]
+  },
+  {
+    "name": "06_repair_plan_RC002",
+    "attempts": [
+      {
+        "attempt": 1,
+        "kind": "validation",
+        "validation_errors": [],
+        "response_metadata": {
+          "num_ctx": 8192,
+          "num_predict": 6400,
+          "prompt_chars": 5520,
+          "format_mode": "json",
+          "done": true,
+          "done_reason": "stop",
+          "prompt_eval_count": 1689,
+          "eval_count": 730,
+          "prompt_eval_duration": 558289000,
+          "eval_duration": 25575846000,
+          "total_duration": 26291785000,
+          "load_duration": 5763400,
+          "client_elapsed_seconds": 28.344,
+          "raw_chars": 1073
+        }
+      }
+    ]
+  },
+  {
+    "name": "06_repair_plan_RC003",
+    "attempts": [
+      {
+        "attempt": 1,
+        "kind": "validation",
+        "validation_errors": [],
+        "response_metadata": {
+          "num_ctx": 8192,
+          "num_predict": 6400,
+          "prompt_chars": 6204,
+          "format_mode": "json",
+          "done": true,
+          "done_reason": "stop",
+          "prompt_eval_count": 1863,
+          "eval_count": 740,
+          "prompt_eval_duration": 719398000,
+          "eval_duration": 26026391000,
+          "total_duration": 26894354900,
+          "load_duration": 4994100,
+          "client_elapsed_seconds": 28.922,
+          "raw_chars": 1236
+        }
+      }
+    ]
+  },
+  {
+    "name": "06_repair_plan_RC004",
+    "attempts": [
+      {
+        "attempt": 1,
+        "kind": "validation",
+        "validation_errors": [],
+        "response_metadata": {
+          "num_ctx": 8192,
+          "num_predict": 6400,
+          "prompt_chars": 6204,
+          "format_mode": "json",
+          "done": true,
+          "done_reason": "stop",
+          "prompt_eval_count": 1860,
+          "eval_count": 584,
+          "prompt_eval_duration": 634913000,
+          "eval_duration": 20509952000,
+          "total_duration": 21303550000,
+          "load_duration": 5313800,
+          "client_elapsed_seconds": 23.344,
+          "raw_chars": 1303
+        }
+      }
+    ]
+  },
+  {
+    "name": "06_repair_plan_RC005",
+    "attempts": [
+      {
+        "attempt": 1,
+        "kind": "validation",
+        "validation_errors": [],
+        "response_metadata": {
+          "num_ctx": 8192,
+          "num_predict": 6400,
+          "prompt_chars": 5240,
+          "format_mode": "json",
+          "done": true,
+          "done_reason": "stop",
+          "prompt_eval_count": 1520,
+          "eval_count": 767,
+          "prompt_eval_duration": 463862000,
+          "eval_duration": 26822326000,
+          "total_duration": 27431936800,
+          "load_duration": 1028200,
+          "client_elapsed_seconds": 29.484,
+          "raw_chars": 1992
+        }
+      }
+    ]
+  }
+]

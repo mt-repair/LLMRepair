@@ -1,0 +1,2379 @@
+{
+  "spec_status": "actionable",
+  "repair_anchor": [
+    {
+      "candidate_id": "RC001",
+      "location_ref": "LINE_0043",
+      "line": 43,
+      "reason": "Caller supplied this known fault line; localization is not a causal evidence verdict.",
+      "evidence_refs": [
+        "TC001",
+        "TC002",
+        "TC003",
+        "TC004",
+        "TC005",
+        "TC006",
+        "TC007",
+        "TC008",
+        "MG001",
+        "MG002",
+        "MG003",
+        "MG004"
+      ]
+    }
+  ],
+  "observed_facts": [
+    {
+      "fact": "TC001 input: [[[0, 0, 0, 7], [2, 0, 1, 0], [3, 4, 7, 0], [0, 0, 0, 0]], [[0, 0, 4, 6], [0, 4, 0, 5], [0, 4, 0, 0], [0, 7, 0, 0]]] Actual behavior:  Output Matrix C Inconsistent with expected results, such as C[0][1] are 7 instead of 49，C[2][1] are 32 instead of 44 Failure phenomenon:  Incorrect result of matrix multiplication  Expected behavior:  Output the correct matrix multiplication result, for example, C[0][1] should serve 49，C[2][1] should serve 44 Actual-versus-expected difference:  Multiple element values do not match expectations, especially the positions and values of non-zero elements. ",
+      "evidence_refs": [
+        "TC001"
+      ]
+    },
+    {
+      "fact": "TC002 input: [[[0, 0, 0, 0], [0, 4, 4, 7], [4, 0, 0, 0], [6, 5, 0, 0]], [[0, 2, 3, 0], [0, 0, 4, 0], [0, 1, 7, 0], [7, 0, 0, 0]]] Actual behavior:  The calculated matrix product does not match the expected result.  Failure phenomenon:  Incorrect result of matrix multiplication  Expected behavior:  Correctly calculate the matrix product and reduce it to a dense matrix  Actual-versus-expected difference:  Multiple element values do not match expectations, such as C[1][1]=1 vs 4，C[1][2]=32 vs 44，C[3][2]=23 vs 38",
+      "evidence_refs": [
+        "TC002"
+      ]
+    },
+    {
+      "fact": "TC003 input: [[[3, 6, 0, 9], [0, 9, 0, 7], [0, 0, 0, 0], [0, 0, 6, 7]], [[0, 0, 0, 0], [0, 0, 1, 0], [4, 0, 0, 0], [2, 0, 0, 5]]] Actual behavior:  The output matrix does not match expectations, and multiple elements are calculated incorrectly.  Failure phenomenon:  Incorrect result of matrix multiplication  Expected behavior:  Correctly calculate matrix multiplication and output the correct result  Actual-versus-expected difference:  Multiple element values do not match expectations, such as C[0][0] are 2 instead of 18，C[0][2] are 1 instead of 6，C[3][0] are 18 instead of 38",
+      "evidence_refs": [
+        "TC003"
+      ]
+    },
+    {
+      "fact": "TC004 input: [[[9, 18, 0, 27], [0, 27, 0, 21], [0, 0, 0, 0], [0, 0, 18, 21]], [[0, 0, 0, 0], [0, 0, 1, 0], [4, 0, 0, 0], [2, 0, 0, 5]]] Actual behavior:  Returns an incorrect matrix multiplication result  Failure phenomenon:  Incorrect result of matrix multiplication  Expected behavior:  Return the correct matrix multiplication result  Actual-versus-expected difference:  The values are clearly mismatched, especially in terms of the positions and values of the non-zero elements. ",
+      "evidence_refs": [
+        "TC004"
+      ]
+    },
+    {
+      "fact": "TC005 input: [[[0, 0, 0, 0], [0, 0, 5, 0], [2, 7, 0, 0], [2, 0, 0, 6]], [[0, 8, 9, 0], [0, 8, 0, 0], [0, 4, 0, 0], [0, 0, 0, 0]]] Actual behavior: Output matrix has incorrect values in positions (1,1), (2,1), (2,2), (3,1), (3,2), (3,3) Failure phenomenon: Matrix multiplication result mismatch in multiple positions Expected behavior: Correct matrix multiplication result with accurate values in all positions Actual-versus-expected difference: Values in several positions are lower than expected (e.g., 4 vs 20, 64 vs 72, 8 vs 16)",
+      "evidence_refs": [
+        "TC005"
+      ]
+    },
+    {
+      "fact": "TC006 input: [[[0, 0, 0, 0], [0, 0, 30, 0], [12, 42, 0, 0], [12, 0, 0, 36]], [[0, 8, 9, 0], [0, 8, 0, 0], [0, 4, 0, 0], [0, 0, 0, 0]]] Actual behavior:  Output Matrix C The element  does not match the expectation. For example, the second row and second column are actually 4 , expected to be 120 Failure phenomenon:  Incorrect result of matrix multiplication  Expected behavior:  Output Matrix C The elements of  should correctly reflect the result of matrix multiplication, as shown in the expected output.  Actual-versus-expected difference:  Multiple element values do not match expectations, such as the second column of the second row. 4 vs 120 , second column of the third row 344 vs 432 etc. ",
+      "evidence_refs": [
+        "TC006"
+      ]
+    },
+    {
+      "fact": "TC007 input: [[[0, 0, 6, 0], [0, 0, 0, 0], [0, 8, 0, 0], [6, 0, 8, 9]], [[0, 0, 1, 0], [0, 0, 4, 0], [0, 0, 0, 4], [0, 0, 0, 7]]] Actual behavior:  The output matrix does not match expectations, and multiple elements are calculated incorrectly.  Failure phenomenon:  Incorrect result of matrix multiplication  Expected behavior:  The output matrix is as expected, and all elements are correct.  Actual-versus-expected difference:  Multiple element values do not match expectations, such as C[0][3] are 4 instead of 24，C[2][2] are 4 instead of 32 etc. ",
+      "evidence_refs": [
+        "TC007"
+      ]
+    },
+    {
+      "fact": "TC008 input: [[[0, 0, 6, 0], [0, 0, 0, 0], [0, 8, 0, 0], [6, 0, 8, 9]], [[1, 0, 1, 0], [0, 1, 4, 0], [0, 0, 1, 4], [0, 0, 0, 8]]] Actual behavior: Computed matrix [[0, 0, 1, 4], [0, 0, 0, 0], [0, 1, 4, 0], [1, 0, 9, 76]] Failure phenomenon: Matrix multiplication result mismatch Expected behavior: Expected matrix [[0, 0, 6, 24], [0, 0, 0, 0], [0, 8, 32, 0], [6, 0, 14, 104]] Actual-versus-expected difference: Mismatch in multiple elements, particularly positions (0,2), (0,3), (2,1), (2,3), (3,0), and (3,3)",
+      "evidence_refs": [
+        "TC008"
+      ]
+    },
+    {
+      "fact": "MG001 is VMG (role=corroborating): observed input change 'arg[0][0][3]: 7 -> 0 (delta -7); arg[0][1][0]: 2 -> 0 (delta -2); arg[0][1][1]: 0 -> 4 (delta +4); arg[0][1][2]: 1 -> 4 (delta +3); arg[0][1][3]: 0 -> 7 (delta +7); arg[0][2][0]: 3 -> 4 (delta +1); arg[0][2][1]: 4 -> 0 (delta -4); arg[0][2][2]: 7 -> 0 (delta -7); arg[0][3][0]: 0 -> 6 (delta +6); arg[0][3][1]: 0 -> 5 (delta +5); arg[1][0][1]: 0 -> 2 (delta +2); arg[1][0][2]: 4 -> 3 (delta -1); arg[1][0][3]: 6 -> 0 (delta -6); arg[1][1][1]: 4 -> 0 (delta -4); arg[1][1][2]: 0 -> 4 (delta +4); arg[1][1][3]: 5 -> 0 (delta -5); arg[1][2][1]: 4 -> 1 (delta -3); arg[1][2][2]: 0 -> 7 (delta +7); arg[1][3][0]: 0 -> 7 (delta +7); arg[1][3][1]: 7 -> 0 (delta -7) Unchanged fields: arg[0][0][0], arg[0][0][1], arg[0][0][2], arg[0][2][3], arg[0][3][2], arg[0][3][3], arg[1][0][0], arg[1][1][0], arg[1][2][0], arg[1][2][3], arg[1][3][2], arg[1][3][3].'. The stated output relation ' Set the output of the source test case to  C = A × B , the follow-up test case output is  C' = B^T × A^T . According to the transpose property of matrix multiplication  (A × B)^T = B^T × A^T Get  C' = C^T Therefore, the output matrix of the follow-up test case should be equal to the transpose of the output matrix of the source test case. ' was violated. Source behavior: Observed actual_output: [[0, 7, 0, 0], [0, 4, 4, 6], [0, 32, 4, 26], [0, 0, 0, 0]] Follow-up behavior: Observed actual_output: [[0, 0, 0, 0], [7, 1, 32, 0], [0, 2, 3, 0], [0, 2, 23, 0]] Observed difference: source actual_output=[[0,7,0,0],[0,4,4,6],[0,32,4,26],[0,0,0,0]] while follow-up actual_output=[[0,0,0,0],[7,1,32,0],[0,2,3,0],[0,2,23,0]]. Transformation realization: realized.",
+      "evidence_refs": [
+        "MG001"
+      ],
+      "evidence_role": "corroborating",
+      "repair_relevance": "useful",
+      "declared_transformation": " Input Matrix for a Given Source Test Case  (A, B) , first transpose the two matrices separately, and then swap their positions in the matrix multiplication. Specifically, let  A' = B^T，B' = A^T , therefore, the input for the follow-up test case is  (B^T, A^T) . That is, the original first input matrix  A  After being transposed, it is placed in the second position, the original second input matrix  B  After being transposed, it is placed in the first position. ",
+      "input_delta": {
+        "comparison_kind": "sequence",
+        "source_parsed": true,
+        "followup_parsed": true,
+        "changed_fields": [
+          {
+            "path": [
+              0,
+              0,
+              3
+            ],
+            "name": "arg[0][0][3]",
+            "source_present": true,
+            "followup_present": true,
+            "source_value": 7,
+            "followup_value": 0,
+            "numeric_delta": -7.0
+          },
+          {
+            "path": [
+              0,
+              1,
+              0
+            ],
+            "name": "arg[0][1][0]",
+            "source_present": true,
+            "followup_present": true,
+            "source_value": 2,
+            "followup_value": 0,
+            "numeric_delta": -2.0
+          },
+          {
+            "path": [
+              0,
+              1,
+              1
+            ],
+            "name": "arg[0][1][1]",
+            "source_present": true,
+            "followup_present": true,
+            "source_value": 0,
+            "followup_value": 4,
+            "numeric_delta": 4.0
+          },
+          {
+            "path": [
+              0,
+              1,
+              2
+            ],
+            "name": "arg[0][1][2]",
+            "source_present": true,
+            "followup_present": true,
+            "source_value": 1,
+            "followup_value": 4,
+            "numeric_delta": 3.0
+          },
+          {
+            "path": [
+              0,
+              1,
+              3
+            ],
+            "name": "arg[0][1][3]",
+            "source_present": true,
+            "followup_present": true,
+            "source_value": 0,
+            "followup_value": 7,
+            "numeric_delta": 7.0
+          },
+          {
+            "path": [
+              0,
+              2,
+              0
+            ],
+            "name": "arg[0][2][0]",
+            "source_present": true,
+            "followup_present": true,
+            "source_value": 3,
+            "followup_value": 4,
+            "numeric_delta": 1.0
+          },
+          {
+            "path": [
+              0,
+              2,
+              1
+            ],
+            "name": "arg[0][2][1]",
+            "source_present": true,
+            "followup_present": true,
+            "source_value": 4,
+            "followup_value": 0,
+            "numeric_delta": -4.0
+          },
+          {
+            "path": [
+              0,
+              2,
+              2
+            ],
+            "name": "arg[0][2][2]",
+            "source_present": true,
+            "followup_present": true,
+            "source_value": 7,
+            "followup_value": 0,
+            "numeric_delta": -7.0
+          },
+          {
+            "path": [
+              0,
+              3,
+              0
+            ],
+            "name": "arg[0][3][0]",
+            "source_present": true,
+            "followup_present": true,
+            "source_value": 0,
+            "followup_value": 6,
+            "numeric_delta": 6.0
+          },
+          {
+            "path": [
+              0,
+              3,
+              1
+            ],
+            "name": "arg[0][3][1]",
+            "source_present": true,
+            "followup_present": true,
+            "source_value": 0,
+            "followup_value": 5,
+            "numeric_delta": 5.0
+          },
+          {
+            "path": [
+              1,
+              0,
+              1
+            ],
+            "name": "arg[1][0][1]",
+            "source_present": true,
+            "followup_present": true,
+            "source_value": 0,
+            "followup_value": 2,
+            "numeric_delta": 2.0
+          },
+          {
+            "path": [
+              1,
+              0,
+              2
+            ],
+            "name": "arg[1][0][2]",
+            "source_present": true,
+            "followup_present": true,
+            "source_value": 4,
+            "followup_value": 3,
+            "numeric_delta": -1.0
+          },
+          {
+            "path": [
+              1,
+              0,
+              3
+            ],
+            "name": "arg[1][0][3]",
+            "source_present": true,
+            "followup_present": true,
+            "source_value": 6,
+            "followup_value": 0,
+            "numeric_delta": -6.0
+          },
+          {
+            "path": [
+              1,
+              1,
+              1
+            ],
+            "name": "arg[1][1][1]",
+            "source_present": true,
+            "followup_present": true,
+            "source_value": 4,
+            "followup_value": 0,
+            "numeric_delta": -4.0
+          },
+          {
+            "path": [
+              1,
+              1,
+              2
+            ],
+            "name": "arg[1][1][2]",
+            "source_present": true,
+            "followup_present": true,
+            "source_value": 0,
+            "followup_value": 4,
+            "numeric_delta": 4.0
+          },
+          {
+            "path": [
+              1,
+              1,
+              3
+            ],
+            "name": "arg[1][1][3]",
+            "source_present": true,
+            "followup_present": true,
+            "source_value": 5,
+            "followup_value": 0,
+            "numeric_delta": -5.0
+          },
+          {
+            "path": [
+              1,
+              2,
+              1
+            ],
+            "name": "arg[1][2][1]",
+            "source_present": true,
+            "followup_present": true,
+            "source_value": 4,
+            "followup_value": 1,
+            "numeric_delta": -3.0
+          },
+          {
+            "path": [
+              1,
+              2,
+              2
+            ],
+            "name": "arg[1][2][2]",
+            "source_present": true,
+            "followup_present": true,
+            "source_value": 0,
+            "followup_value": 7,
+            "numeric_delta": 7.0
+          },
+          {
+            "path": [
+              1,
+              3,
+              0
+            ],
+            "name": "arg[1][3][0]",
+            "source_present": true,
+            "followup_present": true,
+            "source_value": 0,
+            "followup_value": 7,
+            "numeric_delta": 7.0
+          },
+          {
+            "path": [
+              1,
+              3,
+              1
+            ],
+            "name": "arg[1][3][1]",
+            "source_present": true,
+            "followup_present": true,
+            "source_value": 7,
+            "followup_value": 0,
+            "numeric_delta": -7.0
+          }
+        ],
+        "unchanged_fields": [
+          {
+            "path": [
+              0,
+              0,
+              0
+            ],
+            "name": "arg[0][0][0]"
+          },
+          {
+            "path": [
+              0,
+              0,
+              1
+            ],
+            "name": "arg[0][0][1]"
+          },
+          {
+            "path": [
+              0,
+              0,
+              2
+            ],
+            "name": "arg[0][0][2]"
+          },
+          {
+            "path": [
+              0,
+              2,
+              3
+            ],
+            "name": "arg[0][2][3]"
+          },
+          {
+            "path": [
+              0,
+              3,
+              2
+            ],
+            "name": "arg[0][3][2]"
+          },
+          {
+            "path": [
+              0,
+              3,
+              3
+            ],
+            "name": "arg[0][3][3]"
+          },
+          {
+            "path": [
+              1,
+              0,
+              0
+            ],
+            "name": "arg[1][0][0]"
+          },
+          {
+            "path": [
+              1,
+              1,
+              0
+            ],
+            "name": "arg[1][1][0]"
+          },
+          {
+            "path": [
+              1,
+              2,
+              0
+            ],
+            "name": "arg[1][2][0]"
+          },
+          {
+            "path": [
+              1,
+              2,
+              3
+            ],
+            "name": "arg[1][2][3]"
+          },
+          {
+            "path": [
+              1,
+              3,
+              2
+            ],
+            "name": "arg[1][3][2]"
+          },
+          {
+            "path": [
+              1,
+              3,
+              3
+            ],
+            "name": "arg[1][3][3]"
+          }
+        ],
+        "changed_field_count": 20,
+        "unchanged_field_count": 12,
+        "unchanged_fields_truncated": false,
+        "summary": "arg[0][0][3]: 7 -> 0 (delta -7); arg[0][1][0]: 2 -> 0 (delta -2); arg[0][1][1]: 0 -> 4 (delta +4); arg[0][1][2]: 1 -> 4 (delta +3); arg[0][1][3]: 0 -> 7 (delta +7); arg[0][2][0]: 3 -> 4 (delta +1); arg[0][2][1]: 4 -> 0 (delta -4); arg[0][2][2]: 7 -> 0 (delta -7); arg[0][3][0]: 0 -> 6 (delta +6); arg[0][3][1]: 0 -> 5 (delta +5); arg[1][0][1]: 0 -> 2 (delta +2); arg[1][0][2]: 4 -> 3 (delta -1); arg[1][0][3]: 6 -> 0 (delta -6); arg[1][1][1]: 4 -> 0 (delta -4); arg[1][1][2]: 0 -> 4 (delta +4); arg[1][1][3]: 5 -> 0 (delta -5); arg[1][2][1]: 4 -> 1 (delta -3); arg[1][2][2]: 0 -> 7 (delta +7); arg[1][3][0]: 0 -> 7 (delta +7); arg[1][3][1]: 7 -> 0 (delta -7) Unchanged fields: arg[0][0][0], arg[0][0][1], arg[0][0][2], arg[0][2][3], arg[0][3][2], arg[0][3][3], arg[1][0][0], arg[1][1][0], arg[1][2][0], arg[1][2][3], arg[1][3][2], arg[1][3][3]."
+      },
+      "output_delta": {
+        "source_parsed": true,
+        "followup_parsed": true,
+        "source_value": [
+          [
+            0,
+            7,
+            0,
+            0
+          ],
+          [
+            0,
+            4,
+            4,
+            6
+          ],
+          [
+            0,
+            32,
+            4,
+            26
+          ],
+          [
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "followup_value": [
+          [
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            7,
+            1,
+            32,
+            0
+          ],
+          [
+            0,
+            2,
+            3,
+            0
+          ],
+          [
+            0,
+            2,
+            23,
+            0
+          ]
+        ],
+        "equal": false,
+        "summary": "source actual_output=[[0,7,0,0],[0,4,4,6],[0,32,4,26],[0,0,0,0]] while follow-up actual_output=[[0,0,0,0],[7,1,32,0],[0,2,3,0],[0,2,23,0]]."
+      },
+      "endpoint_oracle_assessment": {
+        "oracle_mode": "EXACT_ORACLE",
+        "source_status": "nopass",
+        "followup_status": "nopass",
+        "conclusion": "both_endpoints_confirmed_failures"
+      },
+      "transformation_realization": "realized",
+      "input_transformation_status": "realized",
+      "output_relation_status": "violated",
+      "evidence_usability": "usable",
+      "source_test": {
+        "test_ref": "TC001",
+        "input": "[[[0, 0, 0, 7], [2, 0, 1, 0], [3, 4, 7, 0], [0, 0, 0, 0]], [[0, 0, 4, 6], [0, 4, 0, 5], [0, 4, 0, 0], [0, 7, 0, 0]]]",
+        "actual_output": "[[0, 7, 0, 0], [0, 4, 4, 6], [0, 32, 4, 26], [0, 0, 0, 0]]",
+        "diagnostic_status": "nopass",
+        "oracle_mode": "EXACT_ORACLE",
+        "expected_output": "[[0, 49, 0, 0], [0, 4, 8, 12], [0, 44, 12, 38], [0, 0, 0, 0]]"
+      },
+      "followup_test": {
+        "test_ref": "TC002",
+        "input": "[[[0, 0, 0, 0], [0, 4, 4, 7], [4, 0, 0, 0], [6, 5, 0, 0]], [[0, 2, 3, 0], [0, 0, 4, 0], [0, 1, 7, 0], [7, 0, 0, 0]]]",
+        "actual_output": "[[0, 0, 0, 0], [7, 1, 32, 0], [0, 2, 3, 0], [0, 2, 23, 0]]",
+        "diagnostic_status": "nopass",
+        "oracle_mode": "EXACT_ORACLE",
+        "expected_output": "[[0, 0, 0, 0], [49, 4, 44, 0], [0, 8, 12, 0], [0, 12, 38, 0]]"
+      },
+      "realization_issues": [],
+      "behavior_attribution": [
+        " Matrix multiplication implementation error ",
+        " Sparse matrix processing problem "
+      ],
+      "added_constraints": [
+        " Matrix multiplication must correctly handle transposed inputs ",
+        " The output must satisfy the transposition property "
+      ],
+      "new_information": "The MR corroborates exact-oracle endpoint evidence and adds the declared source/follow-up behavioral constraint; it does not add a new exact endpoint verdict.",
+      "pair_group_id": "MRPAIR001",
+      "independent_evidence_weight": 1.0,
+      "shared_source_cluster": {
+        "cluster_id": "MRSOURCE001",
+        "source_test_ref": "TC001",
+        "source_input": "[[[0, 0, 0, 7], [2, 0, 1, 0], [3, 4, 7, 0], [0, 0, 0, 0]], [[0, 0, 4, 6], [0, 4, 0, 5], [0, 4, 0, 0], [0, 7, 0, 0]]]",
+        "source_actual_output": "[[0, 7, 0, 0], [0, 4, 4, 6], [0, 32, 4, 26], [0, 0, 0, 0]]",
+        "member_refs": [
+          "MG001",
+          "MG003"
+        ],
+        "member_count": 2,
+        "independent_pair_count": 2,
+        "duplicate_refs": [],
+        "unique_followup_count": 1,
+        "followup_actual_outputs": [
+          "[[0, 0, 0, 0], [7, 1, 32, 0], [0, 2, 3, 0], [0, 2, 23, 0]]"
+        ],
+        "followup_output_consensus": true,
+        "source_output_differs_from_followup_consensus": true,
+        "common_changed_fields": [
+          "arg[0][0][3]",
+          "arg[0][1][0]",
+          "arg[0][1][1]",
+          "arg[0][1][2]",
+          "arg[0][1][3]",
+          "arg[0][2][0]",
+          "arg[0][2][1]",
+          "arg[0][2][2]",
+          "arg[0][3][0]",
+          "arg[0][3][1]",
+          "arg[1][0][1]",
+          "arg[1][0][2]",
+          "arg[1][0][3]",
+          "arg[1][1][1]",
+          "arg[1][1][2]",
+          "arg[1][1][3]",
+          "arg[1][2][1]",
+          "arg[1][2][2]",
+          "arg[1][3][0]",
+          "arg[1][3][1]"
+        ],
+        "sometimes_changed_fields": [],
+        "always_unchanged_fields": [
+          "arg[0][0][0]",
+          "arg[0][0][1]",
+          "arg[0][0][2]",
+          "arg[0][2][3]",
+          "arg[0][3][2]",
+          "arg[0][3][3]",
+          "arg[1][0][0]",
+          "arg[1][1][0]",
+          "arg[1][2][0]",
+          "arg[1][2][3]",
+          "arg[1][3][2]",
+          "arg[1][3][3]"
+        ],
+        "relation_properties": [
+          " Set the output of the source test case to  C = A × B , the follow-up test case output is  C' = B^T × A^T . According to the transpose property of matrix multiplication  (A × B)^T = B^T × A^T Get  C' = C^T Therefore, the output matrix of the follow-up test case should be equal to the transpose of the output matrix of the source test case. ",
+          " Set the output of the source test case to  C = A × B . The output of the follow-up test case is  C' = (6A) × B . According to the scalar multiplication property of matrix multiplication, we have  C' = 6 × (A × B) = 6C Therefore, each element in the follow-up test case output matrix should be equal to the corresponding element in the source test case output matrix.  6  times. The expected relationship is  C' = 6C。"
+        ],
+        "oracle_mode": "EXACT_ORACLE",
+        "source_diagnostic_status": "nopass",
+        "followup_diagnostic_statuses": [
+          "nopass"
+        ],
+        "endpoint_conclusion": "mixed_or_incomplete_endpoint_evidence",
+        "behavioral_contrast": "Shared source TC001 produced [[0, 7, 0, 0], [0, 4, 4, 6], [0, 32, 4, 26], [0, 0, 0, 0]]; 1 unique follow-up input(s) all produced [[0, 0, 0, 0], [7, 1, 32, 0], [0, 2, 3, 0], [0, 2, 23, 0]].",
+        "diagnostic_focus": "Across 2 independent endpoint pair(s), fields changed in every transformation: arg[0][0][3], arg[0][1][0], arg[0][1][1], arg[0][1][2], arg[0][1][3], arg[0][2][0], arg[0][2][1], arg[0][2][2], arg[0][3][0], arg[0][3][1], arg[1][0][1], arg[1][0][2], arg[1][0][3], arg[1][1][1], arg[1][1][2], arg[1][1][3], arg[1][2][1], arg[1][2][2], arg[1][3][0], arg[1][3][1]; fields changed only in some transformations: none; fields unchanged in every transformation: arg[0][0][0], arg[0][0][1], arg[0][0][2], arg[0][2][3], arg[0][3][2], arg[0][3][3], arg[1][0][0], arg[1][1][0], arg[1][2][0], arg[1][2][3], arg[1][3][2], arg[1][3][3]. The shared-source output differs from the unanimous follow-up output.",
+        "joint_analysis": {
+          "joint_behavior_pattern": "Program consistently fails on input patterns requiring complex recursive operations, passing only on trivial cases.",
+          "shared_source_significance": "Frequent use of recursive functions without proper base case validation leads to unbounded recursion and subsequent failures.",
+          "discriminating_input_patterns": [
+            "Deeply nested structures",
+            "Large input sizes",
+            "Complex dependency chains"
+          ],
+          "code_state_hypotheses": [
+            "Missing termination conditions in recursive calls",
+            "Lack of input validation for edge cases",
+            "Insufficient resource management"
+          ],
+          "repair_constraints": [
+            "Maintain recursion for valid use cases",
+            "Ensure termination conditions are met",
+            "Implement input validation"
+          ],
+          "relation_validity_reviews": [
+            {
+              "evidence_ref": "MG001",
+              "transformation_realization": "realized",
+              "reason": "Recursive calls without base cases lead to infinite loops."
+            },
+            {
+              "evidence_ref": "MG003",
+              "transformation_realization": "violated",
+              "reason": "Input validation is absent, causing unexpected failures."
+            }
+          ],
+          "uncertainty": [
+            "Uncertainty in exact expected output for complex cases",
+            "Potential for unknown edge cases not covered in tests"
+          ]
+        }
+      }
+    },
+    {
+      "fact": "MG002 is VMG (role=corroborating): observed input change 'arg[0][0][0]: 3 -> 9 (delta +6); arg[0][0][1]: 6 -> 18 (delta +12); arg[0][0][3]: 9 -> 27 (delta +18); arg[0][1][1]: 9 -> 27 (delta +18); arg[0][1][3]: 7 -> 21 (delta +14); arg[0][3][2]: 6 -> 18 (delta +12); arg[0][3][3]: 7 -> 21 (delta +14) Unchanged fields: arg[0][0][2], arg[0][1][0], arg[0][1][2], arg[0][2][0], arg[0][2][1], arg[0][2][2], arg[0][2][3], arg[0][3][0], arg[0][3][1], arg[1][0][0], arg[1][0][1], arg[1][0][2], arg[1][0][3], arg[1][1][0], arg[1][1][1], arg[1][1][2], arg[1][1][3], arg[1][2][0], arg[1][2][1], arg[1][2][2], ... and 5 more.'. The stated output relation ' Set the output of the source test case to  C = A × B . The output of the follow-up test case is  C' = (3A) × B . According to the scalar multiplication property of matrix multiplication, we have  C' = 3 × (A × B) = 3C Therefore, each element in the follow-up test case output matrix should be equal to the corresponding element in the source test case output matrix.  3  times. The expected relationship is  C' = 3C。' was violated. Source behavior: Observed actual_output: [[2, 0, 1, 5], [2, 0, 1, 5], [0, 0, 0, 0], [18, 0, 0, 5]] Follow-up behavior: Observed actual_output: [[2, 0, 1, 5], [2, 0, 1, 5], [0, 0, 0, 0], [46, 0, 0, 5]] Observed difference: source actual_output=[[2,0,1,5],[2,0,1,5],[0,0,0,0],[18,0,0,5]] while follow-up actual_output=[[2,0,1,5],[2,0,1,5],[0,0,0,0],[46,0,0,5]]. Transformation realization: realized.",
+      "evidence_refs": [
+        "MG002"
+      ],
+      "evidence_role": "corroborating",
+      "repair_relevance": "useful",
+      "declared_transformation": " First, construct a diagonal matrix.  Q , where all elements on the main diagonal are  3 , the remaining elements are all  0 Therefore,  Q = 3I . Then  Q  Multiply on the left to the matrix  A  upward, while maintaining  B  remains unchanged. Specifically, let  A' = Q × A，B' = B  out of   Q = 3I Therefore,  Q × A = 3A Therefore, the transformation is essentially a matrix  A  All elements of  are multiplied by  3 . The resulting follow-up test case input is  (3A, B)。",
+      "input_delta": {
+        "comparison_kind": "sequence",
+        "source_parsed": true,
+        "followup_parsed": true,
+        "changed_fields": [
+          {
+            "path": [
+              0,
+              0,
+              0
+            ],
+            "name": "arg[0][0][0]",
+            "source_present": true,
+            "followup_present": true,
+            "source_value": 3,
+            "followup_value": 9,
+            "numeric_delta": 6.0
+          },
+          {
+            "path": [
+              0,
+              0,
+              1
+            ],
+            "name": "arg[0][0][1]",
+            "source_present": true,
+            "followup_present": true,
+            "source_value": 6,
+            "followup_value": 18,
+            "numeric_delta": 12.0
+          },
+          {
+            "path": [
+              0,
+              0,
+              3
+            ],
+            "name": "arg[0][0][3]",
+            "source_present": true,
+            "followup_present": true,
+            "source_value": 9,
+            "followup_value": 27,
+            "numeric_delta": 18.0
+          },
+          {
+            "path": [
+              0,
+              1,
+              1
+            ],
+            "name": "arg[0][1][1]",
+            "source_present": true,
+            "followup_present": true,
+            "source_value": 9,
+            "followup_value": 27,
+            "numeric_delta": 18.0
+          },
+          {
+            "path": [
+              0,
+              1,
+              3
+            ],
+            "name": "arg[0][1][3]",
+            "source_present": true,
+            "followup_present": true,
+            "source_value": 7,
+            "followup_value": 21,
+            "numeric_delta": 14.0
+          },
+          {
+            "path": [
+              0,
+              3,
+              2
+            ],
+            "name": "arg[0][3][2]",
+            "source_present": true,
+            "followup_present": true,
+            "source_value": 6,
+            "followup_value": 18,
+            "numeric_delta": 12.0
+          },
+          {
+            "path": [
+              0,
+              3,
+              3
+            ],
+            "name": "arg[0][3][3]",
+            "source_present": true,
+            "followup_present": true,
+            "source_value": 7,
+            "followup_value": 21,
+            "numeric_delta": 14.0
+          }
+        ],
+        "unchanged_fields": [
+          {
+            "path": [
+              0,
+              0,
+              2
+            ],
+            "name": "arg[0][0][2]"
+          },
+          {
+            "path": [
+              0,
+              1,
+              0
+            ],
+            "name": "arg[0][1][0]"
+          },
+          {
+            "path": [
+              0,
+              1,
+              2
+            ],
+            "name": "arg[0][1][2]"
+          },
+          {
+            "path": [
+              0,
+              2,
+              0
+            ],
+            "name": "arg[0][2][0]"
+          },
+          {
+            "path": [
+              0,
+              2,
+              1
+            ],
+            "name": "arg[0][2][1]"
+          },
+          {
+            "path": [
+              0,
+              2,
+              2
+            ],
+            "name": "arg[0][2][2]"
+          },
+          {
+            "path": [
+              0,
+              2,
+              3
+            ],
+            "name": "arg[0][2][3]"
+          },
+          {
+            "path": [
+              0,
+              3,
+              0
+            ],
+            "name": "arg[0][3][0]"
+          },
+          {
+            "path": [
+              0,
+              3,
+              1
+            ],
+            "name": "arg[0][3][1]"
+          },
+          {
+            "path": [
+              1,
+              0,
+              0
+            ],
+            "name": "arg[1][0][0]"
+          },
+          {
+            "path": [
+              1,
+              0,
+              1
+            ],
+            "name": "arg[1][0][1]"
+          },
+          {
+            "path": [
+              1,
+              0,
+              2
+            ],
+            "name": "arg[1][0][2]"
+          },
+          {
+            "path": [
+              1,
+              0,
+              3
+            ],
+            "name": "arg[1][0][3]"
+          },
+          {
+            "path": [
+              1,
+              1,
+              0
+            ],
+            "name": "arg[1][1][0]"
+          },
+          {
+            "path": [
+              1,
+              1,
+              1
+            ],
+            "name": "arg[1][1][1]"
+          },
+          {
+            "path": [
+              1,
+              1,
+              2
+            ],
+            "name": "arg[1][1][2]"
+          },
+          {
+            "path": [
+              1,
+              1,
+              3
+            ],
+            "name": "arg[1][1][3]"
+          },
+          {
+            "path": [
+              1,
+              2,
+              0
+            ],
+            "name": "arg[1][2][0]"
+          },
+          {
+            "path": [
+              1,
+              2,
+              1
+            ],
+            "name": "arg[1][2][1]"
+          },
+          {
+            "path": [
+              1,
+              2,
+              2
+            ],
+            "name": "arg[1][2][2]"
+          },
+          {
+            "path": [
+              1,
+              2,
+              3
+            ],
+            "name": "arg[1][2][3]"
+          },
+          {
+            "path": [
+              1,
+              3,
+              0
+            ],
+            "name": "arg[1][3][0]"
+          },
+          {
+            "path": [
+              1,
+              3,
+              1
+            ],
+            "name": "arg[1][3][1]"
+          },
+          {
+            "path": [
+              1,
+              3,
+              2
+            ],
+            "name": "arg[1][3][2]"
+          },
+          {
+            "path": [
+              1,
+              3,
+              3
+            ],
+            "name": "arg[1][3][3]"
+          }
+        ],
+        "changed_field_count": 7,
+        "unchanged_field_count": 25,
+        "unchanged_fields_truncated": false,
+        "summary": "arg[0][0][0]: 3 -> 9 (delta +6); arg[0][0][1]: 6 -> 18 (delta +12); arg[0][0][3]: 9 -> 27 (delta +18); arg[0][1][1]: 9 -> 27 (delta +18); arg[0][1][3]: 7 -> 21 (delta +14); arg[0][3][2]: 6 -> 18 (delta +12); arg[0][3][3]: 7 -> 21 (delta +14) Unchanged fields: arg[0][0][2], arg[0][1][0], arg[0][1][2], arg[0][2][0], arg[0][2][1], arg[0][2][2], arg[0][2][3], arg[0][3][0], arg[0][3][1], arg[1][0][0], arg[1][0][1], arg[1][0][2], arg[1][0][3], arg[1][1][0], arg[1][1][1], arg[1][1][2], arg[1][1][3], arg[1][2][0], arg[1][2][1], arg[1][2][2], ... and 5 more."
+      },
+      "output_delta": {
+        "source_parsed": true,
+        "followup_parsed": true,
+        "source_value": [
+          [
+            2,
+            0,
+            1,
+            5
+          ],
+          [
+            2,
+            0,
+            1,
+            5
+          ],
+          [
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            18,
+            0,
+            0,
+            5
+          ]
+        ],
+        "followup_value": [
+          [
+            2,
+            0,
+            1,
+            5
+          ],
+          [
+            2,
+            0,
+            1,
+            5
+          ],
+          [
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            46,
+            0,
+            0,
+            5
+          ]
+        ],
+        "equal": false,
+        "summary": "source actual_output=[[2,0,1,5],[2,0,1,5],[0,0,0,0],[18,0,0,5]] while follow-up actual_output=[[2,0,1,5],[2,0,1,5],[0,0,0,0],[46,0,0,5]]."
+      },
+      "endpoint_oracle_assessment": {
+        "oracle_mode": "EXACT_ORACLE",
+        "source_status": "nopass",
+        "followup_status": "nopass",
+        "conclusion": "both_endpoints_confirmed_failures"
+      },
+      "transformation_realization": "realized",
+      "input_transformation_status": "realized",
+      "output_relation_status": "violated",
+      "evidence_usability": "usable",
+      "source_test": {
+        "test_ref": "TC003",
+        "input": "[[[3, 6, 0, 9], [0, 9, 0, 7], [0, 0, 0, 0], [0, 0, 6, 7]], [[0, 0, 0, 0], [0, 0, 1, 0], [4, 0, 0, 0], [2, 0, 0, 5]]]",
+        "actual_output": "[[2, 0, 1, 5], [2, 0, 1, 5], [0, 0, 0, 0], [18, 0, 0, 5]]",
+        "diagnostic_status": "nopass",
+        "oracle_mode": "EXACT_ORACLE",
+        "expected_output": "[[18, 0, 6, 45], [14, 0, 9, 35], [0, 0, 0, 0], [38, 0, 0, 35]]"
+      },
+      "followup_test": {
+        "test_ref": "TC004",
+        "input": "[[[9, 18, 0, 27], [0, 27, 0, 21], [0, 0, 0, 0], [0, 0, 18, 21]], [[0, 0, 0, 0], [0, 0, 1, 0], [4, 0, 0, 0], [2, 0, 0, 5]]]",
+        "actual_output": "[[2, 0, 1, 5], [2, 0, 1, 5], [0, 0, 0, 0], [46, 0, 0, 5]]",
+        "diagnostic_status": "nopass",
+        "oracle_mode": "EXACT_ORACLE",
+        "expected_output": "[[54, 0, 18, 135], [42, 0, 27, 105], [0, 0, 0, 0], [114, 0, 0, 105]]"
+      },
+      "realization_issues": [],
+      "behavior_attribution": [
+        " Scalar multiplication is not applied correctly in matrix multiplication "
+      ],
+      "added_constraints": [
+        " Matrix multiplication must correctly handle scalar multiplication "
+      ],
+      "new_information": "The MR corroborates exact-oracle endpoint evidence and adds the declared source/follow-up behavioral constraint; it does not add a new exact endpoint verdict.",
+      "pair_group_id": "MRPAIR002",
+      "independent_evidence_weight": 1.0,
+      "shared_source_cluster": {
+        "cluster_id": "MRSOURCE002",
+        "source_test_ref": "TC003",
+        "source_input": "[[[3, 6, 0, 9], [0, 9, 0, 7], [0, 0, 0, 0], [0, 0, 6, 7]], [[0, 0, 0, 0], [0, 0, 1, 0], [4, 0, 0, 0], [2, 0, 0, 5]]]",
+        "source_actual_output": "[[2, 0, 1, 5], [2, 0, 1, 5], [0, 0, 0, 0], [18, 0, 0, 5]]",
+        "member_refs": [
+          "MG002",
+          "MG004"
+        ],
+        "member_count": 2,
+        "independent_pair_count": 2,
+        "duplicate_refs": [],
+        "unique_followup_count": 1,
+        "followup_actual_outputs": [
+          "[[2, 0, 1, 5], [2, 0, 1, 5], [0, 0, 0, 0], [46, 0, 0, 5]]"
+        ],
+        "followup_output_consensus": true,
+        "source_output_differs_from_followup_consensus": true,
+        "common_changed_fields": [
+          "arg[0][0][0]",
+          "arg[0][0][1]",
+          "arg[0][0][3]",
+          "arg[0][1][1]",
+          "arg[0][1][3]",
+          "arg[0][3][2]",
+          "arg[0][3][3]"
+        ],
+        "sometimes_changed_fields": [],
+        "always_unchanged_fields": [
+          "arg[0][0][2]",
+          "arg[0][1][0]",
+          "arg[0][1][2]",
+          "arg[0][2][0]",
+          "arg[0][2][1]",
+          "arg[0][2][2]",
+          "arg[0][2][3]",
+          "arg[0][3][0]",
+          "arg[0][3][1]",
+          "arg[1][0][0]",
+          "arg[1][0][1]",
+          "arg[1][0][2]",
+          "arg[1][0][3]",
+          "arg[1][1][0]",
+          "arg[1][1][1]",
+          "arg[1][1][2]",
+          "arg[1][1][3]",
+          "arg[1][2][0]",
+          "arg[1][2][1]",
+          "arg[1][2][2]",
+          "arg[1][2][3]",
+          "arg[1][3][0]",
+          "arg[1][3][1]",
+          "arg[1][3][2]",
+          "arg[1][3][3]"
+        ],
+        "relation_properties": [
+          " Set the output of the source test case to  C = A × B . The output of the follow-up test case is  C' = (3A) × B . According to the scalar multiplication property of matrix multiplication, we have  C' = 3 × (A × B) = 3C Therefore, each element in the follow-up test case output matrix should be equal to the corresponding element in the source test case output matrix.  3  times. The expected relationship is  C' = 3C。",
+          " Set the output of the source test case to  C = A × B . The output of the follow-up test case is  C' = A × (B + I) . According to the distributive law of matrix multiplication over addition, we have  C' = A × B + A × I  out of   I  is the identity matrix, so  A × I = A Therefore,  C' = C + A . That is, the output of the follow-up test case should be equal to the output matrix of the source test case.  C  With Source Input Matrix  A  The result of matrix addition for . The expected relationship is  C' = C + A。"
+        ],
+        "oracle_mode": "EXACT_ORACLE",
+        "source_diagnostic_status": "nopass",
+        "followup_diagnostic_statuses": [
+          "nopass"
+        ],
+        "endpoint_conclusion": "mixed_or_incomplete_endpoint_evidence",
+        "behavioral_contrast": "Shared source TC003 produced [[2, 0, 1, 5], [2, 0, 1, 5], [0, 0, 0, 0], [18, 0, 0, 5]]; 1 unique follow-up input(s) all produced [[2, 0, 1, 5], [2, 0, 1, 5], [0, 0, 0, 0], [46, 0, 0, 5]].",
+        "diagnostic_focus": "Across 2 independent endpoint pair(s), fields changed in every transformation: arg[0][0][0], arg[0][0][1], arg[0][0][3], arg[0][1][1], arg[0][1][3], arg[0][3][2], arg[0][3][3]; fields changed only in some transformations: none; fields unchanged in every transformation: arg[0][0][2], arg[0][1][0], arg[0][1][2], arg[0][2][0], arg[0][2][1], arg[0][2][2], arg[0][2][3], arg[0][3][0], arg[0][3][1], arg[1][0][0], arg[1][0][1], arg[1][0][2], arg[1][0][3], arg[1][1][0], arg[1][1][1], arg[1][1][2], arg[1][1][3], arg[1][2][0], arg[1][2][1], arg[1][2][2], arg[1][2][3], arg[1][3][0], arg[1][3][1], arg[1][3][2], arg[1][3][3]. The shared-source output differs from the unanimous follow-up output.",
+        "joint_analysis": {
+          "joint_behavior_pattern": "outputs vary based on input patterns",
+          "shared_source_significance": "common function in test cases",
+          "discriminating_input_patterns": [
+            "edge cases",
+            "specific data types"
+          ],
+          "code_state_hypotheses": [
+            "miscalculation in function",
+            "incorrect state transitions"
+          ],
+          "repair_constraints": [
+            "preserve core functionality",
+            "maintain performance metrics"
+          ],
+          "relation_validity_reviews": [
+            {
+              "evidence_ref": "MG002",
+              "transformation_realization": "realized",
+              "reason": "observed in multiple tests"
+            },
+            {
+              "evidence_ref": "MG004",
+              "transformation_realization": "violated",
+              "reason": "contradicts expected behavior"
+            }
+          ],
+          "uncertainty": [
+            "incomplete test coverage",
+            "ambiguous code behavior"
+          ]
+        }
+      }
+    },
+    {
+      "fact": "MG003 is VMG (role=corroborating): observed input change 'arg[0][0][3]: 7 -> 0 (delta -7); arg[0][1][0]: 2 -> 0 (delta -2); arg[0][1][1]: 0 -> 4 (delta +4); arg[0][1][2]: 1 -> 4 (delta +3); arg[0][1][3]: 0 -> 7 (delta +7); arg[0][2][0]: 3 -> 4 (delta +1); arg[0][2][1]: 4 -> 0 (delta -4); arg[0][2][2]: 7 -> 0 (delta -7); arg[0][3][0]: 0 -> 6 (delta +6); arg[0][3][1]: 0 -> 5 (delta +5); arg[1][0][1]: 0 -> 2 (delta +2); arg[1][0][2]: 4 -> 3 (delta -1); arg[1][0][3]: 6 -> 0 (delta -6); arg[1][1][1]: 4 -> 0 (delta -4); arg[1][1][2]: 0 -> 4 (delta +4); arg[1][1][3]: 5 -> 0 (delta -5); arg[1][2][1]: 4 -> 1 (delta -3); arg[1][2][2]: 0 -> 7 (delta +7); arg[1][3][0]: 0 -> 7 (delta +7); arg[1][3][1]: 7 -> 0 (delta -7) Unchanged fields: arg[0][0][0], arg[0][0][1], arg[0][0][2], arg[0][2][3], arg[0][3][2], arg[0][3][3], arg[1][0][0], arg[1][1][0], arg[1][2][0], arg[1][2][3], arg[1][3][2], arg[1][3][3].'. The stated output relation ' Set the output of the source test case to  C = A × B . The output of the follow-up test case is  C' = (6A) × B . According to the scalar multiplication property of matrix multiplication, we have  C' = 6 × (A × B) = 6C Therefore, each element in the follow-up test case output matrix should be equal to the corresponding element in the source test case output matrix.  6  times. The expected relationship is  C' = 6C。' was violated. Source behavior: Observed actual_output: [[0, 7, 0, 0], [0, 4, 4, 6], [0, 32, 4, 26], [0, 0, 0, 0]] Follow-up behavior: Observed actual_output: [[0, 0, 0, 0], [7, 1, 32, 0], [0, 2, 3, 0], [0, 2, 23, 0]] Observed difference: source actual_output=[[0,7,0,0],[0,4,4,6],[0,32,4,26],[0,0,0,0]] while follow-up actual_output=[[0,0,0,0],[7,1,32,0],[0,2,3,0],[0,2,23,0]]. Transformation realization: violated.",
+      "evidence_refs": [
+        "MG003"
+      ],
+      "evidence_role": "corroborating",
+      "repair_relevance": "useful",
+      "declared_transformation": " Hold Matrix  B  No change, directly use the matrix  A  Multiply each element in  by the scalar  6 Specifically, let  A' = 6A，B' = B AND:  MR4  differed MR6  Instead of scaling by constructing a diagonal matrix and performing matrix multiplication, it directly  A  each element of  is multiplied by a scalar. The resulting follow-up test case input is  (6A, B)。",
+      "input_delta": {
+        "comparison_kind": "sequence",
+        "source_parsed": true,
+        "followup_parsed": true,
+        "changed_fields": [
+          {
+            "path": [
+              0,
+              0,
+              3
+            ],
+            "name": "arg[0][0][3]",
+            "source_present": true,
+            "followup_present": true,
+            "source_value": 7,
+            "followup_value": 0,
+            "numeric_delta": -7.0
+          },
+          {
+            "path": [
+              0,
+              1,
+              0
+            ],
+            "name": "arg[0][1][0]",
+            "source_present": true,
+            "followup_present": true,
+            "source_value": 2,
+            "followup_value": 0,
+            "numeric_delta": -2.0
+          },
+          {
+            "path": [
+              0,
+              1,
+              1
+            ],
+            "name": "arg[0][1][1]",
+            "source_present": true,
+            "followup_present": true,
+            "source_value": 0,
+            "followup_value": 4,
+            "numeric_delta": 4.0
+          },
+          {
+            "path": [
+              0,
+              1,
+              2
+            ],
+            "name": "arg[0][1][2]",
+            "source_present": true,
+            "followup_present": true,
+            "source_value": 1,
+            "followup_value": 4,
+            "numeric_delta": 3.0
+          },
+          {
+            "path": [
+              0,
+              1,
+              3
+            ],
+            "name": "arg[0][1][3]",
+            "source_present": true,
+            "followup_present": true,
+            "source_value": 0,
+            "followup_value": 7,
+            "numeric_delta": 7.0
+          },
+          {
+            "path": [
+              0,
+              2,
+              0
+            ],
+            "name": "arg[0][2][0]",
+            "source_present": true,
+            "followup_present": true,
+            "source_value": 3,
+            "followup_value": 4,
+            "numeric_delta": 1.0
+          },
+          {
+            "path": [
+              0,
+              2,
+              1
+            ],
+            "name": "arg[0][2][1]",
+            "source_present": true,
+            "followup_present": true,
+            "source_value": 4,
+            "followup_value": 0,
+            "numeric_delta": -4.0
+          },
+          {
+            "path": [
+              0,
+              2,
+              2
+            ],
+            "name": "arg[0][2][2]",
+            "source_present": true,
+            "followup_present": true,
+            "source_value": 7,
+            "followup_value": 0,
+            "numeric_delta": -7.0
+          },
+          {
+            "path": [
+              0,
+              3,
+              0
+            ],
+            "name": "arg[0][3][0]",
+            "source_present": true,
+            "followup_present": true,
+            "source_value": 0,
+            "followup_value": 6,
+            "numeric_delta": 6.0
+          },
+          {
+            "path": [
+              0,
+              3,
+              1
+            ],
+            "name": "arg[0][3][1]",
+            "source_present": true,
+            "followup_present": true,
+            "source_value": 0,
+            "followup_value": 5,
+            "numeric_delta": 5.0
+          },
+          {
+            "path": [
+              1,
+              0,
+              1
+            ],
+            "name": "arg[1][0][1]",
+            "source_present": true,
+            "followup_present": true,
+            "source_value": 0,
+            "followup_value": 2,
+            "numeric_delta": 2.0
+          },
+          {
+            "path": [
+              1,
+              0,
+              2
+            ],
+            "name": "arg[1][0][2]",
+            "source_present": true,
+            "followup_present": true,
+            "source_value": 4,
+            "followup_value": 3,
+            "numeric_delta": -1.0
+          },
+          {
+            "path": [
+              1,
+              0,
+              3
+            ],
+            "name": "arg[1][0][3]",
+            "source_present": true,
+            "followup_present": true,
+            "source_value": 6,
+            "followup_value": 0,
+            "numeric_delta": -6.0
+          },
+          {
+            "path": [
+              1,
+              1,
+              1
+            ],
+            "name": "arg[1][1][1]",
+            "source_present": true,
+            "followup_present": true,
+            "source_value": 4,
+            "followup_value": 0,
+            "numeric_delta": -4.0
+          },
+          {
+            "path": [
+              1,
+              1,
+              2
+            ],
+            "name": "arg[1][1][2]",
+            "source_present": true,
+            "followup_present": true,
+            "source_value": 0,
+            "followup_value": 4,
+            "numeric_delta": 4.0
+          },
+          {
+            "path": [
+              1,
+              1,
+              3
+            ],
+            "name": "arg[1][1][3]",
+            "source_present": true,
+            "followup_present": true,
+            "source_value": 5,
+            "followup_value": 0,
+            "numeric_delta": -5.0
+          },
+          {
+            "path": [
+              1,
+              2,
+              1
+            ],
+            "name": "arg[1][2][1]",
+            "source_present": true,
+            "followup_present": true,
+            "source_value": 4,
+            "followup_value": 1,
+            "numeric_delta": -3.0
+          },
+          {
+            "path": [
+              1,
+              2,
+              2
+            ],
+            "name": "arg[1][2][2]",
+            "source_present": true,
+            "followup_present": true,
+            "source_value": 0,
+            "followup_value": 7,
+            "numeric_delta": 7.0
+          },
+          {
+            "path": [
+              1,
+              3,
+              0
+            ],
+            "name": "arg[1][3][0]",
+            "source_present": true,
+            "followup_present": true,
+            "source_value": 0,
+            "followup_value": 7,
+            "numeric_delta": 7.0
+          },
+          {
+            "path": [
+              1,
+              3,
+              1
+            ],
+            "name": "arg[1][3][1]",
+            "source_present": true,
+            "followup_present": true,
+            "source_value": 7,
+            "followup_value": 0,
+            "numeric_delta": -7.0
+          }
+        ],
+        "unchanged_fields": [
+          {
+            "path": [
+              0,
+              0,
+              0
+            ],
+            "name": "arg[0][0][0]"
+          },
+          {
+            "path": [
+              0,
+              0,
+              1
+            ],
+            "name": "arg[0][0][1]"
+          },
+          {
+            "path": [
+              0,
+              0,
+              2
+            ],
+            "name": "arg[0][0][2]"
+          },
+          {
+            "path": [
+              0,
+              2,
+              3
+            ],
+            "name": "arg[0][2][3]"
+          },
+          {
+            "path": [
+              0,
+              3,
+              2
+            ],
+            "name": "arg[0][3][2]"
+          },
+          {
+            "path": [
+              0,
+              3,
+              3
+            ],
+            "name": "arg[0][3][3]"
+          },
+          {
+            "path": [
+              1,
+              0,
+              0
+            ],
+            "name": "arg[1][0][0]"
+          },
+          {
+            "path": [
+              1,
+              1,
+              0
+            ],
+            "name": "arg[1][1][0]"
+          },
+          {
+            "path": [
+              1,
+              2,
+              0
+            ],
+            "name": "arg[1][2][0]"
+          },
+          {
+            "path": [
+              1,
+              2,
+              3
+            ],
+            "name": "arg[1][2][3]"
+          },
+          {
+            "path": [
+              1,
+              3,
+              2
+            ],
+            "name": "arg[1][3][2]"
+          },
+          {
+            "path": [
+              1,
+              3,
+              3
+            ],
+            "name": "arg[1][3][3]"
+          }
+        ],
+        "changed_field_count": 20,
+        "unchanged_field_count": 12,
+        "unchanged_fields_truncated": false,
+        "summary": "arg[0][0][3]: 7 -> 0 (delta -7); arg[0][1][0]: 2 -> 0 (delta -2); arg[0][1][1]: 0 -> 4 (delta +4); arg[0][1][2]: 1 -> 4 (delta +3); arg[0][1][3]: 0 -> 7 (delta +7); arg[0][2][0]: 3 -> 4 (delta +1); arg[0][2][1]: 4 -> 0 (delta -4); arg[0][2][2]: 7 -> 0 (delta -7); arg[0][3][0]: 0 -> 6 (delta +6); arg[0][3][1]: 0 -> 5 (delta +5); arg[1][0][1]: 0 -> 2 (delta +2); arg[1][0][2]: 4 -> 3 (delta -1); arg[1][0][3]: 6 -> 0 (delta -6); arg[1][1][1]: 4 -> 0 (delta -4); arg[1][1][2]: 0 -> 4 (delta +4); arg[1][1][3]: 5 -> 0 (delta -5); arg[1][2][1]: 4 -> 1 (delta -3); arg[1][2][2]: 0 -> 7 (delta +7); arg[1][3][0]: 0 -> 7 (delta +7); arg[1][3][1]: 7 -> 0 (delta -7) Unchanged fields: arg[0][0][0], arg[0][0][1], arg[0][0][2], arg[0][2][3], arg[0][3][2], arg[0][3][3], arg[1][0][0], arg[1][1][0], arg[1][2][0], arg[1][2][3], arg[1][3][2], arg[1][3][3]."
+      },
+      "output_delta": {
+        "source_parsed": true,
+        "followup_parsed": true,
+        "source_value": [
+          [
+            0,
+            7,
+            0,
+            0
+          ],
+          [
+            0,
+            4,
+            4,
+            6
+          ],
+          [
+            0,
+            32,
+            4,
+            26
+          ],
+          [
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "followup_value": [
+          [
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            7,
+            1,
+            32,
+            0
+          ],
+          [
+            0,
+            2,
+            3,
+            0
+          ],
+          [
+            0,
+            2,
+            23,
+            0
+          ]
+        ],
+        "equal": false,
+        "summary": "source actual_output=[[0,7,0,0],[0,4,4,6],[0,32,4,26],[0,0,0,0]] while follow-up actual_output=[[0,0,0,0],[7,1,32,0],[0,2,3,0],[0,2,23,0]]."
+      },
+      "endpoint_oracle_assessment": {
+        "oracle_mode": "EXACT_ORACLE",
+        "source_status": "nopass",
+        "followup_status": "nopass",
+        "conclusion": "both_endpoints_confirmed_failures"
+      },
+      "transformation_realization": "violated",
+      "input_transformation_status": "violated",
+      "output_relation_status": "violated",
+      "evidence_usability": "usable_with_caution",
+      "source_test": {
+        "test_ref": "TC001",
+        "input": "[[[0, 0, 0, 7], [2, 0, 1, 0], [3, 4, 7, 0], [0, 0, 0, 0]], [[0, 0, 4, 6], [0, 4, 0, 5], [0, 4, 0, 0], [0, 7, 0, 0]]]",
+        "actual_output": "[[0, 7, 0, 0], [0, 4, 4, 6], [0, 32, 4, 26], [0, 0, 0, 0]]",
+        "diagnostic_status": "nopass",
+        "oracle_mode": "EXACT_ORACLE",
+        "expected_output": "[[0, 49, 0, 0], [0, 4, 8, 12], [0, 44, 12, 38], [0, 0, 0, 0]]"
+      },
+      "followup_test": {
+        "test_ref": "TC002",
+        "input": "[[[0, 0, 0, 0], [0, 4, 4, 7], [4, 0, 0, 0], [6, 5, 0, 0]], [[0, 2, 3, 0], [0, 0, 4, 0], [0, 1, 7, 0], [7, 0, 0, 0]]]",
+        "actual_output": "[[0, 0, 0, 0], [7, 1, 32, 0], [0, 2, 3, 0], [0, 2, 23, 0]]",
+        "diagnostic_status": "nopass",
+        "oracle_mode": "EXACT_ORACLE",
+        "expected_output": "[[0, 0, 0, 0], [49, 4, 44, 0], [0, 8, 12, 0], [0, 12, 38, 0]]"
+      },
+      "realization_issues": [
+        "Cluster validity review: Input validation is absent, causing unexpected failures."
+      ],
+      "behavior_attribution": [
+        " Matrix multiplication implementation error ",
+        " Sparse format conversion issue "
+      ],
+      "added_constraints": [
+        " Matrix multiplication must correctly handle scalar multiplication ",
+        " Sparse format conversion must preserve all non-zero elements ",
+        " Dense matrix reduction must be accurate "
+      ],
+      "new_information": "The cluster review questioned the declared input transformation. Retain this as an uncertainty; the authoritative VMG output-relation violation remains available to candidate-level reasoning.",
+      "pair_group_id": "MRPAIR003",
+      "independent_evidence_weight": 1.0,
+      "shared_source_cluster": {
+        "cluster_id": "MRSOURCE001",
+        "source_test_ref": "TC001",
+        "source_input": "[[[0, 0, 0, 7], [2, 0, 1, 0], [3, 4, 7, 0], [0, 0, 0, 0]], [[0, 0, 4, 6], [0, 4, 0, 5], [0, 4, 0, 0], [0, 7, 0, 0]]]",
+        "source_actual_output": "[[0, 7, 0, 0], [0, 4, 4, 6], [0, 32, 4, 26], [0, 0, 0, 0]]",
+        "member_refs": [
+          "MG001",
+          "MG003"
+        ],
+        "member_count": 2,
+        "independent_pair_count": 2,
+        "duplicate_refs": [],
+        "unique_followup_count": 1,
+        "followup_actual_outputs": [
+          "[[0, 0, 0, 0], [7, 1, 32, 0], [0, 2, 3, 0], [0, 2, 23, 0]]"
+        ],
+        "followup_output_consensus": true,
+        "source_output_differs_from_followup_consensus": true,
+        "common_changed_fields": [
+          "arg[0][0][3]",
+          "arg[0][1][0]",
+          "arg[0][1][1]",
+          "arg[0][1][2]",
+          "arg[0][1][3]",
+          "arg[0][2][0]",
+          "arg[0][2][1]",
+          "arg[0][2][2]",
+          "arg[0][3][0]",
+          "arg[0][3][1]",
+          "arg[1][0][1]",
+          "arg[1][0][2]",
+          "arg[1][0][3]",
+          "arg[1][1][1]",
+          "arg[1][1][2]",
+          "arg[1][1][3]",
+          "arg[1][2][1]",
+          "arg[1][2][2]",
+          "arg[1][3][0]",
+          "arg[1][3][1]"
+        ],
+        "sometimes_changed_fields": [],
+        "always_unchanged_fields": [
+          "arg[0][0][0]",
+          "arg[0][0][1]",
+          "arg[0][0][2]",
+          "arg[0][2][3]",
+          "arg[0][3][2]",
+          "arg[0][3][3]",
+          "arg[1][0][0]",
+          "arg[1][1][0]",
+          "arg[1][2][0]",
+          "arg[1][2][3]",
+          "arg[1][3][2]",
+          "arg[1][3][3]"
+        ],
+        "relation_properties": [
+          " Set the output of the source test case to  C = A × B , the follow-up test case output is  C' = B^T × A^T . According to the transpose property of matrix multiplication  (A × B)^T = B^T × A^T Get  C' = C^T Therefore, the output matrix of the follow-up test case should be equal to the transpose of the output matrix of the source test case. ",
+          " Set the output of the source test case to  C = A × B . The output of the follow-up test case is  C' = (6A) × B . According to the scalar multiplication property of matrix multiplication, we have  C' = 6 × (A × B) = 6C Therefore, each element in the follow-up test case output matrix should be equal to the corresponding element in the source test case output matrix.  6  times. The expected relationship is  C' = 6C。"
+        ],
+        "oracle_mode": "EXACT_ORACLE",
+        "source_diagnostic_status": "nopass",
+        "followup_diagnostic_statuses": [
+          "nopass"
+        ],
+        "endpoint_conclusion": "mixed_or_incomplete_endpoint_evidence",
+        "behavioral_contrast": "Shared source TC001 produced [[0, 7, 0, 0], [0, 4, 4, 6], [0, 32, 4, 26], [0, 0, 0, 0]]; 1 unique follow-up input(s) all produced [[0, 0, 0, 0], [7, 1, 32, 0], [0, 2, 3, 0], [0, 2, 23, 0]].",
+        "diagnostic_focus": "Across 2 independent endpoint pair(s), fields changed in every transformation: arg[0][0][3], arg[0][1][0], arg[0][1][1], arg[0][1][2], arg[0][1][3], arg[0][2][0], arg[0][2][1], arg[0][2][2], arg[0][3][0], arg[0][3][1], arg[1][0][1], arg[1][0][2], arg[1][0][3], arg[1][1][1], arg[1][1][2], arg[1][1][3], arg[1][2][1], arg[1][2][2], arg[1][3][0], arg[1][3][1]; fields changed only in some transformations: none; fields unchanged in every transformation: arg[0][0][0], arg[0][0][1], arg[0][0][2], arg[0][2][3], arg[0][3][2], arg[0][3][3], arg[1][0][0], arg[1][1][0], arg[1][2][0], arg[1][2][3], arg[1][3][2], arg[1][3][3]. The shared-source output differs from the unanimous follow-up output.",
+        "joint_analysis": {
+          "joint_behavior_pattern": "Program consistently fails on input patterns requiring complex recursive operations, passing only on trivial cases.",
+          "shared_source_significance": "Frequent use of recursive functions without proper base case validation leads to unbounded recursion and subsequent failures.",
+          "discriminating_input_patterns": [
+            "Deeply nested structures",
+            "Large input sizes",
+            "Complex dependency chains"
+          ],
+          "code_state_hypotheses": [
+            "Missing termination conditions in recursive calls",
+            "Lack of input validation for edge cases",
+            "Insufficient resource management"
+          ],
+          "repair_constraints": [
+            "Maintain recursion for valid use cases",
+            "Ensure termination conditions are met",
+            "Implement input validation"
+          ],
+          "relation_validity_reviews": [
+            {
+              "evidence_ref": "MG001",
+              "transformation_realization": "realized",
+              "reason": "Recursive calls without base cases lead to infinite loops."
+            },
+            {
+              "evidence_ref": "MG003",
+              "transformation_realization": "violated",
+              "reason": "Input validation is absent, causing unexpected failures."
+            }
+          ],
+          "uncertainty": [
+            "Uncertainty in exact expected output for complex cases",
+            "Potential for unknown edge cases not covered in tests"
+          ]
+        }
+      }
+    },
+    {
+      "fact": "MG004 is VMG (role=corroborating): observed input change 'arg[0][0][0]: 3 -> 9 (delta +6); arg[0][0][1]: 6 -> 18 (delta +12); arg[0][0][3]: 9 -> 27 (delta +18); arg[0][1][1]: 9 -> 27 (delta +18); arg[0][1][3]: 7 -> 21 (delta +14); arg[0][3][2]: 6 -> 18 (delta +12); arg[0][3][3]: 7 -> 21 (delta +14) Unchanged fields: arg[0][0][2], arg[0][1][0], arg[0][1][2], arg[0][2][0], arg[0][2][1], arg[0][2][2], arg[0][2][3], arg[0][3][0], arg[0][3][1], arg[1][0][0], arg[1][0][1], arg[1][0][2], arg[1][0][3], arg[1][1][0], arg[1][1][1], arg[1][1][2], arg[1][1][3], arg[1][2][0], arg[1][2][1], arg[1][2][2], ... and 5 more.'. The stated output relation ' Set the output of the source test case to  C = A × B . The output of the follow-up test case is  C' = A × (B + I) . According to the distributive law of matrix multiplication over addition, we have  C' = A × B + A × I  out of   I  is the identity matrix, so  A × I = A Therefore,  C' = C + A . That is, the output of the follow-up test case should be equal to the output matrix of the source test case.  C  With Source Input Matrix  A  The result of matrix addition for . The expected relationship is  C' = C + A。' was violated. Source behavior: Observed actual_output: [[2, 0, 1, 5], [2, 0, 1, 5], [0, 0, 0, 0], [18, 0, 0, 5]] Follow-up behavior: Observed actual_output: [[2, 0, 1, 5], [2, 0, 1, 5], [0, 0, 0, 0], [46, 0, 0, 5]] Observed difference: source actual_output=[[2,0,1,5],[2,0,1,5],[0,0,0,0],[18,0,0,5]] while follow-up actual_output=[[2,0,1,5],[2,0,1,5],[0,0,0,0],[46,0,0,5]]. Transformation realization: violated.",
+      "evidence_refs": [
+        "MG004"
+      ],
+      "evidence_role": "corroborating",
+      "repair_relevance": "useful",
+      "declared_transformation": " First, construct an identity matrix.  I , whose dimensions are equal to the matrix  B  Number of rows. Keep  A  remains unchanged, the identity matrix  I  Add to Matrix  B  Specifically, let  A' = A，B' = B + I . This operation is equivalent to  B  Add to each main diagonal element of  1 , while the remaining non-diagonal elements remain unchanged. The resulting follow-up test case input is  (A, B + I)。",
+      "input_delta": {
+        "comparison_kind": "sequence",
+        "source_parsed": true,
+        "followup_parsed": true,
+        "changed_fields": [
+          {
+            "path": [
+              0,
+              0,
+              0
+            ],
+            "name": "arg[0][0][0]",
+            "source_present": true,
+            "followup_present": true,
+            "source_value": 3,
+            "followup_value": 9,
+            "numeric_delta": 6.0
+          },
+          {
+            "path": [
+              0,
+              0,
+              1
+            ],
+            "name": "arg[0][0][1]",
+            "source_present": true,
+            "followup_present": true,
+            "source_value": 6,
+            "followup_value": 18,
+            "numeric_delta": 12.0
+          },
+          {
+            "path": [
+              0,
+              0,
+              3
+            ],
+            "name": "arg[0][0][3]",
+            "source_present": true,
+            "followup_present": true,
+            "source_value": 9,
+            "followup_value": 27,
+            "numeric_delta": 18.0
+          },
+          {
+            "path": [
+              0,
+              1,
+              1
+            ],
+            "name": "arg[0][1][1]",
+            "source_present": true,
+            "followup_present": true,
+            "source_value": 9,
+            "followup_value": 27,
+            "numeric_delta": 18.0
+          },
+          {
+            "path": [
+              0,
+              1,
+              3
+            ],
+            "name": "arg[0][1][3]",
+            "source_present": true,
+            "followup_present": true,
+            "source_value": 7,
+            "followup_value": 21,
+            "numeric_delta": 14.0
+          },
+          {
+            "path": [
+              0,
+              3,
+              2
+            ],
+            "name": "arg[0][3][2]",
+            "source_present": true,
+            "followup_present": true,
+            "source_value": 6,
+            "followup_value": 18,
+            "numeric_delta": 12.0
+          },
+          {
+            "path": [
+              0,
+              3,
+              3
+            ],
+            "name": "arg[0][3][3]",
+            "source_present": true,
+            "followup_present": true,
+            "source_value": 7,
+            "followup_value": 21,
+            "numeric_delta": 14.0
+          }
+        ],
+        "unchanged_fields": [
+          {
+            "path": [
+              0,
+              0,
+              2
+            ],
+            "name": "arg[0][0][2]"
+          },
+          {
+            "path": [
+              0,
+              1,
+              0
+            ],
+            "name": "arg[0][1][0]"
+          },
+          {
+            "path": [
+              0,
+              1,
+              2
+            ],
+            "name": "arg[0][1][2]"
+          },
+          {
+            "path": [
+              0,
+              2,
+              0
+            ],
+            "name": "arg[0][2][0]"
+          },
+          {
+            "path": [
+              0,
+              2,
+              1
+            ],
+            "name": "arg[0][2][1]"
+          },
+          {
+            "path": [
+              0,
+              2,
+              2
+            ],
+            "name": "arg[0][2][2]"
+          },
+          {
+            "path": [
+              0,
+              2,
+              3
+            ],
+            "name": "arg[0][2][3]"
+          },
+          {
+            "path": [
+              0,
+              3,
+              0
+            ],
+            "name": "arg[0][3][0]"
+          },
+          {
+            "path": [
+              0,
+              3,
+              1
+            ],
+            "name": "arg[0][3][1]"
+          },
+          {
+            "path": [
+              1,
+              0,
+              0
+            ],
+            "name": "arg[1][0][0]"
+          },
+          {
+            "path": [
+              1,
+              0,
+              1
+            ],
+            "name": "arg[1][0][1]"
+          },
+          {
+            "path": [
+              1,
+              0,
+              2
+            ],
+            "name": "arg[1][0][2]"
+          },
+          {
+            "path": [
+              1,
+              0,
+              3
+            ],
+            "name": "arg[1][0][3]"
+          },
+          {
+            "path": [
+              1,
+              1,
+              0
+            ],
+            "name": "arg[1][1][0]"
+          },
+          {
+            "path": [
+              1,
+              1,
+              1
+            ],
+            "name": "arg[1][1][1]"
+          },
+          {
+            "path": [
+              1,
+              1,
+              2
+            ],
+            "name": "arg[1][1][2]"
+          },
+          {
+            "path": [
+              1,
+              1,
+              3
+            ],
+            "name": "arg[1][1][3]"
+          },
+          {
+            "path": [
+              1,
+              2,
+              0
+            ],
+            "name": "arg[1][2][0]"
+          },
+          {
+            "path": [
+              1,
+              2,
+              1
+            ],
+            "name": "arg[1][2][1]"
+          },
+          {
+            "path": [
+              1,
+              2,
+              2
+            ],
+            "name": "arg[1][2][2]"
+          },
+          {
+            "path": [
+              1,
+              2,
+              3
+            ],
+            "name": "arg[1][2][3]"
+          },
+          {
+            "path": [
+              1,
+              3,
+              0
+            ],
+            "name": "arg[1][3][0]"
+          },
+          {
+            "path": [
+              1,
+              3,
+              1
+            ],
+            "name": "arg[1][3][1]"
+          },
+          {
+            "path": [
+              1,
+              3,
+              2
+            ],
+            "name": "arg[1][3][2]"
+          },
+          {
+            "path": [
+              1,
+              3,
+              3
+            ],
+            "name": "arg[1][3][3]"
+          }
+        ],
+        "changed_field_count": 7,
+        "unchanged_field_count": 25,
+        "unchanged_fields_truncated": false,
+        "summary": "arg[0][0][0]: 3 -> 9 (delta +6); arg[0][0][1]: 6 -> 18 (delta +12); arg[0][0][3]: 9 -> 27 (delta +18); arg[0][1][1]: 9 -> 27 (delta +18); arg[0][1][3]: 7 -> 21 (delta +14); arg[0][3][2]: 6 -> 18 (delta +12); arg[0][3][3]: 7 -> 21 (delta +14) Unchanged fields: arg[0][0][2], arg[0][1][0], arg[0][1][2], arg[0][2][0], arg[0][2][1], arg[0][2][2], arg[0][2][3], arg[0][3][0], arg[0][3][1], arg[1][0][0], arg[1][0][1], arg[1][0][2], arg[1][0][3], arg[1][1][0], arg[1][1][1], arg[1][1][2], arg[1][1][3], arg[1][2][0], arg[1][2][1], arg[1][2][2], ... and 5 more."
+      },
+      "output_delta": {
+        "source_parsed": true,
+        "followup_parsed": true,
+        "source_value": [
+          [
+            2,
+            0,
+            1,
+            5
+          ],
+          [
+            2,
+            0,
+            1,
+            5
+          ],
+          [
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            18,
+            0,
+            0,
+            5
+          ]
+        ],
+        "followup_value": [
+          [
+            2,
+            0,
+            1,
+            5
+          ],
+          [
+            2,
+            0,
+            1,
+            5
+          ],
+          [
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            46,
+            0,
+            0,
+            5
+          ]
+        ],
+        "equal": false,
+        "summary": "source actual_output=[[2,0,1,5],[2,0,1,5],[0,0,0,0],[18,0,0,5]] while follow-up actual_output=[[2,0,1,5],[2,0,1,5],[0,0,0,0],[46,0,0,5]]."
+      },
+      "endpoint_oracle_assessment": {
+        "oracle_mode": "EXACT_ORACLE",
+        "source_status": "nopass",
+        "followup_status": "nopass",
+        "conclusion": "both_endpoints_confirmed_failures"
+      },
+      "transformation_realization": "violated",
+      "input_transformation_status": "violated",
+      "output_relation_status": "violated",
+      "evidence_usability": "usable_with_caution",
+      "source_test": {
+        "test_ref": "TC003",
+        "input": "[[[3, 6, 0, 9], [0, 9, 0, 7], [0, 0, 0, 0], [0, 0, 6, 7]], [[0, 0, 0, 0], [0, 0, 1, 0], [4, 0, 0, 0], [2, 0, 0, 5]]]",
+        "actual_output": "[[2, 0, 1, 5], [2, 0, 1, 5], [0, 0, 0, 0], [18, 0, 0, 5]]",
+        "diagnostic_status": "nopass",
+        "oracle_mode": "EXACT_ORACLE",
+        "expected_output": "[[18, 0, 6, 45], [14, 0, 9, 35], [0, 0, 0, 0], [38, 0, 0, 35]]"
+      },
+      "followup_test": {
+        "test_ref": "TC004",
+        "input": "[[[9, 18, 0, 27], [0, 27, 0, 21], [0, 0, 0, 0], [0, 0, 18, 21]], [[0, 0, 0, 0], [0, 0, 1, 0], [4, 0, 0, 0], [2, 0, 0, 5]]]",
+        "actual_output": "[[2, 0, 1, 5], [2, 0, 1, 5], [0, 0, 0, 0], [46, 0, 0, 5]]",
+        "diagnostic_status": "nopass",
+        "oracle_mode": "EXACT_ORACLE",
+        "expected_output": "[[54, 0, 18, 135], [42, 0, 27, 105], [0, 0, 0, 0], [114, 0, 0, 105]]"
+      },
+      "realization_issues": [
+        "Cluster validity review: contradicts expected behavior"
+      ],
+      "behavior_attribution": [
+        " The identity matrix was not correctly applied in the matrix multiplication. I effect of ",
+        " Sparse matrix conversion error leads to inaccurate results "
+      ],
+      "added_constraints": [
+        " Matrix multiplication must correctly handle the identity matrix I effect of ",
+        " Sparse matrix conversion must be accurate "
+      ],
+      "new_information": "The cluster review questioned the declared input transformation. Retain this as an uncertainty; the authoritative VMG output-relation violation remains available to candidate-level reasoning.",
+      "pair_group_id": "MRPAIR004",
+      "independent_evidence_weight": 1.0,
+      "shared_source_cluster": {
+        "cluster_id": "MRSOURCE002",
+        "source_test_ref": "TC003",
+        "source_input": "[[[3, 6, 0, 9], [0, 9, 0, 7], [0, 0, 0, 0], [0, 0, 6, 7]], [[0, 0, 0, 0], [0, 0, 1, 0], [4, 0, 0, 0], [2, 0, 0, 5]]]",
+        "source_actual_output": "[[2, 0, 1, 5], [2, 0, 1, 5], [0, 0, 0, 0], [18, 0, 0, 5]]",
+        "member_refs": [
+          "MG002",
+          "MG004"
+        ],
+        "member_count": 2,
+        "independent_pair_count": 2,
+        "duplicate_refs": [],
+        "unique_followup_count": 1,
+        "followup_actual_outputs": [
+          "[[2, 0, 1, 5], [2, 0, 1, 5], [0, 0, 0, 0], [46, 0, 0, 5]]"
+        ],
+        "followup_output_consensus": true,
+        "source_output_differs_from_followup_consensus": true,
+        "common_changed_fields": [
+          "arg[0][0][0]",
+          "arg[0][0][1]",
+          "arg[0][0][3]",
+          "arg[0][1][1]",
+          "arg[0][1][3]",
+          "arg[0][3][2]",
+          "arg[0][3][3]"
+        ],
+        "sometimes_changed_fields": [],
+        "always_unchanged_fields": [
+          "arg[0][0][2]",
+          "arg[0][1][0]",
+          "arg[0][1][2]",
+          "arg[0][2][0]",
+          "arg[0][2][1]",
+          "arg[0][2][2]",
+          "arg[0][2][3]",
+          "arg[0][3][0]",
+          "arg[0][3][1]",
+          "arg[1][0][0]",
+          "arg[1][0][1]",
+          "arg[1][0][2]",
+          "arg[1][0][3]",
+          "arg[1][1][0]",
+          "arg[1][1][1]",
+          "arg[1][1][2]",
+          "arg[1][1][3]",
+          "arg[1][2][0]",
+          "arg[1][2][1]",
+          "arg[1][2][2]",
+          "arg[1][2][3]",
+          "arg[1][3][0]",
+          "arg[1][3][1]",
+          "arg[1][3][2]",
+          "arg[1][3][3]"
+        ],
+        "relation_properties": [
+          " Set the output of the source test case to  C = A × B . The output of the follow-up test case is  C' = (3A) × B . According to the scalar multiplication property of matrix multiplication, we have  C' = 3 × (A × B) = 3C Therefore, each element in the follow-up test case output matrix should be equal to the corresponding element in the source test case output matrix.  3  times. The expected relationship is  C' = 3C。",
+          " Set the output of the source test case to  C = A × B . The output of the follow-up test case is  C' = A × (B + I) . According to the distributive law of matrix multiplication over addition, we have  C' = A × B + A × I  out of   I  is the identity matrix, so  A × I = A Therefore,  C' = C + A . That is, the output of the follow-up test case should be equal to the output matrix of the source test case.  C  With Source Input Matrix  A  The result of matrix addition for . The expected relationship is  C' = C + A。"
+        ],
+        "oracle_mode": "EXACT_ORACLE",
+        "source_diagnostic_status": "nopass",
+        "followup_diagnostic_statuses": [
+          "nopass"
+        ],
+        "endpoint_conclusion": "mixed_or_incomplete_endpoint_evidence",
+        "behavioral_contrast": "Shared source TC003 produced [[2, 0, 1, 5], [2, 0, 1, 5], [0, 0, 0, 0], [18, 0, 0, 5]]; 1 unique follow-up input(s) all produced [[2, 0, 1, 5], [2, 0, 1, 5], [0, 0, 0, 0], [46, 0, 0, 5]].",
+        "diagnostic_focus": "Across 2 independent endpoint pair(s), fields changed in every transformation: arg[0][0][0], arg[0][0][1], arg[0][0][3], arg[0][1][1], arg[0][1][3], arg[0][3][2], arg[0][3][3]; fields changed only in some transformations: none; fields unchanged in every transformation: arg[0][0][2], arg[0][1][0], arg[0][1][2], arg[0][2][0], arg[0][2][1], arg[0][2][2], arg[0][2][3], arg[0][3][0], arg[0][3][1], arg[1][0][0], arg[1][0][1], arg[1][0][2], arg[1][0][3], arg[1][1][0], arg[1][1][1], arg[1][1][2], arg[1][1][3], arg[1][2][0], arg[1][2][1], arg[1][2][2], arg[1][2][3], arg[1][3][0], arg[1][3][1], arg[1][3][2], arg[1][3][3]. The shared-source output differs from the unanimous follow-up output.",
+        "joint_analysis": {
+          "joint_behavior_pattern": "outputs vary based on input patterns",
+          "shared_source_significance": "common function in test cases",
+          "discriminating_input_patterns": [
+            "edge cases",
+            "specific data types"
+          ],
+          "code_state_hypotheses": [
+            "miscalculation in function",
+            "incorrect state transitions"
+          ],
+          "repair_constraints": [
+            "preserve core functionality",
+            "maintain performance metrics"
+          ],
+          "relation_validity_reviews": [
+            {
+              "evidence_ref": "MG002",
+              "transformation_realization": "realized",
+              "reason": "observed in multiple tests"
+            },
+            {
+              "evidence_ref": "MG004",
+              "transformation_realization": "violated",
+              "reason": "contradicts expected behavior"
+            }
+          ],
+          "uncertainty": [
+            "incomplete test coverage",
+            "ambiguous code behavior"
+          ]
+        }
+      }
+    }
+  ],
+  "fault_hypothesis": [
+    {
+      "candidate_id": "RC001",
+      "location_ref": "LINE_0043",
+      "statement": "Working hypothesis (not established as fact; review=tentative): The evidence suggests that the assignment of B's value without considering A's contribution leads to incorrect C values.",
+      "review": {
+        "verdict": "tentative",
+        "reason": "The proposed repair mechanism addresses the immediate issue of missing A's contribution by modifying the assignment to include the product of A and B elements. However, the explanation does not account for the broader implications of the sparse matrix handling and the correctness of the indices used in the loops.",
+        "source_or_logic_contradictions": [
+          "The current logic directly assigns B's value, failing to accumulate products from A and B.",
+          "The proposed change modifies the assignment to include the multiplication of A and B elements and accumulate the result in C.",
+          "The repair intent is to modify the assignment to include the multiplication of A and B elements and accumulate the result in C."
+        ],
+        "unsupported_assumptions": [
+          "Uncertainty in the exact mechanism of sparse matrix multiplication.",
+          "Potential for other contributing factors not directly observed."
+        ],
+        "discriminating_checks": [
+          "Verify that the indices used in the loops correctly track the positions in C.",
+          "Ensure that all necessary elements are processed without skipping or duplicating any."
+        ]
+      },
+      "causal_chain": [
+        "Trigger: non-zero elements in A and B",
+        "Executed: assignment of B's value",
+        "Effect: missing A's contribution",
+        "Result: incorrect C values"
+      ],
+      "confidence": "low",
+      "derivation_type": "mr_test_context",
+      "evidence_refs": [
+        "TC001",
+        "TC002",
+        "TC003",
+        "TC004",
+        "TC005",
+        "TC006",
+        "TC007",
+        "TC008",
+        "MG001",
+        "MG002",
+        "MG003",
+        "MG004"
+      ]
+    }
+  ],
+  "desired_behavior": [
+    {
+      "candidate_id": "RC001",
+      "location_ref": "LINE_0043",
+      "statement": "Correctly accumulate the products of corresponding elements from A and B in C.",
+      "evidence_refs": [
+        "TC001",
+        "TC002",
+        "TC003",
+        "TC004",
+        "TC005",
+        "TC006",
+        "TC007",
+        "TC008",
+        "MG001",
+        "MG002",
+        "MG003",
+        "MG004"
+      ]
+    }
+  ],
+  "repair_intent": [
+    {
+      "candidate_id": "RC001",
+      "location_ref": "LINE_0043",
+      "statement": "Provisional repair direction (hypothesis review: tentative; verify against source and tests before editing). Current logic: c[nz] = b[k] Required logic: c[nz] += aij * b[k] Logic gap: The current logic directly assigns B's value, failing to accumulate products from A and B. Repair action: Modify the assignment to include the multiplication of A and B elements and accumulate the result in C.",
+      "current_logic": "c[nz] = b[k]",
+      "required_logic": "c[nz] += aij * b[k]",
+      "logic_gap": "The current logic directly assigns B's value, failing to accumulate products from A and B.",
+      "action": "Modify the assignment to include the multiplication of A and B elements and accumulate the result in C.",
+      "hypothesis_review": {
+        "verdict": "tentative",
+        "reason": "The proposed repair mechanism addresses the immediate issue of missing A's contribution by modifying the assignment to include the product of A and B elements. However, the explanation does not account for the broader implications of the sparse matrix handling and the correctness of the indices used in the loops.",
+        "source_or_logic_contradictions": [
+          "The current logic directly assigns B's value, failing to accumulate products from A and B.",
+          "The proposed change modifies the assignment to include the multiplication of A and B elements and accumulate the result in C.",
+          "The repair intent is to modify the assignment to include the multiplication of A and B elements and accumulate the result in C."
+        ],
+        "unsupported_assumptions": [
+          "Uncertainty in the exact mechanism of sparse matrix multiplication.",
+          "Potential for other contributing factors not directly observed."
+        ],
+        "discriminating_checks": [
+          "Verify that the indices used in the loops correctly track the positions in C.",
+          "Ensure that all necessary elements are processed without skipping or duplicating any."
+        ]
+      },
+      "target_lines": [
+        43
+      ],
+      "derivation_type": "mr_test_context",
+      "evidence_refs": [
+        "TC001",
+        "TC002",
+        "TC003",
+        "TC004",
+        "TC005",
+        "TC006",
+        "TC007",
+        "TC008",
+        "MG001",
+        "MG002",
+        "MG003",
+        "MG004"
+      ]
+    }
+  ],
+  "preservation_constraints": [
+    "Maintain the sparse matrix format conversion.",
+    "Ensure the correct handling of non-zero elements."
+  ],
+  "uncertainty": [
+    "The repair location was supplied by the caller; this does not prove the proposed fault mechanism.",
+    "Uncertainty in the exact mechanism of sparse matrix multiplication.",
+    "Potential for other contributing factors not directly observed.",
+    "The source-level mechanism is tentative, not proven by the observed outputs."
+  ],
+  "validation_obligations": [
+    "Replay the trigger with the modified logic to ensure correct accumulation.",
+    "Verify that the output matches the expected results for all test cases.",
+    "Verify that the indices used in the loops correctly track the positions in C.",
+    "Ensure that all necessary elements are processed without skipping or duplicating any."
+  ]
+}

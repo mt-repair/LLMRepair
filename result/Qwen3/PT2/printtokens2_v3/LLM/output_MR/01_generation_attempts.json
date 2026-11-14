@@ -1,0 +1,26 @@
+[
+  {
+    "attempt": 1,
+    "errors": [
+      "Model output is not valid JSON: Unterminated string starting at: line 37 column 26 (char 2538)"
+    ],
+    "raw_tail": "9)id=2;    /* prepare for comment */\\n    if(ch != '\\\"')id=0;    /* prepare for string */\\n    if(ch !=59)id=2;    /* prepare for comment */\\n    if(ch != '\\\"')id=0;    /* prepare for string */\\n    if(ch !=59)id=2;    /* prepare for comment */\\n    if(ch != '\\\"')id=0;    /* prepare for string */\\n    if(ch !=59)id=2;    /* prepare for comment */\\n    if(ch != '\\\"')id=0;    /* prepare for string */\\n    if(ch !=59)id=2;    /* prepare for comment */\\n    if(ch != '\\\"')id=0;    /* prepare for string */\\n    if(ch !=59)id=2;    /* prepare for comment */\\n    if(ch != '\\\"')id=0;    /* prepare for string */\\n    if(ch !=59)id=2;    /* prepare for comment */\\n    if(ch != '\\\"')id=0;    /* prepare for string */\\n    if(ch !=59)id=2;    /* prepare for comment */\\n    if(ch != '\\\"')id=0;    /* prepare for string */\\n    if(ch !=59)id=2;    /* prepare for comment */\\n    if(ch != '\\\"')id=0;    /* prepare for string */\\n    if(ch !=59)id=2;    /* prepare for comment */\\n    if(ch != '\\\"')id=0;   ",
+    "response_metadata": {
+      "model": "Qwen3:14b",
+      "temperature": 0.09,
+      "seed": 0,
+      "num_ctx": 32768,
+      "num_predict": 8192,
+      "prompt_chars": 24467,
+      "done": true,
+      "done_reason": "length",
+      "prompt_eval_count": 8709,
+      "eval_count": 8192,
+      "prompt_eval_duration": 1178608000,
+      "eval_duration": 70328465000,
+      "total_duration": 72477918695,
+      "load_duration": 144054680,
+      "client_elapsed_seconds": 72.48
+    }
+  }
+]

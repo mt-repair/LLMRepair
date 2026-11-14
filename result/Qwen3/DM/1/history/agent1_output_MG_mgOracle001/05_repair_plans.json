@@ -1,0 +1,119 @@
+{
+  "RC001": {
+    "fault_hypothesis": "The program incorrectly sums diagonal elements instead of multiplying them for triangular matrices, leading to an incorrect determinant calculation.",
+    "causal_chain": [
+      "The code incorrectly sums diagonal elements for triangular matrices.",
+      "This results in an incorrect determinant value.",
+      "The test case returns 0 instead of the expected value."
+    ],
+    "desired_behavior": "The determinant of a triangular matrix should be the product of its diagonal elements.",
+    "repair_intent": "Modify the calculation to multiply diagonal elements instead of summing them.",
+    "preservation_constraints": [
+      "Preserve correct handling of non-triangular matrices.",
+      "Maintain existing test cases and their expected outcomes."
+    ],
+    "uncertainty": [
+      "Uncertainty about whether other matrix types are affected by this change.",
+      "Possibility of arithmetic errors in determinant calculation."
+    ],
+    "validation_obligations": [
+      "Re-run test cases to ensure correct determinant values.",
+      "Verify behavior for both triangular and non-triangular matrices."
+    ]
+  },
+  "RC002": {
+    "fault_hypothesis": "The program incorrectly sums diagonal elements instead of multiplying them when calculating the determinant for triangular matrices.",
+    "causal_chain": [
+      "Line 21 uses addition instead of multiplication for diagonal elements.",
+      "This leads to an incorrect determinant value for upper triangular matrices.",
+      "The determinant calculation fails to produce the correct product of diagonal elements."
+    ],
+    "desired_behavior": "The determinant calculation for upper triangular matrices should multiply the diagonal elements.",
+    "repair_intent": "Change the operation from addition to multiplication for the diagonal elements in the determinant calculation.",
+    "preservation_constraints": [
+      "Maintain the classification logic for matrix types (upper/lower triangular).",
+      "Ensure the rest of the determinant calculation remains unaffected."
+    ],
+    "uncertainty": [
+      "Uncertainty if other matrix types are affected by this change.",
+      "Potential impact on test cases beyond the specific upper triangular case."
+    ],
+    "validation_obligations": [
+      "Re-run the affected test case (TC007) to verify the determinant is correct.",
+      "Check other test cases to ensure no unintended side effects."
+    ]
+  },
+  "RC003": {
+    "fault_hypothesis": "The program incorrectly classifies non-triangular matrices and mishandles determinant calculation in the expansion method.",
+    "causal_chain": [
+      "Matrix classification logic fails to correctly identify non-triangular matrices.",
+      "Expansion method in `DeterComp` has errors in sign calculation or submatrix generation.",
+      "Incorrect determinant calculation leads to wrong results."
+    ],
+    "desired_behavior": "Correctly classify matrix type and accurately compute determinant using appropriate method.",
+    "repair_intent": "Adjust matrix classification logic and fix determinant calculation in expansion method.",
+    "preservation_constraints": [
+      "Preserve correct determinant calculation for triangular matrices.",
+      "Maintain existing input-output behavior for correctly classified matrices."
+    ],
+    "uncertainty": [
+      "Uncertainty about exact cause of classification failure.",
+      "Uncertainty in sign handling during expansion."
+    ],
+    "validation_obligations": [
+      "Validate determinant calculation for non-triangular matrices.",
+      "Ensure correct classification of matrix types.",
+      "Check sign calculations in expansion method."
+    ]
+  },
+  "RC004": {
+    "fault_hypothesis": "The program incorrectly initializes the temporary list for matrix processing, leading to incorrect determinant calculation.",
+    "causal_chain": [
+      "The list `temp` is initialized as empty but not properly populated with matrix elements.",
+      "Incorrect matrix classification causes the determinant calculation to use the wrong method.",
+      "Arithmetic errors occur during the expansion due to improper matrix manipulation."
+    ],
+    "desired_behavior": "The determinant calculation correctly identifies matrix type and accurately computes the determinant using appropriate methods.",
+    "repair_intent": "Ensure the temporary list `temp` is correctly initialized with matrix elements and that matrix classification accurately identifies triangular matrices.",
+    "preservation_constraints": [
+      "Maintain correct handling of matrix indices in `AlgComp` method.",
+      "Preserve correct sign calculation in `DeterComp` method.",
+      "Ensure determinant calculation for non-triangular matrices remains functional."
+    ],
+    "uncertainty": [
+      "Uncertainty exists regarding whether the matrix classification logic is entirely incorrect or if there's an arithmetic error in the calculation.",
+      "Without exact expected output, it's uncertain if the computed value is definitively wrong or if there's an alternative valid interpretation."
+    ],
+    "validation_obligations": [
+      "Validate determinant calculation for upper triangular matrices with non-zero diagonal elements.",
+      "Check correctness of determinant calculation for lower triangular matrices.",
+      "Test determinant calculation for non-triangular matrices using known correct values.",
+      "Ensure that the product of a matrix and its inverse determinant equals 1 for invertible matrices."
+    ]
+  },
+  "RC005": {
+    "fault_hypothesis": "Incorrect sign calculation in Laplace expansion due to wrong exponent in (-1)^(2+i)",
+    "causal_chain": [
+      "Sign calculation uses incorrect exponent",
+      "Determinant expansion produces wrong results",
+      "Matrix classification logic may be incorrect"
+    ],
+    "desired_behavior": "Correct sign alternation based on i and j indices in expansion",
+    "repair_intent": "Modify exponent to use i + j for proper sign calculation",
+    "preservation_constraints": [
+      "Maintain matrix classification logic",
+      "Preserve determinant expansion structure",
+      "Ensure correct handling of matrix indices"
+    ],
+    "uncertainty": [
+      "Uncertainty about whether other matrix types are affected",
+      "Possibility of arithmetic errors elsewhere",
+      "Dependence on correct matrix manipulation in AlgComp"
+    ],
+    "validation_obligations": [
+      "Test with various matrix sizes and types",
+      "Verify determinant correctness for upper/lower triangular matrices",
+      "Check sign alternation during expansion"
+    ]
+  }
+}

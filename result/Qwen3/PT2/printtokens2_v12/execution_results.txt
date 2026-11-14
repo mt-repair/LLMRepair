@@ -1,0 +1,96 @@
+[5, 2]
+[ Source Test Case ]
+ Input :
+=> W4vLoQv ` 9 ;Bm1
+=> W4vLoQv ` 9 ;Bm1
+ Variant Program Output :
+keyword,"=>".
+identifier,"W4vLoQv".
+bquote.
+numeric,9.
+character,"Bm1".
+keyword,"=>".
+identifier,"W4vLoQv".
+bquote.
+numeric,9.
+character,"Bm1".
+eof.
+ Correct program output :
+keyword,"=>".
+identifier,"W4vLoQv".
+bquote.
+numeric,9.
+keyword,"=>".
+identifier,"W4vLoQv".
+bquote.
+numeric,9.
+eof.
+[ follow-up test case ]
+ Input :
+=> W4vLoQv ` 9 ;
+=> W4vLoQv ` 9 ;
+ Variant Program Output :
+keyword,"=>".
+identifier,"W4vLoQv".
+bquote.
+numeric,9.
+keyword,"=>".
+identifier,"W4vLoQv".
+bquote.
+numeric,9.
+eof.
+ Correct program output :
+keyword,"=>".
+identifier,"W4vLoQv".
+bquote.
+numeric,9.
+keyword,"=>".
+identifier,"W4vLoQv".
+bquote.
+numeric,9.
+eof.
+MR_Status: 1
+
+[3, 4]
+[ Source Test Case ]
+ Input :
+;IF A L  ;tJvMR3
+ Variant Program Output :
+character,"IF A L  ;tJvMR3".
+eof.
+ Correct program output :
+eof.
+[ follow-up test case ]
+ Input :
+;
+ Variant Program Output :
+eof.
+ Correct program output :
+eof.
+MR_Status: 1
+
+[1, 5]
+[ Source Test Case ]
+ Input :
+=> K3dQ   ;hp7
+ Variant Program Output :
+keyword,"=>".
+identifier,"K3dQ".
+character,"hp7".
+eof.
+ Correct program output :
+keyword,"=>".
+identifier,"K3dQ".
+eof.
+[ follow-up test case ]
+ Input :
+=> k3Dq   ;
+ Variant Program Output :
+keyword,"=>".
+identifier,"k3Dq".
+eof.
+ Correct program output :
+keyword,"=>".
+identifier,"k3Dq".
+eof.
+MR_Status: 1

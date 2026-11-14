@@ -1,0 +1,26 @@
+[
+  {
+    "attempt": 1,
+    "errors": [],
+    "response_metadata": {
+      "model": "deepseek-r1:14b",
+      "temperature": 0.05,
+      "seed": 0,
+      "num_ctx": 32768,
+      "num_predict": 8192,
+      "prompt_chars": 8315,
+      "done": true,
+      "done_reason": "stop",
+      "prompt_eval_count": 2782,
+      "eval_count": 2738,
+      "prompt_eval_duration": 1105151000,
+      "eval_duration": 116542645000,
+      "total_duration": 118153803900,
+      "load_duration": 3697400,
+      "client_elapsed_seconds": 120.172
+    },
+    "post_generation_errors": [
+      "The LLM response contained no valid repair candidate; there is no safe candidate to copy into invalid slots."
+    ]
+  }
+]

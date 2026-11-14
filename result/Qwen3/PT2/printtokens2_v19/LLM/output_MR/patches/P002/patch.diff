@@ -1,0 +1,25 @@
+--- a/print_tokens2.c
++++ b/print_tokens2.c
+@@ -165,7 +165,7 @@
+    if(ch ==59)id=2;    /* prepare for comment */
+    ch=get_char(tp);
+ 
+-   while (is_token_end(id,ch) == FALSE)/* until meet the end character */
++    while (is_token_end(id,ch) == FALSE)/* until meet the end character or newline */
+    {
+        i++;
+        buffer[i]=ch;
+@@ -215,7 +215,12 @@
+          return(FALSE);
+     }
+ 
+- if(str_com_id>2)    /* is comment token */
++  if(str_com_id>2)    /* is comment token */
++    { if(ch=='\n')     /* for comment until meet end of line */
++         return(TRUE);
++       else
++         return(FALSE);
++    }
+    { if(ch=='\n')     /* for comment until meet end of line */
+         return(TRUE);
+       else

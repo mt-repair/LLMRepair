@@ -1,0 +1,64 @@
+{
+  "program_path": "e:\\LLMProgramRepair\\LLM\\MSBF\\code\\deepseek-r1\\TSQ\\Mutant1.py",
+  "project_root": "e:\\LLMProgramRepair\\LLM\\MSBF\\code\\deepseek-r1\\TSQ",
+  "program_function": "\n            Program name: Trisquare\n            Function: Calculate the area of a triangle given three side lengths.\n\n            Input: argv, a list containing three numeric side lengths [a, b, c].\n            Output: returns a tuple (area, symbol). symbol is always 0.\n\n            Behavior:\n            1. If any side ≤ 0 or triangle‑inequality is violated, print \"Not a triangle\" and return (0, 0).\n            2. For valid triangle sides: classify triangle as acute, right‑angled or obtuse.\n            Use corresponding formulas to compute area for isosceles and scalene cases.\n        ",
+  "requested_mode": "ORACLE",
+  "effective_mode": "ORACLE",
+  "known_fault_lines": [
+    21
+  ],
+  "test_executions": [
+    {
+      "test_id": "input1",
+      "input": "[2, 7, 7]",
+      "actual_output": "6.06217782649107",
+      "expected_output": "6.928203230275509",
+      "test_status": "nopass"
+    },
+    {
+      "test_id": "input2",
+      "input": "[13.856406460551018, 7, 7]",
+      "actual_output": "6.928203230275534",
+      "expected_output": "6.928203230275534",
+      "test_status": "pass"
+    },
+    {
+      "test_id": "input3",
+      "input": "[2, 7.54983443527075, 7]",
+      "actual_output": "6.928203230274629",
+      "expected_output": "6.928203230274629",
+      "test_status": "pass"
+    },
+    {
+      "test_id": "input4",
+      "input": "[2, 7, 7.54983443527075]",
+      "actual_output": "6.928203230274629",
+      "expected_output": "6.928203230274629",
+      "test_status": "pass"
+    },
+    {
+      "test_id": "input5",
+      "input": "[13.856406460551018, 20.808652046684813, 7]",
+      "actual_output": "6.928203230274629",
+      "expected_output": "6.928203230274629",
+      "test_status": "pass"
+    },
+    {
+      "test_id": "input6",
+      "input": "[13.856406460551018, 7, 20.808652046684813]",
+      "actual_output": "6.928203230274629",
+      "expected_output": "6.928203230274629",
+      "test_status": "pass"
+    }
+  ],
+  "mg_relation": [],
+  "patch_budget": 5,
+  "generation_limits": {
+    "num_ctx": 32768,
+    "num_predict": 8192,
+    "max_edits_per_candidate": 3,
+    "max_total_touched_lines_per_candidate": 20,
+    "require_known_line_coverage": true
+  },
+  "policy": "One LLM response performs one shared evidence analysis and returns all patch candidates; no Agent1/Agent2 artifacts are used."
+}

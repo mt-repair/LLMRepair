@@ -1,0 +1,18 @@
+--- a/print_tokens.c
++++ b/print_tokens.c
+@@ -229,7 +229,14 @@
+                            if(check_delimiter(ch)==TRUE)
+                            {
+                                  token_ptr->token_id=keyword(next_st);
+-                                 unget_char(cu_state,tstream_ptr->ch_stream);
++if (ch == ';') {
++    token_ptr->token_id = special(next_st);
++} else {
++    token_ptr->token_id = keyword(next_st);
++}
++unget_char(ch, tstream_ptr->ch_stream);
++token_ptr->token_string[0] = '\0';
++return(token_ptr);
+                                  token_ptr->token_string[0]='\0';
+                                  return(token_ptr);
+                            }

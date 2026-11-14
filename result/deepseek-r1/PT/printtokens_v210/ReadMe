@@ -1,0 +1,4 @@
+@@ -254,1 +254,1 @@
+-   skip(tstream_ptr->ch_stream);
++   return(error_or_eof_case(tstream_ptr,token_ptr,cu_state,token_str,token_ind,ch));
+--

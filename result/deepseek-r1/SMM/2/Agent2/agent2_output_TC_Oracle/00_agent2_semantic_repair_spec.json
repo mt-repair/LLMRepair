@@ -1,0 +1,163 @@
+{
+  "spec_status": "actionable",
+  "repair_anchor": [
+    {
+      "candidate_id": "RC001",
+      "location_ref": "LINE_0043",
+      "line": 43,
+      "reason": "Caller supplied this known fault line; localization is not a causal evidence verdict.",
+      "evidence_refs": [
+        "TC001",
+        "TC002",
+        "TC003",
+        "TC004",
+        "TC005",
+        "TC006",
+        "TC007",
+        "TC008"
+      ]
+    }
+  ],
+  "observed_facts": [
+    {
+      "fact": "TC001 input: [[[0, 0, 0, 7], [2, 0, 1, 0], [3, 4, 7, 0], [0, 0, 0, 0]], [[0, 0, 4, 6], [0, 4, 0, 5], [0, 4, 0, 0], [0, 7, 0, 0]]] Actual behavior:  Output Matrix C Inconsistent with expected results, such as C[0][1] are 7 instead of 49，C[2][1] are 32 instead of 44 Failure phenomenon:  Incorrect result of matrix multiplication  Expected behavior:  Output the correct matrix multiplication result, for example, C[0][1] should serve 49，C[2][1] should serve 44 Actual-versus-expected difference:  Multiple element values do not match expectations, especially the positions and values of non-zero elements. ",
+      "evidence_refs": [
+        "TC001"
+      ]
+    },
+    {
+      "fact": "TC002 input: [[[0, 0, 0, 0], [0, 4, 4, 7], [4, 0, 0, 0], [6, 5, 0, 0]], [[0, 2, 3, 0], [0, 0, 4, 0], [0, 1, 7, 0], [7, 0, 0, 0]]] Actual behavior:  The calculated matrix product does not match the expected result.  Failure phenomenon:  Incorrect result of matrix multiplication  Expected behavior:  Correctly calculate the matrix product and reduce it to a dense matrix  Actual-versus-expected difference:  Multiple element values do not match expectations, such as C[1][1]=1 vs 4，C[1][2]=32 vs 44，C[3][2]=23 vs 38",
+      "evidence_refs": [
+        "TC002"
+      ]
+    },
+    {
+      "fact": "TC003 input: [[[3, 6, 0, 9], [0, 9, 0, 7], [0, 0, 0, 0], [0, 0, 6, 7]], [[0, 0, 0, 0], [0, 0, 1, 0], [4, 0, 0, 0], [2, 0, 0, 5]]] Actual behavior:  The output matrix does not match expectations, and multiple elements are calculated incorrectly.  Failure phenomenon:  Incorrect result of matrix multiplication  Expected behavior:  Correctly calculate matrix multiplication and output the correct result  Actual-versus-expected difference:  Multiple element values do not match expectations, such as C[0][0] are 2 instead of 18，C[0][2] are 1 instead of 6，C[3][0] are 18 instead of 38",
+      "evidence_refs": [
+        "TC003"
+      ]
+    },
+    {
+      "fact": "TC004 input: [[[9, 18, 0, 27], [0, 27, 0, 21], [0, 0, 0, 0], [0, 0, 18, 21]], [[0, 0, 0, 0], [0, 0, 1, 0], [4, 0, 0, 0], [2, 0, 0, 5]]] Actual behavior:  Returns an incorrect matrix multiplication result  Failure phenomenon:  Incorrect result of matrix multiplication  Expected behavior:  Return the correct matrix multiplication result  Actual-versus-expected difference:  The values are clearly mismatched, especially in terms of the positions and values of the non-zero elements. ",
+      "evidence_refs": [
+        "TC004"
+      ]
+    },
+    {
+      "fact": "TC005 input: [[[0, 0, 0, 0], [0, 0, 5, 0], [2, 7, 0, 0], [2, 0, 0, 6]], [[0, 8, 9, 0], [0, 8, 0, 0], [0, 4, 0, 0], [0, 0, 0, 0]]] Actual behavior: Output matrix has incorrect values in positions (1,1), (2,1), (2,2), (3,1), (3,2), (3,3) Failure phenomenon: Matrix multiplication result mismatch in multiple positions Expected behavior: Correct matrix multiplication result with accurate values in all positions Actual-versus-expected difference: Values in several positions are lower than expected (e.g., 4 vs 20, 64 vs 72, 8 vs 16)",
+      "evidence_refs": [
+        "TC005"
+      ]
+    },
+    {
+      "fact": "TC006 input: [[[0, 0, 0, 0], [0, 0, 30, 0], [12, 42, 0, 0], [12, 0, 0, 36]], [[0, 8, 9, 0], [0, 8, 0, 0], [0, 4, 0, 0], [0, 0, 0, 0]]] Actual behavior:  Output Matrix C The element  does not match the expectation. For example, the second row and second column are actually 4 , expected to be 120 Failure phenomenon:  Incorrect result of matrix multiplication  Expected behavior:  Output Matrix C The elements of  should correctly reflect the result of matrix multiplication, as shown in the expected output.  Actual-versus-expected difference:  Multiple element values do not match expectations, such as the second column of the second row. 4 vs 120 , second column of the third row 344 vs 432 etc. ",
+      "evidence_refs": [
+        "TC006"
+      ]
+    },
+    {
+      "fact": "TC007 input: [[[0, 0, 6, 0], [0, 0, 0, 0], [0, 8, 0, 0], [6, 0, 8, 9]], [[0, 0, 1, 0], [0, 0, 4, 0], [0, 0, 0, 4], [0, 0, 0, 7]]] Actual behavior:  The output matrix does not match expectations, and multiple elements are calculated incorrectly.  Failure phenomenon:  Incorrect result of matrix multiplication  Expected behavior:  The output matrix is as expected, and all elements are correct.  Actual-versus-expected difference:  Multiple element values do not match expectations, such as C[0][3] are 4 instead of 24，C[2][2] are 4 instead of 32 etc. ",
+      "evidence_refs": [
+        "TC007"
+      ]
+    },
+    {
+      "fact": "TC008 input: [[[0, 0, 6, 0], [0, 0, 0, 0], [0, 8, 0, 0], [6, 0, 8, 9]], [[1, 0, 1, 0], [0, 1, 4, 0], [0, 0, 1, 4], [0, 0, 0, 8]]] Actual behavior: Computed matrix [[0, 0, 1, 4], [0, 0, 0, 0], [0, 1, 4, 0], [1, 0, 9, 76]] Failure phenomenon: Matrix multiplication result mismatch Expected behavior: Expected matrix [[0, 0, 6, 24], [0, 0, 0, 0], [0, 8, 32, 0], [6, 0, 14, 104]] Actual-versus-expected difference: Mismatch in multiple elements, particularly positions (0,2), (0,3), (2,1), (2,3), (3,0), and (3,3)",
+      "evidence_refs": [
+        "TC008"
+      ]
+    }
+  ],
+  "fault_hypothesis": [
+    {
+      "candidate_id": "RC001",
+      "location_ref": "LINE_0043",
+      "statement": "Working hypothesis (not established as fact; review=supported): The assignment of b[k] to c[nz] without multiplying by a[j] (aij) leads to incorrect matrix values, as the sparse matrix multiplication requires the product of corresponding elements from matrices A and B to be accumulated.",
+      "review": {
+        "verdict": "supported",
+        "reason": "The proposed repair correctly addresses the missing multiplication by incorporating the product of a[j] and b[k] into the assignment to c[nz], aligning with the requirements of sparse matrix multiplication.",
+        "source_or_logic_contradictions": [],
+        "unsupported_assumptions": [],
+        "discriminating_checks": []
+      },
+      "causal_chain": [
+        "Trigger: Processing non-zero elements in sparse matrices",
+        "Execute: Assignment of b[k] to c[nz] without multiplication by a[j]",
+        "Effect: Incorrect value stored in result matrix C"
+      ],
+      "confidence": "low",
+      "derivation_type": "test_context",
+      "evidence_refs": [
+        "TC001",
+        "TC002",
+        "TC003",
+        "TC004",
+        "TC005",
+        "TC006",
+        "TC007",
+        "TC008"
+      ]
+    }
+  ],
+  "desired_behavior": [
+    {
+      "candidate_id": "RC001",
+      "location_ref": "LINE_0043",
+      "statement": "Accumulate the product of non-zero elements from matrices A and B into the result matrix C.",
+      "evidence_refs": [
+        "TC001",
+        "TC002",
+        "TC003",
+        "TC004",
+        "TC005",
+        "TC006",
+        "TC007",
+        "TC008"
+      ]
+    }
+  ],
+  "repair_intent": [
+    {
+      "candidate_id": "RC001",
+      "location_ref": "LINE_0043",
+      "statement": "Provisional repair direction (hypothesis review: supported; verify against source and tests before editing). Current logic: c[nz] = b[k] Required logic: c[nz] += a[j] * b[k] Logic gap: The current logic directly assigns b[k] to c[nz], omitting the multiplication with a[j], which is essential for correct sparse matrix multiplication. The required logic involves accumulating the product of a[j] and b[k] into c[nz]. Repair action: Modify the assignment to include the multiplication of a[j] and b[k], and change it to an accumulation operation.",
+      "current_logic": "c[nz] = b[k]",
+      "required_logic": "c[nz] += a[j] * b[k]",
+      "logic_gap": "The current logic directly assigns b[k] to c[nz], omitting the multiplication with a[j], which is essential for correct sparse matrix multiplication. The required logic involves accumulating the product of a[j] and b[k] into c[nz].",
+      "action": "Modify the assignment to include the multiplication of a[j] and b[k], and change it to an accumulation operation.",
+      "hypothesis_review": {
+        "verdict": "supported",
+        "reason": "The proposed repair correctly addresses the missing multiplication by incorporating the product of a[j] and b[k] into the assignment to c[nz], aligning with the requirements of sparse matrix multiplication.",
+        "source_or_logic_contradictions": [],
+        "unsupported_assumptions": [],
+        "discriminating_checks": []
+      },
+      "target_lines": [
+        43
+      ],
+      "derivation_type": "test_context",
+      "evidence_refs": [
+        "TC001",
+        "TC002",
+        "TC003",
+        "TC004",
+        "TC005",
+        "TC006",
+        "TC007",
+        "TC008"
+      ]
+    }
+  ],
+  "preservation_constraints": [
+    "Ensure that the assignment to c[nz] correctly reflects the product of a[j] and b[k].",
+    "Maintain the sparse matrix structure and correct indexing."
+  ],
+  "uncertainty": [
+    "The repair location was supplied by the caller; this does not prove the proposed fault mechanism.",
+    "No uncertainty; the missing multiplication is directly supported by the test evidence."
+  ],
+  "validation_obligations": [
+    "Replay the test cases to verify that the product of a[j] and b[k] is correctly accumulated into c[nz].",
+    "Ensure that the modified logic does not introduce new errors in other parts of the matrix multiplication process."
+  ]
+}

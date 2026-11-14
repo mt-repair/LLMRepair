@@ -1,0 +1,16 @@
+--- a/print_tokens.c
++++ b/print_tokens.c
+@@ -206,7 +206,12 @@
+ 	  if (next_st == -1) { /* ERROR or EOF case */
+ 	      return(error_or_eof_case(tstream_ptr,
+ 				       token_ptr,cu_state,token_str,token_ind,ch));
+-	  } else if (next_st >> -2) {/* This is numeric case. */
++case 16: ch=get_char(tstream_ptr->ch_stream);
++if(isupper(ch)) {
++    unget_char(ch, tstream_ptr->ch_stream);
++    token_found = 0;
++    cu_state = next_state(cu_state, ch);
++} else if(check_delimiter(ch)==TRUE) {
+ 	      return(numeric_case(tstream_ptr,token_ptr,ch,
+ 				  token_str,token_ind));
+ 	  } else if (next_st == -3) {/* This is the IDENTIFIER case */

@@ -1,0 +1,318 @@
+[
+  {
+    "patch_id": "P001",
+    "status": "compile_passed",
+    "proposal": {
+      "diagnosis": "The issue lies in the incorrect handling of keywords during tokenization. Specifically, at line 231, the code incorrectly multiplies `token_ptr->token_id` by the keyword value instead of assigning it, leading to improper token identification.",
+      "evidence_reasoning": {
+        "causal_chain": [
+          "The failing test case shows that ';and \"vY\" (  ;Fzr7' results in a string token instead of recognizing 'and' as a keyword. This suggests an issue with how keywords are processed.",
+          "Line 231 uses `*=` which incorrectly modifies the token ID, preventing proper keyword assignment."
+        ],
+        "mr_refs": [
+          "MR4 indicates that input transformations (case changes and comment truncation) should not affect token counts, but the test fails, pointing to a processing error."
+        ],
+        "testcase_refs": [
+          "source_s1_mr4's output omits the 'and' keyword, showing a failure in keyword detection."
+        ]
+      },
+      "uncertainty": "While the primary issue is line 231, there might be related issues in how `token_id` is managed elsewhere. However, based on the evidence, this line is the most likely cause of the failure.",
+      "assumption": "Replace multiplication with assignment to correctly set the token ID.",
+      "edits": [
+        {
+          "end_line": 231,
+          "rationale": "Change `*=` to `=` to properly assign the keyword token ID.",
+          "replacement": "token_ptr->token_id = keyword(next_st);",
+          "start_line": 231
+        }
+      ],
+      "expected_effect": "Keywords are correctly identified and output as expected.",
+      "preservation_constraints": [
+        "Maintain correct handling of other token types."
+      ],
+      "repair_intent": "Fix incorrect token ID assignment for keywords."
+    },
+    "proposal_errors": [],
+    "patch_diff": "--- a/print_tokens.c\n+++ b/print_tokens.c\n@@ -228,7 +228,7 @@\n                  case 16 : ch=get_char(tstream_ptr->ch_stream);\n                            if(check_delimiter(ch)==TRUE)\n                            {\n-                                 token_ptr->token_id*=keyword(next_st);\n+token_ptr->token_id = keyword(next_st);\n                                  unget_char(ch,tstream_ptr->ch_stream);\n                                  token_ptr->token_string[0]='\\0';\n                                  return(token_ptr);\n",
+    "patch_hash": "7803e7c9e3f5818a1f8ffee6dc6c0d09026a3ab3352c582879b0da9322ceba47",
+    "model_candidate_source": "P001",
+    "fallback_copy_of": null,
+    "original_candidate_errors": [],
+    "duplicate_of": null,
+    "validation_reused_from": null,
+    "validation": {
+      "compile": {
+        "attempted": true,
+        "success": true,
+        "return_code": 0,
+        "timed_out": false,
+        "stdout_tail": "",
+        "stderr_tail": "",
+        "elapsed_seconds": 0.052,
+        "command": [
+          "/usr/bin/gcc",
+          "-std=c11",
+          "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v143/LLM/output_MR_Oracle/patches/P001/workspace/print_tokens.c",
+          "-o",
+          "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v143/LLM/output_MR_Oracle/patches/P001/workspace/llm_candidate"
+        ],
+        "executable_path": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v143/LLM/output_MR_Oracle/patches/P001/workspace/llm_candidate"
+      },
+      "visible_checks": []
+    }
+  },
+  {
+    "patch_id": "P002",
+    "status": "compile_passed",
+    "proposal": {
+      "diagnosis": "The issue lies in the incorrect handling of keywords during tokenization. Specifically, at line 231, the code incorrectly multiplies `token_ptr->token_id` by the keyword value instead of assigning it, leading to improper token identification.",
+      "evidence_reasoning": {
+        "causal_chain": [
+          "The failing test case shows that ';and \"vY\" (  ;Fzr7' results in a string token instead of recognizing 'and' as a keyword. This suggests an issue with how keywords are processed.",
+          "Line 231 uses `*=` which incorrectly modifies the token ID, preventing proper keyword assignment."
+        ],
+        "mr_refs": [
+          "MR4 indicates that input transformations (case changes and comment truncation) should not affect token counts, but the test fails, pointing to a processing error."
+        ],
+        "testcase_refs": [
+          "source_s1_mr4's output omits the 'and' keyword, showing a failure in keyword detection."
+        ]
+      },
+      "uncertainty": "While the primary issue is line 231, there might be related issues in how `token_id` is managed elsewhere. However, based on the evidence, this line is the most likely cause of the failure.",
+      "assumption": "Use bitwise OR to combine token IDs if necessary.",
+      "edits": [
+        {
+          "end_line": 231,
+          "rationale": "If multiple tokens are allowed, use `|` instead of `*=`.",
+          "replacement": "token_ptr->token_id |= keyword(next_st);",
+          "start_line": 231
+        }
+      ],
+      "expected_effect": "Ensure correct combination of token IDs without overflow.",
+      "preservation_constraints": [
+        "Prevent unintended token ID modifications."
+      ],
+      "repair_intent": "Correctly combine token IDs using appropriate operation."
+    },
+    "proposal_errors": [],
+    "patch_diff": "--- a/print_tokens.c\n+++ b/print_tokens.c\n@@ -228,7 +228,7 @@\n                  case 16 : ch=get_char(tstream_ptr->ch_stream);\n                            if(check_delimiter(ch)==TRUE)\n                            {\n-                                 token_ptr->token_id*=keyword(next_st);\n+token_ptr->token_id |= keyword(next_st);\n                                  unget_char(ch,tstream_ptr->ch_stream);\n                                  token_ptr->token_string[0]='\\0';\n                                  return(token_ptr);\n",
+    "patch_hash": "808d2748302c89686a80691fbc4d54dc59529ccf2540d06f66d58dda02c268be",
+    "model_candidate_source": "P002",
+    "fallback_copy_of": null,
+    "original_candidate_errors": [],
+    "duplicate_of": null,
+    "validation_reused_from": null,
+    "validation": {
+      "compile": {
+        "attempted": true,
+        "success": true,
+        "return_code": 0,
+        "timed_out": false,
+        "stdout_tail": "",
+        "stderr_tail": "",
+        "elapsed_seconds": 0.054,
+        "command": [
+          "/usr/bin/gcc",
+          "-std=c11",
+          "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v143/LLM/output_MR_Oracle/patches/P002/workspace/print_tokens.c",
+          "-o",
+          "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v143/LLM/output_MR_Oracle/patches/P002/workspace/llm_candidate"
+        ],
+        "executable_path": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v143/LLM/output_MR_Oracle/patches/P002/workspace/llm_candidate"
+      },
+      "visible_checks": []
+    }
+  },
+  {
+    "patch_id": "P003",
+    "status": "compile_failed",
+    "proposal": {
+      "diagnosis": "The issue lies in the incorrect handling of keywords during tokenization. Specifically, at line 231, the code incorrectly multiplies `token_ptr->token_id` by the keyword value instead of assigning it, leading to improper token identification.",
+      "evidence_reasoning": {
+        "causal_chain": [
+          "The failing test case shows that ';and \"vY\" (  ;Fzr7' results in a string token instead of recognizing 'and' as a keyword. This suggests an issue with how keywords are processed.",
+          "Line 231 uses `*=` which incorrectly modifies the token ID, preventing proper keyword assignment."
+        ],
+        "mr_refs": [
+          "MR4 indicates that input transformations (case changes and comment truncation) should not affect token counts, but the test fails, pointing to a processing error."
+        ],
+        "testcase_refs": [
+          "source_s1_mr4's output omits the 'and' keyword, showing a failure in keyword detection."
+        ]
+      },
+      "uncertainty": "While the primary issue is line 231, there might be related issues in how `token_id` is managed elsewhere. However, based on the evidence, this line is the most likely cause of the failure.",
+      "assumption": "Initialize token_id before assignment to avoid unexpected behavior.",
+      "edits": [
+        {
+          "end_line": 231,
+          "rationale": "Ensure `token_id` is initialized to prevent garbage values.",
+          "replacement": "token_ptr->token_id = keyword(next_st);",
+          "start_line": 231
+        },
+        {
+          "end_line": 194,
+          "rationale": "Initialize `token_found` and other variables properly.",
+          "replacement": "int cu_state=0, token_ind=0, token_found=FALSE;",
+          "start_line": 194
+        }
+      ],
+      "expected_effect": "Prevent incorrect initial states affecting token ID assignment.",
+      "preservation_constraints": [
+        "Maintain correct initialization practices."
+      ],
+      "repair_intent": "Ensure proper variable initialization to support correct token processing."
+    },
+    "proposal_errors": [],
+    "patch_diff": "--- a/print_tokens.c\n+++ b/print_tokens.c\n@@ -191,7 +191,7 @@\n \n       token_ptr=(token)(malloc(sizeof(struct token_type)));\n       ch=get_char(tstream_ptr->ch_stream);\n-      cu_state=token_ind=token_found=0;\n+int cu_state=0, token_ind=0, token_found=FALSE;\n       while(!token_found)\n       {\n \t  if(token_ind < 80) /* ADDED ERROR CHECK - hf */\n@@ -228,7 +228,7 @@\n                  case 16 : ch=get_char(tstream_ptr->ch_stream);\n                            if(check_delimiter(ch)==TRUE)\n                            {\n-                                 token_ptr->token_id*=keyword(next_st);\n+token_ptr->token_id = keyword(next_st);\n                                  unget_char(ch,tstream_ptr->ch_stream);\n                                  token_ptr->token_string[0]='\\0';\n                                  return(token_ptr);\n",
+    "patch_hash": "6e3b9b30eccc9b0ca76e4a5739b37cecccb59eaba54c3903bdf12cf6d51a50a8",
+    "model_candidate_source": "P003",
+    "fallback_copy_of": null,
+    "original_candidate_errors": [],
+    "duplicate_of": null,
+    "validation_reused_from": null,
+    "validation": {
+      "compile": {
+        "attempted": true,
+        "success": false,
+        "return_code": 1,
+        "timed_out": false,
+        "stdout_tail": "",
+        "stderr_tail": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v143/LLM/output_MR_Oracle/patches/P003/workspace/print_tokens.c: In function ‘get_token’:\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v143/LLM/output_MR_Oracle/patches/P003/workspace/print_tokens.c:194:5: error: redeclaration of ‘cu_state’ with no linkage\n  194 | int cu_state=0, token_ind=0, token_found=FALSE;\n      |     ^~~~~~~~\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v143/LLM/output_MR_Oracle/patches/P003/workspace/print_tokens.c:190:11: note: previous declaration of ‘cu_state’ with type ‘int’\n  190 |       int cu_state,next_st,token_found;\n      |           ^~~~~~~~\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v143/LLM/output_MR_Oracle/patches/P003/workspace/print_tokens.c:194:17: error: redeclaration of ‘token_ind’ with no linkage\n  194 | int cu_state=0, token_ind=0, token_found=FALSE;\n      |                 ^~~~~~~~~\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v143/LLM/output_MR_Oracle/patches/P003/workspace/print_tokens.c:187:11: note: previous declaration of ‘token_ind’ with type ‘int’\n  187 |       int token_ind;      /* Index to the token_str  */\n      |           ^~~~~~~~~\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v143/LLM/output_MR_Oracle/patches/P003/workspace/print_tokens.c:194:30: error: redeclaration of ‘token_found’ with no linkage\n  194 | int cu_state=0, token_ind=0, token_found=FALSE;\n      |                              ^~~~~~~~~~~\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v143/LLM/output_MR_Oracle/patches/P003/workspace/print_tokens.c:190:28: note: previous declaration of ‘token_found’ with type ‘int’\n  190 |       int cu_state,next_st,token_found;\n      |                            ^~~~~~~~~~~\n",
+        "elapsed_seconds": 0.018,
+        "command": [
+          "/usr/bin/gcc",
+          "-std=c11",
+          "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v143/LLM/output_MR_Oracle/patches/P003/workspace/print_tokens.c",
+          "-o",
+          "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v143/LLM/output_MR_Oracle/patches/P003/workspace/llm_candidate"
+        ],
+        "executable_path": null
+      },
+      "visible_checks": []
+    }
+  },
+  {
+    "patch_id": "P004",
+    "status": "compile_failed",
+    "proposal": {
+      "diagnosis": "The issue lies in the incorrect handling of keywords during tokenization. Specifically, at line 231, the code incorrectly multiplies `token_ptr->token_id` by the keyword value instead of assigning it, leading to improper token identification.",
+      "evidence_reasoning": {
+        "causal_chain": [
+          "The failing test case shows that ';and \"vY\" (  ;Fzr7' results in a string token instead of recognizing 'and' as a keyword. This suggests an issue with how keywords are processed.",
+          "Line 231 uses `*=` which incorrectly modifies the token ID, preventing proper keyword assignment."
+        ],
+        "mr_refs": [
+          "MR4 indicates that input transformations (case changes and comment truncation) should not affect token counts, but the test fails, pointing to a processing error."
+        ],
+        "testcase_refs": [
+          "source_s1_mr4's output omits the 'and' keyword, showing a failure in keyword detection."
+        ]
+      },
+      "uncertainty": "While the primary issue is line 231, there might be related issues in how `token_id` is managed elsewhere. However, based on the evidence, this line is the most likely cause of the failure.",
+      "assumption": "Check for and handle potential overflow in token_id assignments.",
+      "edits": [
+        {
+          "end_line": 231,
+          "rationale": "Use modulo operation to prevent overflow if necessary.",
+          "replacement": "token_ptr->token_id = keyword(next_st) % MAX_TOKEN_ID;",
+          "start_line": 231
+        }
+      ],
+      "expected_effect": "Avoid token ID overflow issues that could lead to incorrect assignments.",
+      "preservation_constraints": [
+        "Ensure token IDs remain within valid ranges."
+      ],
+      "repair_intent": "Prevent potential integer overflow in token_id assignment."
+    },
+    "proposal_errors": [],
+    "patch_diff": "--- a/print_tokens.c\n+++ b/print_tokens.c\n@@ -228,7 +228,7 @@\n                  case 16 : ch=get_char(tstream_ptr->ch_stream);\n                            if(check_delimiter(ch)==TRUE)\n                            {\n-                                 token_ptr->token_id*=keyword(next_st);\n+token_ptr->token_id = keyword(next_st) % MAX_TOKEN_ID;\n                                  unget_char(ch,tstream_ptr->ch_stream);\n                                  token_ptr->token_string[0]='\\0';\n                                  return(token_ptr);\n",
+    "patch_hash": "2c01d5742222bb52088f6d50593559a73111931502be356d0c25817e19935b37",
+    "model_candidate_source": "P004",
+    "fallback_copy_of": null,
+    "original_candidate_errors": [],
+    "duplicate_of": null,
+    "validation_reused_from": null,
+    "validation": {
+      "compile": {
+        "attempted": true,
+        "success": false,
+        "return_code": 1,
+        "timed_out": false,
+        "stdout_tail": "",
+        "stderr_tail": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v143/LLM/output_MR_Oracle/patches/P004/workspace/print_tokens.c: In function ‘get_token’:\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v143/LLM/output_MR_Oracle/patches/P004/workspace/print_tokens.c:231:42: error: ‘MAX_TOKEN_ID’ undeclared (first use in this function)\n  231 | token_ptr->token_id = keyword(next_st) % MAX_TOKEN_ID;\n      |                                          ^~~~~~~~~~~~\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v143/LLM/output_MR_Oracle/patches/P004/workspace/print_tokens.c:231:42: note: each undeclared identifier is reported only once for each function it appears in\n",
+        "elapsed_seconds": 0.015,
+        "command": [
+          "/usr/bin/gcc",
+          "-std=c11",
+          "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v143/LLM/output_MR_Oracle/patches/P004/workspace/print_tokens.c",
+          "-o",
+          "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v143/LLM/output_MR_Oracle/patches/P004/workspace/llm_candidate"
+        ],
+        "executable_path": null
+      },
+      "visible_checks": []
+    }
+  },
+  {
+    "patch_id": "P005",
+    "status": "compile_passed",
+    "proposal": {
+      "diagnosis": "The issue lies in the incorrect handling of keywords during tokenization. Specifically, at line 231, the code incorrectly multiplies `token_ptr->token_id` by the keyword value instead of assigning it, leading to improper token identification.",
+      "evidence_reasoning": {
+        "causal_chain": [
+          "The failing test case shows that ';and \"vY\" (  ;Fzr7' results in a string token instead of recognizing 'and' as a keyword. This suggests an issue with how keywords are processed.",
+          "Line 231 uses `*=` which incorrectly modifies the token ID, preventing proper keyword assignment."
+        ],
+        "mr_refs": [
+          "MR4 indicates that input transformations (case changes and comment truncation) should not affect token counts, but the test fails, pointing to a processing error."
+        ],
+        "testcase_refs": [
+          "source_s1_mr4's output omits the 'and' keyword, showing a failure in keyword detection."
+        ]
+      },
+      "uncertainty": "While the primary issue is line 231, there might be related issues in how `token_id` is managed elsewhere. However, based on the evidence, this line is the most likely cause of the failure.",
+      "assumption": "Re-express the keyword handling logic for clarity and correctness.",
+      "edits": [
+        {
+          "end_line": 231,
+          "rationale": "Replace multiplication with direct assignment to fix the core issue.",
+          "replacement": "token_ptr->token_id = keyword(next_st);",
+          "start_line": 231
+        }
+      ],
+      "expected_effect": "Keywords are correctly identified and output as expected.",
+      "preservation_constraints": [
+        "Maintain correct handling of other token types."
+      ],
+      "repair_intent": "Fix incorrect token ID assignment for keywords."
+    },
+    "proposal_errors": [],
+    "patch_diff": "--- a/print_tokens.c\n+++ b/print_tokens.c\n@@ -228,7 +228,7 @@\n                  case 16 : ch=get_char(tstream_ptr->ch_stream);\n                            if(check_delimiter(ch)==TRUE)\n                            {\n-                                 token_ptr->token_id*=keyword(next_st);\n+token_ptr->token_id = keyword(next_st);\n                                  unget_char(ch,tstream_ptr->ch_stream);\n                                  token_ptr->token_string[0]='\\0';\n                                  return(token_ptr);\n",
+    "patch_hash": "7803e7c9e3f5818a1f8ffee6dc6c0d09026a3ab3352c582879b0da9322ceba47",
+    "model_candidate_source": "P005",
+    "fallback_copy_of": null,
+    "original_candidate_errors": [],
+    "duplicate_of": "P001",
+    "validation_reused_from": "P001",
+    "validation": {
+      "compile": {
+        "attempted": true,
+        "success": true,
+        "return_code": 0,
+        "timed_out": false,
+        "stdout_tail": "",
+        "stderr_tail": "",
+        "elapsed_seconds": 0.052,
+        "command": [
+          "/usr/bin/gcc",
+          "-std=c11",
+          "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v143/LLM/output_MR_Oracle/patches/P001/workspace/print_tokens.c",
+          "-o",
+          "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v143/LLM/output_MR_Oracle/patches/P001/workspace/llm_candidate"
+        ],
+        "executable_path": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v143/LLM/output_MR_Oracle/patches/P001/workspace/llm_candidate"
+      },
+      "visible_checks": []
+    }
+  }
+]

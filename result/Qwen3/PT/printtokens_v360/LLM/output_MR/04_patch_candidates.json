@@ -1,0 +1,82 @@
+[
+  {
+    "patch_id": "P001",
+    "status": "generation_failed",
+    "proposal": null,
+    "proposal_errors": [
+      "Model output is not valid JSON: Unterminated string starting at: line 41 column 26 (char 3282)"
+    ],
+    "patch_diff": "",
+    "patch_hash": null,
+    "model_candidate_source": null,
+    "fallback_copy_of": null,
+    "original_candidate_errors": [],
+    "duplicate_of": null,
+    "validation_reused_from": null,
+    "validation": null
+  },
+  {
+    "patch_id": "P002",
+    "status": "generation_failed",
+    "proposal": null,
+    "proposal_errors": [
+      "Model output is not valid JSON: Unterminated string starting at: line 41 column 26 (char 3282)"
+    ],
+    "patch_diff": "",
+    "patch_hash": null,
+    "model_candidate_source": null,
+    "fallback_copy_of": null,
+    "original_candidate_errors": [],
+    "duplicate_of": null,
+    "validation_reused_from": null,
+    "validation": null
+  },
+  {
+    "patch_id": "P003",
+    "status": "generation_failed",
+    "proposal": null,
+    "proposal_errors": [
+      "Model output is not valid JSON: Unterminated string starting at: line 41 column 26 (char 3282)"
+    ],
+    "patch_diff": "",
+    "patch_hash": null,
+    "model_candidate_source": null,
+    "fallback_copy_of": null,
+    "original_candidate_errors": [],
+    "duplicate_of": null,
+    "validation_reused_from": null,
+    "validation": null
+  },
+  {
+    "patch_id": "P004",
+    "status": "generation_failed",
+    "proposal": null,
+    "proposal_errors": [
+      "Model output is not valid JSON: Unterminated string starting at: line 41 column 26 (char 3282)"
+    ],
+    "patch_diff": "",
+    "patch_hash": null,
+    "model_candidate_source": null,
+    "fallback_copy_of": null,
+    "original_candidate_errors": [],
+    "duplicate_of": null,
+    "validation_reused_from": null,
+    "validation": null
+  },
+  {
+    "patch_id": "P005",
+    "status": "generation_failed",
+    "proposal": null,
+    "proposal_errors": [
+      "Model output is not valid JSON: Unterminated string starting at: line 41 column 26 (char 3282)"
+    ],
+    "patch_diff": "",
+    "patch_hash": null,
+    "model_candidate_source": null,
+    "fallback_copy_of": null,
+    "original_candidate_errors": [],
+    "duplicate_of": null,
+    "validation_reused_from": null,
+    "validation": null
+  }
+]

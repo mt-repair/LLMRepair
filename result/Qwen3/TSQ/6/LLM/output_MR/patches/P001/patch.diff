@@ -1,0 +1,13 @@
+--- a/Mutant6.py
++++ b/Mutant6.py
+@@ -39,8 +39,8 @@
+             area = Max * h / 2
+             return area, symbol
+         else:  #  scalene obtuse triangle, Max Multiply by height divided by 2
+-            x = (pow(Max, 2) + pow(Min, 2) - pow(mid, 2)) / (2 * Max)
+-            h = math.sqrt(pow(mid, 2) - pow(x, 2))
++x = (pow(Max, 2) - pow(mid, 2) - pow(Min, 2)) / (2 * Max)
++h = math.sqrt(pow(mid, 2) - pow(x, 2))
+             area = Max * h / 2
+             symbol = 1
+             return area, symbol

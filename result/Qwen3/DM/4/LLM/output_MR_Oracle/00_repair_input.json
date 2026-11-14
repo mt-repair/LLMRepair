@@ -1,0 +1,89 @@
+{
+  "program_path": "e:\\LLMProgramRepair\\LLM\\MSBF\\code\\Qwen3\\DM\\Mutant4.py",
+  "project_root": "e:\\LLMProgramRepair\\LLM\\MSBF\\code\\Qwen3\\DM",
+  "program_function": "\n             This program is used to calculate a  (n x n)  Determinant of a square matrix. The input includes the order of the matrix.  (n)  And \n             One-dimensional array expanded in row-major order  (A) , where  (A)  The length is  (n^2) . The program is based on \n             Select the corresponding calculation method for the matrix structure and return the numerical result of the determinant along with an auxiliary flag value. \n             (Note: The auxiliary flag value has no practical significance and will not affect the program’s operation results.) \n        ",
+  "requested_mode": "ORACLE_MR",
+  "effective_mode": "ORACLE_MR",
+  "known_fault_lines": [
+    21
+  ],
+  "test_executions": [
+    {
+      "test_id": "input1",
+      "input": "[8, 4, 7, 0, 7, 5, 0, 0, 6]",
+      "actual_output": "0",
+      "expected_output": "336",
+      "test_status": "nopass"
+    },
+    {
+      "test_id": "input2",
+      "input": "[8, 4, 7, 0, 0, 6, 0, 7, 5]",
+      "actual_output": "-336",
+      "expected_output": "-336",
+      "test_status": "pass"
+    },
+    {
+      "test_id": "input3",
+      "input": "[5, 8, 1, 0, 9, 6, 0, 0, 1]",
+      "actual_output": "0",
+      "expected_output": "45",
+      "test_status": "nopass"
+    },
+    {
+      "test_id": "input4",
+      "input": "[0.2, -0.17777777777777778, 0.8666666666666667, 0.0, 0.1111111111111111, -0.6666666666666666, 0.0, 0.0, 1.0]",
+      "actual_output": "-0.0",
+      "expected_output": "0.022222222222222223",
+      "test_status": "nopass"
+    },
+    {
+      "test_id": "input5",
+      "input": "[9, 10, 5, 0, 7, 8, 0, 0, 8]",
+      "actual_output": "0",
+      "expected_output": "504",
+      "test_status": "nopass"
+    },
+    {
+      "test_id": "input6",
+      "input": "[9, 10, 5, 0, -21, -16, 0, 7, 8]",
+      "actual_output": "-504",
+      "expected_output": "-504",
+      "test_status": "nopass"
+    }
+  ],
+  "mg_relation": [
+    {
+      "mr_id": "MR1",
+      "source_test_id": "input1",
+      "followup_test_id": "input2",
+      "input_transformation": " The source test cases are represented in row-major order as  [a1, a2, a3, b1, b2, b3, c1, c2, c3] , corresponding matrix  [[a1, a2, a3], [b1, b2, b3], [c1, c2, c3]] . Swap the index starting from zero to 1 And 2 of the two rows, i.e., swap the second row with the third row. The resulting follow-up test case is  [a1, a2, a3, c1, c2, c3, b1, b2, b3]。",
+      "output_relation": " The determinant of the matrix formed by the follow-up test cases is the negative of the determinant of the matrix formed by the source test cases. ",
+      "actual_relation_status": "VMG"
+    },
+    {
+      "mr_id": "MR2",
+      "source_test_id": "input3",
+      "followup_test_id": "input4",
+      "input_transformation": " The source test cases are represented in row-major order as  [a1, a2, a3, b1, b2, b3, c1, c2, c3] , corresponding matrix  [[a1, a2, a3], [b1, b2, b3], [c1, c2, c3]] If the matrix is invertible, calculate its inverse matrix, flatten the inverse matrix in row-major order, and construct the follow-up test cases. ",
+      "output_relation": " The determinant of the matrix formed by the follow-up test cases is the reciprocal of the determinant of the matrix formed by the source test cases. , Accuracy error not exceeding 0.0001 You can ",
+      "actual_relation_status": "VMG"
+    },
+    {
+      "mr_id": "MR3",
+      "source_test_id": "input5",
+      "followup_test_id": "input6",
+      "input_transformation": " The source test cases are represented in row-major order as  [a1, a2, a3, b1, b2, b3, c1, c2, c3] , corresponding matrix  [[a1, a2, a3], [b1, b2, b3], [c1, c2, c3]]。  First, swap the indices starting from zero as 1 And 2 of the two rows, we get  [[a1, a2, a3], [c1, c2, c3], [b1, b2, b3]] . Then, the transformed index is 1 Replace the row with the row minus 3 The multiplier index is 2 Row of . So,  [c1, c2, c3]  becomes:  [c1‑3*b1, c2‑3*b2, c3‑3*b3] . The final follow-up test case is  [a1, a2, a3, c1‑3*b1, c2‑3*b2, c3‑3*b3, b1, b2, b3]。",
+      "output_relation": " The determinant of the matrix formed by the follow-up test cases is the negative of the determinant of the matrix formed by the source test cases. ",
+      "actual_relation_status": "VMG"
+    }
+  ],
+  "patch_budget": 5,
+  "generation_limits": {
+    "num_ctx": 32768,
+    "num_predict": 8192,
+    "max_edits_per_candidate": 3,
+    "max_total_touched_lines_per_candidate": 20,
+    "require_known_line_coverage": true
+  },
+  "policy": "One LLM response performs one shared evidence analysis and returns all patch candidates; no Agent1/Agent2 artifacts are used."
+}

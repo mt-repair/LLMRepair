@@ -1,0 +1,15 @@
+--- a/print_tokens2.c
++++ b/print_tokens2.c
+@@ -216,7 +216,11 @@
+     }
+ 
+  if(str_com_id==2)    /* is comment token */
+-   { if(ch!='\n')     /* for comment until meet end of line */
++    { if(ch!='\n' || is_eof_token(ch1)==TRUE)     /* for comment until meet end of line or EOF */
++         return(TRUE);
++       else
++         return(FALSE);
++    }
+         return(TRUE);
+       else
+         return(FALSE);

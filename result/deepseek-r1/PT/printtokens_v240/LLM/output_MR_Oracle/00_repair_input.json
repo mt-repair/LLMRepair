@@ -1,0 +1,45 @@
+{
+  "program_path": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v240/print_tokens.c",
+  "project_root": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v240",
+  "program_function": "\n            ##  FUNCTION DESCRIPTION \n\n            C  lexical analyzer  (tokenizer) , read the input text, and segment it  token  and Print  token  flow. \n             All implemented in `print_tokens2.c` (Main Program), which can be logically divided into: Main Program Module, Character Stream Module, DFA Participle module, relying on external header files  tokens.h AND DFA State \n             Global Transfer Array ( base/check/next/default1）。\n             Type slug \n            `character_stream` : Structure pointer, encapsulates input file, built-in line buffer; \n            `token_stream` : Structure pointer, held internally character_stream Character stream; \n            `token` : Structure pointer, containing token_id、token_string Buffer Save token The text. \n\n            ##  Input \n\n            -  Command line parameters: `./print_tokens2 filename` , read the specified file; if no parameter is provided, read from standard input  stdin  Read \n            -  Support  token : Keywords, identifiers, numeric literals, string literals, character literals, comments, special symbols, EOF。\n            -  Keywords: `and or if xor lambda =>`\n            -  Identifier: Starts with a letter, followed by letters  /  Numbers \n            -  numeric literal: digits only \n            -  String literal: enclosed in double quotes \n            -  character literal: consists of DFA State Machine Recognition (Grammar rules are defined externally DFA Table Definition \n            -  NOTATION: `;` From the beginning to the line break, not generated token , discard directly \n            -  Special Symbols `( ) [ ] ' ` ,`\n\n            ##  Output \n\n             Line-by-line output  token：\n\n            - `keyword,\"xxx\".`\n            - `identifier,\"xxx\".`\n            - `numeric,xxx.`\n            - `string,\"xxx\".`\n            - `character,\"x\".`\n            -  SIGN: `lparen. rparen. lsquare. rsquare. quote. bquote. comma.`\n            - `eof.`  End of Stream \n            - `error,\"xxx\".`  Crime  token\n        ",
+  "requested_mode": "ORACLE_MR",
+  "effective_mode": "ORACLE_MR",
+  "known_fault_lines": [
+    465
+  ],
+  "test_executions": [
+    {
+      "test_id": "source_s1_mr4",
+      "input": ";and \"vY\" (  ;Fzr7\nand \"vY\" (  ;Fzr7\n",
+      "actual_output": "error,\t\"a\".\nerror,\t\"n\".\nerror,\t\"d\".\nerror,\t\"\".\nerror,\t\"\"\".\nerror,\t\"v\".\nidentifier,\t\"Y\".\nerror,\t\"\"\".\nerror,\t\"\".\nlparen.\nerror,\t\"\".\nerror,\t\"\".\neof.",
+      "expected_output": "keyword,\t\"and\".\nstring,\t\"vY\".\nlparen.\neof.",
+      "test_status": "nopass"
+    },
+    {
+      "test_id": "followup_s1_mr4",
+      "input": ";and \"vY\" (  ;Fzr7\nAND \"Vy\" (  ;fZR7\n",
+      "actual_output": "identifier,\t\"A\".\nidentifier,\t\"N\".\nidentifier,\t\"D\".\nerror,\t\"\".\nerror,\t\"\"\".\nstring,\tVy.\nerror,\t\"\"\".\nerror,\t\"\".\nlparen.\nerror,\t\"\".\nerror,\t\"\".\neof.",
+      "expected_output": "identifier,\t\"AND\".\nstring,\t\"Vy\".\nlparen.\neof.",
+      "test_status": "nopass"
+    }
+  ],
+  "mg_relation": [
+    {
+      "mr_id": "MR4",
+      "source_test_id": "source_s1_mr4",
+      "followup_test_id": "followup_s1_mr4",
+      "input_transformation": " First, randomly select the rounded-up test cases from the source test cases. 50% Enter a line and switch between uppercase and lowercase English letters; then, for lines containing semicolons, ';' For input lines that do not contain single or double quotation marks, remove all characters after the first semicolon to construct the follow-up test case. ",
+      "output_relation": " Changing between uppercase and lowercase letters and deleting comments after semicolons should not change the five categories. token Therefore, the number of test cases in the output of the source test cases and the follow-up test cases identifier AND: keyword Amount string Medicine Quantity, error Medicine Quantity, character Total Quantity numeric The quantities should be equal. ",
+      "actual_relation_status": "VMG"
+    }
+  ],
+  "patch_budget": 5,
+  "generation_limits": {
+    "num_ctx": 32768,
+    "num_predict": 8192,
+    "max_edits_per_candidate": 3,
+    "max_total_touched_lines_per_candidate": 20,
+    "require_known_line_coverage": true
+  },
+  "policy": "One LLM response performs one shared evidence analysis and returns all patch candidates; no Agent1/Agent2 artifacts are used."
+}

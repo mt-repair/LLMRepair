@@ -1,0 +1,343 @@
+{
+  "workflow": "single_llm_direct_repair",
+  "effective_mode": "MR",
+  "program_path": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v143/print_tokens.c",
+  "output_dir": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v143/LLM/output_MR",
+  "llm_call_attempts": 1,
+  "normal_llm_calls_per_scenario": 1,
+  "patch_candidates": [
+    {
+      "patch_id": "P001",
+      "status": "compile_passed",
+      "proposal": {
+        "diagnosis": "The issue lies in line 231 where `token_ptr->token_id *= keyword(next_st);` incorrectly uses multiplication instead of assignment. This leads to incorrect token ID values being set.",
+        "evidence_reasoning": {
+          "causal_chain": [
+            "Line 231 attempts to multiply the token ID by the result of `keyword()`, which is intended to assign a new value, not modify it."
+          ],
+          "mr_refs": [
+            "MR4"
+          ],
+          "testcase_refs": [
+            "source_s1_mr4",
+            "followup_s1_mr4"
+          ]
+        },
+        "uncertainty": "While multiple repair approaches are plausible, the simplest fix is to directly assign the keyword result without modification. More complex solutions may introduce unnecessary complexity unless there's a clear benefit in terms of maintainability or performance.",
+        "assumption": "Replace the multiplication with assignment to correctly set the token ID.",
+        "edits": [
+          {
+            "end_line": 231,
+            "rationale": "Change `*=` to `=` to properly assign the keyword value.",
+            "replacement": "token_ptr->token_id = keyword(next_st);",
+            "start_line": 231
+          }
+        ],
+        "expected_effect": "Fixes token ID assignment, ensuring correct token types are identified.",
+        "preservation_constraints": [
+          "print_token function",
+          "keyword function"
+        ],
+        "repair_intent": "Correct the token ID assignment logic."
+      },
+      "proposal_errors": [],
+      "patch_diff": "--- a/print_tokens.c\n+++ b/print_tokens.c\n@@ -228,7 +228,7 @@\n                  case 16 : ch=get_char(tstream_ptr->ch_stream);\n                            if(check_delimiter(ch)==TRUE)\n                            {\n-                                 token_ptr->token_id*=keyword(next_st);\n+token_ptr->token_id = keyword(next_st);\n                                  unget_char(ch,tstream_ptr->ch_stream);\n                                  token_ptr->token_string[0]='\\0';\n                                  return(token_ptr);\n",
+      "patch_hash": "7803e7c9e3f5818a1f8ffee6dc6c0d09026a3ab3352c582879b0da9322ceba47",
+      "model_candidate_source": "P001",
+      "fallback_copy_of": null,
+      "original_candidate_errors": [],
+      "duplicate_of": null,
+      "validation_reused_from": null,
+      "validation": {
+        "compile": {
+          "attempted": true,
+          "success": true,
+          "return_code": 0,
+          "timed_out": false,
+          "stdout_tail": "",
+          "stderr_tail": "",
+          "elapsed_seconds": 0.057,
+          "command": [
+            "/usr/bin/gcc",
+            "-std=c11",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v143/LLM/output_MR/patches/P001/workspace/print_tokens.c",
+            "-o",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v143/LLM/output_MR/patches/P001/workspace/llm_candidate"
+          ],
+          "executable_path": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v143/LLM/output_MR/patches/P001/workspace/llm_candidate"
+        },
+        "visible_checks": []
+      }
+    },
+    {
+      "patch_id": "P002",
+      "status": "compile_passed",
+      "proposal": {
+        "diagnosis": "The issue lies in line 231 where `token_ptr->token_id *= keyword(next_st);` incorrectly uses multiplication instead of assignment. This leads to incorrect token ID values being set.",
+        "evidence_reasoning": {
+          "causal_chain": [
+            "Line 231 attempts to multiply the token ID by the result of `keyword()`, which is intended to assign a new value, not modify it."
+          ],
+          "mr_refs": [
+            "MR4"
+          ],
+          "testcase_refs": [
+            "source_s1_mr4",
+            "followup_s1_mr4"
+          ]
+        },
+        "uncertainty": "While multiple repair approaches are plausible, the simplest fix is to directly assign the keyword result without modification. More complex solutions may introduce unnecessary complexity unless there's a clear benefit in terms of maintainability or performance.",
+        "assumption": "Alternative approach to ensure proper state handling.",
+        "edits": [
+          {
+            "end_line": 231,
+            "rationale": "Use a temporary variable to handle state transitions more safely.",
+            "replacement": "int keyword_id = keyword(next_st);\n token_ptr->token_id = keyword_id;",
+            "start_line": 231
+          }
+        ],
+        "expected_effect": "Improves code readability and safety by separating concerns.",
+        "preservation_constraints": [
+          "keyword function"
+        ],
+        "repair_intent": "Enhance code clarity while fixing the token ID assignment."
+      },
+      "proposal_errors": [],
+      "patch_diff": "--- a/print_tokens.c\n+++ b/print_tokens.c\n@@ -228,7 +228,8 @@\n                  case 16 : ch=get_char(tstream_ptr->ch_stream);\n                            if(check_delimiter(ch)==TRUE)\n                            {\n-                                 token_ptr->token_id*=keyword(next_st);\n+int keyword_id = keyword(next_st);\n+ token_ptr->token_id = keyword_id;\n                                  unget_char(ch,tstream_ptr->ch_stream);\n                                  token_ptr->token_string[0]='\\0';\n                                  return(token_ptr);\n",
+      "patch_hash": "90c0683752ef0266f263db34c78ef290d5c31666ad0b2061f0b7d363aa9eb003",
+      "model_candidate_source": "P002",
+      "fallback_copy_of": null,
+      "original_candidate_errors": [],
+      "duplicate_of": null,
+      "validation_reused_from": null,
+      "validation": {
+        "compile": {
+          "attempted": true,
+          "success": true,
+          "return_code": 0,
+          "timed_out": false,
+          "stdout_tail": "",
+          "stderr_tail": "",
+          "elapsed_seconds": 0.051,
+          "command": [
+            "/usr/bin/gcc",
+            "-std=c11",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v143/LLM/output_MR/patches/P002/workspace/print_tokens.c",
+            "-o",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v143/LLM/output_MR/patches/P002/workspace/llm_candidate"
+          ],
+          "executable_path": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v143/LLM/output_MR/patches/P002/workspace/llm_candidate"
+        },
+        "visible_checks": []
+      }
+    },
+    {
+      "patch_id": "P003",
+      "status": "compile_passed",
+      "proposal": {
+        "diagnosis": "The issue lies in line 231 where `token_ptr->token_id *= keyword(next_st);` incorrectly uses multiplication instead of assignment. This leads to incorrect token ID values being set.",
+        "evidence_reasoning": {
+          "causal_chain": [
+            "Line 231 attempts to multiply the token ID by the result of `keyword()`, which is intended to assign a new value, not modify it."
+          ],
+          "mr_refs": [
+            "MR4"
+          ],
+          "testcase_refs": [
+            "source_s1_mr4",
+            "followup_s1_mr4"
+          ]
+        },
+        "uncertainty": "While multiple repair approaches are plausible, the simplest fix is to directly assign the keyword result without modification. More complex solutions may introduce unnecessary complexity unless there's a clear benefit in terms of maintainability or performance.",
+        "assumption": "Directly assign the keyword result without modification.",
+        "edits": [
+          {
+            "end_line": 231,
+            "rationale": "Simplify the assignment by removing unnecessary operations.",
+            "replacement": "token_ptr->token_id = keyword(next_st);",
+            "start_line": 231
+          }
+        ],
+        "expected_effect": "Ensures token ID is correctly set without unintended modifications.",
+        "preservation_constraints": [
+          "keyword function"
+        ],
+        "repair_intent": "Simplify and correct the token ID assignment."
+      },
+      "proposal_errors": [],
+      "patch_diff": "--- a/print_tokens.c\n+++ b/print_tokens.c\n@@ -228,7 +228,7 @@\n                  case 16 : ch=get_char(tstream_ptr->ch_stream);\n                            if(check_delimiter(ch)==TRUE)\n                            {\n-                                 token_ptr->token_id*=keyword(next_st);\n+token_ptr->token_id = keyword(next_st);\n                                  unget_char(ch,tstream_ptr->ch_stream);\n                                  token_ptr->token_string[0]='\\0';\n                                  return(token_ptr);\n",
+      "patch_hash": "7803e7c9e3f5818a1f8ffee6dc6c0d09026a3ab3352c582879b0da9322ceba47",
+      "model_candidate_source": "P003",
+      "fallback_copy_of": null,
+      "original_candidate_errors": [],
+      "duplicate_of": "P001",
+      "validation_reused_from": "P001",
+      "validation": {
+        "compile": {
+          "attempted": true,
+          "success": true,
+          "return_code": 0,
+          "timed_out": false,
+          "stdout_tail": "",
+          "stderr_tail": "",
+          "elapsed_seconds": 0.057,
+          "command": [
+            "/usr/bin/gcc",
+            "-std=c11",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v143/LLM/output_MR/patches/P001/workspace/print_tokens.c",
+            "-o",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v143/LLM/output_MR/patches/P001/workspace/llm_candidate"
+          ],
+          "executable_path": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v143/LLM/output_MR/patches/P001/workspace/llm_candidate"
+        },
+        "visible_checks": []
+      }
+    },
+    {
+      "patch_id": "P004",
+      "status": "compile_failed",
+      "proposal": {
+        "diagnosis": "The issue lies in line 231 where `token_ptr->token_id *= keyword(next_st);` incorrectly uses multiplication instead of assignment. This leads to incorrect token ID values being set.",
+        "evidence_reasoning": {
+          "causal_chain": [
+            "Line 231 attempts to multiply the token ID by the result of `keyword()`, which is intended to assign a new value, not modify it."
+          ],
+          "mr_refs": [
+            "MR4"
+          ],
+          "testcase_refs": [
+            "source_s1_mr4",
+            "followup_s1_mr4"
+          ]
+        },
+        "uncertainty": "While multiple repair approaches are plausible, the simplest fix is to directly assign the keyword result without modification. More complex solutions may introduce unnecessary complexity unless there's a clear benefit in terms of maintainability or performance.",
+        "assumption": "Use a helper function to manage state transitions.",
+        "edits": [
+          {
+            "end_line": 231,
+            "rationale": "Decouple state management for better maintainability.",
+            "replacement": "token_ptr->token_id = handle_keyword_state(next_st);",
+            "start_line": 231
+          },
+          {
+            "end_line": 470,
+            "rationale": "Implement the helper function to manage keyword states correctly.",
+            "replacement": "static int handle_keyword_state(state)\n{\n    return keyword(state);\n}",
+            "start_line": 470
+          }
+        ],
+        "expected_effect": "Improves code structure and maintainability by encapsulating state handling.",
+        "preservation_constraints": [
+          "keyword function"
+        ],
+        "repair_intent": "Improve code structure while fixing the token ID assignment."
+      },
+      "proposal_errors": [],
+      "patch_diff": "--- a/print_tokens.c\n+++ b/print_tokens.c\n@@ -228,7 +228,7 @@\n                  case 16 : ch=get_char(tstream_ptr->ch_stream);\n                            if(check_delimiter(ch)==TRUE)\n                            {\n-                                 token_ptr->token_id*=keyword(next_st);\n+token_ptr->token_id = handle_keyword_state(next_st);\n                                  unget_char(ch,tstream_ptr->ch_stream);\n                                  token_ptr->token_string[0]='\\0';\n                                  return(token_ptr);\n@@ -467,7 +467,10 @@\n         else\n               return(next_state(default1[state],ch));\n     }\n-    else\n+static int handle_keyword_state(state)\n+{\n+    return keyword(state);\n+}\n         return(next_state(default1[state],ch));\n }\n \n",
+      "patch_hash": "6bc0801c2b82cd6966d7b8a88fb3d2e97fc8f7e9346b49772ead938f075a81e2",
+      "model_candidate_source": "P004",
+      "fallback_copy_of": null,
+      "original_candidate_errors": [],
+      "duplicate_of": null,
+      "validation_reused_from": null,
+      "validation": {
+        "compile": {
+          "attempted": true,
+          "success": false,
+          "return_code": 1,
+          "timed_out": false,
+          "stdout_tail": "",
+          "stderr_tail": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v143/LLM/output_MR/patches/P004/workspace/print_tokens.c: In function ‘get_token’:\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v143/LLM/output_MR/patches/P004/workspace/print_tokens.c:231:23: warning: implicit declaration of function ‘handle_keyword_state’ [-Wimplicit-function-declaration]\n  231 | token_ptr->token_id = handle_keyword_state(next_st);\n      |                       ^~~~~~~~~~~~~~~~~~~~\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v143/LLM/output_MR/patches/P004/workspace/print_tokens.c: In function ‘next_state’:\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v143/LLM/output_MR/patches/P004/workspace/print_tokens.c:470:12: error: invalid storage class for function ‘handle_keyword_state’\n  470 | static int handle_keyword_state(state)\n      |            ^~~~~~~~~~~~~~~~~~~~\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v143/LLM/output_MR/patches/P004/workspace/print_tokens.c: In function ‘handle_keyword_state’:\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v143/LLM/output_MR/patches/P004/workspace/print_tokens.c:470:12: warning: type of ‘state’ defaults to ‘int’ [-Wimplicit-int]\n",
+          "elapsed_seconds": 0.016,
+          "command": [
+            "/usr/bin/gcc",
+            "-std=c11",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v143/LLM/output_MR/patches/P004/workspace/print_tokens.c",
+            "-o",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v143/LLM/output_MR/patches/P004/workspace/llm_candidate"
+          ],
+          "executable_path": null
+        },
+        "visible_checks": []
+      }
+    },
+    {
+      "patch_id": "P005",
+      "status": "compile_failed",
+      "proposal": {
+        "diagnosis": "The issue lies in line 231 where `token_ptr->token_id *= keyword(next_st);` incorrectly uses multiplication instead of assignment. This leads to incorrect token ID values being set.",
+        "evidence_reasoning": {
+          "causal_chain": [
+            "Line 231 attempts to multiply the token ID by the result of `keyword()`, which is intended to assign a new value, not modify it."
+          ],
+          "mr_refs": [
+            "MR4"
+          ],
+          "testcase_refs": [
+            "source_s1_mr4",
+            "followup_s1_mr4"
+          ]
+        },
+        "uncertainty": "While multiple repair approaches are plausible, the simplest fix is to directly assign the keyword result without modification. More complex solutions may introduce unnecessary complexity unless there's a clear benefit in terms of maintainability or performance.",
+        "assumption": "Use a lookup table for keyword states.",
+        "edits": [
+          {
+            "end_line": 231,
+            "rationale": "Replace direct function call with a lookup mechanism for efficiency and clarity.",
+            "replacement": "token_ptr->token_id = keyword_lookup[next_st];",
+            "start_line": 231
+          },
+          {
+            "end_line": 470,
+            "rationale": "Define the lookup table to map states to token IDs correctly.",
+            "replacement": "static int keyword_lookup[] = {\n    [6] = LAMBDA,\n    [9] = AND,\n    [11] = OR,\n    [13] = IF,\n    [16] = XOR\n};",
+            "start_line": 470
+          }
+        ],
+        "expected_effect": "Enhances performance and clarity by using a lookup table for keyword states.",
+        "preservation_constraints": [
+          "keyword function"
+        ],
+        "repair_intent": "Optimize token ID assignment through efficient lookups."
+      },
+      "proposal_errors": [],
+      "patch_diff": "--- a/print_tokens.c\n+++ b/print_tokens.c\n@@ -228,7 +228,7 @@\n                  case 16 : ch=get_char(tstream_ptr->ch_stream);\n                            if(check_delimiter(ch)==TRUE)\n                            {\n-                                 token_ptr->token_id*=keyword(next_st);\n+token_ptr->token_id = keyword_lookup[next_st];\n                                  unget_char(ch,tstream_ptr->ch_stream);\n                                  token_ptr->token_string[0]='\\0';\n                                  return(token_ptr);\n@@ -467,7 +467,13 @@\n         else\n               return(next_state(default1[state],ch));\n     }\n-    else\n+static int keyword_lookup[] = {\n+    [6] = LAMBDA,\n+    [9] = AND,\n+    [11] = OR,\n+    [13] = IF,\n+    [16] = XOR\n+};\n         return(next_state(default1[state],ch));\n }\n \n",
+      "patch_hash": "431e154e587f5153b2b4fa6e59f204ebb68bfe5a71c58e619b93f828b56e0911",
+      "model_candidate_source": "P005",
+      "fallback_copy_of": null,
+      "original_candidate_errors": [],
+      "duplicate_of": null,
+      "validation_reused_from": null,
+      "validation": {
+        "compile": {
+          "attempted": true,
+          "success": false,
+          "return_code": 1,
+          "timed_out": false,
+          "stdout_tail": "",
+          "stderr_tail": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v143/LLM/output_MR/patches/P005/workspace/print_tokens.c: In function ‘get_token’:\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v143/LLM/output_MR/patches/P005/workspace/print_tokens.c:231:23: error: ‘keyword_lookup’ undeclared (first use in this function)\n  231 | token_ptr->token_id = keyword_lookup[next_st];\n      |                       ^~~~~~~~~~~~~~\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v143/LLM/output_MR/patches/P005/workspace/print_tokens.c:231:23: note: each undeclared identifier is reported only once for each function it appears in\n",
+          "elapsed_seconds": 0.017,
+          "command": [
+            "/usr/bin/gcc",
+            "-std=c11",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v143/LLM/output_MR/patches/P005/workspace/print_tokens.c",
+            "-o",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v143/LLM/output_MR/patches/P005/workspace/llm_candidate"
+          ],
+          "executable_path": null
+        },
+        "visible_checks": []
+      }
+    }
+  ],
+  "summary": {
+    "requested": 5,
+    "generated": 5,
+    "compile_passed": 3,
+    "visible_checks_passed": 0,
+    "fallback_filled": 0,
+    "duplicates": 1,
+    "failed": 2
+  },
+  "interpretation": "Compilation only proves syntactic/build validity. Semantic repair success requires independent hidden tests or an external evaluator."
+}

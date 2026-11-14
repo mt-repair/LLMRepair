@@ -1,0 +1,323 @@
+[
+  {
+    "patch_id": "P001",
+    "status": "compile_failed",
+    "proposal": {
+      "diagnosis": "The issue lies in the `keyword` function at line 362, which fails to correctly map DFA states to keywords. The switch statement is incomplete, causing incorrect token classification.",
+      "evidence_reasoning": {
+        "causal_chain": [
+          "Test case input contains 'and' and expects it to be recognized as a keyword.",
+          "The `keyword` function at line 362 doesn't handle all necessary states, leading to misclassification.",
+          "This results in an error token instead of the expected keyword."
+        ],
+        "mr_refs": [
+          "MR4"
+        ],
+        "testcase_refs": [
+          "source_s1_mr4"
+        ]
+      },
+      "uncertainty": "While the primary issue is in the `keyword` function, there may be other contributing factors such as incorrect DFA state transitions or token processing logic. However, based on the evidence and test failures, the incomplete switch statement in `keyword` is the most likely cause of the failure.",
+      "assumption": "Expand switch cases to cover all DFA states corresponding to keywords.",
+      "edits": [
+        {
+          "end_line": 362,
+          "rationale": "Complete the keyword mapping by adding missing cases.",
+          "replacement": "switch(state)\n{\n    case 6: return(LAMBDA);\n    case 9: return(AND);\n    case 11: return(OR);\n    case 13: return(IF);\n    case 16: return(XOR);\n    case 25: return(EQUALGREATER);\n    default: break;\n}\nexit(0);",
+          "start_line": 362
+        }
+      ],
+      "expected_effect": "Correctly classify all keyword tokens, fixing the test failure.",
+      "preservation_constraints": [
+        "Preserve other token classifications and error handling."
+      ],
+      "repair_intent": "Complete DFA state to keyword mapping in `keyword` function."
+    },
+    "proposal_errors": [],
+    "patch_diff": "--- a/print_tokens.c\n+++ b/print_tokens.c\n@@ -359,7 +359,17 @@\n static int keyword(state)\n int state;\n {\n-      switch(0)\n+switch(state)\n+{\n+    case 6: return(LAMBDA);\n+    case 9: return(AND);\n+    case 11: return(OR);\n+    case 13: return(IF);\n+    case 16: return(XOR);\n+    case 25: return(EQUALGREATER);\n+    default: break;\n+}\n+exit(0);\n       {   /* Return the respective macro for the Keyword. */\n           case 6 : return(LAMBDA);\n           case 9 : return(AND);\n",
+    "patch_hash": "349127fb8dc759c1ebc0dc4e77ef02b26da7ee9c5521ac6e7ed2e9e57ad5df26",
+    "model_candidate_source": "P001",
+    "fallback_copy_of": null,
+    "original_candidate_errors": [],
+    "duplicate_of": null,
+    "validation_reused_from": null,
+    "validation": {
+      "compile": {
+        "attempted": true,
+        "success": false,
+        "return_code": 1,
+        "timed_out": false,
+        "stdout_tail": "",
+        "stderr_tail": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v237/LLM/output_MR_Oracle/patches/P001/workspace/print_tokens.c: In function ‘keyword’:\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v237/LLM/output_MR_Oracle/patches/P001/workspace/print_tokens.c:374:11: error: case label not within a switch statement\n  374 |           case 6 : return(LAMBDA);\n      |           ^~~~\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v237/LLM/output_MR_Oracle/patches/P001/workspace/print_tokens.c:375:11: error: case label not within a switch statement\n  375 |           case 9 : return(AND);\n      |           ^~~~\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v237/LLM/output_MR_Oracle/patches/P001/workspace/print_tokens.c:376:11: error: case label not within a switch statement\n  376 |           case 11: return(OR);\n      |           ^~~~\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v237/LLM/output_MR_Oracle/patches/P001/workspace/print_tokens.c:377:11: error: case label not within a switch statement\n  377 |           case 13: return(IF);\n      |           ^~~~\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v237/LLM/output_MR_Oracle/patches/P001/workspace/print_tokens.c:378:11: error: case label not within a switch statement\n  378 |           case 16: return(XOR);\n      |           ^~~~\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v237/LLM/output_MR_Oracle/patches/P001/workspace/print_tokens.c:379:11: error: ‘default’ label not within a switch statement\n  379 |           default: fprintf(stdout, \"error\\n\");break;\n      |           ^~~~~~~\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v237/LLM/output_MR_Oracle/patches/P001/workspace/print_tokens.c:379:47: error: break statement not within loop or switch\n  379 |           default: fprintf(stdout, \"error\\n\");break;\n      |                                               ^~~~~\n",
+        "elapsed_seconds": 0.015,
+        "command": [
+          "/usr/bin/gcc",
+          "-std=c11",
+          "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v237/LLM/output_MR_Oracle/patches/P001/workspace/print_tokens.c",
+          "-o",
+          "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v237/LLM/output_MR_Oracle/patches/P001/workspace/llm_candidate"
+        ],
+        "executable_path": null
+      },
+      "visible_checks": []
+    }
+  },
+  {
+    "patch_id": "P002",
+    "status": "compile_failed",
+    "proposal": {
+      "diagnosis": "The issue lies in the `keyword` function at line 362, which fails to correctly map DFA states to keywords. The switch statement is incomplete, causing incorrect token classification.",
+      "evidence_reasoning": {
+        "causal_chain": [
+          "Test case input contains 'and' and expects it to be recognized as a keyword.",
+          "The `keyword` function at line 362 doesn't handle all necessary states, leading to misclassification.",
+          "This results in an error token instead of the expected keyword."
+        ],
+        "mr_refs": [
+          "MR4"
+        ],
+        "testcase_refs": [
+          "source_s1_mr4"
+        ]
+      },
+      "uncertainty": "While the primary issue is in the `keyword` function, there may be other contributing factors such as incorrect DFA state transitions or token processing logic. However, based on the evidence and test failures, the incomplete switch statement in `keyword` is the most likely cause of the failure.",
+      "assumption": "Expand switch cases to cover all DFA states corresponding to keywords.",
+      "edits": [
+        {
+          "end_line": 362,
+          "rationale": "Complete the keyword mapping by adding missing cases.",
+          "replacement": "switch(state)\n{\n    case 6: return(LAMBDA);\n    case 9: return(AND);\n    case 11: return(OR);\n    case 13: return(IF);\n    case 16: return(XOR);\n    case 25: return(EQUALGREATER);\n    default: break;\n}\nexit(0);",
+          "start_line": 362
+        }
+      ],
+      "expected_effect": "Correctly classify all keyword tokens, fixing the test failure.",
+      "preservation_constraints": [
+        "Preserve other token classifications and error handling."
+      ],
+      "repair_intent": "Complete DFA state to keyword mapping in `keyword` function."
+    },
+    "proposal_errors": [],
+    "patch_diff": "--- a/print_tokens.c\n+++ b/print_tokens.c\n@@ -359,7 +359,17 @@\n static int keyword(state)\n int state;\n {\n-      switch(0)\n+switch(state)\n+{\n+    case 6: return(LAMBDA);\n+    case 9: return(AND);\n+    case 11: return(OR);\n+    case 13: return(IF);\n+    case 16: return(XOR);\n+    case 25: return(EQUALGREATER);\n+    default: break;\n+}\n+exit(0);\n       {   /* Return the respective macro for the Keyword. */\n           case 6 : return(LAMBDA);\n           case 9 : return(AND);\n",
+    "patch_hash": "349127fb8dc759c1ebc0dc4e77ef02b26da7ee9c5521ac6e7ed2e9e57ad5df26",
+    "model_candidate_source": "P001",
+    "fallback_copy_of": "P001",
+    "original_candidate_errors": [
+      "repair_candidates[1].no edit covers a known fault line"
+    ],
+    "duplicate_of": "P001",
+    "validation_reused_from": "P001",
+    "validation": {
+      "compile": {
+        "attempted": true,
+        "success": false,
+        "return_code": 1,
+        "timed_out": false,
+        "stdout_tail": "",
+        "stderr_tail": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v237/LLM/output_MR_Oracle/patches/P001/workspace/print_tokens.c: In function ‘keyword’:\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v237/LLM/output_MR_Oracle/patches/P001/workspace/print_tokens.c:374:11: error: case label not within a switch statement\n  374 |           case 6 : return(LAMBDA);\n      |           ^~~~\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v237/LLM/output_MR_Oracle/patches/P001/workspace/print_tokens.c:375:11: error: case label not within a switch statement\n  375 |           case 9 : return(AND);\n      |           ^~~~\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v237/LLM/output_MR_Oracle/patches/P001/workspace/print_tokens.c:376:11: error: case label not within a switch statement\n  376 |           case 11: return(OR);\n      |           ^~~~\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v237/LLM/output_MR_Oracle/patches/P001/workspace/print_tokens.c:377:11: error: case label not within a switch statement\n  377 |           case 13: return(IF);\n      |           ^~~~\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v237/LLM/output_MR_Oracle/patches/P001/workspace/print_tokens.c:378:11: error: case label not within a switch statement\n  378 |           case 16: return(XOR);\n      |           ^~~~\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v237/LLM/output_MR_Oracle/patches/P001/workspace/print_tokens.c:379:11: error: ‘default’ label not within a switch statement\n  379 |           default: fprintf(stdout, \"error\\n\");break;\n      |           ^~~~~~~\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v237/LLM/output_MR_Oracle/patches/P001/workspace/print_tokens.c:379:47: error: break statement not within loop or switch\n  379 |           default: fprintf(stdout, \"error\\n\");break;\n      |                                               ^~~~~\n",
+        "elapsed_seconds": 0.015,
+        "command": [
+          "/usr/bin/gcc",
+          "-std=c11",
+          "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v237/LLM/output_MR_Oracle/patches/P001/workspace/print_tokens.c",
+          "-o",
+          "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v237/LLM/output_MR_Oracle/patches/P001/workspace/llm_candidate"
+        ],
+        "executable_path": null
+      },
+      "visible_checks": []
+    }
+  },
+  {
+    "patch_id": "P003",
+    "status": "compile_failed",
+    "proposal": {
+      "diagnosis": "The issue lies in the `keyword` function at line 362, which fails to correctly map DFA states to keywords. The switch statement is incomplete, causing incorrect token classification.",
+      "evidence_reasoning": {
+        "causal_chain": [
+          "Test case input contains 'and' and expects it to be recognized as a keyword.",
+          "The `keyword` function at line 362 doesn't handle all necessary states, leading to misclassification.",
+          "This results in an error token instead of the expected keyword."
+        ],
+        "mr_refs": [
+          "MR4"
+        ],
+        "testcase_refs": [
+          "source_s1_mr4"
+        ]
+      },
+      "uncertainty": "While the primary issue is in the `keyword` function, there may be other contributing factors such as incorrect DFA state transitions or token processing logic. However, based on the evidence and test failures, the incomplete switch statement in `keyword` is the most likely cause of the failure.",
+      "assumption": "Expand switch cases to cover all DFA states corresponding to keywords.",
+      "edits": [
+        {
+          "end_line": 362,
+          "rationale": "Complete the keyword mapping by adding missing cases.",
+          "replacement": "switch(state)\n{\n    case 6: return(LAMBDA);\n    case 9: return(AND);\n    case 11: return(OR);\n    case 13: return(IF);\n    case 16: return(XOR);\n    case 25: return(EQUALGREATER);\n    default: break;\n}\nexit(0);",
+          "start_line": 362
+        }
+      ],
+      "expected_effect": "Correctly classify all keyword tokens, fixing the test failure.",
+      "preservation_constraints": [
+        "Preserve other token classifications and error handling."
+      ],
+      "repair_intent": "Complete DFA state to keyword mapping in `keyword` function."
+    },
+    "proposal_errors": [],
+    "patch_diff": "--- a/print_tokens.c\n+++ b/print_tokens.c\n@@ -359,7 +359,17 @@\n static int keyword(state)\n int state;\n {\n-      switch(0)\n+switch(state)\n+{\n+    case 6: return(LAMBDA);\n+    case 9: return(AND);\n+    case 11: return(OR);\n+    case 13: return(IF);\n+    case 16: return(XOR);\n+    case 25: return(EQUALGREATER);\n+    default: break;\n+}\n+exit(0);\n       {   /* Return the respective macro for the Keyword. */\n           case 6 : return(LAMBDA);\n           case 9 : return(AND);\n",
+    "patch_hash": "349127fb8dc759c1ebc0dc4e77ef02b26da7ee9c5521ac6e7ed2e9e57ad5df26",
+    "model_candidate_source": "P001",
+    "fallback_copy_of": "P001",
+    "original_candidate_errors": [
+      "repair_candidates[2].no edit covers a known fault line"
+    ],
+    "duplicate_of": "P001",
+    "validation_reused_from": "P001",
+    "validation": {
+      "compile": {
+        "attempted": true,
+        "success": false,
+        "return_code": 1,
+        "timed_out": false,
+        "stdout_tail": "",
+        "stderr_tail": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v237/LLM/output_MR_Oracle/patches/P001/workspace/print_tokens.c: In function ‘keyword’:\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v237/LLM/output_MR_Oracle/patches/P001/workspace/print_tokens.c:374:11: error: case label not within a switch statement\n  374 |           case 6 : return(LAMBDA);\n      |           ^~~~\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v237/LLM/output_MR_Oracle/patches/P001/workspace/print_tokens.c:375:11: error: case label not within a switch statement\n  375 |           case 9 : return(AND);\n      |           ^~~~\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v237/LLM/output_MR_Oracle/patches/P001/workspace/print_tokens.c:376:11: error: case label not within a switch statement\n  376 |           case 11: return(OR);\n      |           ^~~~\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v237/LLM/output_MR_Oracle/patches/P001/workspace/print_tokens.c:377:11: error: case label not within a switch statement\n  377 |           case 13: return(IF);\n      |           ^~~~\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v237/LLM/output_MR_Oracle/patches/P001/workspace/print_tokens.c:378:11: error: case label not within a switch statement\n  378 |           case 16: return(XOR);\n      |           ^~~~\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v237/LLM/output_MR_Oracle/patches/P001/workspace/print_tokens.c:379:11: error: ‘default’ label not within a switch statement\n  379 |           default: fprintf(stdout, \"error\\n\");break;\n      |           ^~~~~~~\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v237/LLM/output_MR_Oracle/patches/P001/workspace/print_tokens.c:379:47: error: break statement not within loop or switch\n  379 |           default: fprintf(stdout, \"error\\n\");break;\n      |                                               ^~~~~\n",
+        "elapsed_seconds": 0.015,
+        "command": [
+          "/usr/bin/gcc",
+          "-std=c11",
+          "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v237/LLM/output_MR_Oracle/patches/P001/workspace/print_tokens.c",
+          "-o",
+          "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v237/LLM/output_MR_Oracle/patches/P001/workspace/llm_candidate"
+        ],
+        "executable_path": null
+      },
+      "visible_checks": []
+    }
+  },
+  {
+    "patch_id": "P004",
+    "status": "compile_failed",
+    "proposal": {
+      "diagnosis": "The issue lies in the `keyword` function at line 362, which fails to correctly map DFA states to keywords. The switch statement is incomplete, causing incorrect token classification.",
+      "evidence_reasoning": {
+        "causal_chain": [
+          "Test case input contains 'and' and expects it to be recognized as a keyword.",
+          "The `keyword` function at line 362 doesn't handle all necessary states, leading to misclassification.",
+          "This results in an error token instead of the expected keyword."
+        ],
+        "mr_refs": [
+          "MR4"
+        ],
+        "testcase_refs": [
+          "source_s1_mr4"
+        ]
+      },
+      "uncertainty": "While the primary issue is in the `keyword` function, there may be other contributing factors such as incorrect DFA state transitions or token processing logic. However, based on the evidence and test failures, the incomplete switch statement in `keyword` is the most likely cause of the failure.",
+      "assumption": "Expand switch cases to cover all DFA states corresponding to keywords.",
+      "edits": [
+        {
+          "end_line": 362,
+          "rationale": "Complete the keyword mapping by adding missing cases.",
+          "replacement": "switch(state)\n{\n    case 6: return(LAMBDA);\n    case 9: return(AND);\n    case 11: return(OR);\n    case 13: return(IF);\n    case 16: return(XOR);\n    case 25: return(EQUALGREATER);\n    default: break;\n}\nexit(0);",
+          "start_line": 362
+        }
+      ],
+      "expected_effect": "Correctly classify all keyword tokens, fixing the test failure.",
+      "preservation_constraints": [
+        "Preserve other token classifications and error handling."
+      ],
+      "repair_intent": "Complete DFA state to keyword mapping in `keyword` function."
+    },
+    "proposal_errors": [],
+    "patch_diff": "--- a/print_tokens.c\n+++ b/print_tokens.c\n@@ -359,7 +359,17 @@\n static int keyword(state)\n int state;\n {\n-      switch(0)\n+switch(state)\n+{\n+    case 6: return(LAMBDA);\n+    case 9: return(AND);\n+    case 11: return(OR);\n+    case 13: return(IF);\n+    case 16: return(XOR);\n+    case 25: return(EQUALGREATER);\n+    default: break;\n+}\n+exit(0);\n       {   /* Return the respective macro for the Keyword. */\n           case 6 : return(LAMBDA);\n           case 9 : return(AND);\n",
+    "patch_hash": "349127fb8dc759c1ebc0dc4e77ef02b26da7ee9c5521ac6e7ed2e9e57ad5df26",
+    "model_candidate_source": "P001",
+    "fallback_copy_of": "P001",
+    "original_candidate_errors": [
+      "repair_candidates[3].no edit covers a known fault line"
+    ],
+    "duplicate_of": "P001",
+    "validation_reused_from": "P001",
+    "validation": {
+      "compile": {
+        "attempted": true,
+        "success": false,
+        "return_code": 1,
+        "timed_out": false,
+        "stdout_tail": "",
+        "stderr_tail": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v237/LLM/output_MR_Oracle/patches/P001/workspace/print_tokens.c: In function ‘keyword’:\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v237/LLM/output_MR_Oracle/patches/P001/workspace/print_tokens.c:374:11: error: case label not within a switch statement\n  374 |           case 6 : return(LAMBDA);\n      |           ^~~~\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v237/LLM/output_MR_Oracle/patches/P001/workspace/print_tokens.c:375:11: error: case label not within a switch statement\n  375 |           case 9 : return(AND);\n      |           ^~~~\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v237/LLM/output_MR_Oracle/patches/P001/workspace/print_tokens.c:376:11: error: case label not within a switch statement\n  376 |           case 11: return(OR);\n      |           ^~~~\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v237/LLM/output_MR_Oracle/patches/P001/workspace/print_tokens.c:377:11: error: case label not within a switch statement\n  377 |           case 13: return(IF);\n      |           ^~~~\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v237/LLM/output_MR_Oracle/patches/P001/workspace/print_tokens.c:378:11: error: case label not within a switch statement\n  378 |           case 16: return(XOR);\n      |           ^~~~\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v237/LLM/output_MR_Oracle/patches/P001/workspace/print_tokens.c:379:11: error: ‘default’ label not within a switch statement\n  379 |           default: fprintf(stdout, \"error\\n\");break;\n      |           ^~~~~~~\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v237/LLM/output_MR_Oracle/patches/P001/workspace/print_tokens.c:379:47: error: break statement not within loop or switch\n  379 |           default: fprintf(stdout, \"error\\n\");break;\n      |                                               ^~~~~\n",
+        "elapsed_seconds": 0.015,
+        "command": [
+          "/usr/bin/gcc",
+          "-std=c11",
+          "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v237/LLM/output_MR_Oracle/patches/P001/workspace/print_tokens.c",
+          "-o",
+          "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v237/LLM/output_MR_Oracle/patches/P001/workspace/llm_candidate"
+        ],
+        "executable_path": null
+      },
+      "visible_checks": []
+    }
+  },
+  {
+    "patch_id": "P005",
+    "status": "compile_failed",
+    "proposal": {
+      "diagnosis": "The issue lies in the `keyword` function at line 362, which fails to correctly map DFA states to keywords. The switch statement is incomplete, causing incorrect token classification.",
+      "evidence_reasoning": {
+        "causal_chain": [
+          "Test case input contains 'and' and expects it to be recognized as a keyword.",
+          "The `keyword` function at line 362 doesn't handle all necessary states, leading to misclassification.",
+          "This results in an error token instead of the expected keyword."
+        ],
+        "mr_refs": [
+          "MR4"
+        ],
+        "testcase_refs": [
+          "source_s1_mr4"
+        ]
+      },
+      "uncertainty": "While the primary issue is in the `keyword` function, there may be other contributing factors such as incorrect DFA state transitions or token processing logic. However, based on the evidence and test failures, the incomplete switch statement in `keyword` is the most likely cause of the failure.",
+      "assumption": "Refactor keyword mapping to use a lookup table for clarity and maintainability.",
+      "edits": [
+        {
+          "end_line": 362,
+          "rationale": "Replace switch with a lookup structure for better organization.",
+          "replacement": "static const int keyword_map[] = {\n    [6] = LAMBDA,\n    [9] = AND,\n    [11] = OR,\n    [13] = IF,\n    [16] = XOR,\n    [25] = EQUALGREATER\n};\nreturn (state < sizeof(keyword_map) / sizeof(*keyword_map)) ? keyword_map[state] : ERROR;",
+          "start_line": 362
+        }
+      ],
+      "expected_effect": "Improve code readability and maintainability.",
+      "preservation_constraints": [
+        "Ensure existing functionality remains intact."
+      ],
+      "repair_intent": "Refactor keyword mapping for clarity."
+    },
+    "proposal_errors": [],
+    "patch_diff": "--- a/print_tokens.c\n+++ b/print_tokens.c\n@@ -359,7 +359,15 @@\n static int keyword(state)\n int state;\n {\n-      switch(0)\n+static const int keyword_map[] = {\n+    [6] = LAMBDA,\n+    [9] = AND,\n+    [11] = OR,\n+    [13] = IF,\n+    [16] = XOR,\n+    [25] = EQUALGREATER\n+};\n+return (state < sizeof(keyword_map) / sizeof(*keyword_map)) ? keyword_map[state] : ERROR;\n       {   /* Return the respective macro for the Keyword. */\n           case 6 : return(LAMBDA);\n           case 9 : return(AND);\n",
+    "patch_hash": "5d09402419308240f98b9e080822c5d77b9a14585505ed63911677585e1ace9a",
+    "model_candidate_source": "P005",
+    "fallback_copy_of": null,
+    "original_candidate_errors": [],
+    "duplicate_of": null,
+    "validation_reused_from": null,
+    "validation": {
+      "compile": {
+        "attempted": true,
+        "success": false,
+        "return_code": 1,
+        "timed_out": false,
+        "stdout_tail": "",
+        "stderr_tail": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v237/LLM/output_MR_Oracle/patches/P005/workspace/print_tokens.c: In function ‘keyword’:\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v237/LLM/output_MR_Oracle/patches/P005/workspace/print_tokens.c:372:11: error: case label not within a switch statement\n  372 |           case 6 : return(LAMBDA);\n      |           ^~~~\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v237/LLM/output_MR_Oracle/patches/P005/workspace/print_tokens.c:373:11: error: case label not within a switch statement\n  373 |           case 9 : return(AND);\n      |           ^~~~\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v237/LLM/output_MR_Oracle/patches/P005/workspace/print_tokens.c:374:11: error: case label not within a switch statement\n  374 |           case 11: return(OR);\n      |           ^~~~\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v237/LLM/output_MR_Oracle/patches/P005/workspace/print_tokens.c:375:11: error: case label not within a switch statement\n  375 |           case 13: return(IF);\n      |           ^~~~\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v237/LLM/output_MR_Oracle/patches/P005/workspace/print_tokens.c:376:11: error: case label not within a switch statement\n  376 |           case 16: return(XOR);\n      |           ^~~~\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v237/LLM/output_MR_Oracle/patches/P005/workspace/print_tokens.c:377:11: error: ‘default’ label not within a switch statement\n  377 |           default: fprintf(stdout, \"error\\n\");break;\n      |           ^~~~~~~\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v237/LLM/output_MR_Oracle/patches/P005/workspace/print_tokens.c:377:47: error: break statement not within loop or switch\n  377 |           default: fprintf(stdout, \"error\\n\");break;\n      |                                               ^~~~~\n",
+        "elapsed_seconds": 0.015,
+        "command": [
+          "/usr/bin/gcc",
+          "-std=c11",
+          "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v237/LLM/output_MR_Oracle/patches/P005/workspace/print_tokens.c",
+          "-o",
+          "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v237/LLM/output_MR_Oracle/patches/P005/workspace/llm_candidate"
+        ],
+        "executable_path": null
+      },
+      "visible_checks": []
+    }
+  }
+]

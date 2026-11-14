@@ -1,0 +1,66 @@
+[4, 2]
+[ Source Test Case ]
+ Input :
+;`6#l
+93
+ Variant Program Output :
+bquote.
+error,"6#l".
+numeric,93.
+eof.
+ Correct program output :
+numeric,93.
+eof.
+[ follow-up test case ]
+ Input :
+;
+93
+ Variant Program Output :
+numeric,93.
+eof.
+ Correct program output :
+numeric,93.
+eof.
+MR_Status: 1
+
+[3, 4]
+[ Source Test Case ]
+ Input :
+;IF A L  ;tJvMR3
+ Variant Program Output :
+error,"A L  ;tJvMR3".
+eof.
+ Correct program output :
+eof.
+[ follow-up test case ]
+ Input :
+;
+ Variant Program Output :
+eof.
+ Correct program output :
+eof.
+MR_Status: 1
+
+[2, 5]
+[ Source Test Case ]
+ Input :
+xor 
+;;bWJ00dn9b10m833oe6s6D5Y2S51Wl8VJHX4
+ Variant Program Output :
+error,"xor ".
+identifier,"bWJ00dn9b10m833oe6s6D5Y2S51Wl8VJHX4".
+eof.
+ Correct program output :
+keyword,"xor".
+eof.
+[ follow-up test case ]
+ Input :
+xor 
+;
+ Variant Program Output :
+error,"xor ".
+eof.
+ Correct program output :
+keyword,"xor".
+eof.
+MR_Status: 1

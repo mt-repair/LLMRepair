@@ -1,0 +1,4 @@
+@@ -463,1 +463,1 @@
+-   if(check[base[state]+ch] == state)
++   if(check[base[ch]+ch] == state)
+--

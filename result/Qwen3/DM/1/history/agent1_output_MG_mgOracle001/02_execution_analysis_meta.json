@@ -1,0 +1,75 @@
+[
+  {
+    "name": "02_test_TC007",
+    "attempts": [
+      {
+        "attempt": 1,
+        "kind": "validation",
+        "validation_errors": [],
+        "response_metadata": {
+          "num_ctx": 8192,
+          "num_predict": 6400,
+          "prompt_chars": 4172,
+          "format_mode": "json",
+          "done": true,
+          "done_reason": "stop",
+          "prompt_eval_count": 1268,
+          "eval_count": 2106,
+          "prompt_eval_duration": 630977000,
+          "eval_duration": 75150208000,
+          "total_duration": 76164463200,
+          "load_duration": 5220500,
+          "client_elapsed_seconds": 78.203,
+          "raw_chars": 696
+        }
+      }
+    ]
+  },
+  {
+    "name": "02_test_TC008",
+    "attempts": [
+      {
+        "attempt": 1,
+        "kind": "json_error",
+        "error": "Invalid JSON: Expecting value: line 1 column 1 (char 0) (done_reason=length, eval_count=6400, raw_chars=0, head='')",
+        "response_metadata": {
+          "num_ctx": 8192,
+          "num_predict": 6400,
+          "prompt_chars": 4342,
+          "format_mode": "json",
+          "done": true,
+          "done_reason": "length",
+          "prompt_eval_count": 1433,
+          "eval_count": 6400,
+          "prompt_eval_duration": 357063000,
+          "eval_duration": 237140180000,
+          "total_duration": 237682084900,
+          "load_duration": 4913400,
+          "client_elapsed_seconds": 239.704,
+          "raw_chars": 0
+        }
+      },
+      {
+        "attempt": 2,
+        "kind": "validation",
+        "validation_errors": [],
+        "response_metadata": {
+          "num_ctx": 8192,
+          "num_predict": 10000,
+          "prompt_chars": 4464,
+          "format_mode": "json",
+          "done": true,
+          "done_reason": "stop",
+          "prompt_eval_count": 1460,
+          "eval_count": 1053,
+          "prompt_eval_duration": 184429000,
+          "eval_duration": 36855051000,
+          "total_duration": 37522069400,
+          "load_duration": 1070300,
+          "client_elapsed_seconds": 39.562,
+          "raw_chars": 1032
+        }
+      }
+    ]
+  }
+]

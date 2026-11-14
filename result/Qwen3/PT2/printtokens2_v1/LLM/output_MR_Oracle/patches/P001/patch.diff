@@ -1,0 +1,13 @@
+--- a/print_tokens2.c
++++ b/print_tokens2.c
+@@ -159,8 +159,8 @@
+        ch=get_char(tp);
+       } 
+    buffer[i]=ch;
+-   if(is_eof_token(buffer)==TRUE)return(buffer);   /* Fault */
+-   if(is_spec_symbol(buffer)!=TRUE)return(buffer); 
++if(is_eof_token(buffer)==TRUE)return(buffer);   /* Fault */
++if(is_spec_symbol(buffer)!=TRUE)return(buffer);
+    if(ch =='"')id=1;    /* prepare for string */
+    if(ch ==59)id=2;    /* prepare for comment */
+    ch=get_char(tp);

@@ -1,0 +1,11 @@
+--- a/Mutant1.py
++++ b/Mutant1.py
+@@ -18,7 +18,7 @@
+         if pow(Max, 2) < pow(mid, 2) + pow(Min, 2):  #  Acute triangle 
+             # print('Acute triangle')
+             if Max == mid:  #  Vertex angle less than or equal to 60 Isosceles triangle with an angle of   e.g. [5, 5, 4]
+-                h = math.sqrt(pow(Max, 2) - pow(mid / 2, 2))
++h = math.sqrt(pow(Max, 2) - pow(Min / 2, 2))
+                 symbol = 1
+                 area = Min * h / 2
+                 return area, symbol

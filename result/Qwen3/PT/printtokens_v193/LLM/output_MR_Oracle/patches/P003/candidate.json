@@ -1,0 +1,16 @@
+{
+  "patch_id": "P003",
+  "status": "generation_failed",
+  "proposal": null,
+  "proposal_errors": [
+    "The LLM response contained no valid repair candidate; there is no safe candidate to copy into invalid slots."
+  ],
+  "patch_diff": "",
+  "patch_hash": null,
+  "model_candidate_source": null,
+  "fallback_copy_of": null,
+  "original_candidate_errors": [],
+  "duplicate_of": null,
+  "validation_reused_from": null,
+  "validation": null
+}

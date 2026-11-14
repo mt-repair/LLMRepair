@@ -1,0 +1,67 @@
+{
+  "RC001": {
+    "fault_hypothesis": "The code incorrectly sums diagonal elements instead of multiplying them for triangular matrices.",
+    "causal_chain": [
+      "Line 21 adds diagonal elements instead of multiplying, leading to incorrect determinant calculation.",
+      "This incorrect summation directly causes wrong determinant values for triangular matrices."
+    ],
+    "desired_behavior": "The determinant for triangular matrices should be the product of the diagonal elements.",
+    "repair_intent": "Change the addition operation on line 21 to multiplication to correctly compute the determinant.",
+    "preservation_constraints": [
+      "Ensure that the loop correctly multiplies each diagonal element.",
+      "Maintain the loop structure to process all diagonal elements."
+    ],
+    "uncertainty": [
+      "Uncertainty if other lines might contribute to the issue, though line 21 is the primary cause.",
+      "Uncertainty if the change might affect non-triangular matrix calculations, though the change is specific to triangular matrices."
+    ],
+    "validation_obligations": [
+      "Test with triangular matrices to verify correct determinant calculation after the change.",
+      "Ensure that the change does not break existing functionality for non-triangular matrices."
+    ]
+  },
+  "RC002": {
+    "fault_hypothesis": "The sign calculation in the cofactor expansion incorrectly uses 2 + i instead of the correct formula based on row and column indices.",
+    "causal_chain": [
+      "The incorrect sign calculation leads to wrong determinant values for non-triangular matrices.",
+      "This affects the accuracy of the determinant computation for matrices that require cofactor expansion."
+    ],
+    "desired_behavior": "The sign for each cofactor term should be calculated as (-1) raised to the sum of the row and column indices.",
+    "repair_intent": "Modify the exponent in the sign calculation to use i + (i % n) instead of 2 + i.",
+    "preservation_constraints": [
+      "Ensure the change only affects non-triangular matrices handled by DeterComp.",
+      "Maintain correct behavior for triangular matrices processed earlier."
+    ],
+    "uncertainty": [
+      "Uncertainty if other parts of the code rely on the current sign calculation.",
+      "Possibility of introducing new errors in edge cases not covered by test evidence."
+    ],
+    "validation_obligations": [
+      "Test with matrices requiring cofactor expansion to verify correct signs.",
+      "Ensure triangular matrices still compute determinants correctly."
+    ]
+  },
+  "RC003": {
+    "fault_hypothesis": "The loop in AlgComp starts at n instead of 0, causing incorrect minor construction.",
+    "causal_chain": [
+      "Loop starts at n, skipping the first row.",
+      "Incorrect minor construction excludes necessary elements.",
+      "Determinant calculation fails for non-triangular matrices."
+    ],
+    "desired_behavior": "Loop iterates over all elements, correctly excluding ith column.",
+    "repair_intent": "Adjust loop to start at 0 and check all elements for column exclusion.",
+    "preservation_constraints": [
+      "Maintain correct exclusion of ith column elements.",
+      "Ensure minor construction accuracy.",
+      "Preserve determinant calculation logic."
+    ],
+    "uncertainty": [
+      "Unclear if all minor elements are correctly excluded.",
+      "Possibility of other minor construction issues."
+    ],
+    "validation_obligations": [
+      "Test with 3x3 matrix to verify minor construction.",
+      "Check determinant correctness after loop adjustment."
+    ]
+  }
+}

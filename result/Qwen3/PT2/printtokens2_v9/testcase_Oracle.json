@@ -1,0 +1,58 @@
+[
+  {
+    "test_id": "source_s3_mr2",
+    "input": ";IF A L  ;tJvMR3\n",
+    "actual_output": "identifier,\"F\".\nidentifier,\"A\".\nidentifier,\"L\".\nidentifier,\"JvMR3\".\neof.",
+    "expected_output": "eof.",
+    "test_status": "nopass"
+  },
+  {
+    "test_id": "followup_s3_mr2",
+    "input": ";\n",
+    "actual_output": "It can not get charcter\neof.",
+    "expected_output": "eof.",
+    "test_status": "nopass"
+  },
+  {
+    "test_id": "source_s5_mr3",
+    "input": "=> W4vLoQv ` 9 ;Bm1\n=> W4vLoQv ` 9 ;Bm1\n",
+    "actual_output": "keyword,\"=>\".\nidentifier,\"W4vLoQv\".\nbquote.\nnumeric,9.\nidentifier,\"m1\".\nkeyword,\"=>\".\nidentifier,\"W4vLoQv\".\nbquote.\nnumeric,9.\nidentifier,\"m1\".\neof.",
+    "expected_output": "keyword,\"=>\".\nidentifier,\"W4vLoQv\".\nbquote.\nnumeric,9.\nkeyword,\"=>\".\nidentifier,\"W4vLoQv\".\nbquote.\nnumeric,9.\neof.",
+    "test_status": "nopass"
+  },
+  {
+    "test_id": "followup_s5_mr3",
+    "input": ";=> W4vLoQv ` 9 ;Bm1\n=> W4vLoQv ` 9 ;Bm1\n",
+    "actual_output": "error,\">\".\nidentifier,\"W4vLoQv\".\nbquote.\nnumeric,9.\nidentifier,\"m1\".\nkeyword,\"=>\".\nidentifier,\"W4vLoQv\".\nbquote.\nnumeric,9.\nidentifier,\"m1\".\neof.",
+    "expected_output": "keyword,\"=>\".\nidentifier,\"W4vLoQv\".\nbquote.\nnumeric,9.\neof.",
+    "test_status": "nopass"
+  },
+  {
+    "test_id": "source_s2_mr4",
+    "input": "xor \n;;bWJ00dn9b10m833oe6s6D5Y2S51Wl8VJHX4\n",
+    "actual_output": "keyword,\"xor\".\nidentifier,\"bWJ00dn9b10m833oe6s6D5Y2S51Wl8VJHX4\".\neof.",
+    "expected_output": "keyword,\"xor\".\neof.",
+    "test_status": "nopass"
+  },
+  {
+    "test_id": "followup_s2_mr4",
+    "input": "xor \n;\n",
+    "actual_output": "keyword,\"xor\".\nIt can not get charcter\neof.",
+    "expected_output": "keyword,\"xor\".\neof.",
+    "test_status": "nopass"
+  },
+  {
+    "test_id": "source_s1_mr5",
+    "input": "=> K3dQ   ;hp7\n",
+    "actual_output": "keyword,\"=>\".\nidentifier,\"K3dQ\".\nidentifier,\"p7\".\neof.",
+    "expected_output": "keyword,\"=>\".\nidentifier,\"K3dQ\".\neof.",
+    "test_status": "nopass"
+  },
+  {
+    "test_id": "followup_s1_mr5",
+    "input": "=> k3Dq   ;\n",
+    "actual_output": "keyword,\"=>\".\nidentifier,\"k3Dq\".\nIt can not get charcter\neof.",
+    "expected_output": "keyword,\"=>\".\nidentifier,\"k3Dq\".\neof.",
+    "test_status": "nopass"
+  }
+]

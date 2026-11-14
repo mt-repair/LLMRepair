@@ -1,0 +1,11 @@
+--- a/Mutant2.py
++++ b/Mutant2.py
+@@ -21,7 +21,7 @@
+                 result *= A[i * n + i]
+             return result, symbol
+         elif f3 or f4:
+-            result = int(math.pow(1, n * (n - 1) / 2))
++result = 1
+             symbol = 1
+             for i in range(n):
+                 result *= A[i * n + (n - 1 - i)]

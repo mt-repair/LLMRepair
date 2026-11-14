@@ -1,0 +1,80 @@
+[
+  {
+    "name": "05_repair_plan_RC001",
+    "attempts": [
+      {
+        "attempt": 1,
+        "kind": "validation",
+        "validation_errors": [],
+        "response_metadata": {
+          "num_ctx": 8192,
+          "num_predict": 1600,
+          "prompt_chars": 5107,
+          "format_mode": "json",
+          "done": true,
+          "done_reason": "stop",
+          "prompt_eval_count": 1433,
+          "eval_count": 645,
+          "prompt_eval_duration": 1316716000,
+          "eval_duration": 40755119000,
+          "total_duration": 46622290600,
+          "load_duration": 4538912800,
+          "client_elapsed_seconds": 48.672,
+          "raw_chars": 1298
+        }
+      }
+    ]
+  },
+  {
+    "name": "05_repair_plan_RC002",
+    "attempts": [
+      {
+        "attempt": 1,
+        "kind": "validation",
+        "validation_errors": [],
+        "response_metadata": {
+          "num_ctx": 8192,
+          "num_predict": 1600,
+          "prompt_chars": 5142,
+          "format_mode": "json",
+          "done": true,
+          "done_reason": "stop",
+          "prompt_eval_count": 1460,
+          "eval_count": 877,
+          "prompt_eval_duration": 434742000,
+          "eval_duration": 55594578000,
+          "total_duration": 56185304300,
+          "load_duration": 1064700,
+          "client_elapsed_seconds": 58.218,
+          "raw_chars": 1341
+        }
+      }
+    ]
+  },
+  {
+    "name": "05_repair_plan_RC003",
+    "attempts": [
+      {
+        "attempt": 1,
+        "kind": "validation",
+        "validation_errors": [],
+        "response_metadata": {
+          "num_ctx": 8192,
+          "num_predict": 1600,
+          "prompt_chars": 5096,
+          "format_mode": "json",
+          "done": true,
+          "done_reason": "stop",
+          "prompt_eval_count": 1436,
+          "eval_count": 842,
+          "prompt_eval_duration": 420893000,
+          "eval_duration": 53318822000,
+          "total_duration": 53884267400,
+          "load_duration": 1029600,
+          "client_elapsed_seconds": 55.938,
+          "raw_chars": 1033
+        }
+      }
+    ]
+  }
+]

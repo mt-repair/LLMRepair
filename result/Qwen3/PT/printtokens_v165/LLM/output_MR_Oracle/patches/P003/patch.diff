@@ -1,0 +1,38 @@
+--- a/print_tokens.c
++++ b/print_tokens.c
+@@ -204,13 +204,19 @@
+ 	      next_st = -1; /* - hf */
+ 	  }
+ 	  if (next_st == -1) { /* ERROR or EOF case */
+-	      return(error_or_eof_case(tstream_ptr,
++return(error_or_eof_case(tstream_ptr,
++            token_ptr,cu_state,token_str,token_ind,ch));
+ 				       token_ptr,cu_state,token_str,token_ind,ch));
+ 	  } else if (next_st == -2) {/* This is numeric case. */
+ 	      return(numeric_case(tstream_ptr,token_ptr,ch,
+ 				  token_str,token_ind));
+ 	  } else if (next_st == -3) {/* This is the IDENTIFIER case */
+-	      token_ptr->token_id=IDENTIFIER;
++token_ptr->token_id=IDENTIFIER;
++            unget_char(ch,tstream_ptr->ch_stream);
++            token_ind--;
++            get_actual_token(token_str,token_ind);
++            strcpy(token_ptr->token_string,token_str);
++            return(token_ptr);
+ 	      unget_char(ch,tstream_ptr->ch_stream);
+ 	      token_ind--;
+ 	      get_actual_token(token_str,token_ind);
+@@ -229,7 +235,12 @@
+                            if(check_delimiter(ch)==TRUE)
+                            {
+                                  token_ptr->token_id=keyword(next_st);
+-                                 unget_char('\0',tstream_ptr->ch_stream);
++token_ptr->token_id=keyword(next_st);
++            unget_char(ch,tstream_ptr->ch_stream);
++            token_ind--;
++            get_actual_token(token_str,token_ind);
++            strcpy(token_ptr->token_string,token_str);
++            return(token_ptr);
+                                  token_ptr->token_string[0]='\0';
+                                  return(token_ptr);
+                            }

@@ -1,0 +1,23 @@
+[
+  {
+    "attempt": 1,
+    "errors": [],
+    "response_metadata": {
+      "model": "Qwen3:14b",
+      "temperature": 0.09,
+      "seed": 0,
+      "num_ctx": 32768,
+      "num_predict": 8192,
+      "prompt_chars": 5798,
+      "done": true,
+      "done_reason": "stop",
+      "prompt_eval_count": 1917,
+      "eval_count": 1391,
+      "prompt_eval_duration": 772070000,
+      "eval_duration": 50635085000,
+      "total_duration": 52151840100,
+      "load_duration": 1658700,
+      "client_elapsed_seconds": 54.172
+    }
+  }
+]

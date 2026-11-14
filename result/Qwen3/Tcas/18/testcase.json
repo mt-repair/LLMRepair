@@ -1,0 +1,65 @@
+[
+  {
+    "test_id": "input1",
+    "input": "[958, 1, 1, 2597, 574, 4253, 0, 399, 400, 0, 0, 1]",
+    "actual_output": "DOWNWARD_RA",
+    "expected_output": "missing",
+    "test_status": "unknown"
+  },
+  {
+    "test_id": "input2",
+    "input": "[958, 1, 1, 3425.0, 574, 3425.0, 0, 399, 400, 0, 0, 1]",
+    "actual_output": "UNRESOLVED",
+    "expected_output": "missing",
+    "test_status": "unknown"
+  },
+  {
+    "test_id": "input3",
+    "input": "[958, 1, 1, 3425.0, 574, 3425.0, 0, 389, 479, 0, 0, 1]",
+    "actual_output": "UNRESOLVED",
+    "expected_output": "missing",
+    "test_status": "unknown"
+  },
+  {
+    "test_id": "input4",
+    "input": "[992, 1, 0, 3342, 23, 4657, 1, 640, 741, 0, 0, 0]",
+    "actual_output": "UNRESOLVED",
+    "expected_output": "missing",
+    "test_status": "unknown"
+  },
+  {
+    "test_id": "input5",
+    "input": "[992, 1, 0, 3999.5, 23, 3999.5, 1, 640, 741, 0, 0, 0]",
+    "actual_output": "DOWNWARD_RA",
+    "expected_output": "missing",
+    "test_status": "unknown"
+  },
+  {
+    "test_id": "input6",
+    "input": "[992, 1, 0, 3999.5, 23, 3999.5, 1, 630, 631, 0, 0, 0]",
+    "actual_output": "DOWNWARD_RA",
+    "expected_output": "missing",
+    "test_status": "unknown"
+  },
+  {
+    "test_id": "input7",
+    "input": "[992, 1, 0, 3999.5, 23, 3999.5, 0, 640, 741, 0, 0, 0]",
+    "actual_output": "DOWNWARD_RA",
+    "expected_output": "missing",
+    "test_status": "unknown"
+  },
+  {
+    "test_id": "input8",
+    "input": "[992, 1, 0, 3999.5, 23, 3999.5, 1, 630, 631, 0, 0, 0]",
+    "actual_output": "DOWNWARD_RA",
+    "expected_output": "missing",
+    "test_status": "unknown"
+  },
+  {
+    "test_id": "input9",
+    "input": "[992, 1, 0, 3999.5, 23, 3999.5, 0, 640, 741, 0, 0, 0]",
+    "actual_output": "DOWNWARD_RA",
+    "expected_output": "missing",
+    "test_status": "unknown"
+  }
+]

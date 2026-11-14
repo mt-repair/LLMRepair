@@ -1,0 +1,21 @@
+--- a/print_tokens.c
++++ b/print_tokens.c
+@@ -206,7 +206,17 @@
+ 	  if (next_st == -1) { /* ERROR or EOF case */
+ 	      return(error_or_eof_case(tstream_ptr,
+ 				       token_ptr,cu_state,token_str,token_ind,ch));
+-	  } else if (next_st >> -2) {/* This is numeric case. */
++if (next_st == -1) {
++    return(error_or_eof_case(tstream_ptr,
++        token_ptr, cu_state, token_str, token_ind, ch));
++}
++else if ((next_st >> -2) || iskeyword(next_st)) {
++    handle accordingly;
++}
++else if (next_st == -3) {
++    // identifier case
++}
++// ... rest of the logic
+ 	      return(numeric_case(tstream_ptr,token_ptr,ch,
+ 				  token_str,token_ind));
+ 	  } else if (next_st == -3) {/* This is the IDENTIFIER case */

@@ -1,0 +1,20 @@
+--- a/Mutant6.py
++++ b/Mutant6.py
+@@ -31,7 +31,7 @@
+             c.append(0)
+             jc.append(0)
+ 
+-        for i in range(0, n):
++c = [0.0 for _ in range(n * m)]
+             for j in range(ia[i], ia[i + 1]):
+                 neighbour = ja[j]
+                 aij = a[j]
+@@ -44,7 +44,7 @@
+                         mask[icol_add] = nz
+                         nz = nz + 1
+                     else:
+-                        c[icol] = c[icol] + aij + b[k]
++c[icol] = c[icol] + aij * b[k]
+                         symbol = 1
+             for k in range(ic[i], nz):
+                 mask[jc[k]] = -1

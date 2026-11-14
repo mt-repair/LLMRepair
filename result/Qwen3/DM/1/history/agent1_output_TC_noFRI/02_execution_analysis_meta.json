@@ -1,0 +1,75 @@
+[
+  {
+    "name": "02_test_TC007",
+    "attempts": [
+      {
+        "attempt": 1,
+        "kind": "json_error",
+        "error": "Invalid JSON: Expecting value: line 1 column 1 (char 0) (done_reason=length, eval_count=1600, raw_chars=0, head='')",
+        "response_metadata": {
+          "num_ctx": 8192,
+          "num_predict": 1600,
+          "prompt_chars": 6677,
+          "format_mode": "json",
+          "done": true,
+          "done_reason": "length",
+          "prompt_eval_count": 2075,
+          "eval_count": 1600,
+          "prompt_eval_duration": 1880270000,
+          "eval_duration": 100354833000,
+          "total_duration": 109805952100,
+          "load_duration": 7557676400,
+          "client_elapsed_seconds": 111.875,
+          "raw_chars": 0
+        }
+      },
+      {
+        "attempt": 2,
+        "kind": "validation",
+        "validation_errors": [],
+        "response_metadata": {
+          "num_ctx": 8192,
+          "num_predict": 2560,
+          "prompt_chars": 6884,
+          "format_mode": "json",
+          "done": true,
+          "done_reason": "stop",
+          "prompt_eval_count": 2119,
+          "eval_count": 1745,
+          "prompt_eval_duration": 261120999,
+          "eval_duration": 108905396000,
+          "total_duration": 109189425800,
+          "load_duration": 1027700,
+          "client_elapsed_seconds": 111.234,
+          "raw_chars": 836
+        }
+      }
+    ]
+  },
+  {
+    "name": "02_test_TC008",
+    "attempts": [
+      {
+        "attempt": 1,
+        "kind": "validation",
+        "validation_errors": [],
+        "response_metadata": {
+          "num_ctx": 8192,
+          "num_predict": 1600,
+          "prompt_chars": 6860,
+          "format_mode": "json",
+          "done": true,
+          "done_reason": "stop",
+          "prompt_eval_count": 2253,
+          "eval_count": 1476,
+          "prompt_eval_duration": 301989000,
+          "eval_duration": 78315233000,
+          "total_duration": 79179457600,
+          "load_duration": 6759400,
+          "client_elapsed_seconds": 81.219,
+          "raw_chars": 840
+        }
+      }
+    ]
+  }
+]

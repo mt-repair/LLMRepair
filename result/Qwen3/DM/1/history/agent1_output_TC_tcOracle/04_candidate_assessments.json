@@ -1,0 +1,518 @@
+{
+  "candidate_assessments": [
+    {
+      "location_ref": "LINE_0011",
+      "line": 11,
+      "semantic_role": "causal",
+      "test_assessments": [
+        {
+          "evidence_ref": "TC007",
+          "verdict": "support",
+          "reason": "Incorrectly setting f1 to False may prevent proper upper triangular matrix detection.",
+          "causal_chain": [
+            "Mutant1.Determinant",
+            "f1 flag",
+            "matrix type identification"
+          ]
+        },
+        {
+          "evidence_ref": "TC008",
+          "verdict": "neutral",
+          "reason": "No direct impact on floating-point matrix handling.",
+          "causal_chain": []
+        }
+      ],
+      "mr_assessments": [],
+      "overall_verdict": "support",
+      "root_cause_role": "contributing",
+      "confidence": "medium"
+    },
+    {
+      "location_ref": "LINE_0021",
+      "line": 21,
+      "semantic_role": "causal",
+      "test_assessments": [
+        {
+          "evidence_ref": "TC007",
+          "verdict": "support",
+          "reason": "Summing diagonal elements instead of multiplying leads to incorrect determinant calculation.",
+          "causal_chain": [
+            "Mutant1.Determinant",
+            "result calculation",
+            "determinant value"
+          ]
+        },
+        {
+          "evidence_ref": "TC008",
+          "verdict": "support",
+          "reason": "Same issue affects floating-point matrices.",
+          "causal_chain": [
+            "Mutant1.Determinant",
+            "result calculation",
+            "determinant value"
+          ]
+        }
+      ],
+      "mr_assessments": [],
+      "overall_verdict": "strong_support",
+      "root_cause_role": "root_cause",
+      "confidence": "high"
+    },
+    {
+      "location_ref": "LINE_0024",
+      "line": 24,
+      "semantic_role": "conditional",
+      "test_assessments": [
+        {
+          "evidence_ref": "TC007",
+          "verdict": "neutral",
+          "reason": "No direct impact on upper triangular matrix handling.",
+          "causal_chain": []
+        },
+        {
+          "evidence_ref": "TC008",
+          "verdict": "neutral",
+          "reason": "No direct impact on floating-point matrix handling.",
+          "causal_chain": []
+        }
+      ],
+      "mr_assessments": [],
+      "overall_verdict": "neutral",
+      "root_cause_role": "unrelated",
+      "confidence": "low"
+    },
+    {
+      "location_ref": "LINE_0030",
+      "line": 30,
+      "semantic_role": "recursive_call",
+      "test_assessments": [
+        {
+          "evidence_ref": "TC007",
+          "verdict": "neutral",
+          "reason": "No direct impact on upper triangular matrix handling.",
+          "causal_chain": []
+        },
+        {
+          "evidence_ref": "TC008",
+          "verdict": "support",
+          "reason": "Recursive determinant calculation may be affected by previous errors.",
+          "causal_chain": [
+            "Mutant1.DeterComp",
+            "recursive call",
+            "determinant value"
+          ]
+        }
+      ],
+      "mr_assessments": [],
+      "overall_verdict": "neutral",
+      "root_cause_role": "propagation",
+      "confidence": "medium"
+    },
+    {
+      "location_ref": "LINE_0033",
+      "line": 33,
+      "semantic_role": "initialization",
+      "test_assessments": [
+        {
+          "evidence_ref": "TC007",
+          "verdict": "neutral",
+          "reason": "No direct impact on upper triangular matrix handling.",
+          "causal_chain": []
+        },
+        {
+          "evidence_ref": "TC008",
+          "verdict": "neutral",
+          "reason": "No direct impact on floating-point matrix handling.",
+          "causal_chain": []
+        }
+      ],
+      "mr_assessments": [],
+      "overall_verdict": "neutral",
+      "root_cause_role": "unrelated",
+      "confidence": "low"
+    },
+    {
+      "location_ref": "LINE_0034",
+      "line": 34,
+      "semantic_role": "Initialization of temp list",
+      "test_assessments": [
+        {
+          "evidence_ref": "TC007",
+          "verdict": "neutral",
+          "reason": "No direct impact on determinant calculation for upper triangular matrix",
+          "causal_chain": []
+        },
+        {
+          "evidence_ref": "TC008",
+          "verdict": "neutral",
+          "reason": "No direct impact on determinant calculation for general matrix",
+          "causal_chain": []
+        }
+      ],
+      "mr_assessments": [],
+      "overall_verdict": "neutral",
+      "root_cause_role": "unrelated",
+      "confidence": "high"
+    },
+    {
+      "location_ref": "LINE_0035",
+      "line": 35,
+      "semantic_role": "Loop over all elements of matrix",
+      "test_assessments": [
+        {
+          "evidence_ref": "TC007",
+          "verdict": "neutral",
+          "reason": "No direct impact on determinant calculation for upper triangular matrix",
+          "causal_chain": []
+        },
+        {
+          "evidence_ref": "TC008",
+          "verdict": "neutral",
+          "reason": "No direct impact on determinant calculation for general matrix",
+          "causal_chain": []
+        }
+      ],
+      "mr_assessments": [],
+      "overall_verdict": "neutral",
+      "root_cause_role": "unrelated",
+      "confidence": "high"
+    },
+    {
+      "location_ref": "LINE_0036",
+      "line": 36,
+      "semantic_role": "Appending elements to temp list",
+      "test_assessments": [
+        {
+          "evidence_ref": "TC007",
+          "verdict": "neutral",
+          "reason": "No direct impact on determinant calculation for upper triangular matrix",
+          "causal_chain": []
+        },
+        {
+          "evidence_ref": "TC008",
+          "verdict": "neutral",
+          "reason": "No direct impact on determinant calculation for general matrix",
+          "causal_chain": []
+        }
+      ],
+      "mr_assessments": [],
+      "overall_verdict": "neutral",
+      "root_cause_role": "unrelated",
+      "confidence": "high"
+    },
+    {
+      "location_ref": "LINE_0037",
+      "line": 37,
+      "semantic_role": "Base case for n=1",
+      "test_assessments": [
+        {
+          "evidence_ref": "TC007",
+          "verdict": "neutral",
+          "reason": "No direct impact on determinant calculation for upper triangular matrix",
+          "causal_chain": []
+        },
+        {
+          "evidence_ref": "TC008",
+          "verdict": "neutral",
+          "reason": "No direct impact on determinant calculation for general matrix",
+          "causal_chain": []
+        }
+      ],
+      "mr_assessments": [],
+      "overall_verdict": "neutral",
+      "root_cause_role": "unrelated",
+      "confidence": "high"
+    },
+    {
+      "location_ref": "LINE_0038",
+      "line": 38,
+      "semantic_role": "Return value for n=1",
+      "test_assessments": [
+        {
+          "evidence_ref": "TC007",
+          "verdict": "neutral",
+          "reason": "No direct impact on determinant calculation for upper triangular matrix",
+          "causal_chain": []
+        },
+        {
+          "evidence_ref": "TC008",
+          "verdict": "neutral",
+          "reason": "No direct impact on determinant calculation for general matrix",
+          "causal_chain": []
+        }
+      ],
+      "mr_assessments": [],
+      "overall_verdict": "neutral",
+      "root_cause_role": "unrelated",
+      "confidence": "high"
+    },
+    {
+      "location_ref": "LINE_0040",
+      "line": 40,
+      "semantic_role": "Loop initialization",
+      "test_assessments": [
+        {
+          "evidence_ref": "TC007",
+          "verdict": "neutral",
+          "reason": "No direct impact on determinant calculation logic.",
+          "causal_chain": []
+        },
+        {
+          "evidence_ref": "TC008",
+          "verdict": "neutral",
+          "reason": "No direct impact on determinant calculation logic.",
+          "causal_chain": []
+        }
+      ],
+      "mr_assessments": [],
+      "overall_verdict": "neutral",
+      "root_cause_role": "unrelated",
+      "confidence": "medium"
+    },
+    {
+      "location_ref": "LINE_0041",
+      "line": 41,
+      "semantic_role": "Mid calculation and recursion",
+      "test_assessments": [
+        {
+          "evidence_ref": "TC007",
+          "verdict": "support",
+          "reason": "Involved in determinant calculation with potential sign error.",
+          "causal_chain": [
+            "Sign calculation",
+            "Recursive call"
+          ]
+        },
+        {
+          "evidence_ref": "TC008",
+          "verdict": "support",
+          "reason": "Involved in determinant calculation with potential sign error.",
+          "causal_chain": [
+            "Sign calculation",
+            "Recursive call"
+          ]
+        }
+      ],
+      "mr_assessments": [],
+      "overall_verdict": "support",
+      "root_cause_role": "contributing",
+      "confidence": "high"
+    },
+    {
+      "location_ref": "LINE_0042",
+      "line": 42,
+      "semantic_role": "Result assignment",
+      "test_assessments": [
+        {
+          "evidence_ref": "TC007",
+          "verdict": "support",
+          "reason": "Directly affects the final determinant value.",
+          "causal_chain": [
+            "Result assignment"
+          ]
+        },
+        {
+          "evidence_ref": "TC008",
+          "verdict": "support",
+          "reason": "Directly affects the final determinant value.",
+          "causal_chain": [
+            "Result assignment"
+          ]
+        }
+      ],
+      "mr_assessments": [],
+      "overall_verdict": "support",
+      "root_cause_role": "contributing",
+      "confidence": "high"
+    },
+    {
+      "location_ref": "LINE_0043",
+      "line": 43,
+      "semantic_role": "Return result",
+      "test_assessments": [
+        {
+          "evidence_ref": "TC007",
+          "verdict": "support",
+          "reason": "Returns the computed determinant value.",
+          "causal_chain": [
+            "Result return"
+          ]
+        },
+        {
+          "evidence_ref": "TC008",
+          "verdict": "support",
+          "reason": "Returns the computed determinant value.",
+          "causal_chain": [
+            "Result return"
+          ]
+        }
+      ],
+      "mr_assessments": [],
+      "overall_verdict": "support",
+      "root_cause_role": "contributing",
+      "confidence": "high"
+    },
+    {
+      "location_ref": "LINE_0046",
+      "line": 46,
+      "semantic_role": "Array initialization",
+      "test_assessments": [
+        {
+          "evidence_ref": "TC007",
+          "verdict": "neutral",
+          "reason": "No direct impact on determinant calculation logic.",
+          "causal_chain": []
+        },
+        {
+          "evidence_ref": "TC008",
+          "verdict": "neutral",
+          "reason": "No direct impact on determinant calculation logic.",
+          "causal_chain": []
+        }
+      ],
+      "mr_assessments": [],
+      "overall_verdict": "neutral",
+      "root_cause_role": "unrelated",
+      "confidence": "medium"
+    },
+    {
+      "location_ref": "LINE_0047",
+      "line": 47,
+      "semantic_role": "loop_start",
+      "test_assessments": [
+        {
+          "evidence_ref": "TC007",
+          "verdict": "support",
+          "reason": "Loop starts from n, potentially skipping necessary elements for submatrix generation.",
+          "causal_chain": [
+            "Loop affects submatrix generation",
+            "Incorrect submatrix leads to wrong determinant"
+          ]
+        },
+        {
+          "evidence_ref": "TC008",
+          "verdict": "support",
+          "reason": "Loop may exclude necessary elements for submatrix generation.",
+          "causal_chain": [
+            "Loop affects submatrix generation",
+            "Incorrect submatrix leads to wrong determinant"
+          ]
+        }
+      ],
+      "mr_assessments": [],
+      "overall_verdict": "support",
+      "root_cause_role": "contributing",
+      "confidence": "medium"
+    },
+    {
+      "location_ref": "LINE_0048",
+      "line": 48,
+      "semantic_role": "condition_check",
+      "test_assessments": [
+        {
+          "evidence_ref": "TC007",
+          "verdict": "support",
+          "reason": "Condition may incorrectly skip elements, affecting submatrix generation.",
+          "causal_chain": [
+            "Incorrect element exclusion",
+            "Wrong determinant calculation"
+          ]
+        },
+        {
+          "evidence_ref": "TC008",
+          "verdict": "support",
+          "reason": "Condition may incorrectly skip elements, affecting submatrix generation.",
+          "causal_chain": [
+            "Incorrect element exclusion",
+            "Wrong determinant calculation"
+          ]
+        }
+      ],
+      "mr_assessments": [],
+      "overall_verdict": "support",
+      "root_cause_role": "contributing",
+      "confidence": "medium"
+    },
+    {
+      "location_ref": "LINE_0049",
+      "line": 49,
+      "semantic_role": "no_op",
+      "test_assessments": [
+        {
+          "evidence_ref": "TC007",
+          "verdict": "neutral",
+          "reason": "No operation does not affect submatrix generation.",
+          "causal_chain": []
+        },
+        {
+          "evidence_ref": "TC008",
+          "verdict": "neutral",
+          "reason": "No operation does not affect submatrix generation.",
+          "causal_chain": []
+        }
+      ],
+      "mr_assessments": [],
+      "overall_verdict": "neutral",
+      "root_cause_role": "unrelated",
+      "confidence": "low"
+    },
+    {
+      "location_ref": "LINE_0051",
+      "line": 51,
+      "semantic_role": "array_append",
+      "test_assessments": [
+        {
+          "evidence_ref": "TC007",
+          "verdict": "support",
+          "reason": "Appending elements may include incorrect indices, affecting submatrix generation.",
+          "causal_chain": [
+            "Incorrect indices inclusion",
+            "Wrong determinant calculation"
+          ]
+        },
+        {
+          "evidence_ref": "TC008",
+          "verdict": "support",
+          "reason": "Appending elements may include incorrect indices, affecting submatrix generation.",
+          "causal_chain": [
+            "Incorrect indices inclusion",
+            "Wrong determinant calculation"
+          ]
+        }
+      ],
+      "mr_assessments": [],
+      "overall_verdict": "support",
+      "root_cause_role": "contributing",
+      "confidence": "medium"
+    },
+    {
+      "location_ref": "LINE_0052",
+      "line": 52,
+      "semantic_role": "return",
+      "test_assessments": [
+        {
+          "evidence_ref": "TC007",
+          "verdict": "support",
+          "reason": "Returning array may contain incorrect elements, affecting determinant calculation.",
+          "causal_chain": [
+            "Incorrect submatrix returned",
+            "Wrong determinant calculation"
+          ]
+        },
+        {
+          "evidence_ref": "TC008",
+          "verdict": "support",
+          "reason": "Returning array may contain incorrect elements, affecting determinant calculation.",
+          "causal_chain": [
+            "Incorrect submatrix returned",
+            "Wrong determinant calculation"
+          ]
+        }
+      ],
+      "mr_assessments": [],
+      "overall_verdict": "support",
+      "root_cause_role": "contributing",
+      "confidence": "medium"
+    }
+  ]
+}

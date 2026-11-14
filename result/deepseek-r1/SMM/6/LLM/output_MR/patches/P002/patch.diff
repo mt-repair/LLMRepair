@@ -1,0 +1,12 @@
+--- a/Mutant6.py
++++ b/Mutant6.py
+@@ -44,7 +44,8 @@
+                         mask[icol_add] = nz
+                         nz = nz + 1
+                     else:
+-                        c[icol] = c[icol] + aij + b[k]
++# Multiply corresponding elements and accumulate
++            c[icol] = c[icol] + aij * b[k]
+                         symbol = 1
+             for k in range(ic[i], nz):
+                 mask[jc[k]] = -1

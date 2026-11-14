@@ -1,0 +1,11 @@
+--- a/Mutant4.py
++++ b/Mutant4.py
+@@ -31,7 +31,7 @@
+                 return area, symbol
+         if pow(Max, 2) == pow(mid, 2) + pow(Min, 2):  #  Right triangle 
+             # print('Right-angled triangle')
+-            area = mid * Min
++area = (lambda x: x / 2)(mid * Min)
+             symbol = 1
+             return area, symbol
+         # print('Obtuse triangle')

@@ -1,0 +1,19 @@
+--- a/print_tokens.c
++++ b/print_tokens.c
+@@ -415,10 +415,12 @@
+ {
+         char c;
+ 
+-        while((c=get_char(stream_ptr))=='\n' &&
+-               !is_end_of_character_stream(stream_ptr))
+-             ; /* Skip the characters until EOF or EOL found. */
+-	if(c==EOF) unget_char(c, stream_ptr); /* Put back to leave gracefully - hf */
++        while((c=get_char(stream_ptr)) != '\n' && !is_end_of_character_stream(stream_ptr))
++            ; /* Skip the comment until EOL or EOF. */
++        if(c == '\n') unget_char(c, stream_ptr); /* Put back newline if found. */
++        else if(c == EOF) unget_char(c, stream_ptr); /* Put back to leave gracefully - hf */
++        return;
++    }
+         return;
+ }
+ 

@@ -1,0 +1,13 @@
+--- a/Mutant4.py
++++ b/Mutant4.py
+@@ -45,8 +45,8 @@
+                         nz = nz + 1
+                     else:
+                         #  only a And b Contains two or more non- 0 Pair, execute this line of code 
+-                        c[icol] = c[icol] + aij
+-                        symbol = 1
++c[icol] = c[icol] + aij * b[k]
++symbol = 0  # Correction applied
+             for k in range(ic[i], nz):
+                 mask[jc[k]] = -1
+             ic[i + 1] = nz

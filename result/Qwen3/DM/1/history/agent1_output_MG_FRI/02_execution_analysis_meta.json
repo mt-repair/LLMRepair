@@ -1,0 +1,49 @@
+[
+  {
+    "name": "02_test_TC008",
+    "attempts": [
+      {
+        "attempt": 1,
+        "kind": "json_error",
+        "error": "Invalid JSON: Expecting value: line 1 column 1 (char 0) (done_reason=length, eval_count=1600, raw_chars=0, head='')",
+        "response_metadata": {
+          "num_ctx": 8192,
+          "num_predict": 1600,
+          "prompt_chars": 6860,
+          "format_mode": "json",
+          "done": true,
+          "done_reason": "length",
+          "prompt_eval_count": 2251,
+          "eval_count": 1600,
+          "prompt_eval_duration": 2061047999,
+          "eval_duration": 103788404000,
+          "total_duration": 113457380400,
+          "load_duration": 7594306000,
+          "client_elapsed_seconds": 115.484,
+          "raw_chars": 0
+        }
+      },
+      {
+        "attempt": 2,
+        "kind": "validation",
+        "validation_errors": [],
+        "response_metadata": {
+          "num_ctx": 8192,
+          "num_predict": 2560,
+          "prompt_chars": 7067,
+          "format_mode": "json",
+          "done": true,
+          "done_reason": "stop",
+          "prompt_eval_count": 2295,
+          "eval_count": 1119,
+          "prompt_eval_duration": 241212000,
+          "eval_duration": 71536719000,
+          "total_duration": 71792655100,
+          "load_duration": 1646300,
+          "client_elapsed_seconds": 73.891,
+          "raw_chars": 689
+        }
+      }
+    ]
+  }
+]

@@ -1,0 +1,42 @@
+[
+  {
+    "mr_id": "MR1",
+    "source_test_id": "input1",
+    "followup_test_id": "input2",
+    "input_transformation": " Input Matrix for a Given Source Test Case  (A, B) , first transpose the two matrices separately, and then swap their positions in the matrix multiplication. Specifically, let  A' = B^T，B' = A^T , therefore, the input for the follow-up test case is  (B^T, A^T) . That is, the original first input matrix  A  After being transposed, it is placed in the second position, the original second input matrix  B  After being transposed, it is placed in the first position. ",
+    "output_relation": " Set the output of the source test case to  C = A × B , the follow-up test case output is  C' = B^T × A^T . According to the transpose property of matrix multiplication  (A × B)^T = B^T × A^T Get  C' = C^T Therefore, the output matrix of the follow-up test case should be equal to the transpose of the output matrix of the source test case. ",
+	"actual_relation_status": "VMG"
+  },
+  {
+    "mr_id": "MR2",
+    "source_test_id": "input3",
+    "followup_test_id": "input4",
+    "input_transformation": " First, construct a diagonal matrix.  Q , where all elements on the main diagonal are  3 , the remaining elements are all  0 Therefore,  Q = 3I . Then  Q  Multiply on the left to the matrix  A  upward, while maintaining  B  remains unchanged. Specifically, let  A' = Q × A，B' = B  out of   Q = 3I Therefore,  Q × A = 3A Therefore, the transformation is essentially a matrix  A  All elements of  are multiplied by  3 . The resulting follow-up test case input is  (3A, B)。",
+    "output_relation": " Set the output of the source test case to  C = A × B . The output of the follow-up test case is  C' = (3A) × B . According to the scalar multiplication property of matrix multiplication, we have  C' = 3 × (A × B) = 3C Therefore, each element in the follow-up test case output matrix should be equal to the corresponding element in the source test case output matrix.  3  times. The expected relationship is  C' = 3C。",
+	"actual_relation_status": "VMG"
+  },
+  {
+    "mr_id": "MR3",
+    "source_test_id": "input5",
+    "followup_test_id": "input6",
+    "input_transformation": " Hold Matrix  B  No change, directly use the matrix  A  Multiply each element in  by the scalar  6 Specifically, let  A' = 6A，B' = B AND:  MR4  differed MR6  Instead of scaling by constructing a diagonal matrix and performing matrix multiplication, it directly  A  each element of  is multiplied by a scalar. The resulting follow-up test case input is  (6A, B)。",
+    "output_relation": " Set the output of the source test case to  C = A × B . The output of the follow-up test case is  C' = (6A) × B . According to the scalar multiplication property of matrix multiplication, we have  C' = 6 × (A × B) = 6C Therefore, each element in the follow-up test case output matrix should be equal to the corresponding element in the source test case output matrix.  6  times. The expected relationship is  C' = 6C。",
+	"actual_relation_status": "VMG"
+  },
+  {
+    "mr_id": "MR4",
+    "source_test_id": "input7",
+    "followup_test_id": "input8",
+    "input_transformation": " First, construct an identity matrix.  I , whose dimensions are equal to the matrix  A  the number of rows of . Then, the identity matrix  I  Add to Matrix  A  upward, while maintaining  B  remains unchanged. Specifically, let  A' = A + I，B' = B . This operation is equivalent to  A  Add to each main diagonal element of  1 , while the remaining non-diagonal elements remain unchanged. The resulting follow-up test case input is  (A + I, B)。",
+    "output_relation": " Set the output of the source test case to  C = A × B . The output of the follow-up test case is  C' = (A + I) × B . According to the distributive law of matrix multiplication over addition, we have  C' = A × B + I × B  out of   I  is the identity matrix, so  I × B = B Therefore,  C' = C + B . That is, the output of the follow-up test case should be equal to the output matrix of the source test case.  C  With Source Input Matrix  B  The result of matrix addition for . The expected relationship is  C' = C + B。",
+	"actual_relation_status": "VMG"
+  },
+  {
+    "mr_id": "MR5",
+    "source_test_id": "input9",
+    "followup_test_id": "input10",
+    "input_transformation": " First, construct an identity matrix.  I , whose dimensions are equal to the matrix  B  Number of rows. Keep  A  remains unchanged, the identity matrix  I  Add to Matrix  B  Specifically, let  A' = A，B' = B + I . This operation is equivalent to  B  Add to each main diagonal element of  1 , while the remaining non-diagonal elements remain unchanged. The resulting follow-up test case input is  (A, B + I)。",
+    "output_relation": " Set the output of the source test case to  C = A × B . The output of the follow-up test case is  C' = A × (B + I) . According to the distributive law of matrix multiplication over addition, we have  C' = A × B + A × I  out of   I  is the identity matrix, so  A × I = A Therefore,  C' = C + A . That is, the output of the follow-up test case should be equal to the output matrix of the source test case.  C  With Source Input Matrix  A  The result of matrix addition for . The expected relationship is  C' = C + A。",
+	"actual_relation_status": "VMG"
+  }
+]

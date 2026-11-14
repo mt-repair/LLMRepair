@@ -1,0 +1,11 @@
+--- a/Mutant5.py
++++ b/Mutant5.py
+@@ -44,7 +44,7 @@
+                         mask[icol_add] = nz
+                         nz = nz + 1
+                     else:
+-                        c[icol] = c[icol] + b[k]
++c[icol] = aij * b[k] + c[icol]
+                         symbol = 1
+             for k in range(ic[i], nz):
+                 mask[jc[k]] = -1

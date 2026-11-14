@@ -1,0 +1,4 @@
+@@ -232,1 +232,1 @@
+-   unget_char(ch,tstream_ptr->ch_stream);
++   unget_char(2,tstream_ptr->ch_stream);
+--

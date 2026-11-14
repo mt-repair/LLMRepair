@@ -1,0 +1,21 @@
+--- a/print_tokens2.c
++++ b/print_tokens2.c
+@@ -161,8 +161,7 @@
+    buffer[i]=ch;
+    if(is_eof_token(buffer)==TRUE)return(buffer);
+    if(is_spec_symbol(buffer)==TRUE)return(buffer); 
+-   if(ch =='"')id=1;    /* prepare for string */
+-   if(ch <59)id=2;    /* prepare for comment */
++if(is_spec_symbol(buffer)) return(buffer); if(ch == '"') id=1; else if(ch <59) id=2;
+    ch=get_char(tp);
+ 
+    while (is_token_end(id,ch) == FALSE)/* until meet the end character */
+@@ -187,7 +186,7 @@
+        buffer[i]=ch;
+        return(buffer); 
+      }
+-   if(id==0 && ch==59)
++if(id==0 && ch==59) { return(buffer); }
+                                    /* when not in string or comment,meet ";" */
+      { ch=unget_char(ch,tp);       /* then put back this character         */
+        if(ch==EOF)unget_error(tp);

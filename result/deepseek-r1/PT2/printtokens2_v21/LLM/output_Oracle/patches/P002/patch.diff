@@ -1,0 +1,15 @@
+--- a/print_tokens2.c
++++ b/print_tokens2.c
+@@ -336,8 +336,10 @@
+ static int is_char_constant(str)
+     token str;
+ {
+-  if ((*str) =='#' || isalpha(*(str+1)))
+-     return(TRUE);
++if ((*str) == '#' && (strlen(str) > 1) && isalpha(*(str+1)))
++      return(TRUE);
++    else  
++      return(FALSE);
+   else  
+      return(FALSE);
+ }

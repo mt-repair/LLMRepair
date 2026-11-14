@@ -1,0 +1,26 @@
+{
+  "name": "04_candidate_narrowing",
+  "attempts": [
+    {
+      "attempt": 1,
+      "kind": "validation",
+      "validation_errors": [],
+      "response_metadata": {
+        "num_ctx": 12288,
+        "num_predict": 1600,
+        "prompt_chars": 8365,
+        "format_mode": "json",
+        "done": true,
+        "done_reason": "stop",
+        "prompt_eval_count": 2383,
+        "eval_count": 668,
+        "prompt_eval_duration": 1983657000,
+        "eval_duration": 37354504000,
+        "total_duration": 44370727900,
+        "load_duration": 5017983300,
+        "client_elapsed_seconds": 46.422,
+        "raw_chars": 1514
+      }
+    }
+  ]
+}

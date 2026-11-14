@@ -1,0 +1,4 @@
+@@ -213,1 +213,1 @@
+-   token_ptr->token_id=IDENTIFIER;
++   token_ptr->token_id &= 17;
+--

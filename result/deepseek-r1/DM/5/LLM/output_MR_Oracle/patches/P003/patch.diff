@@ -1,0 +1,15 @@
+--- a/Mutant5.py
++++ b/Mutant5.py
+@@ -21,10 +21,10 @@
+                 result *= A[i * n + i]
+             return result, symbol
+         elif f3 or f4:
+-            result = int(math.pow(-1, n * (n - 1) / 2))
++result = int(math.pow(-1, (n * (n - 1)) / 2))
+             symbol = 1
+             for i in range(n):
+-                result += A[i * n + (n - 1 - i)]
++result *= A[i * n + (n - 1 - i)]
+             return result, symbol
+         else:
+             return self.DeterComp(A, n), symbol

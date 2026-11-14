@@ -1,0 +1,4 @@
+@@ -209,1 +209,1 @@
+-   else if (next_st == -2)
++   else if (next_st >> -2)
+--

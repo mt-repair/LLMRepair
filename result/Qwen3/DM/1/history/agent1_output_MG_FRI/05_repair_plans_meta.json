@@ -1,0 +1,101 @@
+[
+  {
+    "name": "05_repair_plan_RC001",
+    "attempts": [
+      {
+        "attempt": 1,
+        "kind": "validation",
+        "validation_errors": [],
+        "response_metadata": {
+          "num_ctx": 8192,
+          "num_predict": 1600,
+          "prompt_chars": 6355,
+          "format_mode": "json",
+          "done": true,
+          "done_reason": "stop",
+          "prompt_eval_count": 1711,
+          "eval_count": 661,
+          "prompt_eval_duration": 1582570000,
+          "eval_duration": 41467671000,
+          "total_duration": 47920534800,
+          "load_duration": 4858036600,
+          "client_elapsed_seconds": 49.985,
+          "raw_chars": 1265
+        }
+      }
+    ]
+  },
+  {
+    "name": "05_repair_plan_RC002",
+    "attempts": [
+      {
+        "attempt": 1,
+        "kind": "validation",
+        "validation_errors": [],
+        "response_metadata": {
+          "num_ctx": 8192,
+          "num_predict": 1600,
+          "prompt_chars": 6349,
+          "format_mode": "json",
+          "done": true,
+          "done_reason": "stop",
+          "prompt_eval_count": 1711,
+          "eval_count": 946,
+          "prompt_eval_duration": 684680000,
+          "eval_duration": 59534995000,
+          "total_duration": 60440738100,
+          "load_duration": 1027500,
+          "client_elapsed_seconds": 62.468,
+          "raw_chars": 1316
+        }
+      }
+    ]
+  },
+  {
+    "name": "05_repair_plan_RC003",
+    "attempts": [
+      {
+        "attempt": 1,
+        "kind": "json_error",
+        "error": "Invalid JSON: Expecting value: line 1 column 1 (char 0) (done_reason=length, eval_count=1600, raw_chars=0, head='')",
+        "response_metadata": {
+          "num_ctx": 8192,
+          "num_predict": 1600,
+          "prompt_chars": 6385,
+          "format_mode": "json",
+          "done": true,
+          "done_reason": "length",
+          "prompt_eval_count": 1725,
+          "eval_count": 1600,
+          "prompt_eval_duration": 680869000,
+          "eval_duration": 101808036000,
+          "total_duration": 102665351700,
+          "load_duration": 1029100,
+          "client_elapsed_seconds": 104.704,
+          "raw_chars": 0
+        }
+      },
+      {
+        "attempt": 2,
+        "kind": "validation",
+        "validation_errors": [],
+        "response_metadata": {
+          "num_ctx": 8192,
+          "num_predict": 2560,
+          "prompt_chars": 6592,
+          "format_mode": "json",
+          "done": true,
+          "done_reason": "stop",
+          "prompt_eval_count": 1769,
+          "eval_count": 781,
+          "prompt_eval_duration": 249818000,
+          "eval_duration": 49220755000,
+          "total_duration": 49702539000,
+          "load_duration": 1231300,
+          "client_elapsed_seconds": 51.796,
+          "raw_chars": 1176
+        }
+      }
+    ]
+  }
+]

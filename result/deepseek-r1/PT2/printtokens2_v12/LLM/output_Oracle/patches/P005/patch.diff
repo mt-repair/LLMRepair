@@ -1,0 +1,30 @@
+--- a/print_tokens2.c
++++ b/print_tokens2.c
+@@ -336,7 +336,9 @@
+ static int is_char_constant(str)
+     token str;
+ {
+-  if ((*str)!='#' && isalpha(*(str+1)))
++if (is_char_constant_valid(str))
++    return(TRUE);
++return(FALSE);
+      return(TRUE);
+   else  
+      return(FALSE);
+@@ -507,5 +509,14 @@
+     }
+     return(FALSE);     /* others return FALSE */
+ }
+-
+-
++/*************************************/
++/* NAME:	is_char_constant_valid     */
++/* INPUT: 	a pointer to a token */
++/* OUTPUT:      a BOOLEAN value      */
++/*************************************/
++static int is_char_constant_valid(str)
++    token  str;
++{
++   return((*str) == '#' && isalpha(*(str+1)));
++}
++

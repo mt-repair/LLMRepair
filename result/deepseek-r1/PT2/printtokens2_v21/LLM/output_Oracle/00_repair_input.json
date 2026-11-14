@@ -1,0 +1,64 @@
+{
+  "program_path": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT2/printtokens2_v21/print_tokens2.c",
+  "project_root": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT2/printtokens2_v21",
+  "program_function": "\n            ##  FUNCTION DESCRIPTION \n\n            C  lexical analyzer  (tokenizer) , read the input text, and segment it  token  and Print  token  flow. \n             Code by `print_tokens.c` The main program `stream.c` (Character Stream), `tokenizer.c` (Participle logic) composition. \n             Type slug `character_stream`/`token_stream` is the file stream pointer; `token` is a character pointer. \n\n            ##  Input \n\n            -  Command line parameters: `./print_tokens filename` , read the specified file; if no parameter is provided, read from standard input  stdin  Read \n            -  Support  token : Keywords, identifiers, numeric literals, string literals, character literals, comments, special symbols, EOF。\n            -  Keywords: `and or if xor lambda =>`\n            -  Identifier: Starts with a letter, followed by letters  /  Numbers \n            -  numeric literal: digits only \n            -  String literal: enclosed in double quotes \n            -  character literal: `#` Followed by letters \n            -  NOTATION: `;` From the beginning to the line break \n            -  Special Symbols `( ) [ ] ' ` ,`\n\n            ##  Output \n\n             Line-by-line output  token：\n\n            - `keyword,\"xxx\".`\n            - `identifier,\"xxx\".`\n            - `numeric,xxx.`\n            - `string,\"xxx\".`\n            - `character,\"x\".`\n            -  SIGN: `lparen. rparen. lsquare. rsquare. quote. bquote. comma.`\n            - `eof.`  End of Stream \n            - `error,\"xxx\".`  Crime  token\n        ",
+  "requested_mode": "ORACLE",
+  "effective_mode": "ORACLE",
+  "known_fault_lines": [
+    339
+  ],
+  "test_executions": [
+    {
+      "test_id": "source_s5_mr2",
+      "input": "=> W4vLoQv ` 9 ;Bm1\n=> W4vLoQv ` 9 ;Bm1\n",
+      "actual_output": "keyword,\"=>\".\nidentifier,\"W4vLoQv\".\nbquote.\nnumeric,9.\ncharacter,\"Bm1\".\nkeyword,\"=>\".\nidentifier,\"W4vLoQv\".\nbquote.\nnumeric,9.\ncharacter,\"Bm1\".\neof.",
+      "expected_output": "keyword,\"=>\".\nidentifier,\"W4vLoQv\".\nbquote.\nnumeric,9.\nkeyword,\"=>\".\nidentifier,\"W4vLoQv\".\nbquote.\nnumeric,9.\neof.",
+      "test_status": "nopass"
+    },
+    {
+      "test_id": "followup_s5_mr2",
+      "input": "=> W4vLoQv ` 9 ;\n=> W4vLoQv ` 9 ;\n",
+      "actual_output": "keyword,\"=>\".\nidentifier,\"W4vLoQv\".\nbquote.\nnumeric,9.\nkeyword,\"=>\".\nidentifier,\"W4vLoQv\".\nbquote.\nnumeric,9.\neof.",
+      "expected_output": "keyword,\"=>\".\nidentifier,\"W4vLoQv\".\nbquote.\nnumeric,9.\nkeyword,\"=>\".\nidentifier,\"W4vLoQv\".\nbquote.\nnumeric,9.\neof.",
+      "test_status": "pass"
+    },
+    {
+      "test_id": "source_s3_mr4",
+      "input": ";IF A L  ;tJvMR3\n",
+      "actual_output": "character,\"IF A L  ;tJvMR3\".\neof.",
+      "expected_output": "eof.",
+      "test_status": "nopass"
+    },
+    {
+      "test_id": "followup_s3_mr4",
+      "input": ";\n",
+      "actual_output": "eof.",
+      "expected_output": "eof.",
+      "test_status": "pass"
+    },
+    {
+      "test_id": "source_s1_mr5",
+      "input": "=> K3dQ   ;hp7\n",
+      "actual_output": "keyword,\"=>\".\nidentifier,\"K3dQ\".\ncharacter,\"hp7\".\neof.",
+      "expected_output": "keyword,\"=>\".\nidentifier,\"K3dQ\".\neof.",
+      "test_status": "nopass"
+    },
+    {
+      "test_id": "followup_s1_mr5",
+      "input": "=> k3Dq   ;\n",
+      "actual_output": "keyword,\"=>\".\nidentifier,\"k3Dq\".\neof.",
+      "expected_output": "keyword,\"=>\".\nidentifier,\"k3Dq\".\neof.",
+      "test_status": "pass"
+    }
+  ],
+  "mg_relation": [],
+  "patch_budget": 5,
+  "generation_limits": {
+    "num_ctx": 32768,
+    "num_predict": 8192,
+    "max_edits_per_candidate": 3,
+    "max_total_touched_lines_per_candidate": 20,
+    "require_known_line_coverage": true
+  },
+  "policy": "One LLM response performs one shared evidence analysis and returns all patch candidates; no Agent1/Agent2 artifacts are used."
+}

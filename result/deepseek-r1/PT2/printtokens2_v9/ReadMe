@@ -1,0 +1,11 @@
+--- a/Applications/work/code/project/printtokens2/source.alt/source.orig/print_tokens2.c 0
++++ b/Applications/work/code/project/printtokens2/source.alt/source.orig/print_tokens2.c 0
+@@ -219,1 +219,1 @@
+-   { if(ch=='\n')     /* for comment until meet end of line */
++   { if(ch!='\n')     /* for comment until meet end of line */
+--
+Build Date: 20  4 2023
+Commit: 5965c74b
+LLVM Version: 14.0.6
+Mull Version: 0.20.0
+URL: https://github.com/mull-project/mull

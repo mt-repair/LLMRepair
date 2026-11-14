@@ -1,0 +1,11 @@
+--- a/Mutant7.py
++++ b/Mutant7.py
+@@ -21,7 +21,7 @@
+             result = not (self.Own_Below_Threat()) or (
+                     self.Own_Below_Threat() and not (self.Down_Separation >= self.ALIM()))
+         else:
+-            result = self.Own_Above_Threat() and (self.Cur_Vertical_Sep >= self.MINSEP) or (
++result = (self.Own_Above_Threat() and self.Up_Separation >= self.ALIM()) or (
+                         self.Up_Separation >= self.ALIM())
+         return result
+ 

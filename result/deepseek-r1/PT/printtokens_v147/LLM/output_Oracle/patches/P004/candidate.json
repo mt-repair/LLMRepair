@@ -1,0 +1,63 @@
+{
+  "patch_id": "P004",
+  "status": "compile_passed",
+  "proposal": {
+    "diagnosis": "The issue lies in how keywords are detected and processed when the token is at the end of input or delimiter. Specifically, the `keyword` function is called with `-next_st`, which may lead to incorrect state mapping.",
+    "evidence_reasoning": {
+      "causal_chain": [
+        "Test case 'source_s1_mr4' fails because ';' is treated as an error instead of being skipped.",
+        "The failure occurs when processing tokens after a delimiter, indicating issues in how delimiters are handled.",
+        "Line 231 uses `keyword(-next_st)` which may pass invalid states to the keyword mapping function."
+      ],
+      "mr_refs": [],
+      "testcase_refs": [
+        "source_s1_mr4",
+        "followup_s1_mr4"
+      ]
+    },
+    "uncertainty": "While multiple plausible repairs are suggested, the most likely fix is simply removing the negative sign in the first candidate. The other candidates address alternative possibilities but are less certain based on the provided evidence.",
+    "assumption": "The error handling in `error_or_eof_case` is insufficient.",
+    "edits": [
+      {
+        "end_line": 231,
+        "rationale": "Modify the keyword call to handle end-of-file states correctly.",
+        "replacement": "token_ptr->token_id=keyword(next_st == -1 ? 0 : next_st);",
+        "start_line": 231
+      }
+    ],
+    "expected_effect": "Improve handling of EOF and error states during keyword detection.",
+    "preservation_constraints": [
+      "print_token",
+      "get_actual_token"
+    ],
+    "repair_intent": "Enhance state transitions near end-of-file."
+  },
+  "proposal_errors": [],
+  "patch_diff": "--- a/print_tokens.c\n+++ b/print_tokens.c\n@@ -228,7 +228,7 @@\n                  case 16 : ch=get_char(tstream_ptr->ch_stream);\n                            if(check_delimiter(ch)==TRUE)\n                            {\n-                                 token_ptr->token_id=keyword(-next_st);\n+token_ptr->token_id=keyword(next_st == -1 ? 0 : next_st);\n                                  unget_char(ch,tstream_ptr->ch_stream);\n                                  token_ptr->token_string[0]='\\0';\n                                  return(token_ptr);\n",
+  "patch_hash": "c62c84c7d811a302771e8380b37e9c885b4952c28c31b6ea16d66c4b17168393",
+  "model_candidate_source": "P004",
+  "fallback_copy_of": null,
+  "original_candidate_errors": [],
+  "duplicate_of": null,
+  "validation_reused_from": null,
+  "validation": {
+    "compile": {
+      "attempted": true,
+      "success": true,
+      "return_code": 0,
+      "timed_out": false,
+      "stdout_tail": "",
+      "stderr_tail": "",
+      "elapsed_seconds": 0.046,
+      "command": [
+        "/usr/bin/gcc",
+        "-std=c11",
+        "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v147/LLM/output_Oracle/patches/P004/workspace/print_tokens.c",
+        "-o",
+        "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v147/LLM/output_Oracle/patches/P004/workspace/llm_candidate"
+      ],
+      "executable_path": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v147/LLM/output_Oracle/patches/P004/workspace/llm_candidate"
+    },
+    "visible_checks": []
+  }
+}

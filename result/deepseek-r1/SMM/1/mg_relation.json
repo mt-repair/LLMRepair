@@ -1,0 +1,18 @@
+[
+  {
+    "mr_id": "MR1",
+    "source_test_id": "input1",
+    "followup_test_id": "input2",
+    "input_transformation": " First, construct an identity matrix.  I , whose dimensions are equal to the matrix  A  the number of rows of . Then, the identity matrix  I  Add to Matrix  A  upward, while maintaining  B  remains unchanged. Specifically, let  A' = A + I，B' = B . This operation is equivalent to  A  Add to each main diagonal element of  1 , while the remaining non-diagonal elements remain unchanged. The resulting follow-up test case input is  (A + I, B)。",
+    "output_relation": " Set the output of the source test case to  C = A × B . The output of the follow-up test case is  C' = (A + I) × B . According to the distributive law of matrix multiplication over addition, we have  C' = A × B + I × B  out of   I  is the identity matrix, so  I × B = B Therefore,  C' = C + B . That is, the output of the follow-up test case should be equal to the output matrix of the source test case.  C  With Source Input Matrix  B  The result of matrix addition for . The expected relationship is  C' = C + B。"  is in accordance with  A  Therefore, this  MR  Actual Requirements  A  is a square matrix. It must also satisfy the source test case matrix multiplication  A × B  Dimensional requirements. ",
+	"actual_relation_status": "VMG"
+  },
+  {
+    "mr_id": "MR2",
+    "source_test_id": "input3",
+    "followup_test_id": "input4",
+    "input_transformation": " First, construct an identity matrix.  I , whose dimensions are equal to the matrix  B  Number of rows. Keep  A  remains unchanged, the identity matrix  I  Add to Matrix  B  Specifically, let  A' = A，B' = B + I . This operation is equivalent to  B  Add to each main diagonal element of  1 , while the remaining non-diagonal elements remain unchanged. The resulting follow-up test case input is  (A, B + I)。",
+    "output_relation": " Set the output of the source test case to  C = A × B . The output of the follow-up test case is  C' = A × (B + I) . According to the distributive law of matrix multiplication over addition, we have  C' = A × B + A × I  out of   I  is the identity matrix, so  A × I = A Therefore,  C' = C + A . That is, the output of the follow-up test case should be equal to the output matrix of the source test case.  C  With Source Input Matrix  A  The result of matrix addition for . The expected relationship is  C' = C + A。",
+    "actual_relation_status": "VMG"
+  }
+]

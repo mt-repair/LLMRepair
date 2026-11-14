@@ -1,0 +1,11 @@
+--- a/Mutant4.py
++++ b/Mutant4.py
+@@ -60,7 +60,7 @@
+         tcas_equipped = self.Other_Capability == self.TCAS_TA
+         intent_not_known = self.Two_of_Three_Reports_Valid and self.Other_RAC == self.NO_INTENT
+         alt_sep = 'UNRESOLVED'
+-        if enabled or ((tcas_equipped and intent_not_known) or not tcas_equipped):
++if enabled or (tcas_equipped != self.TCAS_TA):
+             need_upward_RA = self.Non_Crossing_Biased_Climb() and self.Own_Below_Threat()
+             need_downward_RA = self.Non_Crossing_Biased_Descend() and self.Own_Above_Threat()
+             if need_upward_RA and need_downward_RA:

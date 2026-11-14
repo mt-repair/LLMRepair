@@ -1,0 +1,15 @@
+--- a/Mutant4.py
++++ b/Mutant4.py
+@@ -15,10 +15,10 @@
+                     f3 = False
+                 if f4 and i + j > n - 1 and A[i * n + j] != 0:
+                     f4 = False
+-        if f1 or f2:  #  The main diagonal contains non- 0 Triangular matrix of elements 
++if f1 or f2 and (result := self.is_triangular(A, n)):
+             result = 1
+             for i in range(n):
+-                result *= A[i * n + 1]
++result *= A[i * n + i]
+                 symbol = 1
+             return result, symbol
+         elif f3 or f4:  #  The anti-diagonal contains non- 0 Triangular matrix of elements 

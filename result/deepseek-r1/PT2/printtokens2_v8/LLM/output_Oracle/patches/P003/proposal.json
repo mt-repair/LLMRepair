@@ -1,0 +1,33 @@
+{
+  "diagnosis": "The primary issue lies in the `is_token_end` function, particularly at line 218. The logic incorrectly handles certain token termination conditions when processing special symbols and comments, leading to improper token segmentation. This causes subsequent characters to be misclassified as errors or part of an invalid token.",
+  "evidence_reasoning": {
+    "causal_chain": [
+      "The failing test cases indicate that the tokenizer mishandles input starting with `;` followed by other characters, suggesting a problem in how special symbols and comments are processed.",
+      "In `is_token_end`, when `str_com_id != 2`, encountering a newline (`\\n`) ends the token. However, this logic doesn't account for cases where `;` should start a comment but isn't properly handled, leading to incorrect token boundaries."
+    ],
+    "mr_refs": [
+      "The test case `source_s4_mr2` shows that after `;`, subsequent characters are incorrectly treated as part of the same token.",
+      "In `followup_s3_mr4`, a lone `;` is correctly handled, but when followed by other content, it fails."
+    ],
+    "testcase_refs": [
+      "source_s4_mr2",
+      "source_s3_mr4",
+      "source_s2_mr5"
+    ]
+  },
+  "uncertainty": "While the proposed edits address the observed failures, there may be edge cases not covered by the provided test suite. Additional testing would be needed to fully validate all scenarios.",
+  "assumption": "Modify `is_token_end` to correctly handle token termination when encountering special symbols outside of comments or strings.",
+  "edits": [
+    {
+      "end_line": 218,
+      "rationale": "Adjust the condition to properly terminate tokens when a special symbol is encountered without being part of a comment or string.",
+      "replacement": "if(str_com_id != 2 && (ch == '\\n' || ch == ' ' || ch == ';')) return(TRUE);",
+      "start_line": 218
+    }
+  ],
+  "expected_effect": "Fixes token segmentation issues when special symbols are encountered outside of comments or strings, resolving the failing test cases by correctly identifying token boundaries.",
+  "preservation_constraints": [
+    "Ensure that existing correct behaviors for standalone `;` and proper comment handling are preserved."
+  ],
+  "repair_intent": "Adjust the termination condition to accurately handle special symbols in non-comment contexts."
+}

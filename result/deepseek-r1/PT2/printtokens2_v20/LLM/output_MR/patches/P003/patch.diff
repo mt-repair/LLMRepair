@@ -1,0 +1,11 @@
+--- a/print_tokens2.c
++++ b/print_tokens2.c
+@@ -215,7 +215,7 @@
+          return(FALSE);
+     }
+ 
+- if(str_com_id<2)    /* is comment token */
++if(str_com_id < 2 && ch == 59) return(TRUE);
+    { if(ch=='\n')     /* for comment until meet end of line */
+         return(TRUE);
+       else

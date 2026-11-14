@@ -1,0 +1,11 @@
+--- a/Mutant5.py
++++ b/Mutant5.py
+@@ -37,7 +37,7 @@
+         # print('Obtuse triangle')
+         if Min == mid:  #  Isoceles Triangle 
+             h = math.sqrt(pow(Min, 2) - pow(Max / 2, 2))
+-            area = Max * h
++area = (Max * h) / 2
+             symbol = 1
+             return area, symbol
+         else:  #  scalene obtuse triangle, Max Multiply by height divided by 2

@@ -1,0 +1,9 @@
+{
+  "requested_candidates": 5,
+  "model_returned_candidates": 0,
+  "valid_model_candidates": 0,
+  "invalid_model_candidates": 0,
+  "ignored_extra_candidates": 0,
+  "candidate_assessments": [],
+  "output_slots": []
+}

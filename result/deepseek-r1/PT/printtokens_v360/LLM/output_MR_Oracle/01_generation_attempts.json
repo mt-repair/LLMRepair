@@ -1,0 +1,23 @@
+[
+  {
+    "attempt": 1,
+    "errors": [],
+    "response_metadata": {
+      "model": "deepseek-r1:14b",
+      "temperature": 0.09,
+      "seed": 0,
+      "num_ctx": 32768,
+      "num_predict": 8192,
+      "prompt_chars": 35367,
+      "done": true,
+      "done_reason": "stop",
+      "prompt_eval_count": 11550,
+      "eval_count": 1952,
+      "prompt_eval_duration": 1827369000,
+      "eval_duration": 20189370000,
+      "total_duration": 24119853187,
+      "load_duration": 180340570,
+      "client_elapsed_seconds": 24.122
+    }
+  }
+]

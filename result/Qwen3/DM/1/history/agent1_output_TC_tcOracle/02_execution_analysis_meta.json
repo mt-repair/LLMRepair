@@ -1,0 +1,54 @@
+[
+  {
+    "name": "02_test_TC007",
+    "attempts": [
+      {
+        "attempt": 1,
+        "kind": "validation",
+        "validation_errors": [],
+        "response_metadata": {
+          "num_ctx": 8192,
+          "num_predict": 6400,
+          "prompt_chars": 3728,
+          "format_mode": "json",
+          "done": true,
+          "done_reason": "stop",
+          "prompt_eval_count": 1272,
+          "eval_count": 709,
+          "prompt_eval_duration": 622301000,
+          "eval_duration": 24650141000,
+          "total_duration": 25613093500,
+          "load_duration": 5075700,
+          "client_elapsed_seconds": 27.672,
+          "raw_chars": 635
+        }
+      }
+    ]
+  },
+  {
+    "name": "02_test_TC008",
+    "attempts": [
+      {
+        "attempt": 1,
+        "kind": "validation",
+        "validation_errors": [],
+        "response_metadata": {
+          "num_ctx": 8192,
+          "num_predict": 6400,
+          "prompt_chars": 3911,
+          "format_mode": "json",
+          "done": true,
+          "done_reason": "stop",
+          "prompt_eval_count": 1450,
+          "eval_count": 711,
+          "prompt_eval_duration": 385808000,
+          "eval_duration": 24755764000,
+          "total_duration": 25155345700,
+          "load_duration": 1602300,
+          "client_elapsed_seconds": 27.203,
+          "raw_chars": 929
+        }
+      }
+    ]
+  }
+]

@@ -1,0 +1,17 @@
+--- a/Mutant2.py
++++ b/Mutant2.py
+@@ -40,12 +40,12 @@
+                     icol = mask[icol_add]
+                     if icol == -1:
+                         jc[nz] = icol_add
+-                        c[nz] = b[k]
++c[nz] = aij * b[k]
+                         mask[icol_add] = nz
+                         nz = nz + 1
+                         symbol = 1
+                     else:
+-                        c[icol] = c[icol] + aij * b[k]
++c[icol] = c[icol] + aij * b[k]
+             for k in range(ic[i], nz):
+                 mask[jc[k]] = -1
+             ic[i + 1] = nz

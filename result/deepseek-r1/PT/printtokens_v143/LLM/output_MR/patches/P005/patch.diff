@@ -1,0 +1,26 @@
+--- a/print_tokens.c
++++ b/print_tokens.c
+@@ -228,7 +228,7 @@
+                  case 16 : ch=get_char(tstream_ptr->ch_stream);
+                            if(check_delimiter(ch)==TRUE)
+                            {
+-                                 token_ptr->token_id*=keyword(next_st);
++token_ptr->token_id = keyword_lookup[next_st];
+                                  unget_char(ch,tstream_ptr->ch_stream);
+                                  token_ptr->token_string[0]='\0';
+                                  return(token_ptr);
+@@ -467,7 +467,13 @@
+         else
+               return(next_state(default1[state],ch));
+     }
+-    else
++static int keyword_lookup[] = {
++    [6] = LAMBDA,
++    [9] = AND,
++    [11] = OR,
++    [13] = IF,
++    [16] = XOR
++};
+         return(next_state(default1[state],ch));
+ }
+ 

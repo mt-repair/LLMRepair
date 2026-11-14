@@ -1,0 +1,317 @@
+[
+  {
+    "patch_id": "P001",
+    "status": "compile_failed",
+    "proposal": {
+      "diagnosis": "The issue lies in the calculation of the area for a right-angled triangle. The code incorrectly computes the area as `mid * Min` instead of `(mid * Min) / 2`. This leads to double the expected area. The faulty line is 34.",
+      "evidence_reasoning": {
+        "causal_chain": [
+          "The test case [5,3,4] forms a right-angled triangle with legs 3 and 4, expecting area 6.",
+          "The code computes area as 4 * 3 = 12 due to a missing division by 2.",
+          "This violates the expected output of 6."
+        ],
+        "mr_refs": [],
+        "testcase_refs": [
+          "input1"
+        ]
+      },
+      "uncertainty": "No other issues were detected in the provided code. The repair candidates all target the same line but vary in approach to ensure correctness and maintainability.",
+      "assumption": "The area calculation for right-angled triangles should be halved.",
+      "edits": [
+        {
+          "end_line": 34,
+          "rationale": "Divide the product by 2 to correct the area calculation.",
+          "replacement": "area = (mid * Min) / 2",
+          "start_line": 34
+        }
+      ],
+      "expected_effect": "Reduces the area calculation for right-angled triangles by half, aligning with expected output.",
+      "preservation_constraints": [
+        "input2",
+        "input3",
+        "input4",
+        "input5"
+      ],
+      "repair_intent": "Correct the area formula for right-angled triangles."
+    },
+    "proposal_errors": [],
+    "patch_diff": "--- a/Mutant4.py\n+++ b/Mutant4.py\n@@ -31,7 +31,7 @@\n                 return area, symbol\n         if pow(Max, 2) == pow(mid, 2) + pow(Min, 2):  #  Right triangle \n             # print('Right-angled triangle')\n-            area = mid * Min\n+area = (mid * Min) / 2\n             symbol = 1\n             return area, symbol\n         # print('Obtuse triangle')\n",
+    "patch_hash": "955fb2bd65a93aea0fde0b4a9d62e2bfbeed10da6dfaef2ad66df461a74595d4",
+    "model_candidate_source": "P001",
+    "fallback_copy_of": null,
+    "original_candidate_errors": [],
+    "duplicate_of": null,
+    "validation_reused_from": null,
+    "validation": {
+      "compile": {
+        "attempted": true,
+        "success": false,
+        "return_code": 1,
+        "timed_out": false,
+        "stdout_tail": "",
+        "stderr_tail": "Sorry: IndentationError: expected an indented block after 'if' statement on line 32 (Mutant4.py, line 34)",
+        "elapsed_seconds": 0.047,
+        "command": [
+          "E:\\Anaconda3\\envs\\llmRepair\\python.exe",
+          "-m",
+          "py_compile",
+          "e:\\LLMProgramRepair\\LLM\\MSBF\\code\\deepseek-r1\\TSQ\\4\\LLM\\output_Oracle\\patches\\P001\\workspace\\Mutant4.py"
+        ],
+        "executable_path": null
+      },
+      "visible_checks": []
+    }
+  },
+  {
+    "patch_id": "P002",
+    "status": "compile_failed",
+    "proposal": {
+      "diagnosis": "The issue lies in the calculation of the area for a right-angled triangle. The code incorrectly computes the area as `mid * Min` instead of `(mid * Min) / 2`. This leads to double the expected area. The faulty line is 34.",
+      "evidence_reasoning": {
+        "causal_chain": [
+          "The test case [5,3,4] forms a right-angled triangle with legs 3 and 4, expecting area 6.",
+          "The code computes area as 4 * 3 = 12 due to a missing division by 2.",
+          "This violates the expected output of 6."
+        ],
+        "mr_refs": [],
+        "testcase_refs": [
+          "input1"
+        ]
+      },
+      "uncertainty": "No other issues were detected in the provided code. The repair candidates all target the same line but vary in approach to ensure correctness and maintainability.",
+      "assumption": "Use a variable to represent the division by 2 for clarity.",
+      "edits": [
+        {
+          "end_line": 34,
+          "rationale": "Introduce a variable to avoid magic numbers and improve readability.",
+          "replacement": "half = 2\ndivisor = half\narea = (mid * Min) / divisor",
+          "start_line": 34
+        }
+      ],
+      "expected_effect": "Same as first candidate but with improved readability.",
+      "preservation_constraints": [
+        "input2",
+        "input3",
+        "input4",
+        "input5"
+      ],
+      "repair_intent": "Correct the area formula for right-angled triangles with better readability."
+    },
+    "proposal_errors": [],
+    "patch_diff": "--- a/Mutant4.py\n+++ b/Mutant4.py\n@@ -31,7 +31,9 @@\n                 return area, symbol\n         if pow(Max, 2) == pow(mid, 2) + pow(Min, 2):  #  Right triangle \n             # print('Right-angled triangle')\n-            area = mid * Min\n+half = 2\n+divisor = half\n+area = (mid * Min) / divisor\n             symbol = 1\n             return area, symbol\n         # print('Obtuse triangle')\n",
+    "patch_hash": "752cc046a0c5a9cc5f694573dad31ee6cd787214ab4153dfb99eedbd71b13147",
+    "model_candidate_source": "P002",
+    "fallback_copy_of": null,
+    "original_candidate_errors": [],
+    "duplicate_of": null,
+    "validation_reused_from": null,
+    "validation": {
+      "compile": {
+        "attempted": true,
+        "success": false,
+        "return_code": 1,
+        "timed_out": false,
+        "stdout_tail": "",
+        "stderr_tail": "Sorry: IndentationError: expected an indented block after 'if' statement on line 32 (Mutant4.py, line 34)",
+        "elapsed_seconds": 0.047,
+        "command": [
+          "E:\\Anaconda3\\envs\\llmRepair\\python.exe",
+          "-m",
+          "py_compile",
+          "e:\\LLMProgramRepair\\LLM\\MSBF\\code\\deepseek-r1\\TSQ\\4\\LLM\\output_Oracle\\patches\\P002\\workspace\\Mutant4.py"
+        ],
+        "executable_path": null
+      },
+      "visible_checks": []
+    }
+  },
+  {
+    "patch_id": "P003",
+    "status": "compile_failed",
+    "proposal": {
+      "diagnosis": "The issue lies in the calculation of the area for a right-angled triangle. The code incorrectly computes the area as `mid * Min` instead of `(mid * Min) / 2`. This leads to double the expected area. The faulty line is 34.",
+      "evidence_reasoning": {
+        "causal_chain": [
+          "The test case [5,3,4] forms a right-angled triangle with legs 3 and 4, expecting area 6.",
+          "The code computes area as 4 * 3 = 12 due to a missing division by 2.",
+          "This violates the expected output of 6."
+        ],
+        "mr_refs": [],
+        "testcase_refs": [
+          "input1"
+        ]
+      },
+      "uncertainty": "No other issues were detected in the provided code. The repair candidates all target the same line but vary in approach to ensure correctness and maintainability.",
+      "assumption": "Use floating-point division explicitly.",
+      "edits": [
+        {
+          "end_line": 34,
+          "rationale": "Ensure division is floating-point to handle cases with non-integer sides.",
+          "replacement": "area = (mid * Min) / 2.0",
+          "start_line": 34
+        }
+      ],
+      "expected_effect": "Same as first candidate but ensures floating-point division.",
+      "preservation_constraints": [
+        "input2",
+        "input3",
+        "input4",
+        "input5"
+      ],
+      "repair_intent": "Correct the area formula for right-angled triangles with explicit floating-point division."
+    },
+    "proposal_errors": [],
+    "patch_diff": "--- a/Mutant4.py\n+++ b/Mutant4.py\n@@ -31,7 +31,7 @@\n                 return area, symbol\n         if pow(Max, 2) == pow(mid, 2) + pow(Min, 2):  #  Right triangle \n             # print('Right-angled triangle')\n-            area = mid * Min\n+area = (mid * Min) / 2.0\n             symbol = 1\n             return area, symbol\n         # print('Obtuse triangle')\n",
+    "patch_hash": "81dc9ebdb99d2102484d5e3db8c12564d827bd8be8c3c8da83de90a7b2d4110a",
+    "model_candidate_source": "P003",
+    "fallback_copy_of": null,
+    "original_candidate_errors": [],
+    "duplicate_of": null,
+    "validation_reused_from": null,
+    "validation": {
+      "compile": {
+        "attempted": true,
+        "success": false,
+        "return_code": 1,
+        "timed_out": false,
+        "stdout_tail": "",
+        "stderr_tail": "Sorry: IndentationError: expected an indented block after 'if' statement on line 32 (Mutant4.py, line 34)",
+        "elapsed_seconds": 0.047,
+        "command": [
+          "E:\\Anaconda3\\envs\\llmRepair\\python.exe",
+          "-m",
+          "py_compile",
+          "e:\\LLMProgramRepair\\LLM\\MSBF\\code\\deepseek-r1\\TSQ\\4\\LLM\\output_Oracle\\patches\\P003\\workspace\\Mutant4.py"
+        ],
+        "executable_path": null
+      },
+      "visible_checks": []
+    }
+  },
+  {
+    "patch_id": "P004",
+    "status": "compile_failed",
+    "proposal": {
+      "diagnosis": "The issue lies in the calculation of the area for a right-angled triangle. The code incorrectly computes the area as `mid * Min` instead of `(mid * Min) / 2`. This leads to double the expected area. The faulty line is 34.",
+      "evidence_reasoning": {
+        "causal_chain": [
+          "The test case [5,3,4] forms a right-angled triangle with legs 3 and 4, expecting area 6.",
+          "The code computes area as 4 * 3 = 12 due to a missing division by 2.",
+          "This violates the expected output of 6."
+        ],
+        "mr_refs": [],
+        "testcase_refs": [
+          "input1"
+        ]
+      },
+      "uncertainty": "No other issues were detected in the provided code. The repair candidates all target the same line but vary in approach to ensure correctness and maintainability.",
+      "assumption": "Use a constant for the divisor to improve code maintainability.",
+      "edits": [
+        {
+          "end_line": 34,
+          "rationale": "Use a defined constant for the divisor to make the code more maintainable.",
+          "replacement": "DIVISOR = 2\narea = (mid * Min) / DIVISOR",
+          "start_line": 34
+        }
+      ],
+      "expected_effect": "Same as first candidate but with better maintainability.",
+      "preservation_constraints": [
+        "input2",
+        "input3",
+        "input4",
+        "input5"
+      ],
+      "repair_intent": "Correct the area formula for right-angled triangles with improved maintainability."
+    },
+    "proposal_errors": [],
+    "patch_diff": "--- a/Mutant4.py\n+++ b/Mutant4.py\n@@ -31,7 +31,8 @@\n                 return area, symbol\n         if pow(Max, 2) == pow(mid, 2) + pow(Min, 2):  #  Right triangle \n             # print('Right-angled triangle')\n-            area = mid * Min\n+DIVISOR = 2\n+area = (mid * Min) / DIVISOR\n             symbol = 1\n             return area, symbol\n         # print('Obtuse triangle')\n",
+    "patch_hash": "18cbecbaaff372b490e756d7454b55afbd5fb97039095c8d3be0159c42f7002f",
+    "model_candidate_source": "P004",
+    "fallback_copy_of": null,
+    "original_candidate_errors": [],
+    "duplicate_of": null,
+    "validation_reused_from": null,
+    "validation": {
+      "compile": {
+        "attempted": true,
+        "success": false,
+        "return_code": 1,
+        "timed_out": false,
+        "stdout_tail": "",
+        "stderr_tail": "Sorry: IndentationError: expected an indented block after 'if' statement on line 32 (Mutant4.py, line 34)",
+        "elapsed_seconds": 0.062,
+        "command": [
+          "E:\\Anaconda3\\envs\\llmRepair\\python.exe",
+          "-m",
+          "py_compile",
+          "e:\\LLMProgramRepair\\LLM\\MSBF\\code\\deepseek-r1\\TSQ\\4\\LLM\\output_Oracle\\patches\\P004\\workspace\\Mutant4.py"
+        ],
+        "executable_path": null
+      },
+      "visible_checks": []
+    }
+  },
+  {
+    "patch_id": "P005",
+    "status": "compile_failed",
+    "proposal": {
+      "diagnosis": "The issue lies in the calculation of the area for a right-angled triangle. The code incorrectly computes the area as `mid * Min` instead of `(mid * Min) / 2`. This leads to double the expected area. The faulty line is 34.",
+      "evidence_reasoning": {
+        "causal_chain": [
+          "The test case [5,3,4] forms a right-angled triangle with legs 3 and 4, expecting area 6.",
+          "The code computes area as 4 * 3 = 12 due to a missing division by 2.",
+          "This violates the expected output of 6."
+        ],
+        "mr_refs": [],
+        "testcase_refs": [
+          "input1"
+        ]
+      },
+      "uncertainty": "No other issues were detected in the provided code. The repair candidates all target the same line but vary in approach to ensure correctness and maintainability.",
+      "assumption": "Use a lambda function for division to reduce code length.",
+      "edits": [
+        {
+          "end_line": 34,
+          "rationale": "Use a lambda function to reduce code length while maintaining functionality.",
+          "replacement": "area = (lambda x: x / 2)(mid * Min)",
+          "start_line": 34
+        }
+      ],
+      "expected_effect": "Same as first candidate but with reduced code length.",
+      "preservation_constraints": [
+        "input2",
+        "input3",
+        "input4",
+        "input5"
+      ],
+      "repair_intent": "Correct the area formula for right-angled triangles with reduced code length."
+    },
+    "proposal_errors": [],
+    "patch_diff": "--- a/Mutant4.py\n+++ b/Mutant4.py\n@@ -31,7 +31,7 @@\n                 return area, symbol\n         if pow(Max, 2) == pow(mid, 2) + pow(Min, 2):  #  Right triangle \n             # print('Right-angled triangle')\n-            area = mid * Min\n+area = (lambda x: x / 2)(mid * Min)\n             symbol = 1\n             return area, symbol\n         # print('Obtuse triangle')\n",
+    "patch_hash": "61b6a193a6edd575b78c133d5677446865f1fcbf0e02df557141b3a7936fb5b3",
+    "model_candidate_source": "P005",
+    "fallback_copy_of": null,
+    "original_candidate_errors": [],
+    "duplicate_of": null,
+    "validation_reused_from": null,
+    "validation": {
+      "compile": {
+        "attempted": true,
+        "success": false,
+        "return_code": 1,
+        "timed_out": false,
+        "stdout_tail": "",
+        "stderr_tail": "Sorry: IndentationError: expected an indented block after 'if' statement on line 32 (Mutant4.py, line 34)",
+        "elapsed_seconds": 0.047,
+        "command": [
+          "E:\\Anaconda3\\envs\\llmRepair\\python.exe",
+          "-m",
+          "py_compile",
+          "e:\\LLMProgramRepair\\LLM\\MSBF\\code\\deepseek-r1\\TSQ\\4\\LLM\\output_Oracle\\patches\\P005\\workspace\\Mutant4.py"
+        ],
+        "executable_path": null
+      },
+      "visible_checks": []
+    }
+  }
+]

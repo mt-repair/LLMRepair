@@ -1,0 +1,26 @@
+[
+  {
+    "attempt": 1,
+    "errors": [
+      "Model output is not valid JSON: Unterminated string starting at: line 43 column 26 (char 2188)"
+    ],
+    "raw_tail": "start processing the next token */\\n                            /* This is a fix to ensure that the comment is skipped and the DFA is reset to start processing the next token */\\n                            /* This is a fix to ensure that the comment is skipped and the DFA is reset to start processing the next token */\\n                            /* This is a fix to ensure that the comment is skipped and the DFA is reset to start processing the next token */\\n                            /* This is a fix to ensure that the comment is skipped and the DFA is reset to start processing the next token */\\n                            /* This is a fix to ensure that the comment is skipped and the DFA is reset to start processing the next token */\\n                            /* This is a fix to ensure that the comment is skipped and the DFA is reset to start processing the next token */\\n                            /* This is a fix to ensure that the comment is skipped and the DFA is reset to",
+    "response_metadata": {
+      "model": "Qwen3:14b",
+      "temperature": 0.09,
+      "seed": 0,
+      "num_ctx": 32768,
+      "num_predict": 8192,
+      "prompt_chars": 37592,
+      "done": true,
+      "done_reason": "length",
+      "prompt_eval_count": 12547,
+      "eval_count": 8192,
+      "prompt_eval_duration": 1874855000,
+      "eval_duration": 73498556000,
+      "total_duration": 76529393910,
+      "load_duration": 135409917,
+      "client_elapsed_seconds": 76.532
+    }
+  }
+]

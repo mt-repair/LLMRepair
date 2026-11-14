@@ -1,0 +1,369 @@
+{
+  "experiment_mode": "MG_NO_FRI",
+  "oracle_mode": "NO_EXACT_ORACLE",
+  "faulty_program": {
+    "file_name": "E:/LLMProgramRepair/LLM/MSBF/code/DM/Mutant1.py",
+    "complete_source_with_line_numbers": "   1 | import math\n   2 | \n   3 | \n   4 | class Mutant1:\n   5 |     def Determinant(self, A, n):\n   6 |         f1 = f2 = f3 = f4 = True  #  Separate identification 4 Triangular matrix \n   7 |         symbol = 0\n   8 |         for i in range(n):\n   9 |             for j in range(n):\n  10 |                 if f1 and j > i and A[i * n + j] != 0:\n  11 |                     f1 = False\n  12 |                 if f2 and i > j and A[i * n + j] != 0:\n  13 |                     f2 = False\n  14 |                 if f3 and i + j < n - 1 and A[i * n + j] != 0:\n  15 |                     f3 = False\n  16 |                 if f4 and i + j > n - 1 and A[i * n + j] != 0:\n  17 |                     f4 = False\n  18 |         if f1 or f2:  #  The main diagonal contains non- 0 Triangular matrix of elements \n  19 |             result = 1\n  20 |             for i in range(n):\n  21 |                 result += A[i * n + i] \n  22 |                 symbol = 1\n  23 |             return result, symbol\n  24 |         elif f3 or f4:  #  The anti-diagonal contains non- 0 Triangular matrix of elements \n  25 |             result = int(math.pow(-1, n * (n - 1) / 2))\n  26 |             for i in range(n):\n  27 |                 result *= A[i * n + (n - 1 - i)]\n  28 |             return result, symbol\n  29 |         else:  #  Finding the determinant value using the expansion method \n  30 |             return self.DeterComp(A, n), symbol\n  31 | \n  32 |     def DeterComp(self, A, n):\n  33 |         mid = 0\n  34 |         temp = []\n  35 |         for i in range(n * n):\n  36 |             temp.append(A[i])\n  37 |         if n == 1:\n  38 |             result = A[0]\n  39 |         else:\n  40 |             for i in range(n):\n  41 |                 mid += int(math.pow(-1, 2 + i)) * A[i] * self.DeterComp(self.AlgComp(temp, n, i), n - 1)\n  42 |             result = mid\n  43 |         return result\n  44 | \n  45 |     def AlgComp(self, x, n, i):\n  46 |         array = []\n  47 |         for j in range(n, n * n):\n  48 |             if j % n == i:\n  49 |                 pass\n  50 |             else:\n  51 |                 array.append(x[j])\n  52 |         return array"
+  },
+  "localization": {
+    "top_n": 20,
+    "ranked_locations": [
+      {
+        "line": 11,
+        "code": "                    f1 = False",
+        "suspiciousness": 0.0792,
+        "rank": 1,
+        "evidence_id": "LOC001"
+      },
+      {
+        "line": 21,
+        "code": "                result += A[i * n + i] ",
+        "suspiciousness": 0.0153,
+        "rank": 2,
+        "evidence_id": "LOC002"
+      },
+      {
+        "line": 24,
+        "code": "        elif f3 or f4:  #  The anti-diagonal contains non- 0 Triangular matrix of elements ",
+        "suspiciousness": 0.0153,
+        "rank": 3,
+        "evidence_id": "LOC003"
+      },
+      {
+        "line": 30,
+        "code": "            return self.DeterComp(A, n), symbol",
+        "suspiciousness": 0.0153,
+        "rank": 4,
+        "evidence_id": "LOC004"
+      },
+      {
+        "line": 33,
+        "code": "        mid = 0",
+        "suspiciousness": 0.0153,
+        "rank": 5,
+        "evidence_id": "LOC005"
+      },
+      {
+        "line": 34,
+        "code": "        temp = []",
+        "suspiciousness": 0.0153,
+        "rank": 6,
+        "evidence_id": "LOC006"
+      },
+      {
+        "line": 35,
+        "code": "        for i in range(n * n):",
+        "suspiciousness": 0.0153,
+        "rank": 7,
+        "evidence_id": "LOC007"
+      },
+      {
+        "line": 36,
+        "code": "            temp.append(A[i])",
+        "suspiciousness": 0.0153,
+        "rank": 8,
+        "evidence_id": "LOC008"
+      },
+      {
+        "line": 37,
+        "code": "        if n == 1:",
+        "suspiciousness": 0.0153,
+        "rank": 9,
+        "evidence_id": "LOC009"
+      },
+      {
+        "line": 38,
+        "code": "            result = A[0]",
+        "suspiciousness": 0.0153,
+        "rank": 10,
+        "evidence_id": "LOC010"
+      },
+      {
+        "line": 40,
+        "code": "            for i in range(n):",
+        "suspiciousness": 0.0153,
+        "rank": 11,
+        "evidence_id": "LOC011"
+      },
+      {
+        "line": 41,
+        "code": "                mid += int(math.pow(-1, 2 + i)) * A[i] * self.DeterComp(self.AlgComp(temp, n, i), n - 1)",
+        "suspiciousness": 0.0153,
+        "rank": 12,
+        "evidence_id": "LOC012"
+      },
+      {
+        "line": 42,
+        "code": "            result = mid",
+        "suspiciousness": 0.0153,
+        "rank": 13,
+        "evidence_id": "LOC013"
+      },
+      {
+        "line": 43,
+        "code": "        return result",
+        "suspiciousness": 0.0153,
+        "rank": 14,
+        "evidence_id": "LOC014"
+      },
+      {
+        "line": 46,
+        "code": "        array = []",
+        "suspiciousness": 0.0153,
+        "rank": 15,
+        "evidence_id": "LOC015"
+      },
+      {
+        "line": 47,
+        "code": "        for j in range(n, n * n):",
+        "suspiciousness": 0.0153,
+        "rank": 16,
+        "evidence_id": "LOC016"
+      },
+      {
+        "line": 48,
+        "code": "            if j % n == i:",
+        "suspiciousness": 0.0153,
+        "rank": 17,
+        "evidence_id": "LOC017"
+      },
+      {
+        "line": 49,
+        "code": "                pass",
+        "suspiciousness": 0.0153,
+        "rank": 18,
+        "evidence_id": "LOC018"
+      },
+      {
+        "line": 51,
+        "code": "                array.append(x[j])",
+        "suspiciousness": 0.0153,
+        "rank": 19,
+        "evidence_id": "LOC019"
+      },
+      {
+        "line": 52,
+        "code": "        return array",
+        "suspiciousness": 0.0153,
+        "rank": 20,
+        "evidence_id": "LOC020"
+      }
+    ]
+  },
+  "candidate_locations": [
+    {
+      "line": 11,
+      "code": "                    f1 = False"
+    },
+    {
+      "line": 21,
+      "code": "                result += A[i * n + i] "
+    },
+    {
+      "line": 24,
+      "code": "        elif f3 or f4:  #  The anti-diagonal contains non- 0 Triangular matrix of elements "
+    },
+    {
+      "line": 30,
+      "code": "            return self.DeterComp(A, n), symbol"
+    },
+    {
+      "line": 33,
+      "code": "        mid = 0"
+    },
+    {
+      "line": 34,
+      "code": "        temp = []"
+    },
+    {
+      "line": 35,
+      "code": "        for i in range(n * n):"
+    },
+    {
+      "line": 36,
+      "code": "            temp.append(A[i])"
+    },
+    {
+      "line": 37,
+      "code": "        if n == 1:"
+    },
+    {
+      "line": 38,
+      "code": "            result = A[0]"
+    },
+    {
+      "line": 40,
+      "code": "            for i in range(n):"
+    },
+    {
+      "line": 41,
+      "code": "                mid += int(math.pow(-1, 2 + i)) * A[i] * self.DeterComp(self.AlgComp(temp, n, i), n - 1)"
+    },
+    {
+      "line": 42,
+      "code": "            result = mid"
+    },
+    {
+      "line": 43,
+      "code": "        return result"
+    },
+    {
+      "line": 46,
+      "code": "        array = []"
+    },
+    {
+      "line": 47,
+      "code": "        for j in range(n, n * n):"
+    },
+    {
+      "line": 48,
+      "code": "            if j % n == i:"
+    },
+    {
+      "line": 49,
+      "code": "                pass"
+    },
+    {
+      "line": 51,
+      "code": "                array.append(x[j])"
+    },
+    {
+      "line": 52,
+      "code": "        return array"
+    }
+  ],
+  "test_executions": [
+    {
+      "evidence_id": "TC007",
+      "input": "[8, 4, 7, 0, 7, 5, 0, 0, 6]",
+      "actual_output": "0",
+      "diagnostic_status": "nopass",
+      "oracle_mode": "NO_EXACT_ORACLE"
+    },
+    {
+      "evidence_id": "TC008",
+      "input": "[-0.12676056338028172, 0.21126760563380287, -0.18309859154929586, 0.22535211267605634, -0.04225352112676059, -0.06338028169014082, 0.08450704225352117, -0.14084507042253525, 0.28873239436619724]",
+      "actual_output": "-0.0",
+      "diagnostic_status": "nopass",
+      "oracle_mode": "NO_EXACT_ORACLE"
+    }
+  ],
+  "test_evidence_semantics": {
+    "status_source": "testcase.json:test_status",
+    "oracle_mode_source": "testcase.json:expected_output (legacy excepted_output is accepted); literal 'missing' means NO_EXACT_ORACLE and any other value means EXACT_ORACLE",
+    "nopass_meaning": "uncertain failure-suspect label; it does not prove that the testcase behavior is wrong",
+    "diagnosis_uses": "nopass_only"
+  },
+  "test_audit": {
+    "oracle_mode": "NO_EXACT_ORACLE",
+    "testcase_source": "E:\\LLMProgramRepair\\LLM\\MSBF\\code\\DM\\testcase.json",
+    "oracle_detection_rule": "trimmed lowercase expected_output == 'missing' -> NO_EXACT_ORACLE; otherwise -> EXACT_ORACLE",
+    "record_count": 10,
+    "expected_output_missing_count": 10,
+    "oracle_detection_records": [
+      {
+        "test_id": "input1",
+        "expected_output_field": "expected_output",
+        "expected_output_is_missing": true,
+        "detected_oracle_mode": "NO_EXACT_ORACLE"
+      },
+      {
+        "test_id": "input2",
+        "expected_output_field": "expected_output",
+        "expected_output_is_missing": true,
+        "detected_oracle_mode": "NO_EXACT_ORACLE"
+      },
+      {
+        "test_id": "input3",
+        "expected_output_field": "expected_output",
+        "expected_output_is_missing": true,
+        "detected_oracle_mode": "NO_EXACT_ORACLE"
+      },
+      {
+        "test_id": "input4",
+        "expected_output_field": "expected_output",
+        "expected_output_is_missing": true,
+        "detected_oracle_mode": "NO_EXACT_ORACLE"
+      },
+      {
+        "test_id": "input5",
+        "expected_output_field": "expected_output",
+        "expected_output_is_missing": true,
+        "detected_oracle_mode": "NO_EXACT_ORACLE"
+      },
+      {
+        "test_id": "input6",
+        "expected_output_field": "expected_output",
+        "expected_output_is_missing": true,
+        "detected_oracle_mode": "NO_EXACT_ORACLE"
+      },
+      {
+        "test_id": "input7",
+        "expected_output_field": "expected_output",
+        "expected_output_is_missing": true,
+        "detected_oracle_mode": "NO_EXACT_ORACLE"
+      },
+      {
+        "test_id": "input8",
+        "expected_output_field": "expected_output",
+        "expected_output_is_missing": true,
+        "detected_oracle_mode": "NO_EXACT_ORACLE"
+      },
+      {
+        "test_id": "input9",
+        "expected_output_field": "expected_output",
+        "expected_output_is_missing": true,
+        "detected_oracle_mode": "NO_EXACT_ORACLE"
+      },
+      {
+        "test_id": "input10",
+        "expected_output_field": "expected_output",
+        "expected_output_is_missing": true,
+        "detected_oracle_mode": "NO_EXACT_ORACLE"
+      }
+    ],
+    "input_status_counts": {
+      "nopass": 2,
+      "pass": 8,
+      "unknown": 0
+    },
+    "visible_nopass_count": 2
+  },
+  "mg_evidence": {
+    "status": "provided",
+    "relations": [
+      {
+        "evidence_id": "MG004",
+        "mr_id": "MR4",
+        "source_test_ref": "TC007",
+        "followup_test_ref": "TC008",
+        "source_test": {
+          "test_ref": "TC007",
+          "input": "[8, 4, 7, 0, 7, 5, 0, 0, 6]",
+          "actual_output": "0",
+          "diagnostic_status": "nopass",
+          "oracle_mode": "NO_EXACT_ORACLE"
+        },
+        "followup_test": {
+          "test_ref": "TC008",
+          "input": "[-0.12676056338028172, 0.21126760563380287, -0.18309859154929586, 0.22535211267605634, -0.04225352112676059, -0.06338028169014082, 0.08450704225352117, -0.14084507042253525, 0.28873239436619724]",
+          "actual_output": "-0.0",
+          "diagnostic_status": "nopass",
+          "oracle_mode": "NO_EXACT_ORACLE"
+        },
+        "input_transformation": "Given an n‑order square matrix (flattened one‑dimensional array), convert it to two‑dimensional matrix form. If source matrix determinant is zero, keep original matrix unchanged as follow‑up input; otherwise compute matrix inverse and convert inverse matrix back to flattened one‑dimensional array as follow‑up input.",
+        "output_relation": "Compare the source and follow‑up actual_output determinant values. For invertible matrix, the product of source determinant and follow‑up(inverse) determinant should equal 1. Check whether abs(source_det * follow_det - 1) < 1e‑4. Skip judgement when source determinant equals zero.",
+        "actual_relation_status": "VMG",
+        "diagnostic_test_refs": [
+          "TC007",
+          "TC008"
+        ]
+      }
+    ],
+    "semantics": "MR/MG evidence is additional relation-level repair evidence only. It must never create, change, validate, or override testcase nopass/pass/unknown labels from test_status. A VMG indicates a relation violation but does not identify an exact faulty side.",
+    "audit_counts": {
+      "all_relations": 5,
+      "visible_vmg_relations": 1
+    }
+  }
+}

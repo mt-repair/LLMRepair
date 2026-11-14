@@ -1,0 +1,219 @@
+[5, 2]
+[ Source Test Case ]
+ Input :
+;if i ` ;nd5 ;YfI8
+ Variant Program Output :
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+eof.
+ Correct program output :
+eof.
+[ follow-up test case ]
+ Input :
+;
+ Variant Program Output :
+error,	"".
+error,	"".
+eof.
+ Correct program output :
+eof.
+MR_Status: 1
+
+[1, 3]
+[ Source Test Case ]
+ Input :
+;and "vY" (  ;Fzr7
+and "vY" (  ;Fzr7
+ Variant Program Output :
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+eof.
+ Correct program output :
+keyword,	"and".
+string,	"vY".
+lparen.
+eof.
+[ follow-up test case ]
+ Input :
+;;and "vY" (  ;Fzr7
+and "vY" (  ;Fzr7
+ Variant Program Output :
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+eof.
+ Correct program output :
+keyword,	"and".
+string,	"vY".
+lparen.
+eof.
+MR_Status: 1
+
+[4, 4]
+[ Source Test Case ]
+ Input :
+;7bTQLAMBDA
+;7bTQLAMBDA
+ Variant Program Output :
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+eof.
+ Correct program output :
+eof.
+[ follow-up test case ]
+ Input :
+;
+;
+ Variant Program Output :
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+eof.
+ Correct program output :
+eof.
+MR_Status: 1
+
+[3, 5]
+[ Source Test Case ]
+ Input :
+;`6#l
+93
+ Variant Program Output :
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+eof.
+ Correct program output :
+numeric,	93.
+eof.
+[ follow-up test case ]
+ Input :
+;
+93
+ Variant Program Output :
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+error,	"".
+eof.
+ Correct program output :
+numeric,	93.
+eof.
+MR_Status: 1

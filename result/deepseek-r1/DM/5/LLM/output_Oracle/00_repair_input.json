@@ -1,0 +1,64 @@
+{
+  "program_path": "e:\\LLMProgramRepair\\LLM\\MSBF\\code\\deepseek-r1\\DM\\Mutant5.py",
+  "project_root": "e:\\LLMProgramRepair\\LLM\\MSBF\\code\\deepseek-r1\\DM",
+  "program_function": "\n             This program is used to calculate a  (n x n)  Determinant of a square matrix. The input includes the order of the matrix.  (n)  And \n             One-dimensional array expanded in row-major order  (A) , where  (A)  The length is  (n^2) . The program is based on \n             Select the corresponding calculation method for the matrix structure and return the numerical result of the determinant along with an auxiliary flag value. \n             (Note: The auxiliary flag value has no practical significance and will not affect the program’s operation results.) \n        ",
+  "requested_mode": "ORACLE",
+  "effective_mode": "ORACLE",
+  "known_fault_lines": [
+    27
+  ],
+  "test_executions": [
+    {
+      "test_id": "input1",
+      "input": "[6, 9, 4, 2, 8, 0, 4, 0, 0] ",
+      "actual_output": "15",
+      "expected_output": "-128",
+      "test_status": "nopass"
+    },
+    {
+      "test_id": "input2",
+      "input": "[6, 9, 4, 4, 0, 0, 2, 8, 0]",
+      "actual_output": "128",
+      "expected_output": "128",
+      "test_status": "pass"
+    },
+    {
+      "test_id": "input3",
+      "input": "[2, 4, 7, 3, 9, 0, 0, 0, 0]",
+      "actual_output": "15",
+      "expected_output": "0",
+      "test_status": "nopass"
+    },
+    {
+      "test_id": "input4",
+      "input": "[2, 4, 7, -9, -27, 0, 3, 9, 0]",
+      "actual_output": "0",
+      "expected_output": "0",
+      "test_status": "pass"
+    },
+    {
+      "test_id": "input5",
+      "input": "[7, 4, 8, 2, 7, 0, 8, 0, 0]",
+      "actual_output": "22",
+      "expected_output": "-448",
+      "test_status": "nopass"
+    },
+    {
+      "test_id": "input6",
+      "input": "[0.0, 0.0, 0.125, 0.0, 0.14285714285714285, -0.03571428571428571, 0.125, -0.07142857142857142, -0.09151785714285715]",
+      "actual_output": "-0.6071428571428572",
+      "expected_output": "-0.002232142857142857",
+      "test_status": "nopass"
+    }
+  ],
+  "mg_relation": [],
+  "patch_budget": 5,
+  "generation_limits": {
+    "num_ctx": 32768,
+    "num_predict": 8192,
+    "max_edits_per_candidate": 3,
+    "max_total_touched_lines_per_candidate": 20,
+    "require_known_line_coverage": true
+  },
+  "policy": "One LLM response performs one shared evidence analysis and returns all patch candidates; no Agent1/Agent2 artifacts are used."
+}

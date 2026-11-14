@@ -1,0 +1,32 @@
+[
+  {
+    "version": 2,
+    "fault_line": 16,
+    "repaired_code": "   return self.Other_Tracked_Alt < self.Own_Tracked_Alt "
+  },
+  {
+    "version": 3,
+    "fault_line": 59,
+    "repaired_code": "    enabled = self.High_Confidence and (self.Own_Tracked_Alt_Rate <= self.OLEV) and ( "
+  },
+  {
+    "version": 4,
+    "fault_line": 63,
+    "repaired_code": "    if enabled and ((tcas_equipped and intent_not_known) or not tcas_equipped): "
+  },
+  {
+    "version": 7,
+    "fault_line": 24,
+    "repaired_code": "    result = self.Own_Above_Threat() and (self.Cur_Vertical_Sep >= self.MINSEP) and ( "
+  },
+  {
+    "version": 18,
+    "fault_line": 16,
+    "repaired_code": "   return self.Other_Tracked_Alt < self.Own_Tracked_Alt "
+  },
+  {
+    "version": 20,
+    "fault_line": 16,
+    "repaired_code": "   return self.Other_Tracked_Alt <= self.Own_Tracked_Alt "
+  }
+]

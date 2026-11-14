@@ -1,0 +1,4 @@
+@@ -213,1 +213,1 @@
+-   token_ptr->token_id=IDENTIFIER;
++   return(numeric_case(tstream_ptr,token_ptr,ch,token_str,token_ind));
+--

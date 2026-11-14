@@ -1,0 +1,343 @@
+[
+  {
+    "patch_id": "P001",
+    "status": "compile_passed",
+    "proposal": {
+      "diagnosis": "The test case 'source_s1_mr4' fails because the output contains an unexpected 'error,\"\\b\".' line. This suggests that the tokenizer is incorrectly identifying a token as an error when it should not be. The issue likely stems from the DFA state transitions or the handling of characters in the 'get_token' function. Specifically, line 232 in the 'get_token' function appears to be a potential fault line, as it involves ungetting a character and potentially misidentifying the token. The 'check_delimiter' function may also be involved, as it determines whether a character is a delimiter, which could affect how tokens are classified.",
+      "evidence_reasoning": {
+        "testcase_refs": [
+          "source_s1_mr4"
+        ],
+        "mr_refs": [
+          "MR4"
+        ],
+        "causal_chain": [
+          "The test input contains a line with a semicolon followed by 'and \"vY\" (  ;Fzr7', which should be parsed as a comment followed by a keyword and a string.",
+          "The actual output includes an 'error,\"\\b\".' line, which indicates that the tokenizer is incorrectly identifying a token as an error.",
+          "The 'get_token' function is responsible for determining the type of token, and line 232 in this function may be incorrectly ungetting a character and misclassifying the token.",
+          "The 'check_delimiter' function may be incorrectly identifying a character as a delimiter, leading to the error classification."
+        ]
+      },
+      "uncertainty": "The exact cause of the error is not immediately clear, but it is likely related to the handling of characters in the 'get_token' function and the 'check_delimiter' function. The issue may involve incorrect state transitions in the DFA or improper handling of characters that should be part of a token but are being classified as delimiters.",
+      "repair_intent": "Fix the unget_char call in the 'get_token' function to ensure that the correct character is being unget and the token is properly classified.",
+      "assumption": "The unget_char call on line 232 is incorrectly ungetting the 'cu_state' instead of the 'ch' character, leading to the error classification.",
+      "expected_effect": "Correctly unget the 'ch' character and properly classify the token, eliminating the error line in the output.",
+      "preservation_constraints": [
+        "Preserve the functionality of the 'get_token' function.",
+        "Preserve the handling of other token types."
+      ],
+      "edits": [
+        {
+          "start_line": 232,
+          "end_line": 232,
+          "replacement": "unget_char(ch,tstream_ptr->ch_stream);",
+          "rationale": "The 'unget_char' function should be called with the 'ch' character instead of 'cu_state' to ensure that the correct character is being unget and the token is properly classified."
+        }
+      ]
+    },
+    "proposal_errors": [],
+    "patch_diff": "--- a/print_tokens.c\n+++ b/print_tokens.c\n@@ -229,7 +229,7 @@\n                            if(check_delimiter(ch)==TRUE)\n                            {\n                                  token_ptr->token_id=keyword(next_st);\n-                                 unget_char(cu_state,tstream_ptr->ch_stream);\n+unget_char(ch,tstream_ptr->ch_stream);\n                                  token_ptr->token_string[0]='\\0';\n                                  return(token_ptr);\n                            }\n",
+    "patch_hash": "3d0bbffc72296db52a3d176ffad5a8364c2a981fba0318496acc96616b04a021",
+    "model_candidate_source": "P001",
+    "fallback_copy_of": null,
+    "original_candidate_errors": [],
+    "duplicate_of": null,
+    "validation_reused_from": null,
+    "validation": {
+      "compile": {
+        "attempted": true,
+        "success": true,
+        "return_code": 0,
+        "timed_out": false,
+        "stdout_tail": "",
+        "stderr_tail": "",
+        "elapsed_seconds": 0.059,
+        "command": [
+          "/usr/bin/gcc",
+          "-std=c11",
+          "/home/ubuntu/LLMRepair/MSBF/code/Qwen3/PT/printtokens_v110/LLM/output_MR_Oracle/patches/P001/workspace/print_tokens.c",
+          "-o",
+          "/home/ubuntu/LLMRepair/MSBF/code/Qwen3/PT/printtokens_v110/LLM/output_MR_Oracle/patches/P001/workspace/llm_candidate"
+        ],
+        "executable_path": "/home/ubuntu/LLMRepair/MSBF/code/Qwen3/PT/printtokens_v110/LLM/output_MR_Oracle/patches/P001/workspace/llm_candidate"
+      },
+      "visible_checks": []
+    }
+  },
+  {
+    "patch_id": "P002",
+    "status": "compile_passed",
+    "proposal": {
+      "diagnosis": "The test case 'source_s1_mr4' fails because the output contains an unexpected 'error,\"\\b\".' line. This suggests that the tokenizer is incorrectly identifying a token as an error when it should not be. The issue likely stems from the DFA state transitions or the handling of characters in the 'get_token' function. Specifically, line 232 in the 'get_token' function appears to be a potential fault line, as it involves ungetting a character and potentially misidentifying the token. The 'check_delimiter' function may also be involved, as it determines whether a character is a delimiter, which could affect how tokens are classified.",
+      "evidence_reasoning": {
+        "testcase_refs": [
+          "source_s1_mr4"
+        ],
+        "mr_refs": [
+          "MR4"
+        ],
+        "causal_chain": [
+          "The test input contains a line with a semicolon followed by 'and \"vY\" (  ;Fzr7', which should be parsed as a comment followed by a keyword and a string.",
+          "The actual output includes an 'error,\"\\b\".' line, which indicates that the tokenizer is incorrectly identifying a token as an error.",
+          "The 'get_token' function is responsible for determining the type of token, and line 232 in this function may be incorrectly ungetting a character and misclassifying the token.",
+          "The 'check_delimiter' function may be incorrectly identifying a character as a delimiter, leading to the error classification."
+        ]
+      },
+      "uncertainty": "The exact cause of the error is not immediately clear, but it is likely related to the handling of characters in the 'get_token' function and the 'check_delimiter' function. The issue may involve incorrect state transitions in the DFA or improper handling of characters that should be part of a token but are being classified as delimiters.",
+      "repair_intent": "Fix the unget_char call in the 'get_token' function to ensure that the correct character is being unget and the token is properly classified.",
+      "assumption": "The unget_char call on line 232 is incorrectly ungetting the 'cu_state' instead of the 'ch' character, leading to the error classification.",
+      "expected_effect": "Correctly unget the 'ch' character and properly classify the token, eliminating the error line in the output.",
+      "preservation_constraints": [
+        "Preserve the functionality of the 'get_token' function.",
+        "Preserve the handling of other token types."
+      ],
+      "edits": [
+        {
+          "start_line": 232,
+          "end_line": 232,
+          "replacement": "unget_char(ch,tstream_ptr->ch_stream);",
+          "rationale": "The 'unget_char' function should be called with the 'ch' character instead of 'cu_state' to ensure that the correct character is being unget and the token is properly classified."
+        }
+      ]
+    },
+    "proposal_errors": [],
+    "patch_diff": "--- a/print_tokens.c\n+++ b/print_tokens.c\n@@ -229,7 +229,7 @@\n                            if(check_delimiter(ch)==TRUE)\n                            {\n                                  token_ptr->token_id=keyword(next_st);\n-                                 unget_char(cu_state,tstream_ptr->ch_stream);\n+unget_char(ch,tstream_ptr->ch_stream);\n                                  token_ptr->token_string[0]='\\0';\n                                  return(token_ptr);\n                            }\n",
+    "patch_hash": "3d0bbffc72296db52a3d176ffad5a8364c2a981fba0318496acc96616b04a021",
+    "model_candidate_source": "P001",
+    "fallback_copy_of": "P001",
+    "original_candidate_errors": [
+      "repair_candidates[1].no edit covers a known fault line"
+    ],
+    "duplicate_of": "P001",
+    "validation_reused_from": "P001",
+    "validation": {
+      "compile": {
+        "attempted": true,
+        "success": true,
+        "return_code": 0,
+        "timed_out": false,
+        "stdout_tail": "",
+        "stderr_tail": "",
+        "elapsed_seconds": 0.059,
+        "command": [
+          "/usr/bin/gcc",
+          "-std=c11",
+          "/home/ubuntu/LLMRepair/MSBF/code/Qwen3/PT/printtokens_v110/LLM/output_MR_Oracle/patches/P001/workspace/print_tokens.c",
+          "-o",
+          "/home/ubuntu/LLMRepair/MSBF/code/Qwen3/PT/printtokens_v110/LLM/output_MR_Oracle/patches/P001/workspace/llm_candidate"
+        ],
+        "executable_path": "/home/ubuntu/LLMRepair/MSBF/code/Qwen3/PT/printtokens_v110/LLM/output_MR_Oracle/patches/P001/workspace/llm_candidate"
+      },
+      "visible_checks": []
+    }
+  },
+  {
+    "patch_id": "P003",
+    "status": "compile_passed",
+    "proposal": {
+      "diagnosis": "The test case 'source_s1_mr4' fails because the output contains an unexpected 'error,\"\\b\".' line. This suggests that the tokenizer is incorrectly identifying a token as an error when it should not be. The issue likely stems from the DFA state transitions or the handling of characters in the 'get_token' function. Specifically, line 232 in the 'get_token' function appears to be a potential fault line, as it involves ungetting a character and potentially misidentifying the token. The 'check_delimiter' function may also be involved, as it determines whether a character is a delimiter, which could affect how tokens are classified.",
+      "evidence_reasoning": {
+        "testcase_refs": [
+          "source_s1_mr4"
+        ],
+        "mr_refs": [
+          "MR4"
+        ],
+        "causal_chain": [
+          "The test input contains a line with a semicolon followed by 'and \"vY\" (  ;Fzr7', which should be parsed as a comment followed by a keyword and a string.",
+          "The actual output includes an 'error,\"\\b\".' line, which indicates that the tokenizer is incorrectly identifying a token as an error.",
+          "The 'get_token' function is responsible for determining the type of token, and line 232 in this function may be incorrectly ungetting a character and misclassifying the token.",
+          "The 'check_delimiter' function may be incorrectly identifying a character as a delimiter, leading to the error classification."
+        ]
+      },
+      "uncertainty": "The exact cause of the error is not immediately clear, but it is likely related to the handling of characters in the 'get_token' function and the 'check_delimiter' function. The issue may involve incorrect state transitions in the DFA or improper handling of characters that should be part of a token but are being classified as delimiters.",
+      "repair_intent": "Fix the unget_char call in the 'get_token' function to ensure that the correct character is being unget and the token is properly classified.",
+      "assumption": "The unget_char call on line 232 is incorrectly ungetting the 'cu_state' instead of the 'ch' character, leading to the error classification.",
+      "expected_effect": "Correctly unget the 'ch' character and properly classify the token, eliminating the error line in the output.",
+      "preservation_constraints": [
+        "Preserve the functionality of the 'get_token' function.",
+        "Preserve the handling of other token types."
+      ],
+      "edits": [
+        {
+          "start_line": 232,
+          "end_line": 232,
+          "replacement": "unget_char(ch,tstream_ptr->ch_stream);",
+          "rationale": "The 'unget_char' function should be called with the 'ch' character instead of 'cu_state' to ensure that the correct character is being unget and the token is properly classified."
+        }
+      ]
+    },
+    "proposal_errors": [],
+    "patch_diff": "--- a/print_tokens.c\n+++ b/print_tokens.c\n@@ -229,7 +229,7 @@\n                            if(check_delimiter(ch)==TRUE)\n                            {\n                                  token_ptr->token_id=keyword(next_st);\n-                                 unget_char(cu_state,tstream_ptr->ch_stream);\n+unget_char(ch,tstream_ptr->ch_stream);\n                                  token_ptr->token_string[0]='\\0';\n                                  return(token_ptr);\n                            }\n",
+    "patch_hash": "3d0bbffc72296db52a3d176ffad5a8364c2a981fba0318496acc96616b04a021",
+    "model_candidate_source": "P001",
+    "fallback_copy_of": "P001",
+    "original_candidate_errors": [
+      "repair_candidates[2].no edit covers a known fault line"
+    ],
+    "duplicate_of": "P001",
+    "validation_reused_from": "P001",
+    "validation": {
+      "compile": {
+        "attempted": true,
+        "success": true,
+        "return_code": 0,
+        "timed_out": false,
+        "stdout_tail": "",
+        "stderr_tail": "",
+        "elapsed_seconds": 0.059,
+        "command": [
+          "/usr/bin/gcc",
+          "-std=c11",
+          "/home/ubuntu/LLMRepair/MSBF/code/Qwen3/PT/printtokens_v110/LLM/output_MR_Oracle/patches/P001/workspace/print_tokens.c",
+          "-o",
+          "/home/ubuntu/LLMRepair/MSBF/code/Qwen3/PT/printtokens_v110/LLM/output_MR_Oracle/patches/P001/workspace/llm_candidate"
+        ],
+        "executable_path": "/home/ubuntu/LLMRepair/MSBF/code/Qwen3/PT/printtokens_v110/LLM/output_MR_Oracle/patches/P001/workspace/llm_candidate"
+      },
+      "visible_checks": []
+    }
+  },
+  {
+    "patch_id": "P004",
+    "status": "compile_failed",
+    "proposal": {
+      "diagnosis": "The test case 'source_s1_mr4' fails because the output contains an unexpected 'error,\"\\b\".' line. This suggests that the tokenizer is incorrectly identifying a token as an error when it should not be. The issue likely stems from the DFA state transitions or the handling of characters in the 'get_token' function. Specifically, line 232 in the 'get_token' function appears to be a potential fault line, as it involves ungetting a character and potentially misidentifying the token. The 'check_delimiter' function may also be involved, as it determines whether a character is a delimiter, which could affect how tokens are classified.",
+      "evidence_reasoning": {
+        "testcase_refs": [
+          "source_s1_mr4"
+        ],
+        "mr_refs": [
+          "MR4"
+        ],
+        "causal_chain": [
+          "The test input contains a line with a semicolon followed by 'and \"vY\" (  ;Fzr7', which should be parsed as a comment followed by a keyword and a string.",
+          "The actual output includes an 'error,\"\\b\".' line, which indicates that the tokenizer is incorrectly identifying a token as an error.",
+          "The 'get_token' function is responsible for determining the type of token, and line 232 in this function may be incorrectly ungetting a character and misclassifying the token.",
+          "The 'check_delimiter' function may be incorrectly identifying a character as a delimiter, leading to the error classification."
+        ]
+      },
+      "uncertainty": "The exact cause of the error is not immediately clear, but it is likely related to the handling of characters in the 'get_token' function and the 'check_delimiter' function. The issue may involve incorrect state transitions in the DFA or improper handling of characters that should be part of a token but are being classified as delimiters.",
+      "repair_intent": "Adjust the 'get_token' function to ensure that it correctly handles the 'keyword' case and does not incorrectly classify tokens as errors.",
+      "assumption": "The 'get_token' function may be incorrectly handling the 'keyword' case, leading to the error classification.",
+      "expected_effect": "Correctly handle the 'keyword' case and prevent the tokenizer from misclassifying tokens as errors.",
+      "preservation_constraints": [
+        "Preserve the functionality of the 'get_token' function.",
+        "Preserve the handling of other token types."
+      ],
+      "edits": [
+        {
+          "start_line": 232,
+          "end_line": 232,
+          "replacement": "unget_char(ch,tstream_ptr->ch_stream);",
+          "rationale": "The 'unget_char' function should be called with the 'ch' character instead of 'cu_state' to ensure that the correct character is being unget and the token is properly classified."
+        },
+        {
+          "start_line": 228,
+          "end_line": 228,
+          "replacement": "if(check_delimiter(ch)==TRUE && ch != '\\\"') /* Check for delimiter and string delimiter */\n                            {",
+          "rationale": "The 'get_token' function should also check for the string delimiter ('\"') to ensure that it does not incorrectly classify tokens as errors."
+        }
+      ]
+    },
+    "proposal_errors": [],
+    "patch_diff": "--- a/print_tokens.c\n+++ b/print_tokens.c\n@@ -225,11 +225,12 @@\n                  case 9  :\n                  case 11 :\n                  case 13 :\n-                 case 16 : ch=get_char(tstream_ptr->ch_stream);\n+if(check_delimiter(ch)==TRUE && ch != '\\\"') /* Check for delimiter and string delimiter */\n+                            {\n                            if(check_delimiter(ch)==TRUE)\n                            {\n                                  token_ptr->token_id=keyword(next_st);\n-                                 unget_char(cu_state,tstream_ptr->ch_stream);\n+unget_char(ch,tstream_ptr->ch_stream);\n                                  token_ptr->token_string[0]='\\0';\n                                  return(token_ptr);\n                            }\n",
+    "patch_hash": "d1cd2c6c4f4257cd5994e6d8ba5bf53b17c11f26197f9c60412d9e1789142e01",
+    "model_candidate_source": "P004",
+    "fallback_copy_of": null,
+    "original_candidate_errors": [],
+    "duplicate_of": null,
+    "validation_reused_from": null,
+    "validation": {
+      "compile": {
+        "attempted": true,
+        "success": false,
+        "return_code": 1,
+        "timed_out": false,
+        "stdout_tail": "",
+        "stderr_tail": "/P004/workspace/print_tokens.c:360:12: error: invalid storage class for function ‘keyword’\n  360 | static int keyword(state)\n      |            ^~~~~~~\n/home/ubuntu/LLMRepair/MSBF/code/Qwen3/PT/printtokens_v110/LLM/output_MR_Oracle/patches/P004/workspace/print_tokens.c:385:12: error: invalid storage class for function ‘special’\n  385 | static int special(state)\n      |            ^~~~~~~\n/home/ubuntu/LLMRepair/MSBF/code/Qwen3/PT/printtokens_v110/LLM/output_MR_Oracle/patches/P004/workspace/print_tokens.c:414:13: error: invalid storage class for function ‘skip’\n  414 | static void skip(stream_ptr)\n      |             ^~~~\n/home/ubuntu/LLMRepair/MSBF/code/Qwen3/PT/printtokens_v110/LLM/output_MR_Oracle/patches/P004/workspace/print_tokens.c:435:12: error: invalid storage class for function ‘constant’\n  435 | static int constant(state,token_str,token_ind)\n      |            ^~~~~~~~\n/home/ubuntu/LLMRepair/MSBF/code/Qwen3/PT/printtokens_v110/LLM/output_MR_Oracle/patches/P004/workspace/print_tokens.c:458:12: error: invalid storage class for function ‘next_state’\n  458 | static int next_state(state,ch)\n      |            ^~~~~~~~~~\n/home/ubuntu/LLMRepair/MSBF/code/Qwen3/PT/printtokens_v110/LLM/output_MR_Oracle/patches/P004/workspace/print_tokens.c:551:13: error: invalid storage class for function ‘get_actual_token’\n  551 | static void get_actual_token(token_str,token_ind)\n      |             ^~~~~~~~~~~~~~~~\n/home/ubuntu/LLMRepair/MSBF/code/Qwen3/PT/printtokens_v110/LLM/output_MR_Oracle/patches/P004/workspace/print_tokens.c:567:1: error: expected declaration or statement at end of input\n  567 | }\n      | ^\n/home/ubuntu/LLMRepair/MSBF/code/Qwen3/PT/printtokens_v110/LLM/output_MR_Oracle/patches/P004/workspace/print_tokens.c: At top level:\n/home/ubuntu/LLMRepair/MSBF/code/Qwen3/PT/printtokens_v110/LLM/output_MR_Oracle/patches/P004/workspace/print_tokens.c:17:14: warning: ‘numeric_case’ used but never defined\n   17 | static token numeric_case();\n      |              ^~~~~~~~~~~~\n/home/ubuntu/LLMRepair/MSBF/code/Qwen3/PT/printtokens_v110/LLM/output_MR_Oracle/patches/P004/workspace/print_tokens.c:18:14: warning: ‘error_or_eof_case’ used but never defined\n   18 | static token error_or_eof_case();\n      |              ^~~~~~~~~~~~~~~~~\n/home/ubuntu/LLMRepair/MSBF/code/Qwen3/PT/printtokens_v110/LLM/output_MR_Oracle/patches/P004/workspace/print_tokens.c:19:12: warning: ‘check_delimiter’ used but never defined\n   19 | static int check_delimiter();\n      |            ^~~~~~~~~~~~~~~\n/home/ubuntu/LLMRepair/MSBF/code/Qwen3/PT/printtokens_v110/LLM/output_MR_Oracle/patches/P004/workspace/print_tokens.c:20:12: warning: ‘keyword’ used but never defined\n   20 | static int keyword(int state);\n      |            ^~~~~~~\n/home/ubuntu/LLMRepair/MSBF/code/Qwen3/PT/printtokens_v110/LLM/output_MR_Oracle/patches/P004/workspace/print_tokens.c:21:12: warning: ‘special’ used but never defined\n   21 | static int special(int state);\n      |            ^~~~~~~\n/home/ubuntu/LLMRepair/MSBF/code/Qwen3/PT/printtokens_v110/LLM/output_MR_Oracle/patches/P004/workspace/print_tokens.c:22:13: warning: ‘skip’ used but never defined\n   22 | static void skip(character_stream stream_ptr);\n      |             ^~~~\n/home/ubuntu/LLMRepair/MSBF/code/Qwen3/PT/printtokens_v110/LLM/output_MR_Oracle/patches/P004/workspace/print_tokens.c:23:12: warning: ‘constant’ used but never defined\n   23 | static int constant(int state,char token_str[],int token_ind);\n      |            ^~~~~~~~\n/home/ubuntu/LLMRepair/MSBF/code/Qwen3/PT/printtokens_v110/LLM/output_MR_Oracle/patches/P004/workspace/print_tokens.c:24:12: warning: ‘next_state’ used but never defined\n   24 | static int next_state();\n      |            ^~~~~~~~~~\n/home/ubuntu/LLMRepair/MSBF/code/Qwen3/PT/printtokens_v110/LLM/output_MR_Oracle/patches/P004/workspace/print_tokens.c:25:13: warning: ‘get_actual_token’ used but never defined\n   25 | static void get_actual_token(char token_str[],int token_ind);\n      |             ^~~~~~~~~~~~~~~~\n",
+        "elapsed_seconds": 0.061,
+        "command": [
+          "/usr/bin/gcc",
+          "-std=c11",
+          "/home/ubuntu/LLMRepair/MSBF/code/Qwen3/PT/printtokens_v110/LLM/output_MR_Oracle/patches/P004/workspace/print_tokens.c",
+          "-o",
+          "/home/ubuntu/LLMRepair/MSBF/code/Qwen3/PT/printtokens_v110/LLM/output_MR_Oracle/patches/P004/workspace/llm_candidate"
+        ],
+        "executable_path": null
+      },
+      "visible_checks": []
+    }
+  },
+  {
+    "patch_id": "P005",
+    "status": "compile_passed",
+    "proposal": {
+      "diagnosis": "The test case 'source_s1_mr4' fails because the output contains an unexpected 'error,\"\\b\".' line. This suggests that the tokenizer is incorrectly identifying a token as an error when it should not be. The issue likely stems from the DFA state transitions or the handling of characters in the 'get_token' function. Specifically, line 232 in the 'get_token' function appears to be a potential fault line, as it involves ungetting a character and potentially misidentifying the token. The 'check_delimiter' function may also be involved, as it determines whether a character is a delimiter, which could affect how tokens are classified.",
+      "evidence_reasoning": {
+        "testcase_refs": [
+          "source_s1_mr4"
+        ],
+        "mr_refs": [
+          "MR4"
+        ],
+        "causal_chain": [
+          "The test input contains a line with a semicolon followed by 'and \"vY\" (  ;Fzr7', which should be parsed as a comment followed by a keyword and a string.",
+          "The actual output includes an 'error,\"\\b\".' line, which indicates that the tokenizer is incorrectly identifying a token as an error.",
+          "The 'get_token' function is responsible for determining the type of token, and line 232 in this function may be incorrectly ungetting a character and misclassifying the token.",
+          "The 'check_delimiter' function may be incorrectly identifying a character as a delimiter, leading to the error classification."
+        ]
+      },
+      "uncertainty": "The exact cause of the error is not immediately clear, but it is likely related to the handling of characters in the 'get_token' function and the 'check_delimiter' function. The issue may involve incorrect state transitions in the DFA or improper handling of characters that should be part of a token but are being classified as delimiters.",
+      "repair_intent": "Adjust the 'get_token' function to ensure that it correctly handles the 'keyword' case and does not incorrectly classify tokens as errors.",
+      "assumption": "The 'get_token' function may be incorrectly handling the 'keyword' case, leading to the error classification.",
+      "expected_effect": "Correctly handle the 'keyword' case and prevent the tokenizer from misclassifying tokens as errors.",
+      "preservation_constraints": [
+        "Preserve the functionality of the 'get_token' function.",
+        "Preserve the handling of other token types."
+      ],
+      "edits": [
+        {
+          "start_line": 232,
+          "end_line": 232,
+          "replacement": "unget_char(ch,tstream_ptr->ch_stream);",
+          "rationale": "The 'unget_char' function should be called with the 'ch' character instead of 'cu_state' to ensure that the correct character is being unget and the token is properly classified."
+        },
+        {
+          "start_line": 345,
+          "end_line": 345,
+          "replacement": "if(!isalpha(ch) && !isdigit(ch) && ch != '\\\"') /* Check for digit, alpha, and string delimiter */\n           return(TRUE);",
+          "rationale": "The 'check_delimiter' function should also check for the string delimiter ('\"') to ensure that it does not incorrectly classify valid token characters as delimiters."
+        }
+      ]
+    },
+    "proposal_errors": [],
+    "patch_diff": "--- a/print_tokens.c\n+++ b/print_tokens.c\n@@ -229,7 +229,7 @@\n                            if(check_delimiter(ch)==TRUE)\n                            {\n                                  token_ptr->token_id=keyword(next_st);\n-                                 unget_char(cu_state,tstream_ptr->ch_stream);\n+unget_char(ch,tstream_ptr->ch_stream);\n                                  token_ptr->token_string[0]='\\0';\n                                  return(token_ptr);\n                            }\n@@ -342,7 +342,8 @@\n static int check_delimiter(ch)\n char ch;\n {\n-      if(!isalpha(ch) && !isdigit(ch)) /* Check for digit and alpha */\n+if(!isalpha(ch) && !isdigit(ch) && ch != '\\\"') /* Check for digit, alpha, and string delimiter */\n+           return(TRUE);\n           return(TRUE);\n       return(FALSE);\n }\n",
+    "patch_hash": "cf973d14ef372f4da6baa4e9405b4e9cb3174bf1d79195f007688b04ebc479c8",
+    "model_candidate_source": "P005",
+    "fallback_copy_of": null,
+    "original_candidate_errors": [],
+    "duplicate_of": null,
+    "validation_reused_from": null,
+    "validation": {
+      "compile": {
+        "attempted": true,
+        "success": true,
+        "return_code": 0,
+        "timed_out": false,
+        "stdout_tail": "",
+        "stderr_tail": "",
+        "elapsed_seconds": 0.058,
+        "command": [
+          "/usr/bin/gcc",
+          "-std=c11",
+          "/home/ubuntu/LLMRepair/MSBF/code/Qwen3/PT/printtokens_v110/LLM/output_MR_Oracle/patches/P005/workspace/print_tokens.c",
+          "-o",
+          "/home/ubuntu/LLMRepair/MSBF/code/Qwen3/PT/printtokens_v110/LLM/output_MR_Oracle/patches/P005/workspace/llm_candidate"
+        ],
+        "executable_path": "/home/ubuntu/LLMRepair/MSBF/code/Qwen3/PT/printtokens_v110/LLM/output_MR_Oracle/patches/P005/workspace/llm_candidate"
+      },
+      "visible_checks": []
+    }
+  }
+]

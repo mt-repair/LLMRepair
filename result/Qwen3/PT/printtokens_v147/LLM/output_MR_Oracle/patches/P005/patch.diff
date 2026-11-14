@@ -1,0 +1,20 @@
+--- a/print_tokens.c
++++ b/print_tokens.c
+@@ -228,7 +228,7 @@
+                  case 16 : ch=get_char(tstream_ptr->ch_stream);
+                            if(check_delimiter(ch)==TRUE)
+                            {
+-                                 token_ptr->token_id=keyword(-next_st);
++token_ptr->token_id=keyword(next_st); /* Correctly set the token_id for the 'and' keyword. */
+                                  unget_char(ch,tstream_ptr->ch_stream);
+                                  token_ptr->token_string[0]='\0';
+                                  return(token_ptr);
+@@ -362,7 +362,7 @@
+       switch(state)
+       {   /* Return the respective macro for the Keyword. */
+           case 6 : return(LAMBDA);
+-          case 9 : return(AND);
++return(AND); /* Correctly return the macro for the 'and' keyword. */
+           case 11: return(OR);
+           case 13: return(IF);
+           case 16: return(XOR);

@@ -1,0 +1,335 @@
+{
+  "workflow": "single_llm_direct_repair",
+  "effective_mode": "MR",
+  "program_path": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v333/print_tokens.c",
+  "output_dir": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v333/LLM/output_MR",
+  "llm_call_attempts": 1,
+  "normal_llm_calls_per_scenario": 1,
+  "patch_candidates": [
+    {
+      "patch_id": "P001",
+      "status": "compile_failed",
+      "proposal": {
+        "diagnosis": "The issue lies in the print_token function where case 9 is not properly handled, leading to incorrect or missing output for certain tokens. The known fault line (513) indicates an incomplete implementation that returns without proper token printing.",
+        "evidence_reasoning": {
+          "causal_chain": [
+            "The test cases show discrepancies in token counts and outputs when input is transformed, suggesting a failure in handling specific token types correctly.",
+            "Line 513 in print_token function lacks proper output for case 9, leading to silent failures or incorrect token processing."
+          ],
+          "mr_refs": [
+            "MR4"
+          ],
+          "testcase_refs": [
+            "source_s1_mr4",
+            "followup_s1_mr4"
+          ]
+        },
+        "uncertainty": "The exact token type for case 9 is ambiguous, leading to multiple plausible repair directions. Further testing would clarify the correct token classification.",
+        "assumption": "Case 9 corresponds to the 'and' keyword and needs proper string output.",
+        "edits": [
+          {
+            "end_line": 513,
+            "rationale": "Replace incomplete return with correct keyword output.",
+            "replacement": "fprintf(stdout, \"keyword,\\t\"and\".\\n\");return(TRUE);",
+            "start_line": 513
+          }
+        ],
+        "expected_effect": "Ensures 'and' keyword is correctly printed in tokens.",
+        "preservation_constraints": [
+          "Other token cases should remain unaffected."
+        ],
+        "repair_intent": "Fix missing keyword output for case 9."
+      },
+      "proposal_errors": [],
+      "patch_diff": "--- a/print_tokens.c\n+++ b/print_tokens.c\n@@ -510,7 +510,7 @@\n                        fprintf(stdout, \"\\\".\\n\");return(TRUE);\n           case EOTSTREAM : fprintf(stdout, \"eof.\\n\");return(TRUE);\n           case 6 : fprintf(stdout, \"keyword,\\t\\\"lambda\\\".\\n\");return(TRUE);\n-          case 9 : 0;return(TRUE);\n+fprintf(stdout, \"keyword,\\t\"and\".\\n\");return(TRUE);\n           case 11: fprintf(stdout, \"keyword,\\t\\\"or\\\".\\n\");return(TRUE);\n           case 13: fprintf(stdout, \"keyword,\\t\\\"if\\\".\\n\");return(TRUE);\n           case 16: fprintf(stdout, \"keyword,\\t\\\"xor\\\".\\n\");return(TRUE);\n",
+      "patch_hash": "51f6834574f9f7496333373945301af330a709bdce6bbdf40c668a5c34d1eeaf",
+      "model_candidate_source": "P001",
+      "fallback_copy_of": null,
+      "original_candidate_errors": [],
+      "duplicate_of": null,
+      "validation_reused_from": null,
+      "validation": {
+        "compile": {
+          "attempted": true,
+          "success": false,
+          "return_code": 1,
+          "timed_out": false,
+          "stdout_tail": "",
+          "stderr_tail": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v333/LLM/output_MR/patches/P001/workspace/print_tokens.c: In function ‘print_token’:\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v333/LLM/output_MR/patches/P001/workspace/print_tokens.c:513:29: error: expected ‘)’ before ‘and’\n  513 | fprintf(stdout, \"keyword,\\t\"and\".\\n\");return(TRUE);\n      |        ~                    ^~~\n      |                             )\n",
+          "elapsed_seconds": 0.014,
+          "command": [
+            "/usr/bin/gcc",
+            "-std=c11",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v333/LLM/output_MR/patches/P001/workspace/print_tokens.c",
+            "-o",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v333/LLM/output_MR/patches/P001/workspace/llm_candidate"
+          ],
+          "executable_path": null
+        },
+        "visible_checks": []
+      }
+    },
+    {
+      "patch_id": "P002",
+      "status": "compile_passed",
+      "proposal": {
+        "diagnosis": "The issue lies in the print_token function where case 9 is not properly handled, leading to incorrect or missing output for certain tokens. The known fault line (513) indicates an incomplete implementation that returns without proper token printing.",
+        "evidence_reasoning": {
+          "causal_chain": [
+            "The test cases show discrepancies in token counts and outputs when input is transformed, suggesting a failure in handling specific token types correctly.",
+            "Line 513 in print_token function lacks proper output for case 9, leading to silent failures or incorrect token processing."
+          ],
+          "mr_refs": [
+            "MR4"
+          ],
+          "testcase_refs": [
+            "source_s1_mr4",
+            "followup_s1_mr4"
+          ]
+        },
+        "uncertainty": "The exact token type for case 9 is ambiguous, leading to multiple plausible repair directions. Further testing would clarify the correct token classification.",
+        "assumption": "Case 9 might correspond to another token type requiring different handling.",
+        "edits": [
+          {
+            "end_line": 513,
+            "rationale": "Handle as identifier instead of keyword if misclassified.",
+            "replacement": "fprintf(stdout, \"identifier,\\t%s\\\".\\n\", token_ptr->token_string);return(TRUE);",
+            "start_line": 513
+          }
+        ],
+        "expected_effect": "Correctly classify and print the token as identifier.",
+        "preservation_constraints": [
+          "Consistency with other identifier cases must be maintained."
+        ],
+        "repair_intent": "Fix misclassification of token type for case 9."
+      },
+      "proposal_errors": [],
+      "patch_diff": "--- a/print_tokens.c\n+++ b/print_tokens.c\n@@ -510,7 +510,7 @@\n                        fprintf(stdout, \"\\\".\\n\");return(TRUE);\n           case EOTSTREAM : fprintf(stdout, \"eof.\\n\");return(TRUE);\n           case 6 : fprintf(stdout, \"keyword,\\t\\\"lambda\\\".\\n\");return(TRUE);\n-          case 9 : 0;return(TRUE);\n+fprintf(stdout, \"identifier,\\t%s\\\".\\n\", token_ptr->token_string);return(TRUE);\n           case 11: fprintf(stdout, \"keyword,\\t\\\"or\\\".\\n\");return(TRUE);\n           case 13: fprintf(stdout, \"keyword,\\t\\\"if\\\".\\n\");return(TRUE);\n           case 16: fprintf(stdout, \"keyword,\\t\\\"xor\\\".\\n\");return(TRUE);\n",
+      "patch_hash": "7a3d9b8c657e1cc729b4789beebe5adedf88f836bdfa5a4454c25e452a61cbef",
+      "model_candidate_source": "P002",
+      "fallback_copy_of": null,
+      "original_candidate_errors": [],
+      "duplicate_of": null,
+      "validation_reused_from": null,
+      "validation": {
+        "compile": {
+          "attempted": true,
+          "success": true,
+          "return_code": 0,
+          "timed_out": false,
+          "stdout_tail": "",
+          "stderr_tail": "",
+          "elapsed_seconds": 0.05,
+          "command": [
+            "/usr/bin/gcc",
+            "-std=c11",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v333/LLM/output_MR/patches/P002/workspace/print_tokens.c",
+            "-o",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v333/LLM/output_MR/patches/P002/workspace/llm_candidate"
+          ],
+          "executable_path": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v333/LLM/output_MR/patches/P002/workspace/llm_candidate"
+        },
+        "visible_checks": []
+      }
+    },
+    {
+      "patch_id": "P003",
+      "status": "compile_passed",
+      "proposal": {
+        "diagnosis": "The issue lies in the print_token function where case 9 is not properly handled, leading to incorrect or missing output for certain tokens. The known fault line (513) indicates an incomplete implementation that returns without proper token printing.",
+        "evidence_reasoning": {
+          "causal_chain": [
+            "The test cases show discrepancies in token counts and outputs when input is transformed, suggesting a failure in handling specific token types correctly.",
+            "Line 513 in print_token function lacks proper output for case 9, leading to silent failures or incorrect token processing."
+          ],
+          "mr_refs": [
+            "MR4"
+          ],
+          "testcase_refs": [
+            "source_s1_mr4",
+            "followup_s1_mr4"
+          ]
+        },
+        "uncertainty": "The exact token type for case 9 is ambiguous, leading to multiple plausible repair directions. Further testing would clarify the correct token classification.",
+        "assumption": "Case 9 is an error state that needs explicit handling.",
+        "edits": [
+          {
+            "end_line": 513,
+            "rationale": "Explicitly handle as error if it's an invalid token state.",
+            "replacement": "fprintf(stdout, \"error,\\t%s\\\".\\n\", token_ptr->token_string);return(TRUE);",
+            "start_line": 513
+          }
+        ],
+        "expected_effect": "Prevent silent failures by explicitly marking as error state.",
+        "preservation_constraints": [
+          "Error handling should be consistent with other error cases."
+        ],
+        "repair_intent": "Fix unhandled error state in token processing."
+      },
+      "proposal_errors": [],
+      "patch_diff": "--- a/print_tokens.c\n+++ b/print_tokens.c\n@@ -510,7 +510,7 @@\n                        fprintf(stdout, \"\\\".\\n\");return(TRUE);\n           case EOTSTREAM : fprintf(stdout, \"eof.\\n\");return(TRUE);\n           case 6 : fprintf(stdout, \"keyword,\\t\\\"lambda\\\".\\n\");return(TRUE);\n-          case 9 : 0;return(TRUE);\n+fprintf(stdout, \"error,\\t%s\\\".\\n\", token_ptr->token_string);return(TRUE);\n           case 11: fprintf(stdout, \"keyword,\\t\\\"or\\\".\\n\");return(TRUE);\n           case 13: fprintf(stdout, \"keyword,\\t\\\"if\\\".\\n\");return(TRUE);\n           case 16: fprintf(stdout, \"keyword,\\t\\\"xor\\\".\\n\");return(TRUE);\n",
+      "patch_hash": "eaf0e7adbd8b9d449db86517c85a3aef525eac35cc9867da97eefc522278c435",
+      "model_candidate_source": "P003",
+      "fallback_copy_of": null,
+      "original_candidate_errors": [],
+      "duplicate_of": null,
+      "validation_reused_from": null,
+      "validation": {
+        "compile": {
+          "attempted": true,
+          "success": true,
+          "return_code": 0,
+          "timed_out": false,
+          "stdout_tail": "",
+          "stderr_tail": "",
+          "elapsed_seconds": 0.052,
+          "command": [
+            "/usr/bin/gcc",
+            "-std=c11",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v333/LLM/output_MR/patches/P003/workspace/print_tokens.c",
+            "-o",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v333/LLM/output_MR/patches/P003/workspace/llm_candidate"
+          ],
+          "executable_path": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v333/LLM/output_MR/patches/P003/workspace/llm_candidate"
+        },
+        "visible_checks": []
+      }
+    },
+    {
+      "patch_id": "P004",
+      "status": "compile_passed",
+      "proposal": {
+        "diagnosis": "The issue lies in the print_token function where case 9 is not properly handled, leading to incorrect or missing output for certain tokens. The known fault line (513) indicates an incomplete implementation that returns without proper token printing.",
+        "evidence_reasoning": {
+          "causal_chain": [
+            "The test cases show discrepancies in token counts and outputs when input is transformed, suggesting a failure in handling specific token types correctly.",
+            "Line 513 in print_token function lacks proper output for case 9, leading to silent failures or incorrect token processing."
+          ],
+          "mr_refs": [
+            "MR4"
+          ],
+          "testcase_refs": [
+            "source_s1_mr4",
+            "followup_s1_mr4"
+          ]
+        },
+        "uncertainty": "The exact token type for case 9 is ambiguous, leading to multiple plausible repair directions. Further testing would clarify the correct token classification.",
+        "assumption": "Case 9 is a special symbol requiring specific output formatting.",
+        "edits": [
+          {
+            "end_line": 513,
+            "rationale": "Handle as special character with appropriate string formatting.",
+            "replacement": "fprintf(stdout, \"special,\\t%s\\\".\\n\", token_ptr->token_string);return(TRUE);",
+            "start_line": 513
+          }
+        ],
+        "expected_effect": "Ensures special symbols are correctly formatted in output.",
+        "preservation_constraints": [
+          "Special character handling must align with other cases."
+        ],
+        "repair_intent": "Fix formatting for special symbol tokens."
+      },
+      "proposal_errors": [],
+      "patch_diff": "--- a/print_tokens.c\n+++ b/print_tokens.c\n@@ -510,7 +510,7 @@\n                        fprintf(stdout, \"\\\".\\n\");return(TRUE);\n           case EOTSTREAM : fprintf(stdout, \"eof.\\n\");return(TRUE);\n           case 6 : fprintf(stdout, \"keyword,\\t\\\"lambda\\\".\\n\");return(TRUE);\n-          case 9 : 0;return(TRUE);\n+fprintf(stdout, \"special,\\t%s\\\".\\n\", token_ptr->token_string);return(TRUE);\n           case 11: fprintf(stdout, \"keyword,\\t\\\"or\\\".\\n\");return(TRUE);\n           case 13: fprintf(stdout, \"keyword,\\t\\\"if\\\".\\n\");return(TRUE);\n           case 16: fprintf(stdout, \"keyword,\\t\\\"xor\\\".\\n\");return(TRUE);\n",
+      "patch_hash": "f765e04cc0d88758d85fe3a129824de67cb8d6e80c6789987f4f4c1ad97ca7fb",
+      "model_candidate_source": "P004",
+      "fallback_copy_of": null,
+      "original_candidate_errors": [],
+      "duplicate_of": null,
+      "validation_reused_from": null,
+      "validation": {
+        "compile": {
+          "attempted": true,
+          "success": true,
+          "return_code": 0,
+          "timed_out": false,
+          "stdout_tail": "",
+          "stderr_tail": "",
+          "elapsed_seconds": 0.053,
+          "command": [
+            "/usr/bin/gcc",
+            "-std=c11",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v333/LLM/output_MR/patches/P004/workspace/print_tokens.c",
+            "-o",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v333/LLM/output_MR/patches/P004/workspace/llm_candidate"
+          ],
+          "executable_path": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v333/LLM/output_MR/patches/P004/workspace/llm_candidate"
+        },
+        "visible_checks": []
+      }
+    },
+    {
+      "patch_id": "P005",
+      "status": "compile_passed",
+      "proposal": {
+        "diagnosis": "The issue lies in the print_token function where case 9 is not properly handled, leading to incorrect or missing output for certain tokens. The known fault line (513) indicates an incomplete implementation that returns without proper token printing.",
+        "evidence_reasoning": {
+          "causal_chain": [
+            "The test cases show discrepancies in token counts and outputs when input is transformed, suggesting a failure in handling specific token types correctly.",
+            "Line 513 in print_token function lacks proper output for case 9, leading to silent failures or incorrect token processing."
+          ],
+          "mr_refs": [
+            "MR4"
+          ],
+          "testcase_refs": [
+            "source_s1_mr4",
+            "followup_s1_mr4"
+          ]
+        },
+        "uncertainty": "The exact token type for case 9 is ambiguous, leading to multiple plausible repair directions. Further testing would clarify the correct token classification.",
+        "assumption": "Case 9 is a numeric constant that requires decimal point inclusion.",
+        "edits": [
+          {
+            "end_line": 513,
+            "rationale": "Ensure numeric constants include decimal points when necessary.",
+            "replacement": "fprintf(stdout, \"numeric,\\t%s.\\n\", token_ptr->token_string);return(TRUE);",
+            "start_line": 513
+          }
+        ],
+        "expected_effect": "Correctly format numeric tokens with decimal points.",
+        "preservation_constraints": [
+          "Numeric formatting should be consistent across all cases."
+        ],
+        "repair_intent": "Fix missing decimal point in numeric constants."
+      },
+      "proposal_errors": [],
+      "patch_diff": "--- a/print_tokens.c\n+++ b/print_tokens.c\n@@ -510,7 +510,7 @@\n                        fprintf(stdout, \"\\\".\\n\");return(TRUE);\n           case EOTSTREAM : fprintf(stdout, \"eof.\\n\");return(TRUE);\n           case 6 : fprintf(stdout, \"keyword,\\t\\\"lambda\\\".\\n\");return(TRUE);\n-          case 9 : 0;return(TRUE);\n+fprintf(stdout, \"numeric,\\t%s.\\n\", token_ptr->token_string);return(TRUE);\n           case 11: fprintf(stdout, \"keyword,\\t\\\"or\\\".\\n\");return(TRUE);\n           case 13: fprintf(stdout, \"keyword,\\t\\\"if\\\".\\n\");return(TRUE);\n           case 16: fprintf(stdout, \"keyword,\\t\\\"xor\\\".\\n\");return(TRUE);\n",
+      "patch_hash": "1adf90222d3ec1c592dddc4bc3f4d68b1fd737a293b936a32f60a3c70317acc5",
+      "model_candidate_source": "P005",
+      "fallback_copy_of": null,
+      "original_candidate_errors": [],
+      "duplicate_of": null,
+      "validation_reused_from": null,
+      "validation": {
+        "compile": {
+          "attempted": true,
+          "success": true,
+          "return_code": 0,
+          "timed_out": false,
+          "stdout_tail": "",
+          "stderr_tail": "",
+          "elapsed_seconds": 0.052,
+          "command": [
+            "/usr/bin/gcc",
+            "-std=c11",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v333/LLM/output_MR/patches/P005/workspace/print_tokens.c",
+            "-o",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v333/LLM/output_MR/patches/P005/workspace/llm_candidate"
+          ],
+          "executable_path": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v333/LLM/output_MR/patches/P005/workspace/llm_candidate"
+        },
+        "visible_checks": []
+      }
+    }
+  ],
+  "summary": {
+    "requested": 5,
+    "generated": 5,
+    "compile_passed": 4,
+    "visible_checks_passed": 0,
+    "fallback_filled": 0,
+    "duplicates": 0,
+    "failed": 1
+  },
+  "interpretation": "Compilation only proves syntactic/build validity. Semantic repair success requires independent hidden tests or an external evaluator."
+}

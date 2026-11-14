@@ -1,0 +1,26 @@
+--- a/print_tokens2.c
++++ b/print_tokens2.c
+@@ -215,15 +215,20 @@
+          return(FALSE);
+     }
+ 
+- if(str_com_id!=2)    /* is comment token */
++  if(str_com_id==2)    /* is comment token */
++    { if(ch=='\n')     /* for comment until meet end of line */
++         return(TRUE);
++       else
++         return(FALSE);
++    }
+    { if(ch=='\n')     /* for comment until meet end of line */
+         return(TRUE);
+       else
+         return(FALSE);
+    }
+ 
+- if(is_spec_symbol(ch1)==TRUE) return(TRUE); /* is special_symbol? */
+- if(ch ==' ' || ch=='\n' || ch==59) return(TRUE); 
++  if(is_spec_symbol(ch1)==TRUE) return(FALSE); /* is special_symbol? */
++  if(ch ==' ' || ch=='\n' || ch==59) return(FALSE); /* others until meet blank or tab or 59 */
+                               /* others until meet blank or tab or 59 */
+  return(FALSE);               /* other case,return FALSE */
+ }

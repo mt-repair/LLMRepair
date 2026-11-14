@@ -1,0 +1,28 @@
+--- a/Mutant2.py
++++ b/Mutant2.py
+@@ -40,7 +40,10 @@
+                     icol = mask[icol_add]
+                     if icol == -1:
+                         jc[nz] = icol_add
+-                        c[nz] = b[k]
++c[nz] = b[k]
++mask[icol_add] = nz
++nz = nz + 1
++symbol = 1
+                         mask[icol_add] = nz
+                         nz = nz + 1
+                         symbol = 1
+@@ -65,7 +68,12 @@
+                     a.append(A[i][j])
+                     off_set = off_set + 1
+                     ja.append(j)  #  Record Columns Only 
+-            ia.append(off_set)  #  How many are there in the first few rows? 
++ia.append(off_set)
++if i == len(A) - 1:
++    ia.append(off_set)
++else:
++    ia.append(off_set)
++    off_set = 0
+         return a, ia, ja
+ 
+     def MatMul(self, mat):

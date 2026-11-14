@@ -1,0 +1,124 @@
+[3, 2]
+[ Source Test Case ]
+ Input :
+;IF A L  ;tJvMR3
+ Variant Program Output :
+identifier,"I".
+identifier,"F".
+identifier,"A".
+identifier,"L".
+identifier,"t".
+identifier,"J".
+identifier,"v".
+identifier,"M".
+identifier,"R".
+numeric,3.
+eof.
+ Correct program output :
+eof.
+[ follow-up test case ]
+ Input :
+;
+ Variant Program Output :
+eof.
+ Correct program output :
+eof.
+MR_Status: 1
+
+[2, 4]
+[ Source Test Case ]
+ Input :
+xor 
+;;bWJ00dn9b10m833oe6s6D5Y2S51Wl8VJHX4
+ Variant Program Output :
+identifier,"x".
+identifier,"o".
+identifier,"r".
+identifier,"b".
+identifier,"W".
+identifier,"J".
+numeric,0.
+numeric,0.
+identifier,"d".
+identifier,"n".
+numeric,9.
+identifier,"b".
+numeric,1.
+numeric,0.
+identifier,"m".
+numeric,8.
+numeric,3.
+numeric,3.
+identifier,"o".
+identifier,"e".
+numeric,6.
+identifier,"s".
+numeric,6.
+identifier,"D".
+numeric,5.
+identifier,"Y".
+numeric,2.
+identifier,"S".
+numeric,5.
+numeric,1.
+identifier,"W".
+identifier,"l".
+numeric,8.
+identifier,"V".
+identifier,"J".
+identifier,"H".
+identifier,"X".
+numeric,4.
+eof.
+ Correct program output :
+keyword,"xor".
+eof.
+[ follow-up test case ]
+ Input :
+xor 
+;
+ Variant Program Output :
+identifier,"x".
+identifier,"o".
+identifier,"r".
+eof.
+ Correct program output :
+keyword,"xor".
+eof.
+MR_Status: 1
+
+[1, 5]
+[ Source Test Case ]
+ Input :
+=> K3dQ   ;hp7
+ Variant Program Output :
+error,"=".
+error,">".
+identifier,"K".
+numeric,3.
+identifier,"d".
+identifier,"Q".
+identifier,"h".
+identifier,"p".
+numeric,7.
+eof.
+ Correct program output :
+keyword,"=>".
+identifier,"K3dQ".
+eof.
+[ follow-up test case ]
+ Input :
+=> k3Dq   ;
+ Variant Program Output :
+error,"=".
+error,">".
+identifier,"k".
+numeric,3.
+identifier,"D".
+identifier,"q".
+eof.
+ Correct program output :
+keyword,"=>".
+identifier,"k3Dq".
+eof.
+MR_Status: 1

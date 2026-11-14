@@ -1,0 +1,23 @@
+--- a/print_tokens.c
++++ b/print_tokens.c
+@@ -228,7 +228,10 @@
+                  case 16 : ch=get_char(tstream_ptr->ch_stream);
+                            if(check_delimiter(ch)==TRUE)
+                            {
+-                                 token_ptr->token_id=keyword(80);
++if (!is_valid_keyword_state(cu_state)) {
++    return(error_or_eof_case(...));
++}
++ token_ptr->token_id=keyword(cu_state);
+                                  unget_char(ch,tstream_ptr->ch_stream);
+                                  token_ptr->token_string[0]='\0';
+                                  return(token_ptr);
+@@ -397,6 +400,8 @@
+          default: fprintf(stdout, "error\n");break;
+      }
+      exit(0);
++static BOOLEAN is_valid_keyword_state(state) {
++    return(state ==6 || state ==9 || state ==11 || state ==13 || state ==16);
+ }
+ 
+ /* **********************************************************************

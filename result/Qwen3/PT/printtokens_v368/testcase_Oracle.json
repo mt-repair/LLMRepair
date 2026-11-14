@@ -1,0 +1,58 @@
+[
+  {
+    "test_id": "source_s5_mr2",
+    "input": ";if i ` ;nd5 ;YfI8\n",
+    "actual_output": "identifier,\t\"f\".\nidentifier,\t\"i\".\nbquote.\nidentifier,\t\"d5\".\nidentifier,\t\"fI8\".\neof.",
+    "expected_output": "eof.",
+    "test_status": "nopass"
+  },
+  {
+    "test_id": "followup_s5_mr2",
+    "input": ";\n",
+    "actual_output": "eof.",
+    "expected_output": "eof.",
+    "test_status": "pass"
+  },
+  {
+    "test_id": "source_s4_mr3",
+    "input": ";7bTQLAMBDA\n;7bTQLAMBDA\n",
+    "actual_output": "identifier,\t\"bTQLAMBDA\".\nidentifier,\t\"bTQLAMBDA\".\neof.",
+    "expected_output": "eof.",
+    "test_status": "nopass"
+  },
+  {
+    "test_id": "followup_s4_mr3",
+    "input": ";7bTQLAMBDA\n;;7bTQLAMBDA\n",
+    "actual_output": "identifier,\t\"bTQLAMBDA\".\nerror,\t\"7bTQLAMBDA\".\neof.",
+    "expected_output": "eof.",
+    "test_status": "nopass"
+  },
+  {
+    "test_id": "source_s3_mr4",
+    "input": ";`6#l\n93\n",
+    "actual_output": "numeric,\t6.\ncharacter,\t\"l\".\nnumeric,\t93.\neof.",
+    "expected_output": "numeric,\t93.\neof.",
+    "test_status": "nopass"
+  },
+  {
+    "test_id": "followup_s3_mr4",
+    "input": ";\n93\n",
+    "actual_output": "numeric,\t3.\neof.",
+    "expected_output": "numeric,\t93.\neof.",
+    "test_status": "nopass"
+  },
+  {
+    "test_id": "source_s3_mr5",
+    "input": ";`6#l\n93\n",
+    "actual_output": "numeric,\t6.\ncharacter,\t\"l\".\nnumeric,\t93.\neof.",
+    "expected_output": "numeric,\t93.\neof.",
+    "test_status": "nopass"
+  },
+  {
+    "test_id": "followup_s3_mr5",
+    "input": ";\n93\n",
+    "actual_output": "numeric,\t3.\neof.",
+    "expected_output": "numeric,\t93.\neof.",
+    "test_status": "nopass"
+  }
+]

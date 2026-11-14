@@ -1,0 +1,16 @@
+[
+  {
+    "test_id": "source_s1_mr4",
+    "input": ";and \"vY\" (  ;Fzr7\nand \"vY\" (  ;Fzr7\n",
+    "actual_output": "error,\t\"a\".\nerror,\t\"n\".\nerror,\t\"d\".\nerror,\t\"\".\nerror,\t\"\"\".\nerror,\t\"v\".\nerror,\t\"Y\".\nerror,\t\"\"\".\nerror,\t\"\".\nlparen.\nerror,\t\"\".\nerror,\t\"\".\neof.",
+    "expected_output": "missing",
+    "test_status": "unknown"
+  },
+  {
+    "test_id": "followup_s1_mr4",
+    "input": ";and \"vY\" (  ;Fzr7\nAND \"Vy\" (  ;fZR7\n",
+    "actual_output": "identifier,\t\"A\".\nidentifier,\t\"N\".\nidentifier,\t\"D\".\nerror,\t\"\".\nerror,\t\"\"\".\nerror,\t\"V\".\nerror,\t\"y\".\nerror,\t\"\"\".\nerror,\t\"\".\nlparen.\nerror,\t\"\".\nerror,\t\"\".\neof.",
+    "expected_output": "missing",
+    "test_status": "unknown"
+  }
+]

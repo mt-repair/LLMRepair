@@ -1,0 +1,16 @@
+[
+  {
+    "test_id": "source_s1_mr4",
+    "input": ";and \"vY\" (  ;Fzr7\nand \"vY\" (  ;Fzr7\n",
+    "actual_output": "keyword,\t\"and\".\nerror,\t\"\b\".\nstring,\t\"vY\".\nlparen.\neof.",
+    "expected_output": "keyword,\t\"and\".\nstring,\t\"vY\".\nlparen.\neof.",
+    "test_status": "nopass"
+  },
+  {
+    "test_id": "followup_s1_mr4",
+    "input": ";and \"vY\" (  ;Fzr7\nAND \"Vy\" (  ;fZR7\n",
+    "actual_output": "identifier,\t\"AND\".\nstring,\t\"Vy\".\nlparen.\neof.",
+    "expected_output": "identifier,\t\"AND\".\nstring,\t\"Vy\".\nlparen.\neof.",
+    "test_status": "pass"
+  }
+]

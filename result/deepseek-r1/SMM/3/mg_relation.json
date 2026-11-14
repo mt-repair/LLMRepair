@@ -1,0 +1,34 @@
+[
+  {
+    "mr_id": "MR1",
+    "source_test_id": "input1",
+    "followup_test_id": "input2",
+    "input_transformation": " Input Matrix for a Given Source Test Case  (A, B) , first transpose the two matrices separately, and then swap their positions in the matrix multiplication. Specifically, let  A' = B^T，B' = A^T , therefore, the input for the follow-up test case is  (B^T, A^T) . That is, the original first input matrix  A  After being transposed, it is placed in the second position, the original second input matrix  B  After being transposed, it is placed in the first position. ",
+    "output_relation": " Set the output of the source test case to  C = A × B , the follow-up test case output is  C' = B^T × A^T . According to the transpose property of matrix multiplication  (A × B)^T = B^T × A^T Get  C' = C^T Therefore, the output matrix of the follow-up test case should be equal to the transpose of the output matrix of the source test case. ",
+	  "actual_relation_status": "VMG"
+  },
+  {
+    "mr_id": "MR2",
+    "source_test_id": "input3",
+    "followup_test_id": "input4",
+    "input_transformation": " First, construct a diagonal matrix.  Q , where all elements on the main diagonal are  4 , the remaining elements are all  0 Therefore,  Q = 4I Hold.  A  Unchanged, the matrix will be  B  Right Multiplication  Q Specifically, let  A' = A，B' = B × Q When  Q  Dimensions and  B  When the number of columns matches, there are  B × Q = 4B Therefore, this transformation is essentially a matrix  B  All elements of  are multiplied by  4 . The resulting follow-up test case input is  (A, 4B)。",
+    "output_relation": " Set the output of the source test case to  C = A × B . The output of the follow-up test case is  C' = A × (4B) . According to the scalar multiplication property of matrix multiplication, we have  C' = 4 × (A × B) = 4C Therefore, each element in the follow-up test case output matrix should be equal to the corresponding element in the source test case output matrix.  4  times. The expected relationship is  C' = 4C。",
+	"actual_relation_status": "VMG"
+  },
+  {
+    "mr_id": "MR3",
+    "source_test_id": "input5",
+    "followup_test_id": "input6",
+    "input_transformation": " Hold Matrix  A  No change, directly use the matrix  B  Multiply each element in  by the scalar  7 Specifically, let  A' = A，B' = 7B AND:  MR5  differed MR7  It is done directly by element-wise multiplication.  B  Perform scaling. The resulting follow-up test case input is  (A, 7B)。",
+    "output_relation": " Set the output of the source test case to  C = A × B . The output of the follow-up test case is  C' = A × (7B) . According to the scalar multiplication property of matrix multiplication, we have  C' = 7 × (A × B) = 7C Therefore, each element in the follow-up test case output matrix should be equal to the corresponding element in the source test case output matrix.  7  times. The expected relationship is  C' = 7C。",
+	"actual_relation_status": "VMG"
+  },
+  {
+    "mr_id": "MR4",
+    "source_test_id": "input7",
+    "followup_test_id": "input8",
+    "input_transformation": " First, construct an identity matrix.  I , whose dimensions are equal to the matrix  A  the number of rows of . Then, the identity matrix  I  Add to Matrix  A  upward, while maintaining  B  remains unchanged. Specifically, let  A' = A + I，B' = B . This operation is equivalent to  A  Add to each main diagonal element of  1 , while the remaining non-diagonal elements remain unchanged. The resulting follow-up test case input is  (A + I, B)。",
+    "output_relation": " Set the output of the source test case to  C = A × B . The output of the follow-up test case is  C' = (A + I) × B . According to the distributive law of matrix multiplication over addition, we have  C' = A × B + I × B  out of   I  is the identity matrix, so  I × B = B Therefore,  C' = C + B . That is, the output of the follow-up test case should be equal to the output matrix of the source test case.  C  With Source Input Matrix  B  The result of matrix addition for . The expected relationship is  C' = C + B。",
+    "actual_relation_status": "VMG"
+  }
+]

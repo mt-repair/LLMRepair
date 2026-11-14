@@ -1,0 +1,73 @@
+{
+  "attempts": [
+    {
+      "attempt": 1,
+      "kind": "duplicate_allowed",
+      "errors": [],
+      "response_metadata": {
+        "num_ctx": 32768,
+        "num_predict": 1800,
+        "prompt_chars": 51526,
+        "temperature": 0.3,
+        "seed": 2018,
+        "model": "deepseek-r1:14b",
+        "request_options": {
+          "temperature": 0.3,
+          "seed": 2018,
+          "num_ctx": 32768,
+          "num_predict": 1800
+        },
+        "format_mode": "schema",
+        "http_attempts": [
+          {
+            "status_code": 200,
+            "think": false
+          }
+        ],
+        "done": true,
+        "done_reason": "stop",
+        "prompt_eval_count": 20371,
+        "eval_count": 367,
+        "prompt_eval_duration": 18424958000,
+        "eval_duration": 24668078000,
+        "total_duration": 44362361900,
+        "load_duration": 6438400,
+        "client_elapsed_seconds": 46.422
+      },
+      "sampling_temperature": 0.3,
+      "sampling_seed": 2018,
+      "duplicate_of": "RC001-P002"
+    }
+  ],
+  "response_metadata": {
+    "num_ctx": 32768,
+    "num_predict": 1800,
+    "prompt_chars": 51526,
+    "temperature": 0.3,
+    "seed": 2018,
+    "model": "deepseek-r1:14b",
+    "request_options": {
+      "temperature": 0.3,
+      "seed": 2018,
+      "num_ctx": 32768,
+      "num_predict": 1800
+    },
+    "format_mode": "schema",
+    "http_attempts": [
+      {
+        "status_code": 200,
+        "think": false
+      }
+    ],
+    "done": true,
+    "done_reason": "stop",
+    "prompt_eval_count": 20371,
+    "eval_count": 367,
+    "prompt_eval_duration": 18424958000,
+    "eval_duration": 24668078000,
+    "total_duration": 44362361900,
+    "load_duration": 6438400,
+    "client_elapsed_seconds": 46.422
+  },
+  "duplicate_retries": 0
+}

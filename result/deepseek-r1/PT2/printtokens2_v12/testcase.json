@@ -1,0 +1,44 @@
+[
+  {
+    "test_id": "source_s5_mr2",
+    "input": "=> W4vLoQv ` 9 ;Bm1\n=> W4vLoQv ` 9 ;Bm1\n",
+    "actual_output": "keyword,\"=>\".\nidentifier,\"W4vLoQv\".\nbquote.\nnumeric,9.\ncharacter,\"Bm1\".\nkeyword,\"=>\".\nidentifier,\"W4vLoQv\".\nbquote.\nnumeric,9.\ncharacter,\"Bm1\".\neof.",
+    "expected_output": "missing",
+    "test_status": "unknown"
+  },
+  {
+    "test_id": "followup_s5_mr2",
+    "input": "=> W4vLoQv ` 9 ;\n=> W4vLoQv ` 9 ;\n",
+    "actual_output": "keyword,\"=>\".\nidentifier,\"W4vLoQv\".\nbquote.\nnumeric,9.\nkeyword,\"=>\".\nidentifier,\"W4vLoQv\".\nbquote.\nnumeric,9.\neof.",
+    "expected_output": "missing",
+    "test_status": "unknown"
+  },
+  {
+    "test_id": "source_s3_mr4",
+    "input": ";IF A L  ;tJvMR3\n",
+    "actual_output": "character,\"IF A L  ;tJvMR3\".\neof.",
+    "expected_output": "missing",
+    "test_status": "unknown"
+  },
+  {
+    "test_id": "followup_s3_mr4",
+    "input": ";\n",
+    "actual_output": "eof.",
+    "expected_output": "missing",
+    "test_status": "unknown"
+  },
+  {
+    "test_id": "source_s1_mr5",
+    "input": "=> K3dQ   ;hp7\n",
+    "actual_output": "keyword,\"=>\".\nidentifier,\"K3dQ\".\ncharacter,\"hp7\".\neof.",
+    "expected_output": "missing",
+    "test_status": "unknown"
+  },
+  {
+    "test_id": "followup_s1_mr5",
+    "input": "=> k3Dq   ;\n",
+    "actual_output": "keyword,\"=>\".\nidentifier,\"k3Dq\".\neof.",
+    "expected_output": "missing",
+    "test_status": "unknown"
+  }
+]

@@ -1,0 +1,320 @@
+{
+  "workflow": "single_llm_direct_repair",
+  "effective_mode": "ORACLE",
+  "program_path": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v333/print_tokens.c",
+  "output_dir": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v333/LLM/output_Oracle",
+  "llm_call_attempts": 1,
+  "normal_llm_calls_per_scenario": 1,
+  "patch_candidates": [
+    {
+      "patch_id": "P001",
+      "status": "compile_failed",
+      "proposal": {
+        "diagnosis": "The issue lies in the print_token function where case 9 (corresponding to the AND keyword) does not output the correct string. The code simply returns TRUE without printing, causing keywords like 'and' to be misclassified.",
+        "evidence_reasoning": {
+          "causal_chain": [
+            "The failing test case shows that when input contains ';and \"vY\" (...', the expected keyword is not printed.",
+            "In print_token(), case 9 (for AND) has no output handling, leading to incorrect classification."
+          ],
+          "mr_refs": [],
+          "testcase_refs": [
+            "source_s1_mr4"
+          ]
+        },
+        "uncertainty": "There is high confidence in these repairs as they directly address the missing output for the AND keyword. The known fault at line 513 indicates a direct issue with this case statement.",
+        "assumption": "Add keyword printing for case 9.",
+        "edits": [
+          {
+            "end_line": 513,
+            "rationale": "Replace the null statement with proper keyword output.",
+            "replacement": "fprintf(stdout, \"keyword,\\t\"and\".\\n\");return(TRUE);",
+            "start_line": 513
+          }
+        ],
+        "expected_effect": "Correctly print 'keyword, \"and\".' for AND tokens.",
+        "preservation_constraints": [
+          "Other cases in print_token() should remain unaffected."
+        ],
+        "repair_intent": "Ensure AND keyword is properly printed."
+      },
+      "proposal_errors": [],
+      "patch_diff": "--- a/print_tokens.c\n+++ b/print_tokens.c\n@@ -510,7 +510,7 @@\n                        fprintf(stdout, \"\\\".\\n\");return(TRUE);\n           case EOTSTREAM : fprintf(stdout, \"eof.\\n\");return(TRUE);\n           case 6 : fprintf(stdout, \"keyword,\\t\\\"lambda\\\".\\n\");return(TRUE);\n-          case 9 : 0;return(TRUE);\n+fprintf(stdout, \"keyword,\\t\"and\".\\n\");return(TRUE);\n           case 11: fprintf(stdout, \"keyword,\\t\\\"or\\\".\\n\");return(TRUE);\n           case 13: fprintf(stdout, \"keyword,\\t\\\"if\\\".\\n\");return(TRUE);\n           case 16: fprintf(stdout, \"keyword,\\t\\\"xor\\\".\\n\");return(TRUE);\n",
+      "patch_hash": "51f6834574f9f7496333373945301af330a709bdce6bbdf40c668a5c34d1eeaf",
+      "model_candidate_source": "P001",
+      "fallback_copy_of": null,
+      "original_candidate_errors": [],
+      "duplicate_of": null,
+      "validation_reused_from": null,
+      "validation": {
+        "compile": {
+          "attempted": true,
+          "success": false,
+          "return_code": 1,
+          "timed_out": false,
+          "stdout_tail": "",
+          "stderr_tail": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v333/LLM/output_Oracle/patches/P001/workspace/print_tokens.c: In function ‘print_token’:\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v333/LLM/output_Oracle/patches/P001/workspace/print_tokens.c:513:29: error: expected ‘)’ before ‘and’\n  513 | fprintf(stdout, \"keyword,\\t\"and\".\\n\");return(TRUE);\n      |        ~                    ^~~\n      |                             )\n",
+          "elapsed_seconds": 0.011,
+          "command": [
+            "/usr/bin/gcc",
+            "-std=c11",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v333/LLM/output_Oracle/patches/P001/workspace/print_tokens.c",
+            "-o",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v333/LLM/output_Oracle/patches/P001/workspace/llm_candidate"
+          ],
+          "executable_path": null
+        },
+        "visible_checks": []
+      }
+    },
+    {
+      "patch_id": "P002",
+      "status": "compile_failed",
+      "proposal": {
+        "diagnosis": "The issue lies in the print_token function where case 9 (corresponding to the AND keyword) does not output the correct string. The code simply returns TRUE without printing, causing keywords like 'and' to be misclassified.",
+        "evidence_reasoning": {
+          "causal_chain": [
+            "The failing test case shows that when input contains ';and \"vY\" (...', the expected keyword is not printed.",
+            "In print_token(), case 9 (for AND) has no output handling, leading to incorrect classification."
+          ],
+          "mr_refs": [],
+          "testcase_refs": [
+            "source_s1_mr4"
+          ]
+        },
+        "uncertainty": "There is high confidence in these repairs as they directly address the missing output for the AND keyword. The known fault at line 513 indicates a direct issue with this case statement.",
+        "assumption": "Alternative formatting fix.",
+        "edits": [
+          {
+            "end_line": 513,
+            "rationale": "Use consistent string formatting with other keywords.",
+            "replacement": "fprintf(stdout, \"keyword,\\t\"and\".\\n\");return(TRUE);",
+            "start_line": 513
+          }
+        ],
+        "expected_effect": "Same as first candidate but with alternative formatting.",
+        "preservation_constraints": [
+          "Consistency in string output style."
+        ],
+        "repair_intent": "Ensure AND keyword is properly printed."
+      },
+      "proposal_errors": [],
+      "patch_diff": "--- a/print_tokens.c\n+++ b/print_tokens.c\n@@ -510,7 +510,7 @@\n                        fprintf(stdout, \"\\\".\\n\");return(TRUE);\n           case EOTSTREAM : fprintf(stdout, \"eof.\\n\");return(TRUE);\n           case 6 : fprintf(stdout, \"keyword,\\t\\\"lambda\\\".\\n\");return(TRUE);\n-          case 9 : 0;return(TRUE);\n+fprintf(stdout, \"keyword,\\t\"and\".\\n\");return(TRUE);\n           case 11: fprintf(stdout, \"keyword,\\t\\\"or\\\".\\n\");return(TRUE);\n           case 13: fprintf(stdout, \"keyword,\\t\\\"if\\\".\\n\");return(TRUE);\n           case 16: fprintf(stdout, \"keyword,\\t\\\"xor\\\".\\n\");return(TRUE);\n",
+      "patch_hash": "51f6834574f9f7496333373945301af330a709bdce6bbdf40c668a5c34d1eeaf",
+      "model_candidate_source": "P002",
+      "fallback_copy_of": null,
+      "original_candidate_errors": [],
+      "duplicate_of": "P001",
+      "validation_reused_from": "P001",
+      "validation": {
+        "compile": {
+          "attempted": true,
+          "success": false,
+          "return_code": 1,
+          "timed_out": false,
+          "stdout_tail": "",
+          "stderr_tail": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v333/LLM/output_Oracle/patches/P001/workspace/print_tokens.c: In function ‘print_token’:\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v333/LLM/output_Oracle/patches/P001/workspace/print_tokens.c:513:29: error: expected ‘)’ before ‘and’\n  513 | fprintf(stdout, \"keyword,\\t\"and\".\\n\");return(TRUE);\n      |        ~                    ^~~\n      |                             )\n",
+          "elapsed_seconds": 0.011,
+          "command": [
+            "/usr/bin/gcc",
+            "-std=c11",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v333/LLM/output_Oracle/patches/P001/workspace/print_tokens.c",
+            "-o",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v333/LLM/output_Oracle/patches/P001/workspace/llm_candidate"
+          ],
+          "executable_path": null
+        },
+        "visible_checks": []
+      }
+    },
+    {
+      "patch_id": "P003",
+      "status": "compile_failed",
+      "proposal": {
+        "diagnosis": "The issue lies in the print_token function where case 9 (corresponding to the AND keyword) does not output the correct string. The code simply returns TRUE without printing, causing keywords like 'and' to be misclassified.",
+        "evidence_reasoning": {
+          "causal_chain": [
+            "The failing test case shows that when input contains ';and \"vY\" (...', the expected keyword is not printed.",
+            "In print_token(), case 9 (for AND) has no output handling, leading to incorrect classification."
+          ],
+          "mr_refs": [],
+          "testcase_refs": [
+            "source_s1_mr4"
+          ]
+        },
+        "uncertainty": "There is high confidence in these repairs as they directly address the missing output for the AND keyword. The known fault at line 513 indicates a direct issue with this case statement.",
+        "assumption": "Fix using a helper macro.",
+        "edits": [
+          {
+            "end_line": 513,
+            "rationale": "Use existing token_id to fetch the string value.",
+            "replacement": "fprintf(stdout, \"keyword,\\t%s\".\\n\", token_ptr->token_string);return(TRUE);",
+            "start_line": 513
+          }
+        ],
+        "expected_effect": "Dynamic keyword printing based on token content.",
+        "preservation_constraints": [
+          "Token string is already set correctly in get_token()."
+        ],
+        "repair_intent": "Use existing data to print keywords."
+      },
+      "proposal_errors": [],
+      "patch_diff": "--- a/print_tokens.c\n+++ b/print_tokens.c\n@@ -510,7 +510,7 @@\n                        fprintf(stdout, \"\\\".\\n\");return(TRUE);\n           case EOTSTREAM : fprintf(stdout, \"eof.\\n\");return(TRUE);\n           case 6 : fprintf(stdout, \"keyword,\\t\\\"lambda\\\".\\n\");return(TRUE);\n-          case 9 : 0;return(TRUE);\n+fprintf(stdout, \"keyword,\\t%s\".\\n\", token_ptr->token_string);return(TRUE);\n           case 11: fprintf(stdout, \"keyword,\\t\\\"or\\\".\\n\");return(TRUE);\n           case 13: fprintf(stdout, \"keyword,\\t\\\"if\\\".\\n\");return(TRUE);\n           case 16: fprintf(stdout, \"keyword,\\t\\\"xor\\\".\\n\");return(TRUE);\n",
+      "patch_hash": "17559fa2cf3d356bbc2d321b2640db17da6139cfdbb95b61cfd2f9274f30e982",
+      "model_candidate_source": "P003",
+      "fallback_copy_of": null,
+      "original_candidate_errors": [],
+      "duplicate_of": null,
+      "validation_reused_from": null,
+      "validation": {
+        "compile": {
+          "attempted": true,
+          "success": false,
+          "return_code": 1,
+          "timed_out": false,
+          "stdout_tail": "",
+          "stderr_tail": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v333/LLM/output_Oracle/patches/P003/workspace/print_tokens.c: In function ‘print_token’:\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v333/LLM/output_Oracle/patches/P003/workspace/print_tokens.c:513:32: error: stray ‘\\’ in program\n  513 | fprintf(stdout, \"keyword,\\t%s\".\\n\", token_ptr->token_string);return(TRUE);\n      |                                ^\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v333/LLM/output_Oracle/patches/P003/workspace/print_tokens.c:513:31: error: request for member ‘n’ in something not a structure or union\n  513 | fprintf(stdout, \"keyword,\\t%s\".\\n\", token_ptr->token_string);return(TRUE);\n      |                               ^\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v333/LLM/output_Oracle/patches/P003/workspace/print_tokens.c:513:34: warning: missing terminating \" character\n  513 | fprintf(stdout, \"keyword,\\t%s\".\\n\", token_ptr->token_string);return(TRUE);\n      |                                  ^\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v333/LLM/output_Oracle/patches/P003/workspace/print_tokens.c:513:34: error: missing terminating \" character\n  513 | fprintf(stdout, \"keyword,\\t%s\".\\n\", token_ptr->token_string);return(TRUE);\n      |                                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v333/LLM/output_Oracle/patches/P003/workspace/print_tokens.c:513:34: error: expected ‘)’ before ‘case’\n  513 | fprintf(stdout, \"keyword,\\t%s\".\\n\", token_ptr->token_string);return(TRUE);\n      |        ~                         ^\n      |                                  )\n  514 |           case 11: fprintf(stdout, \"keyword,\\t\\\"or\\\".\\n\");return(TRUE);\n      |           ~~~~                    \n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v333/LLM/output_Oracle/patches/P003/workspace/print_tokens.c:533:26: error: expected ‘;’ before ‘}’ token\n  533 |           default: break;\n      |                          ^\n      |                          ;\n  534 |       }\n      |       ~                   \n",
+          "elapsed_seconds": 0.015,
+          "command": [
+            "/usr/bin/gcc",
+            "-std=c11",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v333/LLM/output_Oracle/patches/P003/workspace/print_tokens.c",
+            "-o",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v333/LLM/output_Oracle/patches/P003/workspace/llm_candidate"
+          ],
+          "executable_path": null
+        },
+        "visible_checks": []
+      }
+    },
+    {
+      "patch_id": "P004",
+      "status": "compile_failed",
+      "proposal": {
+        "diagnosis": "The issue lies in the print_token function where case 9 (corresponding to the AND keyword) does not output the correct string. The code simply returns TRUE without printing, causing keywords like 'and' to be misclassified.",
+        "evidence_reasoning": {
+          "causal_chain": [
+            "The failing test case shows that when input contains ';and \"vY\" (...', the expected keyword is not printed.",
+            "In print_token(), case 9 (for AND) has no output handling, leading to incorrect classification."
+          ],
+          "mr_refs": [],
+          "testcase_refs": [
+            "source_s1_mr4"
+          ]
+        },
+        "uncertainty": "There is high confidence in these repairs as they directly address the missing output for the AND keyword. The known fault at line 513 indicates a direct issue with this case statement.",
+        "assumption": "Add debug logging.",
+        "edits": [
+          {
+            "end_line": 513,
+            "rationale": "Ensure the case is hit and properly handled.",
+            "replacement": "fprintf(stdout, \"keyword,\\t\"and\".\\n\");return(TRUE);",
+            "start_line": 513
+          }
+        ],
+        "expected_effect": "Same as first candidate with additional logging.",
+        "preservation_constraints": [
+          "No debug output in production by default."
+        ],
+        "repair_intent": "Ensure AND keyword is properly printed."
+      },
+      "proposal_errors": [],
+      "patch_diff": "--- a/print_tokens.c\n+++ b/print_tokens.c\n@@ -510,7 +510,7 @@\n                        fprintf(stdout, \"\\\".\\n\");return(TRUE);\n           case EOTSTREAM : fprintf(stdout, \"eof.\\n\");return(TRUE);\n           case 6 : fprintf(stdout, \"keyword,\\t\\\"lambda\\\".\\n\");return(TRUE);\n-          case 9 : 0;return(TRUE);\n+fprintf(stdout, \"keyword,\\t\"and\".\\n\");return(TRUE);\n           case 11: fprintf(stdout, \"keyword,\\t\\\"or\\\".\\n\");return(TRUE);\n           case 13: fprintf(stdout, \"keyword,\\t\\\"if\\\".\\n\");return(TRUE);\n           case 16: fprintf(stdout, \"keyword,\\t\\\"xor\\\".\\n\");return(TRUE);\n",
+      "patch_hash": "51f6834574f9f7496333373945301af330a709bdce6bbdf40c668a5c34d1eeaf",
+      "model_candidate_source": "P004",
+      "fallback_copy_of": null,
+      "original_candidate_errors": [],
+      "duplicate_of": "P001",
+      "validation_reused_from": "P001",
+      "validation": {
+        "compile": {
+          "attempted": true,
+          "success": false,
+          "return_code": 1,
+          "timed_out": false,
+          "stdout_tail": "",
+          "stderr_tail": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v333/LLM/output_Oracle/patches/P001/workspace/print_tokens.c: In function ‘print_token’:\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v333/LLM/output_Oracle/patches/P001/workspace/print_tokens.c:513:29: error: expected ‘)’ before ‘and’\n  513 | fprintf(stdout, \"keyword,\\t\"and\".\\n\");return(TRUE);\n      |        ~                    ^~~\n      |                             )\n",
+          "elapsed_seconds": 0.011,
+          "command": [
+            "/usr/bin/gcc",
+            "-std=c11",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v333/LLM/output_Oracle/patches/P001/workspace/print_tokens.c",
+            "-o",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v333/LLM/output_Oracle/patches/P001/workspace/llm_candidate"
+          ],
+          "executable_path": null
+        },
+        "visible_checks": []
+      }
+    },
+    {
+      "patch_id": "P005",
+      "status": "compile_failed",
+      "proposal": {
+        "diagnosis": "The issue lies in the print_token function where case 9 (corresponding to the AND keyword) does not output the correct string. The code simply returns TRUE without printing, causing keywords like 'and' to be misclassified.",
+        "evidence_reasoning": {
+          "causal_chain": [
+            "The failing test case shows that when input contains ';and \"vY\" (...', the expected keyword is not printed.",
+            "In print_token(), case 9 (for AND) has no output handling, leading to incorrect classification."
+          ],
+          "mr_refs": [],
+          "testcase_refs": [
+            "source_s1_mr4"
+          ]
+        },
+        "uncertainty": "There is high confidence in these repairs as they directly address the missing output for the AND keyword. The known fault at line 513 indicates a direct issue with this case statement.",
+        "assumption": "Refactor case handling.",
+        "edits": [
+          {
+            "end_line": 513,
+            "rationale": "Consolidate keyword cases for better maintainability.",
+            "replacement": "fprintf(stdout, \"keyword,\\t%s\".\\n\", token_str);return(TRUE);",
+            "start_line": 513
+          }
+        ],
+        "expected_effect": "Refactored code with improved readability.",
+        "preservation_constraints": [
+          "Consistency with other keyword cases."
+        ],
+        "repair_intent": "Improve code structure while fixing the bug."
+      },
+      "proposal_errors": [],
+      "patch_diff": "--- a/print_tokens.c\n+++ b/print_tokens.c\n@@ -510,7 +510,7 @@\n                        fprintf(stdout, \"\\\".\\n\");return(TRUE);\n           case EOTSTREAM : fprintf(stdout, \"eof.\\n\");return(TRUE);\n           case 6 : fprintf(stdout, \"keyword,\\t\\\"lambda\\\".\\n\");return(TRUE);\n-          case 9 : 0;return(TRUE);\n+fprintf(stdout, \"keyword,\\t%s\".\\n\", token_str);return(TRUE);\n           case 11: fprintf(stdout, \"keyword,\\t\\\"or\\\".\\n\");return(TRUE);\n           case 13: fprintf(stdout, \"keyword,\\t\\\"if\\\".\\n\");return(TRUE);\n           case 16: fprintf(stdout, \"keyword,\\t\\\"xor\\\".\\n\");return(TRUE);\n",
+      "patch_hash": "b576776cbbe14f94e8e511af204a577168bb6a7550a9b11d3398e2b2665021a0",
+      "model_candidate_source": "P005",
+      "fallback_copy_of": null,
+      "original_candidate_errors": [],
+      "duplicate_of": null,
+      "validation_reused_from": null,
+      "validation": {
+        "compile": {
+          "attempted": true,
+          "success": false,
+          "return_code": 1,
+          "timed_out": false,
+          "stdout_tail": "",
+          "stderr_tail": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v333/LLM/output_Oracle/patches/P005/workspace/print_tokens.c: In function ‘print_token’:\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v333/LLM/output_Oracle/patches/P005/workspace/print_tokens.c:513:32: error: stray ‘\\’ in program\n  513 | fprintf(stdout, \"keyword,\\t%s\".\\n\", token_str);return(TRUE);\n      |                                ^\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v333/LLM/output_Oracle/patches/P005/workspace/print_tokens.c:513:31: error: request for member ‘n’ in something not a structure or union\n  513 | fprintf(stdout, \"keyword,\\t%s\".\\n\", token_str);return(TRUE);\n      |                               ^\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v333/LLM/output_Oracle/patches/P005/workspace/print_tokens.c:513:34: warning: missing terminating \" character\n  513 | fprintf(stdout, \"keyword,\\t%s\".\\n\", token_str);return(TRUE);\n      |                                  ^\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v333/LLM/output_Oracle/patches/P005/workspace/print_tokens.c:513:34: error: missing terminating \" character\n  513 | fprintf(stdout, \"keyword,\\t%s\".\\n\", token_str);return(TRUE);\n      |                                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v333/LLM/output_Oracle/patches/P005/workspace/print_tokens.c:513:34: error: expected ‘)’ before ‘case’\n  513 | fprintf(stdout, \"keyword,\\t%s\".\\n\", token_str);return(TRUE);\n      |        ~                         ^\n      |                                  )\n  514 |           case 11: fprintf(stdout, \"keyword,\\t\\\"or\\\".\\n\");return(TRUE);\n      |           ~~~~                    \n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v333/LLM/output_Oracle/patches/P005/workspace/print_tokens.c:533:26: error: expected ‘;’ before ‘}’ token\n  533 |           default: break;\n      |                          ^\n      |                          ;\n  534 |       }\n      |       ~                   \n",
+          "elapsed_seconds": 0.015,
+          "command": [
+            "/usr/bin/gcc",
+            "-std=c11",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v333/LLM/output_Oracle/patches/P005/workspace/print_tokens.c",
+            "-o",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v333/LLM/output_Oracle/patches/P005/workspace/llm_candidate"
+          ],
+          "executable_path": null
+        },
+        "visible_checks": []
+      }
+    }
+  ],
+  "summary": {
+    "requested": 5,
+    "generated": 5,
+    "compile_passed": 0,
+    "visible_checks_passed": 0,
+    "fallback_filled": 0,
+    "duplicates": 2,
+    "failed": 5
+  },
+  "interpretation": "Compilation only proves syntactic/build validity. Semantic repair success requires independent hidden tests or an external evaluator."
+}

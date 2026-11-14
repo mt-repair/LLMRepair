@@ -1,0 +1,24 @@
+--- a/print_tokens.c
++++ b/print_tokens.c
+@@ -197,20 +197,7 @@
+ 	  if(token_ind < 80) /* ADDED ERROR CHECK - hf */
+ 	  {
+ 	      token_str[token_ind++]=ch;
+-	      next_st=next_state(cu_state,ch);
+-	  }
+-	  else
+-	  {
+-	      next_st = -1; /* - hf */
+-	  }
+-	  if (next_st == -1) { /* ERROR or EOF case */
+-	      return(error_or_eof_case(tstream_ptr,
+-				       token_ptr,cu_state,token_str,token_ind,ch));
+-	  } else if (next_st == -2) {/* This is numeric case. */
+-	      return(numeric_case(tstream_ptr,token_ptr,ch,
+-				  token_str,token_ind));
+-	  } else if (next_st == -3) {/* This is the IDENTIFIER case */
+-	      ;
++if (isupper(ch)) ch = tolower(ch);
+ 	      unget_char(ch,tstream_ptr->ch_stream);
+ 	      token_ind--;
+ 	      get_actual_token(token_str,token_ind);

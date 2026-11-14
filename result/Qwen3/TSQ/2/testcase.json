@@ -1,0 +1,44 @@
+[
+    {
+    "test_id": "input1",
+    "input": "[8, 8, 9]",
+    "actual_output": "31.17691453623979",
+    "expected_output": "missing",
+    "test_status": "unknown"  
+  },
+  {
+    "test_id": "input2",
+    "input": "[15.033296378372908, 8, 9]",
+    "actual_output": "29.764702249476642",
+    "expected_output": "missing",
+    "test_status": "unknown"  
+  },
+  {
+    "test_id": "input3",
+    "input": "[8, 15.033296378372908, 9]",
+    "actual_output": "29.764702249476642",
+    "expected_output": "missing",
+    "test_status": "unknown"  
+  },
+  {
+    "test_id": "input4", 
+    "input": "[8, 8, 13.228756555322953]",
+    "actual_output": "29.764702249476642",
+    "expected_output": "missing",
+    "test_status": "unknown"
+  },
+  {
+    "test_id": "input5",
+    "input": "[15.033296378372908, 23.45207879911715, 9]",
+    "actual_output": "29.764702249476642",
+    "expected_output": "missing",
+    "test_status": "unknown"
+  },
+  {
+    "test_id": "input6",
+    "input": "[15.033296378372908, 8, 22.338307903688676]",
+    "actual_output": "29.764702249476642",
+    "expected_output": "missing",
+    "test_status": "unknown"
+  }
+]

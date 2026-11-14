@@ -1,0 +1,20 @@
+--- a/Mutant3.py
++++ b/Mutant3.py
+@@ -18,7 +18,7 @@
+     def Non_Crossing_Biased_Climb(self):
+         self.upward_preferred = self.Inhibit_Biased_Climb() > self.Down_Separation
+         if self.upward_preferred:
+-            result = not (self.Own_Below_Threat()) or (
++result = not (self.Own_Below_Threat()) or (self.Own_Below_Threat() and self.Down_Separation >= self.ALIM())
+                     self.Own_Below_Threat() and not (self.Down_Separation >= self.ALIM()))
+         else:
+             result = self.Own_Above_Threat() and (self.Cur_Vertical_Sep >= self.MINSEP) and (
+@@ -56,7 +56,7 @@
+         self.NOZCROSS = 100
+         self.TCAS_TA = 1
+         self.NO_INTENT = 0
+-        enabled = self.High_Confidence or (self.Own_Tracked_Alt_Rate <= self.OLEV) and (
++enabled = self.High_Confidence and (self.Own_Tracked_Alt_Rate <= self.OLEV) and (self.Cur_Vertical_Sep > self.MAXALTDIFF)
+                     self.Cur_Vertical_Sep > self.MAXALTDIFF)
+         tcas_equipped = self.Other_Capability == self.TCAS_TA
+         intent_not_known = self.Two_of_Three_Reports_Valid and self.Other_RAC == self.NO_INTENT

@@ -1,0 +1,76 @@
+{
+  "patch_id": "P001",
+  "status": "compile_failed",
+  "proposal": {
+    "diagnosis": "The issue lies in the calculation of the area for obtuse triangles. In line 40, the area is incorrectly computed as `Max * h` instead of `(Max * h) / 2`, leading to double the expected area in certain cases. This explains the failing test cases where the actual output is twice the expected value.",
+    "evidence_reasoning": {
+      "causal_chain": [
+        "The incorrect area calculation in line 40 causes the area to be twice the correct value for obtuse triangles.",
+        "This leads to test cases like input2 and input4 failing, where the actual output is double the expected value."
+      ],
+      "mr_refs": [
+        "MR1",
+        "MR2",
+        "MR3",
+        "MR4",
+        "MR5",
+        "MR6",
+        "MR7",
+        "MR8",
+        "MR9",
+        "MR10"
+      ],
+      "testcase_refs": [
+        "input2",
+        "input4",
+        "input5",
+        "input12",
+        "input13",
+        "input14"
+      ]
+    },
+    "uncertainty": "No other issues were identified in the source code that could cause the observed test failures. The failing test cases consistently show the area being double the expected value, which strongly suggests the missing division by 2 in the obtuse triangle area calculation is the root cause.",
+    "assumption": "The area calculation for obtuse triangles should be halved to correct the miscalculation.",
+    "edits": [
+      {
+        "end_line": 40,
+        "rationale": "The area for an obtuse triangle should be (base * height) / 2, not base * height.",
+        "replacement": "area = Max * h / 2",
+        "start_line": 40
+      }
+    ],
+    "expected_effect": "Corrects the area calculation for obtuse triangles, ensuring the output matches expected values in failing test cases.",
+    "preservation_constraints": [
+      "The condition checks for valid triangles remain correct.",
+      "The area calculation for acute and right-angled triangles remains correct."
+    ],
+    "repair_intent": "Fix the area calculation for obtuse triangles by dividing by 2."
+  },
+  "proposal_errors": [],
+  "patch_diff": "--- a/Mutant5.py\n+++ b/Mutant5.py\n@@ -37,7 +37,7 @@\n         # print('Obtuse triangle')\n         if Min == mid:  #  Isoceles Triangle \n             h = math.sqrt(pow(Min, 2) - pow(Max / 2, 2))\n-            area = Max * h\n+area = Max * h / 2\n             symbol = 1\n             return area, symbol\n         else:  #  scalene obtuse triangle, Max Multiply by height divided by 2\n",
+  "patch_hash": "e87559dfb3b871b5a20925e0e83de5554d4df130a575e0af76330ab2548efcf6",
+  "model_candidate_source": "P001",
+  "fallback_copy_of": null,
+  "original_candidate_errors": [],
+  "duplicate_of": null,
+  "validation_reused_from": null,
+  "validation": {
+    "compile": {
+      "attempted": true,
+      "success": false,
+      "return_code": 1,
+      "timed_out": false,
+      "stdout_tail": "",
+      "stderr_tail": "Sorry: IndentationError: unexpected indent (Mutant5.py, line 41)",
+      "elapsed_seconds": 0.046,
+      "command": [
+        "E:\\Anaconda3\\envs\\llmRepair\\python.exe",
+        "-m",
+        "py_compile",
+        "e:\\LLMProgramRepair\\LLM\\MSBF\\code\\deepseek-r1\\TSQ\\5\\LLM\\output_MR_Oracle\\patches\\P001\\workspace\\Mutant5.py"
+      ],
+      "executable_path": null
+    },
+    "visible_checks": []
+  }
+}

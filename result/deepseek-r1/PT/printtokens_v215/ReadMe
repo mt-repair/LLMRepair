@@ -1,0 +1,4 @@
+@@ -245,1 +245,1 @@
+-   token_ptr->token_id=special(next_st);
++   token_ptr->token_id=special(~next_st);
+--

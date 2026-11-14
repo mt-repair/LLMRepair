@@ -1,0 +1,4 @@
+@@ -228,1 +228,1 @@
+-           ch=get_char(tstream_ptr->ch_stream);
++           ch^=get_char(tstream_ptr->ch_stream);
+--

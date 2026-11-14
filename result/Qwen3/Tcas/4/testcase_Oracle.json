@@ -1,0 +1,44 @@
+[
+  {
+    "test_id": "input1",
+    "input": "[710, 0, 0, 127, 403, 4616, 3, 500, 400, 0, 0, 0]",
+    "actual_output": "UPWARD_RA",
+    "expected_output": "UNRESOLVED",
+    "test_status": "nopass"
+  },
+  {
+    "test_id": "input2",
+    "input": "[710, 0, 0, 2371.5, 403, 2371.5, 3, 500, 400, 0, 0, 0]",
+    "actual_output": "UNRESOLVED",
+    "expected_output": "UNRESOLVED",
+    "test_status": "pass"
+  },
+  {
+    "test_id": "input3",
+    "input": "[710, 0, 0, 2371.5, 403, 2371.5, 3, 411, 410, 0, 0, 0]",
+    "actual_output": "UNRESOLVED",
+    "expected_output": "UNRESOLVED",
+    "test_status": "pass"
+  },
+  {
+    "test_id": "input4",
+    "input": "[710, 0, 0, 2371.5, 403, 2371.5, 2, 500, 400, 0, 0, 0]",
+    "actual_output": "UNRESOLVED",
+    "expected_output": "UNRESOLVED",
+    "test_status": "pass"
+  },
+  {
+    "test_id": "input5",
+    "input": "[710, 0, 0, 2371.5, 403, 2371.5, 3, 411, 410, 0, 0, 0]",
+    "actual_output": "UNRESOLVED",
+    "expected_output": "UNRESOLVED",
+    "test_status": "pass"
+  },
+  {
+    "test_id": "input6",
+    "input": "[710, 0, 0, 2371.5, 403, 2371.5, 2, 500, 400, 0, 0, 0]",
+    "actual_output": "UNRESOLVED",
+    "expected_output": "UNRESOLVED",
+    "test_status": "pass"
+  }
+]

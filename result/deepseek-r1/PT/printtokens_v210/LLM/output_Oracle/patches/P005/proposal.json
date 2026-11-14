@@ -1,0 +1,35 @@
+{
+  "diagnosis": "The issue stems from incorrect handling of comment tokens (state 30) in `get_token()`, leading to improper tokenization after semicolons. The `print_token()` function also mislabels valid tokens following comments as errors.",
+  "evidence_reasoning": {
+    "causal_chain": [
+      "Line 254 in `get_token()` calls `error_or_eof_case()` for state 30, mishandling comment termination.",
+      "Test cases show semicolons trigger erroneous token outputs instead of proper processing."
+    ],
+    "mr_refs": [],
+    "testcase_refs": [
+      ".test_s5_mr2",
+      ".test_followup_s5_mr2"
+    ]
+  },
+  "uncertainty": "While the proposed edits address the observed symptoms, there may be edge cases in complex comment structures that require further testing. The exact DFA transitions for comments might need additional validation beyond the provided test cases.",
+  "assumption": "Combine comment handling and error correction for comprehensive fix.",
+  "edits": [
+    {
+      "end_line": 254,
+      "rationale": "Replace erroneous case with proper comment processing logic.",
+      "replacement": "token_ptr->token_id = COMMENT;\n                            token_ind--;\n                            unget_char(ch, tstream_ptr->ch_stream);\n                            return(token_ptr);\n                            break;",
+      "start_line": 254
+    },
+    {
+      "end_line": 512,
+      "rationale": "Ensure error messages are correctly formatted and quoted.",
+      "replacement": "fprintf(stdout, \"error,\\t\"\\\"); fprintf(stdout, \"%s\"); fprintf(stdout, \"\\\".\\n\"); return(TRUE);",
+      "start_line": 512
+    }
+  ],
+  "expected_effect": "Comments are properly skipped, and error messages are correctly formatted.",
+  "preservation_constraints": [
+    "Comment handling doesn't disrupt other token processing."
+  ],
+  "repair_intent": "Comprehensive fix addressing both comment handling and error output."
+}

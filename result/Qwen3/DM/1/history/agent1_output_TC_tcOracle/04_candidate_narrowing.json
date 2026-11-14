@@ -1,0 +1,73 @@
+{
+  "candidates": [
+    {
+      "location_ref": "LINE_0021",
+      "selection_reason": "Root cause of determinant calculation error due to incorrect summation instead of multiplication.",
+      "fault_mechanism": "Incorrect operation leading to wrong determinant value",
+      "confidence": "high",
+      "line": 21,
+      "test_evidence_refs": [
+        "TC007",
+        "TC008"
+      ],
+      "mr_evidence_refs": [],
+      "candidate_id": "RC001"
+    },
+    {
+      "location_ref": "LINE_0041",
+      "selection_reason": "Mid calculation and recursion involved in determinant calculation with potential sign error.",
+      "fault_mechanism": "Recursive calculation error affecting determinant",
+      "confidence": "high",
+      "line": 41,
+      "test_evidence_refs": [
+        "TC007",
+        "TC008"
+      ],
+      "mr_evidence_refs": [],
+      "candidate_id": "RC002"
+    },
+    {
+      "location_ref": "LINE_0042",
+      "selection_reason": "Directly affects the final determinant value through result assignment.",
+      "fault_mechanism": "Incorrect result assignment",
+      "confidence": "high",
+      "line": 42,
+      "test_evidence_refs": [
+        "TC007",
+        "TC008"
+      ],
+      "mr_evidence_refs": [],
+      "candidate_id": "RC003"
+    },
+    {
+      "location_ref": "LINE_0043",
+      "selection_reason": "Returns the computed determinant value, critical for final output.",
+      "fault_mechanism": "Incorrect return value propagation",
+      "confidence": "high",
+      "line": 43,
+      "test_evidence_refs": [
+        "TC007",
+        "TC008"
+      ],
+      "mr_evidence_refs": [],
+      "candidate_id": "RC004"
+    },
+    {
+      "location_ref": "LINE_0011",
+      "selection_reason": "Incorrectly setting f1 to False may prevent proper upper triangular matrix detection.",
+      "fault_mechanism": "Matrix detection failure",
+      "confidence": "medium",
+      "line": 11,
+      "test_evidence_refs": [
+        "TC007"
+      ],
+      "mr_evidence_refs": [],
+      "candidate_id": "RC005"
+    }
+  ],
+  "summary": "Selected top 5 repair anchors based on causal evidence and root-cause proximity.",
+  "uncertainties": [
+    "Medium confidence in LINE_0011's impact"
+  ],
+  "selection_status": "complete"
+}

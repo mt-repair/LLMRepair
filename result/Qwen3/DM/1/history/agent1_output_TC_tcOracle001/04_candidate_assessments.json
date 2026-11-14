@@ -1,0 +1,533 @@
+{
+  "candidate_assessments": [
+    {
+      "location_ref": "LINE_0011",
+      "line": 11,
+      "semantic_role": "Check upper triangular matrix",
+      "test_assessments": [
+        {
+          "evidence_ref": "TC007",
+          "verdict": "support",
+          "reason": "Incorrectly setting f1 to False may cause matrix misclassification",
+          "causal_chain": [
+            "Matrix not recognized as upper triangular",
+            "Proceeds to DeterComp",
+            "Incorrect determinant calculation"
+          ]
+        },
+        {
+          "evidence_ref": "TC008",
+          "verdict": "neutral",
+          "reason": "Not directly related to minor matrix formation",
+          "causal_chain": []
+        }
+      ],
+      "mr_assessments": [],
+      "overall_verdict": "support",
+      "root_cause_role": "contributing",
+      "confidence": "medium"
+    },
+    {
+      "location_ref": "LINE_0021",
+      "line": 21,
+      "semantic_role": "Sum diagonal elements",
+      "test_assessments": [
+        {
+          "evidence_ref": "TC007",
+          "verdict": "neutral",
+          "reason": "Correct behavior for triangular matrices",
+          "causal_chain": []
+        },
+        {
+          "evidence_ref": "TC008",
+          "verdict": "neutral",
+          "reason": "Not directly related to minor matrix formation",
+          "causal_chain": []
+        }
+      ],
+      "mr_assessments": [],
+      "overall_verdict": "neutral",
+      "root_cause_role": "unrelated",
+      "confidence": "low"
+    },
+    {
+      "location_ref": "LINE_0024",
+      "line": 24,
+      "semantic_role": "Check lower triangular matrix",
+      "test_assessments": [
+        {
+          "evidence_ref": "TC007",
+          "verdict": "support",
+          "reason": "May be triggered if f1 is incorrectly set to False",
+          "causal_chain": [
+            "Matrix misclassified as lower triangular",
+            "Incorrect determinant calculation"
+          ]
+        },
+        {
+          "evidence_ref": "TC008",
+          "verdict": "neutral",
+          "reason": "Not directly related to minor matrix formation",
+          "causal_chain": []
+        }
+      ],
+      "mr_assessments": [],
+      "overall_verdict": "support",
+      "root_cause_role": "contributing",
+      "confidence": "medium"
+    },
+    {
+      "location_ref": "LINE_0030",
+      "line": 30,
+      "semantic_role": "Recursive determinant calculation",
+      "test_assessments": [
+        {
+          "evidence_ref": "TC007",
+          "verdict": "support",
+          "reason": "Called when matrix is misclassified",
+          "causal_chain": [
+            "Matrix misclassified",
+            "Recursive method used",
+            "Incorrect determinant"
+          ]
+        },
+        {
+          "evidence_ref": "TC008",
+          "verdict": "neutral",
+          "reason": "Not directly related to minor matrix formation",
+          "causal_chain": []
+        }
+      ],
+      "mr_assessments": [],
+      "overall_verdict": "support",
+      "root_cause_role": "contributing",
+      "confidence": "medium"
+    },
+    {
+      "location_ref": "LINE_0033",
+      "line": 33,
+      "semantic_role": "Initialize mid in recursive method",
+      "test_assessments": [
+        {
+          "evidence_ref": "TC007",
+          "verdict": "neutral",
+          "reason": "Correct initialization for recursive calculation",
+          "causal_chain": []
+        },
+        {
+          "evidence_ref": "TC008",
+          "verdict": "uncertain",
+          "reason": "Could be part of minor matrix issue",
+          "causal_chain": []
+        }
+      ],
+      "mr_assessments": [],
+      "overall_verdict": "uncertain",
+      "root_cause_role": "uncertain",
+      "confidence": "low"
+    },
+    {
+      "location_ref": "LINE_0034",
+      "line": 34,
+      "semantic_role": "Initialization of temp list",
+      "test_assessments": [
+        {
+          "evidence_ref": "TC007",
+          "verdict": "neutral",
+          "reason": "No direct evidence linking this line to determinant calculation error.",
+          "causal_chain": []
+        },
+        {
+          "evidence_ref": "TC008",
+          "verdict": "neutral",
+          "reason": "No direct evidence linking this line to determinant calculation error.",
+          "causal_chain": []
+        }
+      ],
+      "mr_assessments": [],
+      "overall_verdict": "neutral",
+      "root_cause_role": "unrelated",
+      "confidence": "medium"
+    },
+    {
+      "location_ref": "LINE_0035",
+      "line": 35,
+      "semantic_role": "Loop through all matrix elements",
+      "test_assessments": [
+        {
+          "evidence_ref": "TC007",
+          "verdict": "neutral",
+          "reason": "No direct evidence linking this line to determinant calculation error.",
+          "causal_chain": []
+        },
+        {
+          "evidence_ref": "TC008",
+          "verdict": "neutral",
+          "reason": "No direct evidence linking this line to determinant calculation error.",
+          "causal_chain": []
+        }
+      ],
+      "mr_assessments": [],
+      "overall_verdict": "neutral",
+      "root_cause_role": "unrelated",
+      "confidence": "medium"
+    },
+    {
+      "location_ref": "LINE_0036",
+      "line": 36,
+      "semantic_role": "Appending matrix elements to temp list",
+      "test_assessments": [
+        {
+          "evidence_ref": "TC007",
+          "verdict": "neutral",
+          "reason": "No direct evidence linking this line to determinant calculation error.",
+          "causal_chain": []
+        },
+        {
+          "evidence_ref": "TC008",
+          "verdict": "neutral",
+          "reason": "No direct evidence linking this line to determinant calculation error.",
+          "causal_chain": []
+        }
+      ],
+      "mr_assessments": [],
+      "overall_verdict": "neutral",
+      "root_cause_role": "unrelated",
+      "confidence": "medium"
+    },
+    {
+      "location_ref": "LINE_0037",
+      "line": 37,
+      "semantic_role": "Base case for n == 1",
+      "test_assessments": [
+        {
+          "evidence_ref": "TC007",
+          "verdict": "neutral",
+          "reason": "No direct evidence linking this line to determinant calculation error.",
+          "causal_chain": []
+        },
+        {
+          "evidence_ref": "TC008",
+          "verdict": "neutral",
+          "reason": "No direct evidence linking this line to determinant calculation error.",
+          "causal_chain": []
+        }
+      ],
+      "mr_assessments": [],
+      "overall_verdict": "neutral",
+      "root_cause_role": "unrelated",
+      "confidence": "medium"
+    },
+    {
+      "location_ref": "LINE_0038",
+      "line": 38,
+      "semantic_role": "Setting result for n == 1",
+      "test_assessments": [
+        {
+          "evidence_ref": "TC007",
+          "verdict": "neutral",
+          "reason": "No direct evidence linking this line to determinant calculation error.",
+          "causal_chain": []
+        },
+        {
+          "evidence_ref": "TC008",
+          "verdict": "neutral",
+          "reason": "No direct evidence linking this line to determinant calculation error.",
+          "causal_chain": []
+        }
+      ],
+      "mr_assessments": [],
+      "overall_verdict": "neutral",
+      "root_cause_role": "unrelated",
+      "confidence": "medium"
+    },
+    {
+      "location_ref": "LINE_0040",
+      "line": 40,
+      "semantic_role": "Loop over rows for determinant calculation",
+      "test_assessments": [
+        {
+          "evidence_ref": "TC007",
+          "verdict": "neutral",
+          "reason": "The loop is part of the recursive expansion but not directly causing the upper triangular misidentification.",
+          "causal_chain": [
+            "Loop runs for each row",
+            "Recursive expansion used when it shouldn't be"
+          ]
+        },
+        {
+          "evidence_ref": "TC008",
+          "verdict": "neutral",
+          "reason": "The loop is part of the recursive expansion but not directly causing the minor matrix error.",
+          "causal_chain": [
+            "Loop runs for each row",
+            "Minor matrix formation error in AlgComp"
+          ]
+        }
+      ],
+      "mr_assessments": [],
+      "overall_verdict": "neutral",
+      "root_cause_role": "unrelated",
+      "confidence": "medium"
+    },
+    {
+      "location_ref": "LINE_0041",
+      "line": 41,
+      "semantic_role": "Cofactor expansion calculation",
+      "test_assessments": [
+        {
+          "evidence_ref": "TC007",
+          "verdict": "support",
+          "reason": "The line uses recursive expansion for upper triangular matrices, which should not be necessary.",
+          "causal_chain": [
+            "Cofactor expansion used",
+            "Upper triangular matrix not identified"
+          ]
+        },
+        {
+          "evidence_ref": "TC008",
+          "verdict": "support",
+          "reason": "The line uses recursive expansion leading to minor matrix formation error.",
+          "causal_chain": [
+            "Cofactor expansion used",
+            "Minor matrix formation error in AlgComp"
+          ]
+        }
+      ],
+      "mr_assessments": [],
+      "overall_verdict": "strong_support",
+      "root_cause_role": "root_cause",
+      "confidence": "high"
+    },
+    {
+      "location_ref": "LINE_0042",
+      "line": 42,
+      "semantic_role": "Assign result from mid calculation",
+      "test_assessments": [
+        {
+          "evidence_ref": "TC007",
+          "verdict": "neutral",
+          "reason": "The line assigns the result but doesn't directly cause the upper triangular misidentification.",
+          "causal_chain": [
+            "Result assigned from mid",
+            "Recursive expansion used when it shouldn't be"
+          ]
+        },
+        {
+          "evidence_ref": "TC008",
+          "verdict": "neutral",
+          "reason": "The line assigns the result but doesn't directly cause the minor matrix error.",
+          "causal_chain": [
+            "Result assigned from mid",
+            "Minor matrix formation error in AlgComp"
+          ]
+        }
+      ],
+      "mr_assessments": [],
+      "overall_verdict": "neutral",
+      "root_cause_role": "propagation",
+      "confidence": "medium"
+    },
+    {
+      "location_ref": "LINE_0043",
+      "line": 43,
+      "semantic_role": "Return result from DeterComp",
+      "test_assessments": [
+        {
+          "evidence_ref": "TC007",
+          "verdict": "neutral",
+          "reason": "The line returns the result but doesn't directly cause the upper triangular misidentification.",
+          "causal_chain": [
+            "Result returned",
+            "Recursive expansion used when it shouldn't be"
+          ]
+        },
+        {
+          "evidence_ref": "TC008",
+          "verdict": "neutral",
+          "reason": "The line returns the result but doesn't directly cause the minor matrix error.",
+          "causal_chain": [
+            "Result returned",
+            "Minor matrix formation error in AlgComp"
+          ]
+        }
+      ],
+      "mr_assessments": [],
+      "overall_verdict": "neutral",
+      "root_cause_role": "propagation",
+      "confidence": "medium"
+    },
+    {
+      "location_ref": "LINE_0046",
+      "line": 46,
+      "semantic_role": "Initialize array for minor matrix",
+      "test_assessments": [
+        {
+          "evidence_ref": "TC007",
+          "verdict": "neutral",
+          "reason": "The line initializes the array but doesn't directly cause the upper triangular misidentification.",
+          "causal_chain": [
+            "Array initialized",
+            "Recursive expansion used when it shouldn't be"
+          ]
+        },
+        {
+          "evidence_ref": "TC008",
+          "verdict": "support",
+          "reason": "The line initializes the array but doesn't correctly form the minor matrix.",
+          "causal_chain": [
+            "Array initialized",
+            "Minor matrix formation error in AlgComp"
+          ]
+        }
+      ],
+      "mr_assessments": [],
+      "overall_verdict": "support",
+      "root_cause_role": "root_cause",
+      "confidence": "high"
+    },
+    {
+      "location_ref": "LINE_0047",
+      "line": 47,
+      "semantic_role": "Loop initialization",
+      "test_assessments": [
+        {
+          "evidence_ref": "TC007",
+          "verdict": "neutral",
+          "reason": "The loop starts from n, which is correct for skipping the ith row.",
+          "causal_chain": [
+            "Loop initializes correctly"
+          ]
+        },
+        {
+          "evidence_ref": "TC008",
+          "verdict": "neutral",
+          "reason": "The loop is part of the minor matrix formation, but the issue may lie elsewhere.",
+          "causal_chain": [
+            "Minor matrix formation"
+          ]
+        }
+      ],
+      "mr_assessments": [],
+      "overall_verdict": "neutral",
+      "root_cause_role": "unrelated",
+      "confidence": "medium"
+    },
+    {
+      "location_ref": "LINE_0048",
+      "line": 48,
+      "semantic_role": "Column exclusion check",
+      "test_assessments": [
+        {
+          "evidence_ref": "TC007",
+          "verdict": "support",
+          "reason": "Incorrect column exclusion leads to wrong minor matrix.",
+          "causal_chain": [
+            "Column exclusion failed",
+            "Minor matrix incorrect",
+            "Determinant calculation wrong"
+          ]
+        },
+        {
+          "evidence_ref": "TC008",
+          "verdict": "support",
+          "reason": "Incorrect column exclusion affects minor matrix formation.",
+          "causal_chain": [
+            "Column exclusion failed",
+            "Minor matrix incorrect",
+            "Determinant calculation wrong"
+          ]
+        }
+      ],
+      "mr_assessments": [],
+      "overall_verdict": "support",
+      "root_cause_role": "root_cause",
+      "confidence": "high"
+    },
+    {
+      "location_ref": "LINE_0049",
+      "line": 49,
+      "semantic_role": "Pass statement",
+      "test_assessments": [
+        {
+          "evidence_ref": "TC007",
+          "verdict": "neutral",
+          "reason": "Pass statement skips element, but may not address the root cause.",
+          "causal_chain": [
+            "Element skipped"
+          ]
+        },
+        {
+          "evidence_ref": "TC008",
+          "verdict": "neutral",
+          "reason": "Pass statement is part of the exclusion logic, but not the main issue.",
+          "causal_chain": [
+            "Element skipped"
+          ]
+        }
+      ],
+      "mr_assessments": [],
+      "overall_verdict": "neutral",
+      "root_cause_role": "unrelated",
+      "confidence": "low"
+    },
+    {
+      "location_ref": "LINE_0051",
+      "line": 51,
+      "semantic_role": "Array append",
+      "test_assessments": [
+        {
+          "evidence_ref": "TC007",
+          "verdict": "support",
+          "reason": "Appending incorrect elements leads to wrong minor matrix.",
+          "causal_chain": [
+            "Incorrect elements appended",
+            "Minor matrix incorrect",
+            "Determinant calculation wrong"
+          ]
+        },
+        {
+          "evidence_ref": "TC008",
+          "verdict": "support",
+          "reason": "Appending incorrect elements affects minor matrix formation.",
+          "causal_chain": [
+            "Incorrect elements appended",
+            "Minor matrix incorrect",
+            "Determinant calculation wrong"
+          ]
+        }
+      ],
+      "mr_assessments": [],
+      "overall_verdict": "support",
+      "root_cause_role": "contributing",
+      "confidence": "medium"
+    },
+    {
+      "location_ref": "LINE_0052",
+      "line": 52,
+      "semantic_role": "Return statement",
+      "test_assessments": [
+        {
+          "evidence_ref": "TC007",
+          "verdict": "neutral",
+          "reason": "Return value depends on array contents, which may be incorrect.",
+          "causal_chain": [
+            "Array returned"
+          ]
+        },
+        {
+          "evidence_ref": "TC008",
+          "verdict": "neutral",
+          "reason": "Return value depends on array contents, which may be incorrect.",
+          "causal_chain": [
+            "Array returned"
+          ]
+        }
+      ],
+      "mr_assessments": [],
+      "overall_verdict": "neutral",
+      "root_cause_role": "unrelated",
+      "confidence": "low"
+    }
+  ]
+}

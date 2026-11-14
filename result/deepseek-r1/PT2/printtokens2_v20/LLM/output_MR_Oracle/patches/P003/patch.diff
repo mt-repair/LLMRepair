@@ -1,0 +1,11 @@
+--- a/print_tokens2.c
++++ b/print_tokens2.c
+@@ -215,7 +215,7 @@
+          return(FALSE);
+     }
+ 
+- if(str_com_id<2)    /* is comment token */
++if(str_com_id<2) { if(ch=='\n') return(TRUE); else if(ch==';') { ch=get_char(tp); while(ch!='\n' && ch!=EOF) { ch=get_char(tp); } return(TRUE); } else return(FALSE); }
+    { if(ch=='\n')     /* for comment until meet end of line */
+         return(TRUE);
+       else

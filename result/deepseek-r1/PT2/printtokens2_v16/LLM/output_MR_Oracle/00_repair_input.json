@@ -1,0 +1,89 @@
+{
+  "program_path": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT2/printtokens2_v16/print_tokens2.c",
+  "project_root": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT2/printtokens2_v16",
+  "program_function": "\n            ##  FUNCTION DESCRIPTION \n\n            C  lexical analyzer  (tokenizer) , read the input text, and segment it  token  and Print  token  flow. \n             Code by `print_tokens.c` The main program `stream.c` (Character Stream), `tokenizer.c` (Participle logic) composition. \n             Type slug `character_stream`/`token_stream` is the file stream pointer; `token` is a character pointer. \n\n            ##  Input \n\n            -  Command line parameters: `./print_tokens filename` , read the specified file; if no parameter is provided, read from standard input  stdin  Read \n            -  Support  token : Keywords, identifiers, numeric literals, string literals, character literals, comments, special symbols, EOF。\n            -  Keywords: `and or if xor lambda =>`\n            -  Identifier: Starts with a letter, followed by letters  /  Numbers \n            -  numeric literal: digits only \n            -  String literal: enclosed in double quotes \n            -  character literal: `#` Followed by letters \n            -  NOTATION: `;` From the beginning to the line break \n            -  Special Symbols `( ) [ ] ' ` ,`\n\n            ##  Output \n\n             Line-by-line output  token：\n\n            - `keyword,\"xxx\".`\n            - `identifier,\"xxx\".`\n            - `numeric,xxx.`\n            - `string,\"xxx\".`\n            - `character,\"x\".`\n            -  SIGN: `lparen. rparen. lsquare. rsquare. quote. bquote. comma.`\n            - `eof.`  End of Stream \n            - `error,\"xxx\".`  Crime  token\n        ",
+  "requested_mode": "ORACLE_MR",
+  "effective_mode": "ORACLE_MR",
+  "known_fault_lines": [
+    165
+  ],
+  "test_executions": [
+    {
+      "test_id": "source_s4_mr2",
+      "input": ";`6#l\n93\n",
+      "actual_output": "bquote.\nerror,\"6#l\".\nnumeric,93.\neof.",
+      "expected_output": "numeric,93.\neof.",
+      "test_status": "nopass"
+    },
+    {
+      "test_id": "followup_s4_mr2",
+      "input": ";\n93\n",
+      "actual_output": "numeric,93.\neof.",
+      "expected_output": "numeric,93.\neof.",
+      "test_status": "pass"
+    },
+    {
+      "test_id": "source_s3_mr4",
+      "input": ";IF A L  ;tJvMR3\n",
+      "actual_output": "identifier,\"A\".\nidentifier,\"L\".\neof.",
+      "expected_output": "eof.",
+      "test_status": "nopass"
+    },
+    {
+      "test_id": "followup_s3_mr4",
+      "input": ";\n",
+      "actual_output": "eof.",
+      "expected_output": "eof.",
+      "test_status": "pass"
+    },
+    {
+      "test_id": "source_s3_mr5",
+      "input": ";IF A L  ;tJvMR3\n",
+      "actual_output": "identifier,\"A\".\nidentifier,\"L\".\neof.",
+      "expected_output": "eof.",
+      "test_status": "nopass"
+    },
+    {
+      "test_id": "followup_s3_mr5",
+      "input": ";\n",
+      "actual_output": "eof.",
+      "expected_output": "eof.",
+      "test_status": "pass"
+    }
+  ],
+  "mg_relation": [
+    {
+      "mr_id": "MR2",
+      "source_test_id": "source_s4_mr2",
+      "followup_test_id": "followup_s4_mr2",
+      "input_transformation": " For semicolons contained in the source test case ';' For input lines that do not contain single or double quotation marks, retain the line from the beginning to the first semicolon. ';' and delete all characters after the semicolon to construct the follow-up test case. ",
+      "output_relation": " Since the content after the semicolon is a comment, deleting that part should not affect validity. token statistical results. Therefore, the five categories in the outputs of the source test cases and the follow-up test cases token which was . identifier AND: keyword The sum of, string、error、character And numeric ) should be equal. ",
+      "actual_relation_status": "VMG"
+    },
+    {
+      "mr_id": "MR4",
+      "source_test_id": "source_s3_mr4",
+      "followup_test_id": "followup_s3_mr4",
+      "input_transformation": " First, randomly select the rounded-up test cases from the source test cases. 50% Enter a line and switch between uppercase and lowercase English letters; then, for lines containing semicolons, ';' For input lines that do not contain single or double quotation marks, remove all characters after the first semicolon to construct the follow-up test case. ",
+      "output_relation": " Changing between uppercase and lowercase letters and deleting comments after semicolons should not change the five categories. token Therefore, the number of test cases in the output of the source test cases and the follow-up test cases identifier AND: keyword Amount string Medicine Quantity, error Medicine Quantity, character Total Quantity numeric The quantities should be equal. ",
+      "actual_relation_status": "VMG"
+    },
+    {
+      "mr_id": "MR5",
+      "source_test_id": "source_s3_mr5",
+      "followup_test_id": "followup_s3_mr5",
+      "input_transformation": " First, for semicolons included in the source test cases, ';' and do not contain single or double quotation marks, delete all characters after the first semicolon; then randomly select the processed rounded-up 50% Enter a line and switch between uppercase and lowercase English letters to construct follow-up test cases. ",
+      "output_relation": " The deletion of the comment after the semicolon and the subsequent change between uppercase and lowercase should not change the five categories. token (Quantity. Therefore, the number of test cases in the source test case and the follow-up test case output identifier AND: keyword Amount string Medicine Quantity, error Medicine Quantity, character Total Quantity numeric The quantities should be equal. ",
+      "actual_relation_status": "VMG"
+    }
+  ],
+  "patch_budget": 5,
+  "generation_limits": {
+    "num_ctx": 32768,
+    "num_predict": 8192,
+    "max_edits_per_candidate": 3,
+    "max_total_touched_lines_per_candidate": 20,
+    "require_known_line_coverage": true
+  },
+  "policy": "One LLM response performs one shared evidence analysis and returns all patch candidates; no Agent1/Agent2 artifacts are used."
+}

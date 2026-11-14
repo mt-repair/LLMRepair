@@ -1,0 +1,385 @@
+{
+  "workflow": "single_llm_direct_repair",
+  "effective_mode": "MR",
+  "program_path": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v355/print_tokens.c",
+  "output_dir": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v355/LLM/output_MR",
+  "llm_call_attempts": 1,
+  "normal_llm_calls_per_scenario": 1,
+  "patch_candidates": [
+    {
+      "patch_id": "P001",
+      "status": "compile_failed",
+      "proposal": {
+        "diagnosis": "The issue lies in the DFA state transition logic where array accesses might be out of bounds, leading to incorrect token processing.",
+        "evidence_reasoning": {
+          "causal_chain": [
+            "DFA uses arrays `check`, `base`, `next`, and `default1` which may have invalid indices if not properly bounded.",
+            "In line 465, `base[state] - ch` could be negative or exceed array limits, causing incorrect state transitions."
+          ],
+          "mr_refs": [
+            "MR1",
+            "MR2",
+            "MR3",
+            "MR4",
+            "MR5"
+          ],
+          "testcase_refs": [
+            "source_s5_mr1",
+            "followup_s5_mr1",
+            "source_s4_mr2",
+            "followup_s4_mr2"
+          ]
+        },
+        "uncertainty": "While multiple plausible repairs are suggested, the exact root cause requires further testing to confirm which repair is most effective. The evidence supports that array index issues are likely, but other factors cannot be ruled out without additional testing.",
+        "assumption": "Add bounds checking to prevent array index out-of-range errors.",
+        "edits": [
+          {
+            "end_line": 465,
+            "rationale": "Ensure `base[state] - ch` is within valid range before accessing `check` array.",
+            "replacement": "if (base[state] >=0 && base[state]-ch >=0 && base[state]-ch < sizeof(check)) { if (check[base[state]-ch] == state) return(next[base[state]+ch]); } else { return(next_state(default1[state], ch)); }",
+            "start_line": 465
+          }
+        ],
+        "expected_effect": "Prevents array index errors and ensures correct state transitions.",
+        "preservation_constraints": [
+          "MR1",
+          "MR2",
+          "MR3",
+          "MR4",
+          "MR5"
+        ],
+        "repair_intent": "Add bounds checking to prevent invalid array accesses."
+      },
+      "proposal_errors": [],
+      "patch_diff": "--- a/print_tokens.c\n+++ b/print_tokens.c\n@@ -462,7 +462,7 @@\n       return(state);\n     if(base[state]+ch >= 0)\n     {\n-        if(check[base[state]-ch] == state) /* Check for the right state */\n+if (base[state] >=0 && base[state]-ch >=0 && base[state]-ch < sizeof(check)) { if (check[base[state]-ch] == state) return(next[base[state]+ch]); } else { return(next_state(default1[state], ch)); }\n              return(next[base[state]+ch]);\n         else\n               return(next_state(default1[state],ch));\n",
+      "patch_hash": "915be1841156bacd3a05caef70972eb121b9746554125aea659643f484a0a7ec",
+      "model_candidate_source": "P001",
+      "fallback_copy_of": null,
+      "original_candidate_errors": [],
+      "duplicate_of": null,
+      "validation_reused_from": null,
+      "validation": {
+        "compile": {
+          "attempted": true,
+          "success": false,
+          "return_code": 1,
+          "timed_out": false,
+          "stdout_tail": "",
+          "stderr_tail": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v355/LLM/output_MR/patches/P001/workspace/print_tokens.c: In function ‘next_state’:\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v355/LLM/output_MR/patches/P001/workspace/print_tokens.c:467:9: error: expected ‘}’ before ‘else’\n  467 |         else\n      |         ^~~~\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v355/LLM/output_MR/patches/P001/workspace/print_tokens.c: At top level:\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v355/LLM/output_MR/patches/P001/workspace/print_tokens.c:470:5: error: expected identifier or ‘(’ before ‘else’\n  470 |     else\n      |     ^~~~\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v355/LLM/output_MR/patches/P001/workspace/print_tokens.c:472:1: error: expected identifier or ‘(’ before ‘}’ token\n  472 | }\n      | ^\n",
+          "elapsed_seconds": 0.014,
+          "command": [
+            "/usr/bin/gcc",
+            "-std=c11",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v355/LLM/output_MR/patches/P001/workspace/print_tokens.c",
+            "-o",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v355/LLM/output_MR/patches/P001/workspace/llm_candidate"
+          ],
+          "executable_path": null
+        },
+        "visible_checks": []
+      }
+    },
+    {
+      "patch_id": "P002",
+      "status": "compile_failed",
+      "proposal": {
+        "diagnosis": "The issue lies in the DFA state transition logic where array accesses might be out of bounds, leading to incorrect token processing.",
+        "evidence_reasoning": {
+          "causal_chain": [
+            "DFA uses arrays `check`, `base`, `next`, and `default1` which may have invalid indices if not properly bounded.",
+            "In line 465, `base[state] - ch` could be negative or exceed array limits, causing incorrect state transitions."
+          ],
+          "mr_refs": [
+            "MR1",
+            "MR2",
+            "MR3",
+            "MR4",
+            "MR5"
+          ],
+          "testcase_refs": [
+            "source_s5_mr1",
+            "followup_s5_mr1",
+            "source_s4_mr2",
+            "followup_s4_mr2"
+          ]
+        },
+        "uncertainty": "While multiple plausible repairs are suggested, the exact root cause requires further testing to confirm which repair is most effective. The evidence supports that array index issues are likely, but other factors cannot be ruled out without additional testing.",
+        "assumption": "Modify the DFA transition logic to handle state transitions more safely.",
+        "edits": [
+          {
+            "end_line": 465,
+            "rationale": "Use a helper function to validate indices before accessing arrays.",
+            "replacement": "if (isValidIndex(base[state], ch)) { if (check[base[state]-ch] == state) return(next[base[state]+ch]); } else { return(next_state(default1[state], ch)); }",
+            "start_line": 465
+          }
+        ],
+        "expected_effect": "Enhances safety by validating indices before array access.",
+        "preservation_constraints": [
+          "MR1",
+          "MR2",
+          "MR3",
+          "MR4",
+          "MR5"
+        ],
+        "repair_intent": "Introduce index validation to prevent out-of-bounds errors."
+      },
+      "proposal_errors": [],
+      "patch_diff": "--- a/print_tokens.c\n+++ b/print_tokens.c\n@@ -462,7 +462,7 @@\n       return(state);\n     if(base[state]+ch >= 0)\n     {\n-        if(check[base[state]-ch] == state) /* Check for the right state */\n+if (isValidIndex(base[state], ch)) { if (check[base[state]-ch] == state) return(next[base[state]+ch]); } else { return(next_state(default1[state], ch)); }\n              return(next[base[state]+ch]);\n         else\n               return(next_state(default1[state],ch));\n",
+      "patch_hash": "3ba3c79191887642d33ceb58fe1d58418f40b8492dc26385e073f50b7a669729",
+      "model_candidate_source": "P002",
+      "fallback_copy_of": null,
+      "original_candidate_errors": [],
+      "duplicate_of": null,
+      "validation_reused_from": null,
+      "validation": {
+        "compile": {
+          "attempted": true,
+          "success": false,
+          "return_code": 1,
+          "timed_out": false,
+          "stdout_tail": "",
+          "stderr_tail": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v355/LLM/output_MR/patches/P002/workspace/print_tokens.c: In function ‘next_state’:\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v355/LLM/output_MR/patches/P002/workspace/print_tokens.c:465:5: warning: implicit declaration of function ‘isValidIndex’ [-Wimplicit-function-declaration]\n  465 | if (isValidIndex(base[state], ch)) { if (check[base[state]-ch] == state) return(next[base[state]+ch]); } else { return(next_state(default1[state], ch)); }\n      |     ^~~~~~~~~~~~\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v355/LLM/output_MR/patches/P002/workspace/print_tokens.c:467:9: error: expected ‘}’ before ‘else’\n  467 |         else\n      |         ^~~~\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v355/LLM/output_MR/patches/P002/workspace/print_tokens.c: At top level:\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v355/LLM/output_MR/patches/P002/workspace/print_tokens.c:470:5: error: expected identifier or ‘(’ before ‘else’\n  470 |     else\n      |     ^~~~\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v355/LLM/output_MR/patches/P002/workspace/print_tokens.c:472:1: error: expected identifier or ‘(’ before ‘}’ token\n  472 | }\n      | ^\n",
+          "elapsed_seconds": 0.016,
+          "command": [
+            "/usr/bin/gcc",
+            "-std=c11",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v355/LLM/output_MR/patches/P002/workspace/print_tokens.c",
+            "-o",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v355/LLM/output_MR/patches/P002/workspace/llm_candidate"
+          ],
+          "executable_path": null
+        },
+        "visible_checks": []
+      }
+    },
+    {
+      "patch_id": "P003",
+      "status": "compile_failed",
+      "proposal": {
+        "diagnosis": "The issue lies in the DFA state transition logic where array accesses might be out of bounds, leading to incorrect token processing.",
+        "evidence_reasoning": {
+          "causal_chain": [
+            "DFA uses arrays `check`, `base`, `next`, and `default1` which may have invalid indices if not properly bounded.",
+            "In line 465, `base[state] - ch` could be negative or exceed array limits, causing incorrect state transitions."
+          ],
+          "mr_refs": [
+            "MR1",
+            "MR2",
+            "MR3",
+            "MR4",
+            "MR5"
+          ],
+          "testcase_refs": [
+            "source_s5_mr1",
+            "followup_s5_mr1",
+            "source_s4_mr2",
+            "followup_s4_mr2"
+          ]
+        },
+        "uncertainty": "While multiple plausible repairs are suggested, the exact root cause requires further testing to confirm which repair is most effective. The evidence supports that array index issues are likely, but other factors cannot be ruled out without additional testing.",
+        "assumption": "Adjust the state transition logic to use safer array access patterns.",
+        "edits": [
+          {
+            "end_line": 465,
+            "rationale": "Replace direct array accesses with a bounds-checking mechanism.",
+            "replacement": "if (stateIsValid(base[state], ch)) { return(next_state_safe(base[state], ch)); } else { return(next_state(default1[state], ch)); }",
+            "start_line": 465
+          }
+        ],
+        "expected_effect": "Reduces risk of array index errors by using a safer transition method.",
+        "preservation_constraints": [
+          "MR1",
+          "MR2",
+          "MR3",
+          "MR4",
+          "MR5"
+        ],
+        "repair_intent": "Replace direct array accesses with a safer alternative."
+      },
+      "proposal_errors": [],
+      "patch_diff": "--- a/print_tokens.c\n+++ b/print_tokens.c\n@@ -462,7 +462,7 @@\n       return(state);\n     if(base[state]+ch >= 0)\n     {\n-        if(check[base[state]-ch] == state) /* Check for the right state */\n+if (stateIsValid(base[state], ch)) { return(next_state_safe(base[state], ch)); } else { return(next_state(default1[state], ch)); }\n              return(next[base[state]+ch]);\n         else\n               return(next_state(default1[state],ch));\n",
+      "patch_hash": "3d959dd42a6508cd9a592bf1bb710c12c95fb89dc42dbc3bfcce49e5fbae5e41",
+      "model_candidate_source": "P003",
+      "fallback_copy_of": null,
+      "original_candidate_errors": [],
+      "duplicate_of": null,
+      "validation_reused_from": null,
+      "validation": {
+        "compile": {
+          "attempted": true,
+          "success": false,
+          "return_code": 1,
+          "timed_out": false,
+          "stdout_tail": "",
+          "stderr_tail": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v355/LLM/output_MR/patches/P003/workspace/print_tokens.c: In function ‘next_state’:\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v355/LLM/output_MR/patches/P003/workspace/print_tokens.c:465:5: warning: implicit declaration of function ‘stateIsValid’ [-Wimplicit-function-declaration]\n  465 | if (stateIsValid(base[state], ch)) { return(next_state_safe(base[state], ch)); } else { return(next_state(default1[state], ch)); }\n      |     ^~~~~~~~~~~~\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v355/LLM/output_MR/patches/P003/workspace/print_tokens.c:465:45: warning: implicit declaration of function ‘next_state_safe’; did you mean ‘next_state’? [-Wimplicit-function-declaration]\n  465 | if (stateIsValid(base[state], ch)) { return(next_state_safe(base[state], ch)); } else { return(next_state(default1[state], ch)); }\n      |                                             ^~~~~~~~~~~~~~~\n      |                                             next_state\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v355/LLM/output_MR/patches/P003/workspace/print_tokens.c:467:9: error: expected ‘}’ before ‘else’\n  467 |         else\n      |         ^~~~\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v355/LLM/output_MR/patches/P003/workspace/print_tokens.c: At top level:\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v355/LLM/output_MR/patches/P003/workspace/print_tokens.c:470:5: error: expected identifier or ‘(’ before ‘else’\n  470 |     else\n      |     ^~~~\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v355/LLM/output_MR/patches/P003/workspace/print_tokens.c:472:1: error: expected identifier or ‘(’ before ‘}’ token\n  472 | }\n      | ^\n",
+          "elapsed_seconds": 0.017,
+          "command": [
+            "/usr/bin/gcc",
+            "-std=c11",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v355/LLM/output_MR/patches/P003/workspace/print_tokens.c",
+            "-o",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v355/LLM/output_MR/patches/P003/workspace/llm_candidate"
+          ],
+          "executable_path": null
+        },
+        "visible_checks": []
+      }
+    },
+    {
+      "patch_id": "P004",
+      "status": "compile_failed",
+      "proposal": {
+        "diagnosis": "The issue lies in the DFA state transition logic where array accesses might be out of bounds, leading to incorrect token processing.",
+        "evidence_reasoning": {
+          "causal_chain": [
+            "DFA uses arrays `check`, `base`, `next`, and `default1` which may have invalid indices if not properly bounded.",
+            "In line 465, `base[state] - ch` could be negative or exceed array limits, causing incorrect state transitions."
+          ],
+          "mr_refs": [
+            "MR1",
+            "MR2",
+            "MR3",
+            "MR4",
+            "MR5"
+          ],
+          "testcase_refs": [
+            "source_s5_mr1",
+            "followup_s5_mr1",
+            "source_s4_mr2",
+            "followup_s4_mr2"
+          ]
+        },
+        "uncertainty": "While multiple plausible repairs are suggested, the exact root cause requires further testing to confirm which repair is most effective. The evidence supports that array index issues are likely, but other factors cannot be ruled out without additional testing.",
+        "assumption": "Implement additional checks to handle edge cases in state transitions.",
+        "edits": [
+          {
+            "end_line": 465,
+            "rationale": "Add multiple layers of index validation for robustness.",
+            "replacement": "if (base[state] >=0 && base[state]-ch >=0 && base[state]+ch < sizeof(next)) { if (check[base[state]-ch] == state) return(next[base[state]+ch]); } else { return(next_state(default1[state], ch)); }",
+            "start_line": 465
+          }
+        ],
+        "expected_effect": "Ensures all array accesses are within valid bounds.",
+        "preservation_constraints": [
+          "MR1",
+          "MR2",
+          "MR3",
+          "MR4",
+          "MR5"
+        ],
+        "repair_intent": "Add comprehensive index validation checks."
+      },
+      "proposal_errors": [],
+      "patch_diff": "--- a/print_tokens.c\n+++ b/print_tokens.c\n@@ -462,7 +462,7 @@\n       return(state);\n     if(base[state]+ch >= 0)\n     {\n-        if(check[base[state]-ch] == state) /* Check for the right state */\n+if (base[state] >=0 && base[state]-ch >=0 && base[state]+ch < sizeof(next)) { if (check[base[state]-ch] == state) return(next[base[state]+ch]); } else { return(next_state(default1[state], ch)); }\n              return(next[base[state]+ch]);\n         else\n               return(next_state(default1[state],ch));\n",
+      "patch_hash": "0e120507d955070c3a14dbe7d26dd87fb66cfff04062eb3f08697e3f6cfd09bc",
+      "model_candidate_source": "P004",
+      "fallback_copy_of": null,
+      "original_candidate_errors": [],
+      "duplicate_of": null,
+      "validation_reused_from": null,
+      "validation": {
+        "compile": {
+          "attempted": true,
+          "success": false,
+          "return_code": 1,
+          "timed_out": false,
+          "stdout_tail": "",
+          "stderr_tail": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v355/LLM/output_MR/patches/P004/workspace/print_tokens.c: In function ‘next_state’:\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v355/LLM/output_MR/patches/P004/workspace/print_tokens.c:467:9: error: expected ‘}’ before ‘else’\n  467 |         else\n      |         ^~~~\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v355/LLM/output_MR/patches/P004/workspace/print_tokens.c: At top level:\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v355/LLM/output_MR/patches/P004/workspace/print_tokens.c:470:5: error: expected identifier or ‘(’ before ‘else’\n  470 |     else\n      |     ^~~~\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v355/LLM/output_MR/patches/P004/workspace/print_tokens.c:472:1: error: expected identifier or ‘(’ before ‘}’ token\n  472 | }\n      | ^\n",
+          "elapsed_seconds": 0.018,
+          "command": [
+            "/usr/bin/gcc",
+            "-std=c11",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v355/LLM/output_MR/patches/P004/workspace/print_tokens.c",
+            "-o",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v355/LLM/output_MR/patches/P004/workspace/llm_candidate"
+          ],
+          "executable_path": null
+        },
+        "visible_checks": []
+      }
+    },
+    {
+      "patch_id": "P005",
+      "status": "compile_failed",
+      "proposal": {
+        "diagnosis": "The issue lies in the DFA state transition logic where array accesses might be out of bounds, leading to incorrect token processing.",
+        "evidence_reasoning": {
+          "causal_chain": [
+            "DFA uses arrays `check`, `base`, `next`, and `default1` which may have invalid indices if not properly bounded.",
+            "In line 465, `base[state] - ch` could be negative or exceed array limits, causing incorrect state transitions."
+          ],
+          "mr_refs": [
+            "MR1",
+            "MR2",
+            "MR3",
+            "MR4",
+            "MR5"
+          ],
+          "testcase_refs": [
+            "source_s5_mr1",
+            "followup_s5_mr1",
+            "source_s4_mr2",
+            "followup_s4_mr2"
+          ]
+        },
+        "uncertainty": "While multiple plausible repairs are suggested, the exact root cause requires further testing to confirm which repair is most effective. The evidence supports that array index issues are likely, but other factors cannot be ruled out without additional testing.",
+        "assumption": "Refactor the DFA transition logic to use a safer approach.",
+        "edits": [
+          {
+            "end_line": 465,
+            "rationale": "Replace direct array accesses with a function that handles edge cases.",
+            "replacement": "return(dfa_safe_transition(base[state], ch, state));",
+            "start_line": 465
+          }
+        ],
+        "expected_effect": "Moves the transition logic into a dedicated safety function.",
+        "preservation_constraints": [
+          "MR1",
+          "MR2",
+          "MR3",
+          "MR4",
+          "MR5"
+        ],
+        "repair_intent": "Refactor to encapsulate state transitions safely."
+      },
+      "proposal_errors": [],
+      "patch_diff": "--- a/print_tokens.c\n+++ b/print_tokens.c\n@@ -462,7 +462,7 @@\n       return(state);\n     if(base[state]+ch >= 0)\n     {\n-        if(check[base[state]-ch] == state) /* Check for the right state */\n+return(dfa_safe_transition(base[state], ch, state));\n              return(next[base[state]+ch]);\n         else\n               return(next_state(default1[state],ch));\n",
+      "patch_hash": "c7baee6e5c58ad4de46fc9094861945c753be3fc3571f25efe10aef2857f3599",
+      "model_candidate_source": "P005",
+      "fallback_copy_of": null,
+      "original_candidate_errors": [],
+      "duplicate_of": null,
+      "validation_reused_from": null,
+      "validation": {
+        "compile": {
+          "attempted": true,
+          "success": false,
+          "return_code": 1,
+          "timed_out": false,
+          "stdout_tail": "",
+          "stderr_tail": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v355/LLM/output_MR/patches/P005/workspace/print_tokens.c: In function ‘next_state’:\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v355/LLM/output_MR/patches/P005/workspace/print_tokens.c:465:8: warning: implicit declaration of function ‘dfa_safe_transition’ [-Wimplicit-function-declaration]\n  465 | return(dfa_safe_transition(base[state], ch, state));\n      |        ^~~~~~~~~~~~~~~~~~~\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v355/LLM/output_MR/patches/P005/workspace/print_tokens.c:467:9: error: expected ‘}’ before ‘else’\n  467 |         else\n      |         ^~~~\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v355/LLM/output_MR/patches/P005/workspace/print_tokens.c: At top level:\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v355/LLM/output_MR/patches/P005/workspace/print_tokens.c:470:5: error: expected identifier or ‘(’ before ‘else’\n  470 |     else\n      |     ^~~~\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v355/LLM/output_MR/patches/P005/workspace/print_tokens.c:472:1: error: expected identifier or ‘(’ before ‘}’ token\n  472 | }\n      | ^\n",
+          "elapsed_seconds": 0.014,
+          "command": [
+            "/usr/bin/gcc",
+            "-std=c11",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v355/LLM/output_MR/patches/P005/workspace/print_tokens.c",
+            "-o",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v355/LLM/output_MR/patches/P005/workspace/llm_candidate"
+          ],
+          "executable_path": null
+        },
+        "visible_checks": []
+      }
+    }
+  ],
+  "summary": {
+    "requested": 5,
+    "generated": 5,
+    "compile_passed": 0,
+    "visible_checks_passed": 0,
+    "fallback_filled": 0,
+    "duplicates": 0,
+    "failed": 5
+  },
+  "interpretation": "Compilation only proves syntactic/build validity. Semantic repair success requires independent hidden tests or an external evaluator."
+}

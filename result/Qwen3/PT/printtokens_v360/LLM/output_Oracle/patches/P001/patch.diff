@@ -1,0 +1,10 @@
+--- a/print_tokens.c
++++ b/print_tokens.c
+@@ -461,6 +461,7 @@
+     if(state < 0)
+       return(state);
+     if(base[state]+ch < 0)
++        return(state);
+     {
+         if(check[base[state]+ch] == state) /* Check for the right state */
+              return(next[base[state]+ch]);

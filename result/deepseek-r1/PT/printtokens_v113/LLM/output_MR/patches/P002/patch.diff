@@ -1,0 +1,11 @@
+--- a/print_tokens.c
++++ b/print_tokens.c
+@@ -246,7 +246,7 @@
+                            token_ptr->token_string[0]='\0';
+                            return(token_ptr);
+                  case 27 : /* These are constant cases */
+-                 case 29 : token_ptr->token_id=constant(next_st,token_str,token_ind);
++case 27 : token_ptr->token_id=constant(next_st,token_str,token_ind); get_actual_token(token_str, token_ind); break;
+                            get_actual_token(token_str,token_ind);
+                            strcpy(token_ptr->token_string,token_str);
+                            return(token_ptr);

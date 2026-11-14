@@ -1,0 +1,94 @@
+[5, 2]
+[ Source Test Case ]
+ Input :
+;if i ` ;nd5 ;YfI8
+ Variant Program Output :
+identifier,	"f".
+identifier,	"i".
+bquote.
+identifier,	"d5".
+identifier,	"fI8".
+eof.
+ Correct program output :
+eof.
+[ follow-up test case ]
+ Input :
+;
+ Variant Program Output :
+eof.
+ Correct program output :
+eof.
+MR_Status: 1
+
+[4, 3]
+[ Source Test Case ]
+ Input :
+;7bTQLAMBDA
+;7bTQLAMBDA
+ Variant Program Output :
+identifier,	"bTQLAMBDA".
+identifier,	"bTQLAMBDA".
+eof.
+ Correct program output :
+eof.
+[ follow-up test case ]
+ Input :
+;7bTQLAMBDA
+;;7bTQLAMBDA
+ Variant Program Output :
+identifier,	"bTQLAMBDA".
+error,	"7bTQLAMBDA".
+eof.
+ Correct program output :
+eof.
+MR_Status: 1
+
+[3, 4]
+[ Source Test Case ]
+ Input :
+;`6#l
+93
+ Variant Program Output :
+numeric,	6.
+character,	"l".
+numeric,	93.
+eof.
+ Correct program output :
+numeric,	93.
+eof.
+[ follow-up test case ]
+ Input :
+;
+93
+ Variant Program Output :
+numeric,	3.
+eof.
+ Correct program output :
+numeric,	93.
+eof.
+MR_Status: 1
+
+[3, 5]
+[ Source Test Case ]
+ Input :
+;`6#l
+93
+ Variant Program Output :
+numeric,	6.
+character,	"l".
+numeric,	93.
+eof.
+ Correct program output :
+numeric,	93.
+eof.
+[ follow-up test case ]
+ Input :
+;
+93
+ Variant Program Output :
+numeric,	3.
+eof.
+ Correct program output :
+numeric,	93.
+eof.
+MR_Status: 1

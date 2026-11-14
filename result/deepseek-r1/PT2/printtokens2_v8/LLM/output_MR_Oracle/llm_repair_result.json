@@ -1,0 +1,345 @@
+{
+  "workflow": "single_llm_direct_repair",
+  "effective_mode": "ORACLE_MR",
+  "program_path": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT2/printtokens2_v8/print_tokens2.c",
+  "output_dir": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT2/printtokens2_v8/LLM/output_MR_Oracle",
+  "llm_call_attempts": 1,
+  "normal_llm_calls_per_scenario": 1,
+  "patch_candidates": [
+    {
+      "patch_id": "P001",
+      "status": "compile_passed",
+      "proposal": {
+        "diagnosis": "The issue lies in how the tokenizer handles tokens following a semicolon (`;`), particularly when they are part of comments or other token sequences. The failing test cases indicate that after encountering a semicolon, subsequent valid tokens (like numeric constants) are either not recognized correctly or are being treated as errors. This points to an issue in the `is_token_end` function where it fails to properly transition states after processing certain token types.",
+        "evidence_reasoning": {
+          "causal_chain": [
+            "The test case `source_s4_mr2` with input `;`6#l\n93\n produces an error for `6#l`, suggesting the tokenizer mishandles tokens following a semicolon.",
+            "The expected output skips over the invalid token and proceeds to print `numeric,93.`, indicating that the issue is in how the tokenizer processes the remainder of the input after encountering certain characters."
+          ],
+          "mr_refs": [
+            "MR2: The transformation removes content after the first semicolon, expecting no change in token counts but observing an error.",
+            "MR5: Similar issues with handling `xor` and subsequent tokens suggest a broader problem with state management after certain token starts."
+          ],
+          "testcase_refs": [
+            "source_s4_mr2: Fails due to unexpected error token.",
+            "followup_s4_mr2: Passes when the problematic part is removed, indicating correct behavior exists but isn't triggered properly."
+          ]
+        },
+        "uncertainty": "While multiple plausible repairs are suggested, the exact cause may require further debugging. However, all candidates focus on improving state transitions and token recognition after certain characters, which aligns with the observed failures.",
+        "assumption": "The tokenizer fails to reset state after processing certain tokens, leading to incorrect classification of subsequent tokens.",
+        "edits": [
+          {
+            "end_line": 218,
+            "rationale": "Modify the condition to properly handle token end detection after semicolons and comments.",
+            "replacement": "if(str_com_id!=2 && ch!='\\n') return(FALSE);",
+            "start_line": 218
+          }
+        ],
+        "expected_effect": "Ensures that non-comment tokens are correctly identified after a semicolon, preventing erroneous token classification.",
+        "preservation_constraints": [
+          "Handle valid numeric constants correctly",
+          "Preserve correct behavior for comments and known tokens"
+        ],
+        "repair_intent": "Fix state management in `is_token_end` to properly transition after encountering certain characters."
+      },
+      "proposal_errors": [],
+      "patch_diff": "--- a/print_tokens2.c\n+++ b/print_tokens2.c\n@@ -215,7 +215,7 @@\n          return(FALSE);\n     }\n \n- if(str_com_id!=2)    /* is comment token */\n+if(str_com_id!=2 && ch!='\\n') return(FALSE);\n    { if(ch=='\\n')     /* for comment until meet end of line */\n         return(TRUE);\n       else\n",
+      "patch_hash": "d359cd8e1158c291c5bbdb713ff7711a453e7ccc9df4879170f0aee00590e188",
+      "model_candidate_source": "P001",
+      "fallback_copy_of": null,
+      "original_candidate_errors": [],
+      "duplicate_of": null,
+      "validation_reused_from": null,
+      "validation": {
+        "compile": {
+          "attempted": true,
+          "success": true,
+          "return_code": 0,
+          "timed_out": false,
+          "stdout_tail": "",
+          "stderr_tail": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT2/printtokens2_v8/LLM/output_MR_Oracle/patches/P001/workspace/print_tokens2.c:22:1: warning: return type defaults to ‘int’ [-Wimplicit-int]\n   22 | main(argc,argv)\n      | ^~~~\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT2/printtokens2_v8/LLM/output_MR_Oracle/patches/P001/workspace/print_tokens2.c:112:8: warning: type defaults to ‘int’ in declaration of ‘unget_error’ [-Wimplicit-int]\n  112 | static unget_error();\n      |        ^~~~~~~~~~~\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT2/printtokens2_v8/LLM/output_MR_Oracle/patches/P001/workspace/print_tokens2.c:422:8: warning: return type defaults to ‘int’ [-Wimplicit-int]\n  422 | static unget_error(fp)\n      |        ^~~~~~~~~~~\n",
+          "elapsed_seconds": 0.041,
+          "command": [
+            "/usr/bin/gcc",
+            "-std=c11",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT2/printtokens2_v8/LLM/output_MR_Oracle/patches/P001/workspace/print_tokens2.c",
+            "-o",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT2/printtokens2_v8/LLM/output_MR_Oracle/patches/P001/workspace/llm_candidate"
+          ],
+          "executable_path": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT2/printtokens2_v8/LLM/output_MR_Oracle/patches/P001/workspace/llm_candidate"
+        },
+        "visible_checks": []
+      }
+    },
+    {
+      "patch_id": "P002",
+      "status": "compile_passed",
+      "proposal": {
+        "diagnosis": "The issue lies in how the tokenizer handles tokens following a semicolon (`;`), particularly when they are part of comments or other token sequences. The failing test cases indicate that after encountering a semicolon, subsequent valid tokens (like numeric constants) are either not recognized correctly or are being treated as errors. This points to an issue in the `is_token_end` function where it fails to properly transition states after processing certain token types.",
+        "evidence_reasoning": {
+          "causal_chain": [
+            "The test case `source_s4_mr2` with input `;`6#l\n93\n produces an error for `6#l`, suggesting the tokenizer mishandles tokens following a semicolon.",
+            "The expected output skips over the invalid token and proceeds to print `numeric,93.`, indicating that the issue is in how the tokenizer processes the remainder of the input after encountering certain characters."
+          ],
+          "mr_refs": [
+            "MR2: The transformation removes content after the first semicolon, expecting no change in token counts but observing an error.",
+            "MR5: Similar issues with handling `xor` and subsequent tokens suggest a broader problem with state management after certain token starts."
+          ],
+          "testcase_refs": [
+            "source_s4_mr2: Fails due to unexpected error token.",
+            "followup_s4_mr2: Passes when the problematic part is removed, indicating correct behavior exists but isn't triggered properly."
+          ]
+        },
+        "uncertainty": "While multiple plausible repairs are suggested, the exact cause may require further debugging. However, all candidates focus on improving state transitions and token recognition after certain characters, which aligns with the observed failures.",
+        "assumption": "The buffer handling in the tokenizer incorrectly marks certain sequences as errors when they should be valid.",
+        "edits": [
+          {
+            "end_line": 218,
+            "rationale": "Adjust the condition to allow proper tokenization of subsequent tokens after a semicolon.",
+            "replacement": "if(str_com_id!=2 && ch!='\\n') return(FALSE);",
+            "start_line": 218
+          }
+        ],
+        "expected_effect": "Prevents erroneous classification of valid tokens following certain characters, such as numeric constants after comments.",
+        "preservation_constraints": [
+          "Maintain correct handling of comment termination",
+          "Ensure proper tokenization of subsequent tokens"
+        ],
+        "repair_intent": "Correct buffer and state management in `is_token_end`."
+      },
+      "proposal_errors": [],
+      "patch_diff": "--- a/print_tokens2.c\n+++ b/print_tokens2.c\n@@ -215,7 +215,7 @@\n          return(FALSE);\n     }\n \n- if(str_com_id!=2)    /* is comment token */\n+if(str_com_id!=2 && ch!='\\n') return(FALSE);\n    { if(ch=='\\n')     /* for comment until meet end of line */\n         return(TRUE);\n       else\n",
+      "patch_hash": "d359cd8e1158c291c5bbdb713ff7711a453e7ccc9df4879170f0aee00590e188",
+      "model_candidate_source": "P002",
+      "fallback_copy_of": null,
+      "original_candidate_errors": [],
+      "duplicate_of": "P001",
+      "validation_reused_from": "P001",
+      "validation": {
+        "compile": {
+          "attempted": true,
+          "success": true,
+          "return_code": 0,
+          "timed_out": false,
+          "stdout_tail": "",
+          "stderr_tail": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT2/printtokens2_v8/LLM/output_MR_Oracle/patches/P001/workspace/print_tokens2.c:22:1: warning: return type defaults to ‘int’ [-Wimplicit-int]\n   22 | main(argc,argv)\n      | ^~~~\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT2/printtokens2_v8/LLM/output_MR_Oracle/patches/P001/workspace/print_tokens2.c:112:8: warning: type defaults to ‘int’ in declaration of ‘unget_error’ [-Wimplicit-int]\n  112 | static unget_error();\n      |        ^~~~~~~~~~~\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT2/printtokens2_v8/LLM/output_MR_Oracle/patches/P001/workspace/print_tokens2.c:422:8: warning: return type defaults to ‘int’ [-Wimplicit-int]\n  422 | static unget_error(fp)\n      |        ^~~~~~~~~~~\n",
+          "elapsed_seconds": 0.041,
+          "command": [
+            "/usr/bin/gcc",
+            "-std=c11",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT2/printtokens2_v8/LLM/output_MR_Oracle/patches/P001/workspace/print_tokens2.c",
+            "-o",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT2/printtokens2_v8/LLM/output_MR_Oracle/patches/P001/workspace/llm_candidate"
+          ],
+          "executable_path": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT2/printtokens2_v8/LLM/output_MR_Oracle/patches/P001/workspace/llm_candidate"
+        },
+        "visible_checks": []
+      }
+    },
+    {
+      "patch_id": "P003",
+      "status": "compile_passed",
+      "proposal": {
+        "diagnosis": "The issue lies in how the tokenizer handles tokens following a semicolon (`;`), particularly when they are part of comments or other token sequences. The failing test cases indicate that after encountering a semicolon, subsequent valid tokens (like numeric constants) are either not recognized correctly or are being treated as errors. This points to an issue in the `is_token_end` function where it fails to properly transition states after processing certain token types.",
+        "evidence_reasoning": {
+          "causal_chain": [
+            "The test case `source_s4_mr2` with input `;`6#l\n93\n produces an error for `6#l`, suggesting the tokenizer mishandles tokens following a semicolon.",
+            "The expected output skips over the invalid token and proceeds to print `numeric,93.`, indicating that the issue is in how the tokenizer processes the remainder of the input after encountering certain characters."
+          ],
+          "mr_refs": [
+            "MR2: The transformation removes content after the first semicolon, expecting no change in token counts but observing an error.",
+            "MR5: Similar issues with handling `xor` and subsequent tokens suggest a broader problem with state management after certain token starts."
+          ],
+          "testcase_refs": [
+            "source_s4_mr2: Fails due to unexpected error token.",
+            "followup_s4_mr2: Passes when the problematic part is removed, indicating correct behavior exists but isn't triggered properly."
+          ]
+        },
+        "uncertainty": "While multiple plausible repairs are suggested, the exact cause may require further debugging. However, all candidates focus on improving state transitions and token recognition after certain characters, which aligns with the observed failures.",
+        "assumption": "The function fails to properly handle cases where a semicolon is followed by valid tokens, incorrectly marking them as errors.",
+        "edits": [
+          {
+            "end_line": 218,
+            "rationale": "Modify the condition to correctly identify token boundaries after certain characters.",
+            "replacement": "if(str_com_id!=2 && ch!='\\n') return(FALSE);",
+            "start_line": 218
+          }
+        ],
+        "expected_effect": "Allows valid tokens following semicolons and comments to be recognized correctly, preventing erroneous classifications.",
+        "preservation_constraints": [
+          "Preserve correct handling of comment syntax",
+          "Ensure proper tokenization of subsequent tokens"
+        ],
+        "repair_intent": "Fix state management in `is_token_end`."
+      },
+      "proposal_errors": [],
+      "patch_diff": "--- a/print_tokens2.c\n+++ b/print_tokens2.c\n@@ -215,7 +215,7 @@\n          return(FALSE);\n     }\n \n- if(str_com_id!=2)    /* is comment token */\n+if(str_com_id!=2 && ch!='\\n') return(FALSE);\n    { if(ch=='\\n')     /* for comment until meet end of line */\n         return(TRUE);\n       else\n",
+      "patch_hash": "d359cd8e1158c291c5bbdb713ff7711a453e7ccc9df4879170f0aee00590e188",
+      "model_candidate_source": "P003",
+      "fallback_copy_of": null,
+      "original_candidate_errors": [],
+      "duplicate_of": "P001",
+      "validation_reused_from": "P001",
+      "validation": {
+        "compile": {
+          "attempted": true,
+          "success": true,
+          "return_code": 0,
+          "timed_out": false,
+          "stdout_tail": "",
+          "stderr_tail": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT2/printtokens2_v8/LLM/output_MR_Oracle/patches/P001/workspace/print_tokens2.c:22:1: warning: return type defaults to ‘int’ [-Wimplicit-int]\n   22 | main(argc,argv)\n      | ^~~~\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT2/printtokens2_v8/LLM/output_MR_Oracle/patches/P001/workspace/print_tokens2.c:112:8: warning: type defaults to ‘int’ in declaration of ‘unget_error’ [-Wimplicit-int]\n  112 | static unget_error();\n      |        ^~~~~~~~~~~\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT2/printtokens2_v8/LLM/output_MR_Oracle/patches/P001/workspace/print_tokens2.c:422:8: warning: return type defaults to ‘int’ [-Wimplicit-int]\n  422 | static unget_error(fp)\n      |        ^~~~~~~~~~~\n",
+          "elapsed_seconds": 0.041,
+          "command": [
+            "/usr/bin/gcc",
+            "-std=c11",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT2/printtokens2_v8/LLM/output_MR_Oracle/patches/P001/workspace/print_tokens2.c",
+            "-o",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT2/printtokens2_v8/LLM/output_MR_Oracle/patches/P001/workspace/llm_candidate"
+          ],
+          "executable_path": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT2/printtokens2_v8/LLM/output_MR_Oracle/patches/P001/workspace/llm_candidate"
+        },
+        "visible_checks": []
+      }
+    },
+    {
+      "patch_id": "P004",
+      "status": "compile_passed",
+      "proposal": {
+        "diagnosis": "The issue lies in how the tokenizer handles tokens following a semicolon (`;`), particularly when they are part of comments or other token sequences. The failing test cases indicate that after encountering a semicolon, subsequent valid tokens (like numeric constants) are either not recognized correctly or are being treated as errors. This points to an issue in the `is_token_end` function where it fails to properly transition states after processing certain token types.",
+        "evidence_reasoning": {
+          "causal_chain": [
+            "The test case `source_s4_mr2` with input `;`6#l\n93\n produces an error for `6#l`, suggesting the tokenizer mishandles tokens following a semicolon.",
+            "The expected output skips over the invalid token and proceeds to print `numeric,93.`, indicating that the issue is in how the tokenizer processes the remainder of the input after encountering certain characters."
+          ],
+          "mr_refs": [
+            "MR2: The transformation removes content after the first semicolon, expecting no change in token counts but observing an error.",
+            "MR5: Similar issues with handling `xor` and subsequent tokens suggest a broader problem with state management after certain token starts."
+          ],
+          "testcase_refs": [
+            "source_s4_mr2: Fails due to unexpected error token.",
+            "followup_s4_mr2: Passes when the problematic part is removed, indicating correct behavior exists but isn't triggered properly."
+          ]
+        },
+        "uncertainty": "While multiple plausible repairs are suggested, the exact cause may require further debugging. However, all candidates focus on improving state transitions and token recognition after certain characters, which aligns with the observed failures.",
+        "assumption": "The tokenizer incorrectly identifies certain sequences as errors due to improper state transitions after processing specific characters.",
+        "edits": [
+          {
+            "end_line": 218,
+            "rationale": "Adjust the condition to properly transition states after encountering a semicolon or comment terminator.",
+            "replacement": "if(str_com_id!=2 && ch!='\\n') return(FALSE);",
+            "start_line": 218
+          }
+        ],
+        "expected_effect": "Ensures that valid tokens following certain characters are recognized correctly, improving overall tokenization accuracy.",
+        "preservation_constraints": [
+          "Maintain correct handling of comment termination",
+          "Ensure proper processing of subsequent tokens"
+        ],
+        "repair_intent": "Correct state transitions in `is_token_end`."
+      },
+      "proposal_errors": [],
+      "patch_diff": "--- a/print_tokens2.c\n+++ b/print_tokens2.c\n@@ -215,7 +215,7 @@\n          return(FALSE);\n     }\n \n- if(str_com_id!=2)    /* is comment token */\n+if(str_com_id!=2 && ch!='\\n') return(FALSE);\n    { if(ch=='\\n')     /* for comment until meet end of line */\n         return(TRUE);\n       else\n",
+      "patch_hash": "d359cd8e1158c291c5bbdb713ff7711a453e7ccc9df4879170f0aee00590e188",
+      "model_candidate_source": "P004",
+      "fallback_copy_of": null,
+      "original_candidate_errors": [],
+      "duplicate_of": "P001",
+      "validation_reused_from": "P001",
+      "validation": {
+        "compile": {
+          "attempted": true,
+          "success": true,
+          "return_code": 0,
+          "timed_out": false,
+          "stdout_tail": "",
+          "stderr_tail": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT2/printtokens2_v8/LLM/output_MR_Oracle/patches/P001/workspace/print_tokens2.c:22:1: warning: return type defaults to ‘int’ [-Wimplicit-int]\n   22 | main(argc,argv)\n      | ^~~~\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT2/printtokens2_v8/LLM/output_MR_Oracle/patches/P001/workspace/print_tokens2.c:112:8: warning: type defaults to ‘int’ in declaration of ‘unget_error’ [-Wimplicit-int]\n  112 | static unget_error();\n      |        ^~~~~~~~~~~\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT2/printtokens2_v8/LLM/output_MR_Oracle/patches/P001/workspace/print_tokens2.c:422:8: warning: return type defaults to ‘int’ [-Wimplicit-int]\n  422 | static unget_error(fp)\n      |        ^~~~~~~~~~~\n",
+          "elapsed_seconds": 0.041,
+          "command": [
+            "/usr/bin/gcc",
+            "-std=c11",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT2/printtokens2_v8/LLM/output_MR_Oracle/patches/P001/workspace/print_tokens2.c",
+            "-o",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT2/printtokens2_v8/LLM/output_MR_Oracle/patches/P001/workspace/llm_candidate"
+          ],
+          "executable_path": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT2/printtokens2_v8/LLM/output_MR_Oracle/patches/P001/workspace/llm_candidate"
+        },
+        "visible_checks": []
+      }
+    },
+    {
+      "patch_id": "P005",
+      "status": "compile_passed",
+      "proposal": {
+        "diagnosis": "The issue lies in how the tokenizer handles tokens following a semicolon (`;`), particularly when they are part of comments or other token sequences. The failing test cases indicate that after encountering a semicolon, subsequent valid tokens (like numeric constants) are either not recognized correctly or are being treated as errors. This points to an issue in the `is_token_end` function where it fails to properly transition states after processing certain token types.",
+        "evidence_reasoning": {
+          "causal_chain": [
+            "The test case `source_s4_mr2` with input `;`6#l\n93\n produces an error for `6#l`, suggesting the tokenizer mishandles tokens following a semicolon.",
+            "The expected output skips over the invalid token and proceeds to print `numeric,93.`, indicating that the issue is in how the tokenizer processes the remainder of the input after encountering certain characters."
+          ],
+          "mr_refs": [
+            "MR2: The transformation removes content after the first semicolon, expecting no change in token counts but observing an error.",
+            "MR5: Similar issues with handling `xor` and subsequent tokens suggest a broader problem with state management after certain token starts."
+          ],
+          "testcase_refs": [
+            "source_s4_mr2: Fails due to unexpected error token.",
+            "followup_s4_mr2: Passes when the problematic part is removed, indicating correct behavior exists but isn't triggered properly."
+          ]
+        },
+        "uncertainty": "While multiple plausible repairs are suggested, the exact cause may require further debugging. However, all candidates focus on improving state transitions and token recognition after certain characters, which aligns with the observed failures.",
+        "assumption": "The function incorrectly marks valid tokens as errors due to a failure in resetting or transitioning states after certain token types.",
+        "edits": [
+          {
+            "end_line": 218,
+            "rationale": "Modify the condition to allow proper state transitions and token recognition after encountering specific characters.",
+            "replacement": "if(str_com_id!=2 && ch!='\\n') return(FALSE);",
+            "start_line": 218
+          }
+        ],
+        "expected_effect": "Prevents erroneous classifications of valid tokens following certain characters, improving overall reliability of the tokenizer.",
+        "preservation_constraints": [
+          "Preserve correct handling of known token types",
+          "Ensure proper state management"
+        ],
+        "repair_intent": "Fix state management in `is_token_end` to prevent incorrect token classifications."
+      },
+      "proposal_errors": [],
+      "patch_diff": "--- a/print_tokens2.c\n+++ b/print_tokens2.c\n@@ -215,7 +215,7 @@\n          return(FALSE);\n     }\n \n- if(str_com_id!=2)    /* is comment token */\n+if(str_com_id!=2 && ch!='\\n') return(FALSE);\n    { if(ch=='\\n')     /* for comment until meet end of line */\n         return(TRUE);\n       else\n",
+      "patch_hash": "d359cd8e1158c291c5bbdb713ff7711a453e7ccc9df4879170f0aee00590e188",
+      "model_candidate_source": "P005",
+      "fallback_copy_of": null,
+      "original_candidate_errors": [],
+      "duplicate_of": "P001",
+      "validation_reused_from": "P001",
+      "validation": {
+        "compile": {
+          "attempted": true,
+          "success": true,
+          "return_code": 0,
+          "timed_out": false,
+          "stdout_tail": "",
+          "stderr_tail": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT2/printtokens2_v8/LLM/output_MR_Oracle/patches/P001/workspace/print_tokens2.c:22:1: warning: return type defaults to ‘int’ [-Wimplicit-int]\n   22 | main(argc,argv)\n      | ^~~~\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT2/printtokens2_v8/LLM/output_MR_Oracle/patches/P001/workspace/print_tokens2.c:112:8: warning: type defaults to ‘int’ in declaration of ‘unget_error’ [-Wimplicit-int]\n  112 | static unget_error();\n      |        ^~~~~~~~~~~\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT2/printtokens2_v8/LLM/output_MR_Oracle/patches/P001/workspace/print_tokens2.c:422:8: warning: return type defaults to ‘int’ [-Wimplicit-int]\n  422 | static unget_error(fp)\n      |        ^~~~~~~~~~~\n",
+          "elapsed_seconds": 0.041,
+          "command": [
+            "/usr/bin/gcc",
+            "-std=c11",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT2/printtokens2_v8/LLM/output_MR_Oracle/patches/P001/workspace/print_tokens2.c",
+            "-o",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT2/printtokens2_v8/LLM/output_MR_Oracle/patches/P001/workspace/llm_candidate"
+          ],
+          "executable_path": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT2/printtokens2_v8/LLM/output_MR_Oracle/patches/P001/workspace/llm_candidate"
+        },
+        "visible_checks": []
+      }
+    }
+  ],
+  "summary": {
+    "requested": 5,
+    "generated": 5,
+    "compile_passed": 5,
+    "visible_checks_passed": 0,
+    "fallback_filled": 0,
+    "duplicates": 4,
+    "failed": 0
+  },
+  "interpretation": "Compilation only proves syntactic/build validity. Semantic repair success requires independent hidden tests or an external evaluator."
+}

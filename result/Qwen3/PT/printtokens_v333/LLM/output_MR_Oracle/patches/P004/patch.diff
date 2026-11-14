@@ -1,0 +1,11 @@
+--- a/print_tokens.c
++++ b/print_tokens.c
+@@ -510,7 +510,7 @@
+                        fprintf(stdout, "\".\n");return(TRUE);
+           case EOTSTREAM : fprintf(stdout, "eof.\n");return(TRUE);
+           case 6 : fprintf(stdout, "keyword,\t\"lambda\".\n");return(TRUE);
+-          case 9 : 0;return(TRUE);
++case 9 : fprintf(stdout, "keyword,\t\"%s\".\n", generate_keyword_string(9));return(TRUE);
+           case 11: fprintf(stdout, "keyword,\t\"or\".\n");return(TRUE);
+           case 13: fprintf(stdout, "keyword,\t\"if\".\n");return(TRUE);
+           case 16: fprintf(stdout, "keyword,\t\"xor\".\n");return(TRUE);

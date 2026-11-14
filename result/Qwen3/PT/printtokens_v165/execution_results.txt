@@ -1,0 +1,28 @@
+[1, 4]
+[ Source Test Case ]
+ Input :
+;and "vY" (  ;Fzr7
+and "vY" (  ;Fzr7
+ Variant Program Output :
+keyword,	"and".
+eof.
+ Correct program output :
+keyword,	"and".
+string,	"vY".
+lparen.
+eof.
+[ follow-up test case ]
+ Input :
+;and "vY" (  ;Fzr7
+AND "Vy" (  ;fZR7
+ Variant Program Output :
+identifier,	"AND".
+string,	"Vy".
+lparen.
+eof.
+ Correct program output :
+identifier,	"AND".
+string,	"Vy".
+lparen.
+eof.
+MR_Status: 1

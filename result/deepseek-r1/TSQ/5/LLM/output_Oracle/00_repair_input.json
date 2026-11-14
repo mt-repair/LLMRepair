@@ -1,0 +1,120 @@
+{
+  "program_path": "e:\\LLMProgramRepair\\LLM\\MSBF\\code\\deepseek-r1\\TSQ\\Mutant5.py",
+  "project_root": "e:\\LLMProgramRepair\\LLM\\MSBF\\code\\deepseek-r1\\TSQ",
+  "program_function": "\n            Program name: Trisquare\n            Function: Calculate the area of a triangle given three side lengths.\n\n            Input: argv, a list containing three numeric side lengths [a, b, c].\n            Output: returns a tuple (area, symbol). symbol is always 0.\n\n            Behavior:\n            1. If any side ≤ 0 or triangle‑inequality is violated, print \"Not a triangle\" and return (0, 0).\n            2. For valid triangle sides: classify triangle as acute, right‑angled or obtuse.\n            Use corresponding formulas to compute area for isosceles and scalene cases.\n        ",
+  "requested_mode": "ORACLE",
+  "effective_mode": "ORACLE",
+  "known_fault_lines": [
+    40
+  ],
+  "test_executions": [
+    {
+      "test_id": "input1",
+      "input": "[8, 8, 9]",
+      "actual_output": "29.764702249476642",
+      "expected_output": "29.764702249476642",
+      "test_status": "pass"
+    },
+    {
+      "test_id": "input2",
+      "input": "[8, 8, 13.228756555322953]",
+      "actual_output": "59.529404498953284",
+      "expected_output": "29.764702249476642",
+      "test_status": "nopass"
+    },
+    {
+      "test_id": "input3",
+      "input": "[2, 7, 7]",
+      "actual_output": "6.928203230275509",
+      "expected_output": "6.928203230275509",
+      "test_status": "pass"
+    },
+    {
+      "test_id": "input4",
+      "input": "[13.856406460551018, 7, 7]",
+      "actual_output": "13.856406460551067",
+      "expected_output": "6.928203230275534",
+      "test_status": "nopass"
+    },
+    {
+      "test_id": "input5",
+      "input": "[5, 9, 5]",
+      "actual_output": "19.615045245933032",
+      "expected_output": "9.807522622966516",
+      "test_status": "nopass"
+    },
+    {
+      "test_id": "input6",
+      "input": "[13.674794331177344, 9, 5]",
+      "actual_output": "9.807522622966594",
+      "expected_output": "9.807522622966594",
+      "test_status": "pass"
+    },
+    {
+      "test_id": "input7",
+      "input": "[5, 4.358898943540674, 5]",
+      "actual_output": "9.807522622966514",
+      "expected_output": "9.807522622966514",
+      "test_status": "pass"
+    },
+    {
+      "test_id": "input8",
+      "input": "[5, 9, 13.674794331177344]",
+      "actual_output": "9.807522622966594",
+      "expected_output": "9.807522622966594",
+      "test_status": "pass"
+    },
+    {
+      "test_id": "input9",
+      "input": "[13.674794331177344, 18.520259177452136, 5]",
+      "actual_output": "9.807522622966466",
+      "expected_output": "9.807522622966466",
+      "test_status": "pass"
+    },
+    {
+      "test_id": "input10",
+      "input": "[13.674794331177344, 9, 22.60530911091463]",
+      "actual_output": "9.807522622966607",
+      "expected_output": "9.807522622966607",
+      "test_status": "pass"
+    },
+    {
+      "test_id": "input11",
+      "input": "[2, 2, 2]",
+      "actual_output": "1.7320508075688776",
+      "expected_output": "1.7320508075688776",
+      "test_status": "pass"
+    },
+    {
+      "test_id": "input12",
+      "input": "[3.4641016151377544, 2, 2]",
+      "actual_output": "3.4641016151377553",
+      "expected_output": "1.7320508075688776",
+      "test_status": "nopass"
+    },
+    {
+      "test_id": "input13",
+      "input": "[2, 3.4641016151377544, 2]",
+      "actual_output": "3.4641016151377553",
+      "expected_output": "1.7320508075688776",
+      "test_status": "nopass"
+    },
+    {
+      "test_id": "input14",
+      "input": "[2, 2, 3.4641016151377544]",
+      "actual_output": "3.4641016151377553",
+      "expected_output": "1.7320508075688776",
+      "test_status": "nopass"
+    }
+  ],
+  "mg_relation": [],
+  "patch_budget": 5,
+  "generation_limits": {
+    "num_ctx": 32768,
+    "num_predict": 8192,
+    "max_edits_per_candidate": 3,
+    "max_total_touched_lines_per_candidate": 20,
+    "require_known_line_coverage": true
+  },
+  "policy": "One LLM response performs one shared evidence analysis and returns all patch candidates; no Agent1/Agent2 artifacts are used."
+}

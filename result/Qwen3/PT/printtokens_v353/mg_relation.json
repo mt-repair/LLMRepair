@@ -1,0 +1,10 @@
+[
+  {
+    "mr_id": "MR4",
+    "source_test_id": "source_s1_mr4",
+    "followup_test_id": "followup_s1_mr4",
+    "input_transformation": " First, randomly select the rounded-up test cases from the source test cases. 50% Enter a line and switch between uppercase and lowercase English letters; then, for lines containing semicolons, ';' For input lines that do not contain single or double quotation marks, remove all characters after the first semicolon to construct the follow-up test case. ",
+    "output_relation": " Changing between uppercase and lowercase letters and deleting comments after semicolons should not change the five categories. token Therefore, the number of test cases in the output of the source test cases and the follow-up test cases identifier AND: keyword Amount string Medicine Quantity, error Medicine Quantity, character Total Quantity numeric The quantities should be equal. ",
+    "actual_relation_status": "VMG"
+  }
+]

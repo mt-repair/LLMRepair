@@ -1,0 +1,343 @@
+{
+  "workflow": "single_llm_direct_repair",
+  "effective_mode": "ORACLE_MR",
+  "program_path": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v240/print_tokens.c",
+  "output_dir": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v240/LLM/output_MR_Oracle",
+  "llm_call_attempts": 1,
+  "normal_llm_calls_per_scenario": 1,
+  "patch_candidates": [
+    {
+      "patch_id": "P001",
+      "status": "compile_passed",
+      "proposal": {
+        "diagnosis": "The issue lies in the DFA state transitions not correctly handling uppercase letters for keywords. The `next_state` function at line 465 does not account for case sensitivity, causing keywords like 'AND' to be misclassified.",
+        "evidence_reasoning": {
+          "causal_chain": [
+            "Test input contains uppercase 'AND', which fails to trigger keyword recognition due to case-sensitive DFA transitions.",
+            "The `next_state` function at line 465 processes characters without converting to a uniform case, leading to incorrect state transitions."
+          ],
+          "mr_refs": [
+            "MR4"
+          ],
+          "testcase_refs": [
+            "source_s1_mr4",
+            "followup_s1_mr4"
+          ]
+        },
+        "uncertainty": "The exact cause of the failure could be due to either incorrect state transitions or improper handling of uppercase letters in `get_char`. The repair candidates address both possibilities by ensuring consistent case handling and accurate state transitions.",
+        "assumption": "Adjust DFA state transitions in `next_state` for case insensitivity.",
+        "edits": [
+          {
+            "end_line": 465,
+            "rationale": "Modify state transitions to handle both cases uniformly.",
+            "replacement": "if (check[check[state] + toupper(ch)] == state)",
+            "start_line": 465
+          }
+        ],
+        "expected_effect": "DFA correctly processes both uppercase and lowercase characters.",
+        "preservation_constraints": [
+          "Ensure existing lowercase transitions remain functional."
+        ],
+        "repair_intent": "Make DFA case-insensitive for keyword recognition."
+      },
+      "proposal_errors": [],
+      "patch_diff": "--- a/print_tokens.c\n+++ b/print_tokens.c\n@@ -462,7 +462,7 @@\n       return(state);\n     if(base[state]+ch >= 0)\n     {\n-        if(check[check[state]+ch] == state) /* Check for the right state */\n+if (check[check[state] + toupper(ch)] == state)\n              return(next[base[state]+ch]);\n         else\n               return(next_state(default1[state],ch));\n",
+      "patch_hash": "1c15e72b8aed010143494c0a97dfcfb36f621f86636e0fa3d4b640185ede691b",
+      "model_candidate_source": "P003",
+      "fallback_copy_of": "P003",
+      "original_candidate_errors": [
+        "repair_candidates[0].no edit covers a known fault line"
+      ],
+      "duplicate_of": null,
+      "validation_reused_from": null,
+      "validation": {
+        "compile": {
+          "attempted": true,
+          "success": true,
+          "return_code": 0,
+          "timed_out": false,
+          "stdout_tail": "",
+          "stderr_tail": "",
+          "elapsed_seconds": 0.047,
+          "command": [
+            "/usr/bin/gcc",
+            "-std=c11",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v240/LLM/output_MR_Oracle/patches/P001/workspace/print_tokens.c",
+            "-o",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v240/LLM/output_MR_Oracle/patches/P001/workspace/llm_candidate"
+          ],
+          "executable_path": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v240/LLM/output_MR_Oracle/patches/P001/workspace/llm_candidate"
+        },
+        "visible_checks": []
+      }
+    },
+    {
+      "patch_id": "P002",
+      "status": "compile_passed",
+      "proposal": {
+        "diagnosis": "The issue lies in the DFA state transitions not correctly handling uppercase letters for keywords. The `next_state` function at line 465 does not account for case sensitivity, causing keywords like 'AND' to be misclassified.",
+        "evidence_reasoning": {
+          "causal_chain": [
+            "Test input contains uppercase 'AND', which fails to trigger keyword recognition due to case-sensitive DFA transitions.",
+            "The `next_state` function at line 465 processes characters without converting to a uniform case, leading to incorrect state transitions."
+          ],
+          "mr_refs": [
+            "MR4"
+          ],
+          "testcase_refs": [
+            "source_s1_mr4",
+            "followup_s1_mr4"
+          ]
+        },
+        "uncertainty": "The exact cause of the failure could be due to either incorrect state transitions or improper handling of uppercase letters in `get_char`. The repair candidates address both possibilities by ensuring consistent case handling and accurate state transitions.",
+        "assumption": "Adjust DFA state transitions in `next_state` for case insensitivity.",
+        "edits": [
+          {
+            "end_line": 465,
+            "rationale": "Modify state transitions to handle both cases uniformly.",
+            "replacement": "if (check[check[state] + toupper(ch)] == state)",
+            "start_line": 465
+          }
+        ],
+        "expected_effect": "DFA correctly processes both uppercase and lowercase characters.",
+        "preservation_constraints": [
+          "Ensure existing lowercase transitions remain functional."
+        ],
+        "repair_intent": "Make DFA case-insensitive for keyword recognition."
+      },
+      "proposal_errors": [],
+      "patch_diff": "--- a/print_tokens.c\n+++ b/print_tokens.c\n@@ -462,7 +462,7 @@\n       return(state);\n     if(base[state]+ch >= 0)\n     {\n-        if(check[check[state]+ch] == state) /* Check for the right state */\n+if (check[check[state] + toupper(ch)] == state)\n              return(next[base[state]+ch]);\n         else\n               return(next_state(default1[state],ch));\n",
+      "patch_hash": "1c15e72b8aed010143494c0a97dfcfb36f621f86636e0fa3d4b640185ede691b",
+      "model_candidate_source": "P003",
+      "fallback_copy_of": "P003",
+      "original_candidate_errors": [
+        "repair_candidates[1].no edit covers a known fault line"
+      ],
+      "duplicate_of": "P001",
+      "validation_reused_from": "P001",
+      "validation": {
+        "compile": {
+          "attempted": true,
+          "success": true,
+          "return_code": 0,
+          "timed_out": false,
+          "stdout_tail": "",
+          "stderr_tail": "",
+          "elapsed_seconds": 0.047,
+          "command": [
+            "/usr/bin/gcc",
+            "-std=c11",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v240/LLM/output_MR_Oracle/patches/P001/workspace/print_tokens.c",
+            "-o",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v240/LLM/output_MR_Oracle/patches/P001/workspace/llm_candidate"
+          ],
+          "executable_path": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v240/LLM/output_MR_Oracle/patches/P001/workspace/llm_candidate"
+        },
+        "visible_checks": []
+      }
+    },
+    {
+      "patch_id": "P003",
+      "status": "compile_passed",
+      "proposal": {
+        "diagnosis": "The issue lies in the DFA state transitions not correctly handling uppercase letters for keywords. The `next_state` function at line 465 does not account for case sensitivity, causing keywords like 'AND' to be misclassified.",
+        "evidence_reasoning": {
+          "causal_chain": [
+            "Test input contains uppercase 'AND', which fails to trigger keyword recognition due to case-sensitive DFA transitions.",
+            "The `next_state` function at line 465 processes characters without converting to a uniform case, leading to incorrect state transitions."
+          ],
+          "mr_refs": [
+            "MR4"
+          ],
+          "testcase_refs": [
+            "source_s1_mr4",
+            "followup_s1_mr4"
+          ]
+        },
+        "uncertainty": "The exact cause of the failure could be due to either incorrect state transitions or improper handling of uppercase letters in `get_char`. The repair candidates address both possibilities by ensuring consistent case handling and accurate state transitions.",
+        "assumption": "Adjust DFA state transitions in `next_state` for case insensitivity.",
+        "edits": [
+          {
+            "end_line": 465,
+            "rationale": "Modify state transitions to handle both cases uniformly.",
+            "replacement": "if (check[check[state] + toupper(ch)] == state)",
+            "start_line": 465
+          }
+        ],
+        "expected_effect": "DFA correctly processes both uppercase and lowercase characters.",
+        "preservation_constraints": [
+          "Ensure existing lowercase transitions remain functional."
+        ],
+        "repair_intent": "Make DFA case-insensitive for keyword recognition."
+      },
+      "proposal_errors": [],
+      "patch_diff": "--- a/print_tokens.c\n+++ b/print_tokens.c\n@@ -462,7 +462,7 @@\n       return(state);\n     if(base[state]+ch >= 0)\n     {\n-        if(check[check[state]+ch] == state) /* Check for the right state */\n+if (check[check[state] + toupper(ch)] == state)\n              return(next[base[state]+ch]);\n         else\n               return(next_state(default1[state],ch));\n",
+      "patch_hash": "1c15e72b8aed010143494c0a97dfcfb36f621f86636e0fa3d4b640185ede691b",
+      "model_candidate_source": "P003",
+      "fallback_copy_of": null,
+      "original_candidate_errors": [],
+      "duplicate_of": "P001",
+      "validation_reused_from": "P001",
+      "validation": {
+        "compile": {
+          "attempted": true,
+          "success": true,
+          "return_code": 0,
+          "timed_out": false,
+          "stdout_tail": "",
+          "stderr_tail": "",
+          "elapsed_seconds": 0.047,
+          "command": [
+            "/usr/bin/gcc",
+            "-std=c11",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v240/LLM/output_MR_Oracle/patches/P001/workspace/print_tokens.c",
+            "-o",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v240/LLM/output_MR_Oracle/patches/P001/workspace/llm_candidate"
+          ],
+          "executable_path": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v240/LLM/output_MR_Oracle/patches/P001/workspace/llm_candidate"
+        },
+        "visible_checks": []
+      }
+    },
+    {
+      "patch_id": "P004",
+      "status": "compile_passed",
+      "proposal": {
+        "diagnosis": "The issue lies in the DFA state transitions not correctly handling uppercase letters for keywords. The `next_state` function at line 465 does not account for case sensitivity, causing keywords like 'AND' to be misclassified.",
+        "evidence_reasoning": {
+          "causal_chain": [
+            "Test input contains uppercase 'AND', which fails to trigger keyword recognition due to case-sensitive DFA transitions.",
+            "The `next_state` function at line 465 processes characters without converting to a uniform case, leading to incorrect state transitions."
+          ],
+          "mr_refs": [
+            "MR4"
+          ],
+          "testcase_refs": [
+            "source_s1_mr4",
+            "followup_s1_mr4"
+          ]
+        },
+        "uncertainty": "The exact cause of the failure could be due to either incorrect state transitions or improper handling of uppercase letters in `get_char`. The repair candidates address both possibilities by ensuring consistent case handling and accurate state transitions.",
+        "assumption": "Adjust DFA state transitions in `next_state` for case insensitivity.",
+        "edits": [
+          {
+            "end_line": 465,
+            "rationale": "Modify state transitions to handle both cases uniformly.",
+            "replacement": "if (check[check[state] + toupper(ch)] == state)",
+            "start_line": 465
+          }
+        ],
+        "expected_effect": "DFA correctly processes both uppercase and lowercase characters.",
+        "preservation_constraints": [
+          "Ensure existing lowercase transitions remain functional."
+        ],
+        "repair_intent": "Make DFA case-insensitive for keyword recognition."
+      },
+      "proposal_errors": [],
+      "patch_diff": "--- a/print_tokens.c\n+++ b/print_tokens.c\n@@ -462,7 +462,7 @@\n       return(state);\n     if(base[state]+ch >= 0)\n     {\n-        if(check[check[state]+ch] == state) /* Check for the right state */\n+if (check[check[state] + toupper(ch)] == state)\n              return(next[base[state]+ch]);\n         else\n               return(next_state(default1[state],ch));\n",
+      "patch_hash": "1c15e72b8aed010143494c0a97dfcfb36f621f86636e0fa3d4b640185ede691b",
+      "model_candidate_source": "P003",
+      "fallback_copy_of": "P003",
+      "original_candidate_errors": [
+        "repair_candidates[3].no edit covers a known fault line"
+      ],
+      "duplicate_of": "P001",
+      "validation_reused_from": "P001",
+      "validation": {
+        "compile": {
+          "attempted": true,
+          "success": true,
+          "return_code": 0,
+          "timed_out": false,
+          "stdout_tail": "",
+          "stderr_tail": "",
+          "elapsed_seconds": 0.047,
+          "command": [
+            "/usr/bin/gcc",
+            "-std=c11",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v240/LLM/output_MR_Oracle/patches/P001/workspace/print_tokens.c",
+            "-o",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v240/LLM/output_MR_Oracle/patches/P001/workspace/llm_candidate"
+          ],
+          "executable_path": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v240/LLM/output_MR_Oracle/patches/P001/workspace/llm_candidate"
+        },
+        "visible_checks": []
+      }
+    },
+    {
+      "patch_id": "P005",
+      "status": "compile_passed",
+      "proposal": {
+        "diagnosis": "The issue lies in the DFA state transitions not correctly handling uppercase letters for keywords. The `next_state` function at line 465 does not account for case sensitivity, causing keywords like 'AND' to be misclassified.",
+        "evidence_reasoning": {
+          "causal_chain": [
+            "Test input contains uppercase 'AND', which fails to trigger keyword recognition due to case-sensitive DFA transitions.",
+            "The `next_state` function at line 465 processes characters without converting to a uniform case, leading to incorrect state transitions."
+          ],
+          "mr_refs": [
+            "MR4"
+          ],
+          "testcase_refs": [
+            "source_s1_mr4",
+            "followup_s1_mr4"
+          ]
+        },
+        "uncertainty": "The exact cause of the failure could be due to either incorrect state transitions or improper handling of uppercase letters in `get_char`. The repair candidates address both possibilities by ensuring consistent case handling and accurate state transitions.",
+        "assumption": "Adjust DFA state transitions in `next_state` for case insensitivity.",
+        "edits": [
+          {
+            "end_line": 465,
+            "rationale": "Modify state transitions to handle both cases uniformly.",
+            "replacement": "if (check[check[state] + toupper(ch)] == state)",
+            "start_line": 465
+          }
+        ],
+        "expected_effect": "DFA correctly processes both uppercase and lowercase characters.",
+        "preservation_constraints": [
+          "Ensure existing lowercase transitions remain functional."
+        ],
+        "repair_intent": "Make DFA case-insensitive for keyword recognition."
+      },
+      "proposal_errors": [],
+      "patch_diff": "--- a/print_tokens.c\n+++ b/print_tokens.c\n@@ -462,7 +462,7 @@\n       return(state);\n     if(base[state]+ch >= 0)\n     {\n-        if(check[check[state]+ch] == state) /* Check for the right state */\n+if (check[check[state] + toupper(ch)] == state)\n              return(next[base[state]+ch]);\n         else\n               return(next_state(default1[state],ch));\n",
+      "patch_hash": "1c15e72b8aed010143494c0a97dfcfb36f621f86636e0fa3d4b640185ede691b",
+      "model_candidate_source": "P003",
+      "fallback_copy_of": "P003",
+      "original_candidate_errors": [
+        "repair_candidates[4].no edit covers a known fault line"
+      ],
+      "duplicate_of": "P001",
+      "validation_reused_from": "P001",
+      "validation": {
+        "compile": {
+          "attempted": true,
+          "success": true,
+          "return_code": 0,
+          "timed_out": false,
+          "stdout_tail": "",
+          "stderr_tail": "",
+          "elapsed_seconds": 0.047,
+          "command": [
+            "/usr/bin/gcc",
+            "-std=c11",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v240/LLM/output_MR_Oracle/patches/P001/workspace/print_tokens.c",
+            "-o",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v240/LLM/output_MR_Oracle/patches/P001/workspace/llm_candidate"
+          ],
+          "executable_path": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v240/LLM/output_MR_Oracle/patches/P001/workspace/llm_candidate"
+        },
+        "visible_checks": []
+      }
+    }
+  ],
+  "summary": {
+    "requested": 5,
+    "generated": 5,
+    "compile_passed": 5,
+    "visible_checks_passed": 0,
+    "fallback_filled": 4,
+    "duplicates": 4,
+    "failed": 0
+  },
+  "interpretation": "Compilation only proves syntactic/build validity. Semantic repair success requires independent hidden tests or an external evaluator."
+}

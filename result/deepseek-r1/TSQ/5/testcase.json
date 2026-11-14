@@ -1,0 +1,100 @@
+[
+    {
+    "test_id": "input1",
+    "input": "[8, 8, 9]",
+    "actual_output": "29.764702249476642",
+    "expected_output": "missing",
+    "test_status": "unknown"  
+  },
+  {
+    "test_id": "input2",
+    "input": "[8, 8, 13.228756555322953]",
+    "actual_output": "59.529404498953284",
+    "expected_output": "missing",
+    "test_status": "unknown"  
+  },
+  {
+    "test_id": "input3",
+    "input": "[2, 7, 7]",
+    "actual_output": "6.928203230275509",
+    "expected_output": "missing",
+    "test_status": "unknown"  
+  },
+  {
+    "test_id": "input4", 
+    "input": "[13.856406460551018, 7, 7]",
+    "actual_output": "13.856406460551067",
+    "expected_output": "missing",
+    "test_status": "unknown"
+  },
+  {
+    "test_id": "input5",
+    "input": "[5, 9, 5]",
+    "actual_output": "19.615045245933032",
+    "expected_output": "missing",
+    "test_status": "unknown"
+  },
+  {
+    "test_id": "input6",
+    "input": "[13.674794331177344, 9, 5]",
+    "actual_output": "9.807522622966594",
+    "expected_output": "missing",
+    "test_status": "unknown"
+  },
+  {
+    "test_id": "input7",
+    "input": "[5, 4.358898943540674, 5]",
+    "actual_output": "9.807522622966514",
+    "expected_output": "missing",
+    "test_status": "unknown"
+  },
+  {
+    "test_id": "input8",
+    "input": "[5, 9, 13.674794331177344]",
+    "actual_output": "9.807522622966594",
+    "expected_output": "missing",
+    "test_status": "unknown"
+  },
+  {
+    "test_id": "input9",
+    "input": "[13.674794331177344, 18.520259177452136, 5]",
+    "actual_output": "9.807522622966466",
+    "expected_output": "missing",
+    "test_status": "unknown"  
+  },
+  {
+    "test_id": "input10", 
+    "input": "[13.674794331177344, 9, 22.60530911091463]",
+    "actual_output": "9.807522622966607",
+    "expected_output": "missing",
+    "test_status": "unknown"
+  },
+  {
+    "test_id": "input11",
+    "input": "[2, 2, 2]",
+    "actual_output": "1.7320508075688776",
+    "expected_output": "missing",
+    "test_status": "unknown"
+  },
+  {
+    "test_id": "input12",
+    "input": "[3.4641016151377544, 2, 2]",
+    "actual_output": "3.4641016151377553",
+    "expected_output": "missing",
+    "test_status": "unknown"
+  },
+  {
+    "test_id": "input13",
+    "input": "[2, 3.4641016151377544, 2]",
+    "actual_output": "3.4641016151377553",
+    "expected_output": "missing",
+    "test_status": "unknown"
+  },
+  {
+    "test_id": "input14",
+    "input": "[2, 2, 3.4641016151377544]",
+    "actual_output": "3.4641016151377553",
+    "expected_output": "missing",
+    "test_status": "unknown"
+  }
+]

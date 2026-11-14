@@ -1,0 +1,33 @@
+{
+  "diagnosis": "The issue lies in the `get_token` function where special symbols like ';' are not correctly identified, causing incorrect tokenization. The known fault line is 163, which checks if a buffer is a special symbol but fails to recognize ';'.",
+  "evidence_reasoning": {
+    "causal_chain": [
+      "The `is_spec_symbol` function does not include ';' in its list of recognized symbols.",
+      "This causes the code to treat ';' as part of subsequent tokens instead of ending the current token and starting a comment."
+    ],
+    "mr_refs": [
+      "MR2",
+      "MR4",
+      "MR5"
+    ],
+    "testcase_refs": [
+      "source_s3_mr2",
+      "followup_s3_mr2"
+    ]
+  },
+  "uncertainty": "There might be other symbols or conditions that need adjustment, but the primary issue is with missing ';' in special symbols.",
+  "assumption": "Modify `get_token` to handle comment termination correctly after ';'.",
+  "edits": [
+    {
+      "end_line": 163,
+      "rationale": "Ensure that ';' triggers the correct token processing for comments.",
+      "replacement": "if(is_spec_symbol(buffer) || !strcmp(buffer, \";\")) return(buffer);",
+      "start_line": 163
+    }
+  ],
+  "expected_effect": "Properly handle comment tokens starting with ';'.",
+  "preservation_constraints": [
+    "is_token_end"
+  ],
+  "repair_intent": "Fix comment handling after recognizing ';'."
+}

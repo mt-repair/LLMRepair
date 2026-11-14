@@ -1,0 +1,35 @@
+--- a/print_tokens2.c
++++ b/print_tokens2.c
+@@ -162,7 +162,13 @@
+    if(is_eof_token(buffer)==TRUE)return(buffer);
+    if(is_spec_symbol(buffer)==TRUE)return(buffer); 
+    if(ch =='"')id=1;    /* prepare for string */
+-   if(ch <59)id=2;    /* prepare for comment */
++    if(ch == ';')id=2;    /* prepare for comment */
++    else if(ch <59)id=2;    /* prepare for comment */
++    else if(ch == '"')id=1;    /* prepare for string */
++    else if(ch == '#')id=3;    /* prepare for character constant */
++    else if(ch == '(' || ch == ')' || ch == '[' || ch == ']' || ch == ',' || ch == '`' || ch == '")')id=4;    /* prepare for special symbol */
++    else id=0; /* default case */
++    ch=get_char(tp);
+    ch=get_char(tp);
+ 
+    while (is_token_end(id,ch) == FALSE)/* until meet the end character */
+@@ -209,13 +215,15 @@
+  ch1[1]='\0';
+  if(is_eof_token(ch1)==TRUE)return(TRUE); /* is eof token? */
+  if(str_com_id==1)          /* is string token */
+-    { if(ch=='"' | ch=='\n')   /* for string until meet another " */
++    if(ch == '"' || ch == '\n')   /* for string until meet another " or newline */
++        return(TRUE);
+          return(TRUE);
+       else
+          return(FALSE);
+     }
+ 
+- if(str_com_id==2)    /* is comment token */
++    if(ch == '\n')     /* for comment until meet end of line */
++        return(TRUE);
+    { if(ch=='\n')     /* for comment until meet end of line */
+         return(TRUE);
+       else

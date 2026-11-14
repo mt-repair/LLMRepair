@@ -1,0 +1,22 @@
+--- a/Mutant2.py
++++ b/Mutant2.py
+@@ -13,7 +13,8 @@
+         return self.Own_Tracked_Alt < self.Other_Tracked_Alt
+ 
+     def Own_Above_Threat(self):
+-        return self.Other_Tracked_Alt > self.Own_Tracked_Alt
++def Own_Above_Threat(self):
++    return self.Own_Tracked_Alt > self.Other_Tracked_Alt
+ 
+     def Non_Crossing_Biased_Climb(self):
+         self.upward_preferred = self.Inhibit_Biased_Climb() > self.Down_Separation
+@@ -21,7 +22,8 @@
+             result = not (self.Own_Below_Threat()) or (
+                     self.Own_Below_Threat() and not (self.Down_Separation >= self.ALIM()))
+         else:
+-            result = self.Own_Above_Threat() and (self.Cur_Vertical_Sep >= self.MINSEP) and (
++        result = self.Own_Above_Threat() and (self.Cur_Vertical_Sep >= self.MINSEP) and (
++                        self.Up_Separation >= self.ALIM())
+                         self.Up_Separation >= self.ALIM())
+         return result
+ 

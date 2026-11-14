@@ -1,0 +1,31 @@
+{
+  "name": "05_candidate_narrowing",
+  "attempts": [
+    {
+      "attempt": 1,
+      "kind": "validation",
+      "validation_errors": [],
+      "response_metadata": {
+        "num_ctx": 12288,
+        "num_predict": 6400,
+        "prompt_chars": 6031,
+        "format_mode": "json",
+        "done": true,
+        "done_reason": "stop",
+        "prompt_eval_count": 1567,
+        "eval_count": 724,
+        "prompt_eval_duration": 953182000,
+        "eval_duration": 25253633000,
+        "total_duration": 26479824200,
+        "load_duration": 4197600,
+        "client_elapsed_seconds": 28.516,
+        "raw_chars": 1470
+      }
+    }
+  ],
+  "selection_method": "LLM over compact evidence summaries",
+  "llm_attempt_count": 1,
+  "eligible_candidate_count": 9,
+  "required_selection_count": 5,
+  "selection_prompt_policy": "compact eligible summaries; line/evidence provenance restored deterministically"
+}

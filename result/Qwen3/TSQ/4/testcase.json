@@ -1,0 +1,37 @@
+[
+    {
+    "test_id": "input1",
+    "input": "[5, 3, 4]",
+    "actual_output": "12",
+    "expected_output": "missing",
+    "test_status": "unknown"  
+  },
+  {
+    "test_id": "input2",
+    "input": "[5, 8.54400374531753, 4]",
+    "actual_output": "6",
+    "expected_output": "missing",
+    "test_status": "unknown"  
+  },
+  {
+    "test_id": "input3",
+    "input": "[5, 3, 7.211102550927978]",
+    "actual_output": "6",
+    "expected_output": "missing",
+    "test_status": "unknown"  
+  },
+  {
+    "test_id": "input4", 
+    "input": "[5.0, 8.54400374531753, 4]",
+    "actual_output": "6",
+    "expected_output": "missing",
+    "test_status": "unknown"
+  },
+  {
+    "test_id": "input5",
+    "input": "[5.0, 3, 7.211102550927978]",
+    "actual_output": "6",
+    "expected_output": "missing",
+    "test_status": "unknown"
+  }
+]

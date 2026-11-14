@@ -1,0 +1,68 @@
+[4, 2]
+[ Source Test Case ]
+ Input :
+;`6#l
+93
+ Variant Program Output :
+error,"936#l".
+eof.
+ Correct program output :
+numeric,93.
+eof.
+[ follow-up test case ]
+ Input :
+;
+93
+ Variant Program Output :
+numeric,93.
+eof.
+ Correct program output :
+numeric,93.
+eof.
+MR_Status: 1
+
+[4, 4]
+[ Source Test Case ]
+ Input :
+;`6#l
+93
+ Variant Program Output :
+error,"936#l".
+eof.
+ Correct program output :
+numeric,93.
+eof.
+[ follow-up test case ]
+ Input :
+;
+93
+ Variant Program Output :
+numeric,93.
+eof.
+ Correct program output :
+numeric,93.
+eof.
+MR_Status: 1
+
+[4, 5]
+[ Source Test Case ]
+ Input :
+;`6#l
+93
+ Variant Program Output :
+error,"936#l".
+eof.
+ Correct program output :
+numeric,93.
+eof.
+[ follow-up test case ]
+ Input :
+;
+93
+ Variant Program Output :
+numeric,93.
+eof.
+ Correct program output :
+numeric,93.
+eof.
+MR_Status: 1

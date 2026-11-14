@@ -1,0 +1,73 @@
+{
+  "candidates": [
+    {
+      "location_ref": "LINE_0041",
+      "selection_reason": "Root cause of minor matrix formation issues, high confidence",
+      "fault_mechanism": "Recursive expansion leading to minor matrix error",
+      "confidence": "high",
+      "line": 41,
+      "test_evidence_refs": [
+        "TC007",
+        "TC008"
+      ],
+      "mr_evidence_refs": [],
+      "candidate_id": "RC001"
+    },
+    {
+      "location_ref": "LINE_0046",
+      "selection_reason": "Incorrect minor matrix initialization",
+      "fault_mechanism": "Array initialization error",
+      "confidence": "high",
+      "line": 46,
+      "test_evidence_refs": [
+        "TC008"
+      ],
+      "mr_evidence_refs": [],
+      "candidate_id": "RC002"
+    },
+    {
+      "location_ref": "LINE_0048",
+      "selection_reason": "Incorrect column exclusion affecting minor matrix",
+      "fault_mechanism": "Column exclusion error",
+      "confidence": "high",
+      "line": 48,
+      "test_evidence_refs": [
+        "TC007",
+        "TC008"
+      ],
+      "mr_evidence_refs": [],
+      "candidate_id": "RC003"
+    },
+    {
+      "location_ref": "LINE_0051",
+      "selection_reason": "Appending incorrect elements to array",
+      "fault_mechanism": "Array manipulation error",
+      "confidence": "medium",
+      "line": 51,
+      "test_evidence_refs": [
+        "TC007",
+        "TC008"
+      ],
+      "mr_evidence_refs": [],
+      "candidate_id": "RC004"
+    },
+    {
+      "location_ref": "LINE_0024",
+      "selection_reason": "Check lower triangular matrix contributing to misclassification",
+      "fault_mechanism": "Triangular matrix check error",
+      "confidence": "medium",
+      "line": 24,
+      "test_evidence_refs": [
+        "TC007"
+      ],
+      "mr_evidence_refs": [],
+      "candidate_id": "RC005"
+    }
+  ],
+  "summary": "Selected repair anchors focus on root causes and high-confidence issues related to minor matrix formation and column exclusion, with additional contributing factors in triangular matrix checks.",
+  "uncertainties": [
+    "Medium confidence in some contributing factors",
+    "Potential overlap in root cause areas"
+  ],
+  "selection_status": "complete"
+}

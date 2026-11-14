@@ -1,0 +1,21 @@
+{
+  "run_id": "7d5e0c12eb0e4b5abbb24bb0e216b821",
+  "input_spec_status": "actionable",
+  "slots_with_model_proposal": 5,
+  "slots_with_applicable_edit": 5,
+  "generation_failed_slots": 0,
+  "model": "deepseek-r1:14b",
+  "patch_budget_per_anchor": 5,
+  "repair_anchor_count": 1,
+  "total_patch_slots": 5,
+  "generated_records": 5,
+  "unique_patch_records": 1,
+  "duplicate_patch_records": 4,
+  "duplicate_regeneration_attempts": 0,
+  "diversity_policy": "Later slots request useful diversity, but byte-identical patches remain valid when the same edit is the best supported repair. Sampling seeds and strategy guidance vary by slot.",
+  "proposal_contract": "The LLM emits exactly one contiguous edit. Candidate identity, repair intent, desired behavior, constraints, and uncertainty come deterministically from RepairSpec.",
+  "patch_policy": "Each slot starts from the original faulty program for one RepairSpec anchor; patches are never accumulated.",
+  "validation_policy": "Agent2 validates edit scope/application and compilation. Runtime checks run only when explicitly supplied or auto_crash_check is enabled.",
+  "workspace_policy": "Clean project copies are temporary and removed after validation.",
+  "repair_spec_firewall": "Only RepairSpec evidence linked to the current anchor is sent to the LLM; provenance IDs and structured MR/test facts are preserved."
+}

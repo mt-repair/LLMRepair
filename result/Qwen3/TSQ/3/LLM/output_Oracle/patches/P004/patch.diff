@@ -1,0 +1,14 @@
+--- a/Mutant3.py
++++ b/Mutant3.py
+@@ -26,7 +26,10 @@
+                 area = Max * h / 2
+                 return area, symbol
+             else:  #  scalene acute triangle, calculated using Heron’s formula 
+-                p = (Max + mid + Min) * 2
++p = (Max + mid + Min) / 2
++        symbol = 0
++        area = math.sqrt(p * (p - Max) * (p - mid) * (p - Min))
++        return area, symbol
+                 symbol = 1
+                 area = math.sqrt(p * (p - Max) * (p - mid) * (p - Min))
+                 return area, symbol

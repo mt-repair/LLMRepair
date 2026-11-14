@@ -1,0 +1,24 @@
+--- a/print_tokens.c
++++ b/print_tokens.c
+@@ -194,7 +194,20 @@
+       cu_state=token_ind=token_found=0;
+       while(!token_found)
+       {
+-	  if(token_ind >= 80) /* ADDED ERROR CHECK - hf */
++if(token_ind >= 80) {
++    token_str[token_ind++] = ch;
++    next_st = next_state(cu_state, ch);
++}
++else {
++    next_st = -1;
++}
++if (next_st == -1) {
++    if (token_ind > 0) {
++        get_actual_token(token_str, token_ind);
++    }
++    return(error_or_eof_case(tstream_ptr,
++                           token_ptr, cu_state, token_str, token_ind, ch));
++}
+ 	  {
+ 	      token_str[token_ind++]=ch;
+ 	      next_st=next_state(cu_state,ch);

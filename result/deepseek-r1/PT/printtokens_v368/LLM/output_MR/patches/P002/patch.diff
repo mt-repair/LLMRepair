@@ -1,0 +1,11 @@
+--- a/print_tokens.c
++++ b/print_tokens.c
+@@ -415,7 +415,7 @@
+ {
+         char c;
+ 
+-        while((c=get_char(stream_ptr))=='\n' &&
++if ((c = get_char(stream_ptr)) == '\n') { break; } else if (is_end_of_character_stream(stream_ptr)) { break; } continue;
+                !is_end_of_character_stream(stream_ptr))
+              ; /* Skip the characters until EOF or EOL found. */
+ 	if(c==EOF) unget_char(c, stream_ptr); /* Put back to leave gracefully - hf */

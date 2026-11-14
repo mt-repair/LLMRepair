@@ -1,0 +1,23 @@
+--- a/print_tokens.c
++++ b/print_tokens.c
+@@ -460,7 +460,19 @@
+ {
+     if(state < 0)
+       return(state);
+-    if(base[state]+ch < 0)
++if (state == SKIP_COMMENT && ch == '\n') {
++    return(DEFAULT_STATE);
++}
++// existing logic for other states and transitions
++if(base[state]+ch < 0)
++{
++    if(check[base[state]+ch] == state) /* Check for the right state */
++         return(next[base[state]+ch]);
++    else
++          return(next_state(default1[state],ch));
++}
++else
++    return(next_state(default1[state],ch));
+     {
+         if(check[base[state]+ch] == state) /* Check for the right state */
+              return(next[base[state]+ch]);

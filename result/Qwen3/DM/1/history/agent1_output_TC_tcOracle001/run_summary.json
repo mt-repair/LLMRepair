@@ -1,0 +1,26 @@
+{
+  "pipeline": "evidence_first_full_top_n_assessment_v3",
+  "mode": "TC_NO_FRI",
+  "top_n": 20,
+  "repair_candidate_max": 5,
+  "repair_candidate_selected": 5,
+  "selection_status": "complete",
+  "candidate_assessment_batch_size": 5,
+  "candidate_assessment_max_evidence_pairs_per_call": 24,
+  "llm_call_shape": {
+    "logical_reasoning_calls": 12,
+    "test_calls": 2,
+    "mr_calls": 0,
+    "candidate_assessment_calls": 4,
+    "narrowing_calls": 1,
+    "repair_plan_calls": 5
+  },
+  "source_policy": "complete program is supplied to evidence extraction, candidate assessment, and repair planning; narrowing receives compact validated summaries",
+  "oracle_policy": "actual_output always stores observed behavior; EXACT_ORACLE makes test_status absolute and supplies expected_output; NO_EXACT_ORACLE treats test_status as uncertain and supplies no exact output oracle",
+  "oracle_mode": "NO_EXACT_ORACLE",
+  "testcase_source": "E:\\LLMProgramRepair\\LLM\\MSBF\\code\\DM\\testcase.json",
+  "expected_output_missing_count": 10,
+  "testcase_record_count": 10,
+  "candidate_order_policy": "FAL determines Top-N membership; all downstream candidates are in source-line order and every candidate is evidence-assessed",
+  "anchor_policy": "select only candidates with support/strong_support and a supporting testcase or MR verdict; never fill from FAL rank"
+}

@@ -1,0 +1,15 @@
+--- a/print_tokens.c
++++ b/print_tokens.c
+@@ -194,7 +194,11 @@
+       cu_state=token_ind=token_found=0;
+       while(!token_found)
+       {
+-	  if(token_ind >= 80) /* ADDED ERROR CHECK - hf */
++    if(token_ind >= 80) /* ADDED ERROR CHECK - hf */
++    {
++        return(error_or_eof_case(tstream_ptr,
++                token_ptr,cu_state,token_str,token_ind,ch));
++    }
+ 	  {
+ 	      token_str[token_ind++]=ch;
+ 	      next_st=next_state(cu_state,ch);

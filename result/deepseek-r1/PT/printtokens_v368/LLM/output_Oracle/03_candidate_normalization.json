@@ -1,0 +1,51 @@
+{
+  "requested_candidates": 5,
+  "model_returned_candidates": 5,
+  "valid_model_candidates": 0,
+  "invalid_model_candidates": 5,
+  "ignored_extra_candidates": 0,
+  "candidate_assessments": [
+    {
+      "model_candidate": "P001",
+      "accepted": false,
+      "errors": [
+        "repair_candidates[0].edit ranges overlap",
+        "repair_candidates[0].no edit covers a known fault line"
+      ],
+      "within_requested_budget": true
+    },
+    {
+      "model_candidate": "P002",
+      "accepted": false,
+      "errors": [
+        "repair_candidates[1].no edit covers a known fault line"
+      ],
+      "within_requested_budget": true
+    },
+    {
+      "model_candidate": "P003",
+      "accepted": false,
+      "errors": [
+        "repair_candidates[2].no edit covers a known fault line"
+      ],
+      "within_requested_budget": true
+    },
+    {
+      "model_candidate": "P004",
+      "accepted": false,
+      "errors": [
+        "repair_candidates[3].no edit covers a known fault line"
+      ],
+      "within_requested_budget": true
+    },
+    {
+      "model_candidate": "P005",
+      "accepted": false,
+      "errors": [
+        "repair_candidates[4].no edit covers a known fault line"
+      ],
+      "within_requested_budget": true
+    }
+  ],
+  "output_slots": []
+}

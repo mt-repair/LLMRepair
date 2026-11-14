@@ -1,0 +1,26 @@
+[
+  {
+    "attempt": 1,
+    "errors": [
+      "Model output is not valid JSON: Unterminated string starting at: line 32 column 26 (char 2176)"
+    ],
+    "raw_tail": "\\n/* ********************************************************************\\n   Function name : get_token\\n   Input         : token_stream\\n   Output        : token\\n   Exceptions    : none.\\n   Description   : This function returns the next token from the\\n                   token_stream.The type of token is integer and specifies\\n                   only the type of the token. DFA is used for finding the\\n                   next token. cu_state is initialized to zero and charcter\\n                   are read until the the is the final state and it\\n                   returns the token type.\\n  * ******************************************************************* */\\n\\ntoken get_token(tstream_ptr)\\ntoken_stream tstream_ptr;\\n{\\n    char token_str[80]; /* This buffer stores the current token */\\n    int token_ind;      /* Index to the token_str  */\\n    token token_ptr;\\n    CHARACTER ch;\\n    int cu_state,next_st,token_found;\\n\\n    token_ptr=(token)(malloc(sizeof(struct token_type)));\\n",
+    "response_metadata": {
+      "model": "Qwen3:14b",
+      "temperature": 0.09,
+      "seed": 0,
+      "num_ctx": 32768,
+      "num_predict": 8192,
+      "prompt_chars": 31203,
+      "done": true,
+      "done_reason": "length",
+      "prompt_eval_count": 9779,
+      "eval_count": 8192,
+      "prompt_eval_duration": 1404052000,
+      "eval_duration": 78654869000,
+      "total_duration": 81573001990,
+      "load_duration": 168388520,
+      "client_elapsed_seconds": 81.575
+    }
+  }
+]

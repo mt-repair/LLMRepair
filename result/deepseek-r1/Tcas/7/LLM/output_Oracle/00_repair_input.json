@@ -1,0 +1,64 @@
+{
+  "program_path": "e:\\LLMProgramRepair\\LLM\\MSBF\\code\\deepseek-r1\\Tcas\\Mutant7.py",
+  "project_root": "e:\\LLMProgramRepair\\LLM\\MSBF\\code\\deepseek-r1\\Tcas",
+  "program_function": "\n         Implementation of this class **TCAS  Vertical of the Airborne Collision Avoidance System  RA (resolution advisory) Logic ** , based on various status parameters of the own aircraft and the threatening aircraft, calculate and output a vertical collision avoidance warning decision. \n        ####  Input  `Tcas(argv)` Receive a one-dimensional list `argv` By order  12  Parameters: \n        1. `Cur_Vertical_Sep` : Current vertical separation between the two aircraft \n        2. `High_Confidence` : high-confidence flag \n            \n        3. `Two_of_Three_Reports_Valid` : Two valid flag bits in three reports \n        4. `Own_Tracked_Alt` : own aircraft Tracking Altitude \n            \n        5. `Own_Tracked_Alt_Rate` : Rate of change in aircraft altitude \n            \n        6. `Other_Tracked_Alt` : Threat Aircraft Tracking Altitude \n            \n        7. `Alt_Layer_Value` : altitude layer index, used for selection  RA  Altitude Threshold  ALIM\n            \n        8. `Up_Separation` : Upward safe separation distance \n            \n        9. `Down_Separation` : Downward safe separation distance \n            \n        10. `Other_RAC` : Opposing Aircraft resolution advisory Status \n            \n        11. `Other_Capability` : Opposing aircraft  TCAS  Capacity \n            \n        12. `Climb_Inhibi` : Climb Inhibition Switch Indicator \n\n            \n        ####  Internal calculation logic \n\n            \n        1.  Conditions for enabling the determination function: confidence level, own aircraft’s rate of climb/descent, vertical separation; simultaneously assess the other aircraft’s onboard equipment and flight intent. \n            \n        2.  The predicate determines the relative position of the own aircraft with respect to the threatening aircraft; in combination with climb inhibition, upper and lower separation thresholds, ALIM  Height threshold, calculated separately ** Non-Crossing Preferred Climb **、** Non-penetrating priority descent ** Condition. \n            \n        3.  Determine whether to move up based on combined conditions  RA Downwards  RA。\n\n            \n        ####  Output (string) \n\n            \n        - `UPWARD_RA` : Upward avoidance alert needs to be executed \n            \n        - `DOWNWARD_RA` : Downward avoidance alert needs to be executed \n            \n        - `UNRESOLVED` : Unable to provide a clear vertical avoidance decision for this type of implementation **TCAS  Vertical of the Airborne Collision Avoidance System  RA (resolution advisory) Logic ** , based on various status parameters of the own aircraft and the threatening aircraft, calculate and output a vertical collision avoidance warning decision. \",\n\n ",
+  "requested_mode": "ORACLE",
+  "effective_mode": "ORACLE",
+  "known_fault_lines": [
+    24
+  ],
+  "test_executions": [
+    {
+      "test_id": "input1",
+      "input": "[992, 1, 0, 3342, 23, 4657, 1, 640, 741, 0, 0, 0]",
+      "actual_output": "DOWNWARD_RA",
+      "expected_output": "UNRESOLVED",
+      "test_status": "nopass"
+    },
+    {
+      "test_id": "input2",
+      "input": "[992, 1, 0, 3999.5, 23, 3999.5, 1, 640, 741, 0, 0, 0]",
+      "actual_output": "UNRESOLVED",
+      "expected_output": "UNRESOLVED",
+      "test_status": "pass"
+    },
+    {
+      "test_id": "input3",
+      "input": "[992, 1, 0, 3999.5, 23, 3999.5, 1, 630, 631, 0, 0, 0]",
+      "actual_output": "UNRESOLVED",
+      "expected_output": "UNRESOLVED",
+      "test_status": "pass"
+    },
+    {
+      "test_id": "input4",
+      "input": "[992, 1, 0, 3999.5, 23, 3999.5, 0, 640, 741, 0, 0, 0]",
+      "actual_output": "UNRESOLVED",
+      "expected_output": "UNRESOLVED",
+      "test_status": "pass"
+    },
+    {
+      "test_id": "input5",
+      "input": "[992, 1, 0, 3999.5, 23, 3999.5, 1, 630, 631, 0, 0, 0]",
+      "actual_output": "UNRESOLVED",
+      "expected_output": "UNRESOLVED",
+      "test_status": "pass"
+    },
+    {
+      "test_id": "input6",
+      "input": "[992, 1, 0, 3999.5, 23, 3999.5, 0, 640, 741, 0, 0, 0]",
+      "actual_output": "UNRESOLVED",
+      "expected_output": "UNRESOLVED",
+      "test_status": "pass"
+    }
+  ],
+  "mg_relation": [],
+  "patch_budget": 5,
+  "generation_limits": {
+    "num_ctx": 32768,
+    "num_predict": 8192,
+    "max_edits_per_candidate": 3,
+    "max_total_touched_lines_per_candidate": 20,
+    "require_known_line_coverage": true
+  },
+  "policy": "One LLM response performs one shared evidence analysis and returns all patch candidates; no Agent1/Agent2 artifacts are used."
+}

@@ -1,0 +1,64 @@
+[
+[
+    {
+    "test_id": "input4",
+    "input": "if a l  ;TjVmr3",
+    "actual_output": "0",
+    "expected_output": "10"  
+  },
+  {
+    "test_id": "input4_0",
+    "input": "IF A L  ;tJvMR3",
+    "actual_output": "0",
+    "expected_output": "10"  
+  },
+  {
+    "test_id": "input0",
+    "input": "=>   2 ;nR4",
+    "actual_output": "0",
+    "expected_output": "10"  
+  },
+  {
+    "test_id": "input0_1", 
+    "input": "=>   2 ;\n",
+    "actual_output": "0",
+    "expected_output": "0"
+  },
+  {
+    "test_id": "input2",
+    "input": "xor \nbWJ00dn9b10m833oe6s6D5Y2S51Wl8VJHX4\n",
+    "actual_output": "0",
+    "expected_output": "10"
+  },
+  {
+    "test_id": "input2_2",
+    "input": ";xor \nbWJ00dn9b10m833oe6s6D5Y2S51Wl8VJHX4\n",
+    "actual_output": "0",
+    "expected_output": "10"
+  },
+
+  {
+    "test_id": "input5",
+    "input": "\"\tRpI.e*\\9G<3I%P/MYi:W;\t_-5?Wb@bPA0]2rrwtK+(\\NK54<\"#P",
+    "actual_output": "0",
+    "expected_output": "10" 
+  },
+  {
+    "test_id": "input5_0_1",
+    "input": "\"\trPi.E*\\9g<3i%p/myI:w;\t_-5?wB@Bpa0]2RRWTk+(\\nk54<\"#p",
+    "actual_output": "0",
+    "expected_output": "10" 
+  },
+  {
+    "test_id": "input7",
+    "input": "=> K3dQ   ;hp7",
+    "actual_output": "0",
+    "expected_output": "10" 
+  },
+  {
+    "test_id": "input5_0_1",
+    "input": "=> k3Dq   ;\n",
+    "actual_output": "0",
+    "expected_output": "10" 
+  }
+]

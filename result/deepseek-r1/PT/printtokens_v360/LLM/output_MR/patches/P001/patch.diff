@@ -1,0 +1,30 @@
+--- a/print_tokens.c
++++ b/print_tokens.c
+@@ -460,7 +460,26 @@
+ {
+     if(state < 0)
+       return(state);
+-    if(base[state]+ch < 0)
++static int next_state(state,ch)
++int state;
++char ch;
++{
++    if(state < 0)
++        return(state);
++    if(base[state] + ch < 0)
++    {
++        if(check[base[state]+ch] == state)
++            return(next[base[state]+ch]);
++        else
++            return(next_state(default1[state], ch));
++    }
++    else
++    {
++        if (state == INITIAL && ch == ';')
++            return(COMMENT_STATE);
++        return(next_state(default1[state], ch));
++    }
++}
+     {
+         if(check[base[state]+ch] == state) /* Check for the right state */
+              return(next[base[state]+ch]);

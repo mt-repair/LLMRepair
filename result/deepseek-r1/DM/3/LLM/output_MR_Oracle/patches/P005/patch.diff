@@ -1,0 +1,27 @@
+--- a/Mutant3.py
++++ b/Mutant3.py
+@@ -18,7 +18,7 @@
+         if f1 or f2:  #  The main diagonal contains non- 0 Triangular matrix of elements 
+             result = 1
+             for i in range(n):
+-                result *= A[i * n]
++result *= A[i * n + i] if i < n else 1
+                 symbol = 1
+             return result, symbol
+         elif f3 or f4:  #  The anti-diagonal contains non- 0 Triangular matrix of elements ( Full main diagonal 0)
+@@ -38,13 +38,13 @@
+             result = A[0]
+         else:
+             for i in range(n):
+-                mid += int(math.pow(-1, 2 + i)) * A[i] * self.DeterComp(self.AlgComp(temp, n, i), n - 1)
++mid += (-1)**(i) * A[i] * self.DeterComp(self.AlgComp(temp, n, i), n - 1)
+             result = mid
+         return result
+ 
+     def AlgComp(self, x, n, i):
+         array = []
+-        for j in range(n, n * n):
++for j in range(n*(n-1)) if j != i + n*row for row in range(n)
+             if j % n == i:
+                 pass
+             else:

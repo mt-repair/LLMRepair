@@ -1,0 +1,11 @@
+--- a/Mutant4.py
++++ b/Mutant4.py
+@@ -45,7 +45,7 @@
+                         nz = nz + 1
+                     else:
+                         #  only a And b Contains two or more non- 0 Pair, execute this line of code 
+-                        c[icol] = c[icol] + aij
++c[icol] = c[icol] + aij * b[k]  # Correct accumulation with b[k]
+                         symbol = 1
+             for k in range(ic[i], nz):
+                 mask[jc[k]] = -1

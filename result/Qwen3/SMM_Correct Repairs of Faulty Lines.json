@@ -1,0 +1,27 @@
+[
+  {
+    "version": 2,
+    "fault_line": 43,
+    "repaired_code": "   c[nz] = aij * b[k] "
+  },
+  {
+    "version": 3,
+    "fault_line": 43,
+    "repaired_code": "   c[nz] = aij * b[k]"
+  },
+  {
+    "version": 4,
+    "fault_line": 48,
+    "repaired_code": "    c[icol] = c[icol]+aij*b[k] "
+  },
+  {
+    "version": 5,
+    "fault_line": 47,
+    "repaired_code": "   c[icol] = c[icol]+aij*b[k] "
+  },
+  {
+    "version": 6,
+    "fault_line": 47,
+    "repaired_code": "   c[icol] = c[icol] + aij * b[k] "
+  }
+]

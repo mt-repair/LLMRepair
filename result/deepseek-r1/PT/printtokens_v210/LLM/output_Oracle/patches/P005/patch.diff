@@ -1,0 +1,24 @@
+--- a/print_tokens.c
++++ b/print_tokens.c
+@@ -251,7 +251,11 @@
+                            strcpy(token_ptr->token_string,token_str);
+                            return(token_ptr);
+                  case 30 :  /* This is COMMENT case */
+-                           return(error_or_eof_case(tstream_ptr,token_ptr,cu_state,token_str,token_ind,ch));
++token_ptr->token_id = COMMENT;
++                            token_ind--;
++                            unget_char(ch, tstream_ptr->ch_stream);
++                            return(token_ptr);
++                            break;
+                            token_ind=next_st=0;
+                            break;
+             }
+@@ -509,7 +513,7 @@
+      switch(token_ptr->token_id)
+      {    /* Print the respective tokens. */
+           case ERROR : fprintf(stdout, "error,\t\"");fprintf(stdout, "%s",token_ptr->token_string);
+-                       fprintf(stdout, "\".\n");return(TRUE);
++fprintf(stdout, "error,\t"\"); fprintf(stdout, "%s"); fprintf(stdout, "\".\n"); return(TRUE);
+           case EOTSTREAM : fprintf(stdout, "eof.\n");return(TRUE);
+           case 6 : fprintf(stdout, "keyword,\t\"lambda\".\n");return(TRUE);
+           case 9 : fprintf(stdout, "keyword,\t\"and\".\n");return(TRUE);

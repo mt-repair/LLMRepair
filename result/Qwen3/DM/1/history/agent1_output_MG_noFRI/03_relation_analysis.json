@@ -1,0 +1,24 @@
+{
+  "mr_findings": [
+    {
+      "repair_relevance": "useful",
+      "new_information": "The program incorrectly sums diagonal elements for triangular matrices instead of multiplying them.",
+      "candidate_support": [
+        {
+          "line": 21,
+          "reason": "The code adds diagonal elements instead of multiplying, leading to an incorrect sum."
+        }
+      ],
+      "uncertainty": "No other lines contribute to this specific issue.",
+      "mg_evidence_id": "MG004",
+      "mr_id": "MR4",
+      "input_transformation": "Given an n‑order square matrix (flattened one‑dimensional array), convert it to two‑dimensional matrix form. If source matrix determinant is zero, keep original matrix unchanged as follow‑up input; otherwise compute matrix inverse and convert inverse matrix back to flattened one‑dimensional array as follow‑up input.",
+      "output_relation": "Compare the source and follow‑up actual_output determinant values. For invertible matrix, the product of source determinant and follow‑up(inverse) determinant should equal 1. Check whether abs(source_det * follow_det - 1) < 1e‑4. Skip judgement when source determinant equals zero.",
+      "actual_relation_status": "VMG",
+      "diagnostic_test_refs": [
+        "TC007",
+        "TC008"
+      ]
+    }
+  ]
+}

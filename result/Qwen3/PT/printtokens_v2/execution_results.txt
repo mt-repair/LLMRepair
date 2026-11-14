@@ -1,0 +1,321 @@
+[5, 1]
+[ Source Test Case ]
+ Input :
+;if i ` ;nd5 ;YfI8
+ Variant Program Output :
+error,	";".
+error,	"i".
+error,	"f".
+error,	"".
+error,	"i".
+error,	"".
+error,	"`".
+error,	"".
+error,	";".
+error,	"n".
+error,	"d".
+error,	"5".
+error,	"".
+error,	";".
+error,	"Y".
+error,	"f".
+error,	"I".
+error,	"8".
+error,	"".
+eof.
+ Correct program output :
+eof.
+[ follow-up test case ]
+ Input :
+;IF I ` ;ND5 ;yFi8
+ Variant Program Output :
+error,	";".
+error,	"I".
+error,	"F".
+error,	"".
+error,	"I".
+error,	"".
+error,	"`".
+error,	"".
+error,	";".
+error,	"N".
+identifier,	"D".
+error,	"5".
+error,	"".
+error,	";".
+error,	"y".
+error,	"F".
+error,	"i".
+error,	"8".
+error,	"".
+eof.
+ Correct program output :
+eof.
+MR_Status: 1
+
+[4, 2]
+[ Source Test Case ]
+ Input :
+;7bTQLAMBDA
+;7bTQLAMBDA
+ Variant Program Output :
+error,	";".
+error,	"7".
+error,	"b".
+error,	"T".
+error,	"Q".
+error,	"L".
+error,	"A".
+error,	"M".
+error,	"B".
+identifier,	"D".
+error,	"A".
+error,	"".
+error,	";".
+error,	"7".
+error,	"b".
+error,	"T".
+error,	"Q".
+error,	"L".
+error,	"A".
+error,	"M".
+error,	"B".
+identifier,	"D".
+error,	"A".
+error,	"".
+eof.
+ Correct program output :
+eof.
+[ follow-up test case ]
+ Input :
+;
+;
+ Variant Program Output :
+error,	";".
+error,	"".
+error,	";".
+error,	"".
+eof.
+ Correct program output :
+eof.
+MR_Status: 1
+
+[3, 3]
+[ Source Test Case ]
+ Input :
+;`6#l
+93
+ Variant Program Output :
+error,	";".
+error,	"`".
+error,	"6".
+error,	"#".
+error,	"l".
+error,	"".
+error,	"9".
+error,	"3".
+error,	"".
+eof.
+ Correct program output :
+numeric,	93.
+eof.
+[ follow-up test case ]
+ Input :
+;;`6#l
+93
+ Variant Program Output :
+error,	";".
+error,	";".
+error,	"`".
+error,	"6".
+error,	"#".
+error,	"l".
+error,	"".
+error,	"9".
+error,	"3".
+error,	"".
+eof.
+ Correct program output :
+numeric,	93.
+eof.
+MR_Status: 1
+
+[2, 4]
+[ Source Test Case ]
+ Input :
+;;aQs4 lambda "NbZ" ` 0 ;YvAsN0
+ Variant Program Output :
+error,	";".
+error,	";".
+error,	"a".
+error,	"Q".
+error,	"s".
+error,	"4".
+error,	"".
+error,	"l".
+error,	"a".
+error,	"m".
+error,	"b".
+error,	"d".
+error,	"a".
+error,	"".
+error,	""".
+error,	"N".
+error,	"b".
+error,	"Z".
+error,	""".
+error,	"".
+error,	"`".
+error,	"".
+error,	"0".
+error,	"".
+error,	";".
+error,	"Y".
+error,	"v".
+error,	"A".
+error,	"s".
+error,	"N".
+error,	"0".
+error,	"".
+eof.
+ Correct program output :
+eof.
+[ follow-up test case ]
+ Input :
+;;AqS4 LAMBDA "nBz" ` 0 ;yVaSn0
+ Variant Program Output :
+error,	";".
+error,	";".
+error,	"A".
+error,	"q".
+error,	"S".
+error,	"4".
+error,	"".
+error,	"L".
+error,	"A".
+error,	"M".
+error,	"B".
+identifier,	"D".
+error,	"A".
+error,	"".
+error,	""".
+error,	"n".
+error,	"B".
+error,	"z".
+error,	""".
+error,	"".
+error,	"`".
+error,	"".
+error,	"0".
+error,	"".
+error,	";".
+error,	"y".
+error,	"V".
+error,	"a".
+error,	"S".
+error,	"n".
+error,	"0".
+error,	"".
+eof.
+ Correct program output :
+eof.
+MR_Status: 1
+
+[1, 5]
+[ Source Test Case ]
+ Input :
+;and "vY" (  ;Fzr7
+and "vY" (  ;Fzr7
+ Variant Program Output :
+error,	";".
+error,	"a".
+error,	"n".
+error,	"d".
+error,	"".
+error,	""".
+error,	"v".
+error,	"Y".
+error,	""".
+error,	"".
+error,	"(".
+error,	"".
+error,	"".
+error,	";".
+error,	"F".
+error,	"z".
+error,	"r".
+error,	"7".
+error,	"".
+error,	"a".
+error,	"n".
+error,	"d".
+error,	"".
+error,	""".
+error,	"v".
+error,	"Y".
+error,	""".
+error,	"".
+error,	"(".
+error,	"".
+error,	"".
+error,	";".
+error,	"F".
+error,	"z".
+error,	"r".
+error,	"7".
+error,	"".
+eof.
+ Correct program output :
+keyword,	"and".
+string,	"vY".
+lparen.
+eof.
+[ follow-up test case ]
+ Input :
+;AND "Vy" (  ;fZR7
+and "vY" (  ;Fzr7
+ Variant Program Output :
+error,	";".
+error,	"A".
+error,	"N".
+identifier,	"D".
+error,	"".
+error,	""".
+error,	"V".
+error,	"y".
+error,	""".
+error,	"".
+error,	"(".
+error,	"".
+error,	"".
+error,	";".
+error,	"f".
+error,	"Z".
+error,	"R".
+error,	"7".
+error,	"".
+error,	"a".
+error,	"n".
+error,	"d".
+error,	"".
+error,	""".
+error,	"v".
+error,	"Y".
+error,	""".
+error,	"".
+error,	"(".
+error,	"".
+error,	"".
+error,	";".
+error,	"F".
+error,	"z".
+error,	"r".
+error,	"7".
+error,	"".
+eof.
+ Correct program output :
+keyword,	"and".
+string,	"vY".
+lparen.
+eof.
+MR_Status: 1

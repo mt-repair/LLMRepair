@@ -1,0 +1,83 @@
+{
+  "candidates": [
+    {
+      "location_ref": "LINE_0011",
+      "selection_reason": "Incorrectly classifies matrix type, leading to wrong determinant calculation.",
+      "fault_mechanism": "Matrix classification error",
+      "confidence": "high",
+      "line": 11,
+      "test_evidence_refs": [
+        "TC007"
+      ],
+      "mr_evidence_refs": [
+        "MG004"
+      ],
+      "candidate_id": "RC001"
+    },
+    {
+      "location_ref": "LINE_0021",
+      "selection_reason": "Sums diagonal elements instead of multiplying, leading to incorrect determinant.",
+      "fault_mechanism": "Determinant calculation for triangular matrices",
+      "confidence": "high",
+      "line": 21,
+      "test_evidence_refs": [
+        "TC007"
+      ],
+      "mr_evidence_refs": [
+        "MG004"
+      ],
+      "candidate_id": "RC002"
+    },
+    {
+      "location_ref": "LINE_0030",
+      "selection_reason": "Incorrectly classifies matrix type, leading to wrong determinant calculation.",
+      "fault_mechanism": "Determinant calculation for non-triangular matrices",
+      "confidence": "high",
+      "line": 30,
+      "test_evidence_refs": [
+        "TC007",
+        "TC008"
+      ],
+      "mr_evidence_refs": [
+        "MG004"
+      ],
+      "candidate_id": "RC003"
+    },
+    {
+      "location_ref": "LINE_0034",
+      "selection_reason": "Incorrect matrix classification leads to wrong determinant calculation.",
+      "fault_mechanism": "List initialization",
+      "confidence": "high",
+      "line": 34,
+      "test_evidence_refs": [
+        "TC007",
+        "TC008"
+      ],
+      "mr_evidence_refs": [
+        "MG004"
+      ],
+      "candidate_id": "RC004"
+    },
+    {
+      "location_ref": "LINE_0041",
+      "selection_reason": "Sign calculation may be incorrect, leading to determinant errors.",
+      "fault_mechanism": "Determinant expansion calculation",
+      "confidence": "medium",
+      "line": 41,
+      "test_evidence_refs": [
+        "TC007",
+        "TC008"
+      ],
+      "mr_evidence_refs": [
+        "MG004"
+      ],
+      "candidate_id": "RC005"
+    }
+  ],
+  "summary": "Selected 5 repair anchors based on causal evidence, root-cause proximity, and confidence level.",
+  "uncertainties": [
+    "Medium confidence in LINE_0041's impact",
+    "Dependence on strong support from multiple test cases"
+  ],
+  "selection_status": "complete"
+}

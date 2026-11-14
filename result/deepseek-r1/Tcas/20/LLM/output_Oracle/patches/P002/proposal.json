@@ -1,0 +1,34 @@
+{
+  "diagnosis": "The issue lies in the logic of the `Non_Crossing_Biased_Descend` method, particularly in how the conditions for `need_downward_RA` are determined. The method incorrectly evaluates the conditions under certain input scenarios, leading to an invalid 'DOWNWARD_RA' output when the expected result is 'UNRESOLVED'. The faulty logic stems from improper handling of the `Own_Above_Threat` and `Own_Below_Threat` conditions in combination with separation thresholds.",
+  "evidence_reasoning": {
+    "causal_chain": [
+      "The failing test case `input1` shows that when `Own_Tracked_Alt` is below `Other_Tracked_Alt`, the system incorrectly outputs 'DOWNWARD_RA' instead of 'UNRESOLVED'.",
+      "The root cause is in the `Non_Crossing_Biased_Descend` method where the condition for `need_downward_RA` does not correctly account for the relationship between `Own_Tracked_Alt` and `Other_Tracked_Alt` in combination with separation thresholds."
+    ],
+    "mr_refs": [],
+    "testcase_refs": [
+      "input1"
+    ]
+  },
+  "uncertainty": "There is some uncertainty about whether additional conditions may need to be adjusted in the `Non_Crossing_Biased_Descend` method beyond the identified faulty line. However, the primary issue appears to be the incorrect comparison operator in the `Own_Above_Threat` method, which directly impacts the determination of `need_downward_RA`.",
+  "assumption": "The `Non_Crossing_Biased_Descend` method's conditions need to be adjusted to properly handle cases where the own aircraft is below the threat.",
+  "edits": [
+    {
+      "end_line": 16,
+      "rationale": "Ensure that `need_downward_RA` is only triggered when the own aircraft is above the threat and separation conditions are met.",
+      "replacement": "         return self.Other_Tracked_Alt <= self.Own_Tracked_Alt",
+      "start_line": 16
+    },
+    {
+      "end_line": 34,
+      "rationale": "Adjust the condition to properly handle cases where the own aircraft is below the threat.",
+      "replacement": "                         (self.Own_Above_Threat()) and (self.Up_Separation >= self.ALIM()))",
+      "start_line": 34
+    }
+  ],
+  "expected_effect": "Correctly handles cases where the own aircraft is below the threat by ensuring `need_downward_RA` is only triggered when appropriate.",
+  "preservation_constraints": [
+    "Other test cases pass as expected."
+  ],
+  "repair_intent": "Adjust conditions in `Non_Crossing_Biased_Descend` to properly handle threat positioning."
+}

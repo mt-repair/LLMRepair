@@ -1,0 +1,335 @@
+{
+  "workflow": "single_llm_direct_repair",
+  "effective_mode": "MR",
+  "program_path": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v165/print_tokens.c",
+  "output_dir": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v165/LLM/output_MR",
+  "llm_call_attempts": 1,
+  "normal_llm_calls_per_scenario": 1,
+  "patch_candidates": [
+    {
+      "patch_id": "P001",
+      "status": "compile_passed",
+      "proposal": {
+        "diagnosis": "The issue lies in line 232 where `token_ptr->token_string[0]` is set to '\\0'. This prematurely terminates the token string, causing subsequent tokens not to be recognized properly. The fix involves creating a new string and copying the original content without altering it.",
+        "evidence_reasoning": {
+          "causal_chain": [
+            "Line 232 modifies `token_ptr->token_string` directly, which affects all subsequent token processing.",
+            "This leads to incorrect handling of tokens following keywords, as seen in test failures."
+          ],
+          "mr_refs": [
+            "MR4"
+          ],
+          "testcase_refs": [
+            "source_s1_mr4",
+            "followup_s1_mr4"
+          ]
+        },
+        "uncertainty": "While the exact cause is identified, alternative repair methods may exist depending on specific implementation details not fully captured in evidence.",
+        "assumption": "Ensure token strings are properly managed without premature termination.",
+        "edits": [
+          {
+            "end_line": 232,
+            "rationale": "Replace direct string modification with a new allocation and copy.",
+            "replacement": "char *new_str = strdup(token_str);\nstrcpy(token_ptr->token_string, new_str);",
+            "start_line": 232
+          }
+        ],
+        "expected_effect": "Restores proper token processing by avoiding string corruption.",
+        "preservation_constraints": [
+          "Token independence and correct string handling."
+        ],
+        "repair_intent": "Prevent premature termination of token strings."
+      },
+      "proposal_errors": [],
+      "patch_diff": "--- a/print_tokens.c\n+++ b/print_tokens.c\n@@ -229,7 +229,8 @@\n                            if(check_delimiter(ch)==TRUE)\n                            {\n                                  token_ptr->token_id=keyword(next_st);\n-                                 unget_char('\\0',tstream_ptr->ch_stream);\n+char *new_str = strdup(token_str);\n+strcpy(token_ptr->token_string, new_str);\n                                  token_ptr->token_string[0]='\\0';\n                                  return(token_ptr);\n                            }\n",
+      "patch_hash": "9496d6cdf3f1ae0d2e86f57bb64dd8891d82b7601cdd271d7ffdb9a4d94ff36a",
+      "model_candidate_source": "P001",
+      "fallback_copy_of": null,
+      "original_candidate_errors": [],
+      "duplicate_of": null,
+      "validation_reused_from": null,
+      "validation": {
+        "compile": {
+          "attempted": true,
+          "success": true,
+          "return_code": 0,
+          "timed_out": false,
+          "stdout_tail": "",
+          "stderr_tail": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v165/LLM/output_MR/patches/P001/workspace/print_tokens.c: In function ‘get_token’:\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v165/LLM/output_MR/patches/P001/workspace/print_tokens.c:232:17: warning: implicit declaration of function ‘strdup’; did you mean ‘strcmp’? [-Wimplicit-function-declaration]\n  232 | char *new_str = strdup(token_str);\n      |                 ^~~~~~\n      |                 strcmp\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v165/LLM/output_MR/patches/P001/workspace/print_tokens.c:232:17: warning: initialization of ‘char *’ from ‘int’ makes pointer from integer without a cast [-Wint-conversion]\n",
+          "elapsed_seconds": 0.055,
+          "command": [
+            "/usr/bin/gcc",
+            "-std=c11",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v165/LLM/output_MR/patches/P001/workspace/print_tokens.c",
+            "-o",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v165/LLM/output_MR/patches/P001/workspace/llm_candidate"
+          ],
+          "executable_path": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v165/LLM/output_MR/patches/P001/workspace/llm_candidate"
+        },
+        "visible_checks": []
+      }
+    },
+    {
+      "patch_id": "P002",
+      "status": "compile_failed",
+      "proposal": {
+        "diagnosis": "The issue lies in line 232 where `token_ptr->token_string[0]` is set to '\\0'. This prematurely terminates the token string, causing subsequent tokens not to be recognized properly. The fix involves creating a new string and copying the original content without altering it.",
+        "evidence_reasoning": {
+          "causal_chain": [
+            "Line 232 modifies `token_ptr->token_string` directly, which affects all subsequent token processing.",
+            "This leads to incorrect handling of tokens following keywords, as seen in test failures."
+          ],
+          "mr_refs": [
+            "MR4"
+          ],
+          "testcase_refs": [
+            "source_s1_mr4",
+            "followup_s1_mr4"
+          ]
+        },
+        "uncertainty": "While the exact cause is identified, alternative repair methods may exist depending on specific implementation details not fully captured in evidence.",
+        "assumption": "Alternative approach to reset token state correctly.",
+        "edits": [
+          {
+            "end_line": 232,
+            "rationale": "Use a temporary buffer to handle string operations safely.",
+            "replacement": "char temp_str[80];\ntoken_ptr->token_string = temp_str;",
+            "start_line": 232
+          }
+        ],
+        "expected_effect": "Ensures token strings are isolated and not prematurely cleared.",
+        "preservation_constraints": [
+          "Token string integrity."
+        ],
+        "repair_intent": "Isolate token string operations."
+      },
+      "proposal_errors": [],
+      "patch_diff": "--- a/print_tokens.c\n+++ b/print_tokens.c\n@@ -229,7 +229,8 @@\n                            if(check_delimiter(ch)==TRUE)\n                            {\n                                  token_ptr->token_id=keyword(next_st);\n-                                 unget_char('\\0',tstream_ptr->ch_stream);\n+char temp_str[80];\n+token_ptr->token_string = temp_str;\n                                  token_ptr->token_string[0]='\\0';\n                                  return(token_ptr);\n                            }\n",
+      "patch_hash": "28bb90e0f423bc0b6f2410f6eb3399b54dedc16e7e5811f6ffb6e90776106127",
+      "model_candidate_source": "P002",
+      "fallback_copy_of": null,
+      "original_candidate_errors": [],
+      "duplicate_of": null,
+      "validation_reused_from": null,
+      "validation": {
+        "compile": {
+          "attempted": true,
+          "success": false,
+          "return_code": 1,
+          "timed_out": false,
+          "stdout_tail": "",
+          "stderr_tail": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v165/LLM/output_MR/patches/P002/workspace/print_tokens.c: In function ‘get_token’:\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v165/LLM/output_MR/patches/P002/workspace/print_tokens.c:233:25: error: assignment to expression with array type\n  233 | token_ptr->token_string = temp_str;\n      |                         ^\n",
+          "elapsed_seconds": 0.017,
+          "command": [
+            "/usr/bin/gcc",
+            "-std=c11",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v165/LLM/output_MR/patches/P002/workspace/print_tokens.c",
+            "-o",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v165/LLM/output_MR/patches/P002/workspace/llm_candidate"
+          ],
+          "executable_path": null
+        },
+        "visible_checks": []
+      }
+    },
+    {
+      "patch_id": "P003",
+      "status": "compile_failed",
+      "proposal": {
+        "diagnosis": "The issue lies in line 232 where `token_ptr->token_string[0]` is set to '\\0'. This prematurely terminates the token string, causing subsequent tokens not to be recognized properly. The fix involves creating a new string and copying the original content without altering it.",
+        "evidence_reasoning": {
+          "causal_chain": [
+            "Line 232 modifies `token_ptr->token_string` directly, which affects all subsequent token processing.",
+            "This leads to incorrect handling of tokens following keywords, as seen in test failures."
+          ],
+          "mr_refs": [
+            "MR4"
+          ],
+          "testcase_refs": [
+            "source_s1_mr4",
+            "followup_s1_mr4"
+          ]
+        },
+        "uncertainty": "While the exact cause is identified, alternative repair methods may exist depending on specific implementation details not fully captured in evidence.",
+        "assumption": "Re-initialize the token string properly after keyword processing.",
+        "edits": [
+          {
+            "end_line": 232,
+            "rationale": "Allocate a new buffer and copy existing content to avoid corruption.",
+            "replacement": "token_ptr->token_string = malloc(strlen(token_str) + 1);\nstrcpy(token_ptr->token_string, token_str);",
+            "start_line": 232
+          }
+        ],
+        "expected_effect": "Restores the correct state for subsequent token processing.",
+        "preservation_constraints": [
+          "Memory management and string integrity."
+        ],
+        "repair_intent": "Correctly reset token strings post-keyword handling."
+      },
+      "proposal_errors": [],
+      "patch_diff": "--- a/print_tokens.c\n+++ b/print_tokens.c\n@@ -229,7 +229,8 @@\n                            if(check_delimiter(ch)==TRUE)\n                            {\n                                  token_ptr->token_id=keyword(next_st);\n-                                 unget_char('\\0',tstream_ptr->ch_stream);\n+token_ptr->token_string = malloc(strlen(token_str) + 1);\n+strcpy(token_ptr->token_string, token_str);\n                                  token_ptr->token_string[0]='\\0';\n                                  return(token_ptr);\n                            }\n",
+      "patch_hash": "79d32b2e5b6d59be06c961c7024111b3e7f899f9d59416522245d5b2036c9a15",
+      "model_candidate_source": "P003",
+      "fallback_copy_of": null,
+      "original_candidate_errors": [],
+      "duplicate_of": null,
+      "validation_reused_from": null,
+      "validation": {
+        "compile": {
+          "attempted": true,
+          "success": false,
+          "return_code": 1,
+          "timed_out": false,
+          "stdout_tail": "",
+          "stderr_tail": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v165/LLM/output_MR/patches/P003/workspace/print_tokens.c: In function ‘get_token’:\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v165/LLM/output_MR/patches/P003/workspace/print_tokens.c:232:25: error: assignment to expression with array type\n  232 | token_ptr->token_string = malloc(strlen(token_str) + 1);\n      |                         ^\n",
+          "elapsed_seconds": 0.015,
+          "command": [
+            "/usr/bin/gcc",
+            "-std=c11",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v165/LLM/output_MR/patches/P003/workspace/print_tokens.c",
+            "-o",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v165/LLM/output_MR/patches/P003/workspace/llm_candidate"
+          ],
+          "executable_path": null
+        },
+        "visible_checks": []
+      }
+    },
+    {
+      "patch_id": "P004",
+      "status": "compile_failed",
+      "proposal": {
+        "diagnosis": "The issue lies in line 232 where `token_ptr->token_string[0]` is set to '\\0'. This prematurely terminates the token string, causing subsequent tokens not to be recognized properly. The fix involves creating a new string and copying the original content without altering it.",
+        "evidence_reasoning": {
+          "causal_chain": [
+            "Line 232 modifies `token_ptr->token_string` directly, which affects all subsequent token processing.",
+            "This leads to incorrect handling of tokens following keywords, as seen in test failures."
+          ],
+          "mr_refs": [
+            "MR4"
+          ],
+          "testcase_refs": [
+            "source_s1_mr4",
+            "followup_s1_mr4"
+          ]
+        },
+        "uncertainty": "While the exact cause is identified, alternative repair methods may exist depending on specific implementation details not fully captured in evidence.",
+        "assumption": "Alternative method to handle keyword tokens without altering existing strings.",
+        "edits": [
+          {
+            "end_line": 232,
+            "rationale": "Use a separate buffer for keyword processing to prevent interference with other tokens.",
+            "replacement": "char keyword_str[80];\nstrcpy(keyword_str, token_str);\ntoken_ptr->token_string = keyword_str;",
+            "start_line": 232
+          }
+        ],
+        "expected_effect": "Isolates keyword processing to avoid affecting other tokens.",
+        "preservation_constraints": [
+          "Token independence and correct string handling."
+        ],
+        "repair_intent": "Isolate keyword token processing."
+      },
+      "proposal_errors": [],
+      "patch_diff": "--- a/print_tokens.c\n+++ b/print_tokens.c\n@@ -229,7 +229,9 @@\n                            if(check_delimiter(ch)==TRUE)\n                            {\n                                  token_ptr->token_id=keyword(next_st);\n-                                 unget_char('\\0',tstream_ptr->ch_stream);\n+char keyword_str[80];\n+strcpy(keyword_str, token_str);\n+token_ptr->token_string = keyword_str;\n                                  token_ptr->token_string[0]='\\0';\n                                  return(token_ptr);\n                            }\n",
+      "patch_hash": "81c36a29349f1b0688bb8bb01be5d7c81e6d68a1cb24f4350dab6addd83bc788",
+      "model_candidate_source": "P004",
+      "fallback_copy_of": null,
+      "original_candidate_errors": [],
+      "duplicate_of": null,
+      "validation_reused_from": null,
+      "validation": {
+        "compile": {
+          "attempted": true,
+          "success": false,
+          "return_code": 1,
+          "timed_out": false,
+          "stdout_tail": "",
+          "stderr_tail": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v165/LLM/output_MR/patches/P004/workspace/print_tokens.c: In function ‘get_token’:\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v165/LLM/output_MR/patches/P004/workspace/print_tokens.c:234:25: error: assignment to expression with array type\n  234 | token_ptr->token_string = keyword_str;\n      |                         ^\n",
+          "elapsed_seconds": 0.018,
+          "command": [
+            "/usr/bin/gcc",
+            "-std=c11",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v165/LLM/output_MR/patches/P004/workspace/print_tokens.c",
+            "-o",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v165/LLM/output_MR/patches/P004/workspace/llm_candidate"
+          ],
+          "executable_path": null
+        },
+        "visible_checks": []
+      }
+    },
+    {
+      "patch_id": "P005",
+      "status": "compile_failed",
+      "proposal": {
+        "diagnosis": "The issue lies in line 232 where `token_ptr->token_string[0]` is set to '\\0'. This prematurely terminates the token string, causing subsequent tokens not to be recognized properly. The fix involves creating a new string and copying the original content without altering it.",
+        "evidence_reasoning": {
+          "causal_chain": [
+            "Line 232 modifies `token_ptr->token_string` directly, which affects all subsequent token processing.",
+            "This leads to incorrect handling of tokens following keywords, as seen in test failures."
+          ],
+          "mr_refs": [
+            "MR4"
+          ],
+          "testcase_refs": [
+            "source_s1_mr4",
+            "followup_s1_mr4"
+          ]
+        },
+        "uncertainty": "While the exact cause is identified, alternative repair methods may exist depending on specific implementation details not fully captured in evidence.",
+        "assumption": "Revert to original string without modification after keyword processing.",
+        "edits": [
+          {
+            "end_line": 232,
+            "rationale": "Avoid direct string alteration by using a temporary variable for keyword handling.",
+            "replacement": "char *keyword_token = strdup(token_str);\ntoken_ptr->token_string = keyword_token;",
+            "start_line": 232
+          }
+        ],
+        "expected_effect": "Ensures that subsequent tokens are processed correctly without interference.",
+        "preservation_constraints": [
+          "Token string integrity and independence."
+        ],
+        "repair_intent": "Prevent unintended side effects on token strings."
+      },
+      "proposal_errors": [],
+      "patch_diff": "--- a/print_tokens.c\n+++ b/print_tokens.c\n@@ -229,7 +229,8 @@\n                            if(check_delimiter(ch)==TRUE)\n                            {\n                                  token_ptr->token_id=keyword(next_st);\n-                                 unget_char('\\0',tstream_ptr->ch_stream);\n+char *keyword_token = strdup(token_str);\n+token_ptr->token_string = keyword_token;\n                                  token_ptr->token_string[0]='\\0';\n                                  return(token_ptr);\n                            }\n",
+      "patch_hash": "6d5082d9f4371579c8e9c9341d346c31b741db78a09c11ee6ead29293ffb444d",
+      "model_candidate_source": "P005",
+      "fallback_copy_of": null,
+      "original_candidate_errors": [],
+      "duplicate_of": null,
+      "validation_reused_from": null,
+      "validation": {
+        "compile": {
+          "attempted": true,
+          "success": false,
+          "return_code": 1,
+          "timed_out": false,
+          "stdout_tail": "",
+          "stderr_tail": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v165/LLM/output_MR/patches/P005/workspace/print_tokens.c: In function ‘get_token’:\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v165/LLM/output_MR/patches/P005/workspace/print_tokens.c:232:23: warning: implicit declaration of function ‘strdup’; did you mean ‘strcmp’? [-Wimplicit-function-declaration]\n  232 | char *keyword_token = strdup(token_str);\n      |                       ^~~~~~\n      |                       strcmp\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v165/LLM/output_MR/patches/P005/workspace/print_tokens.c:232:23: warning: initialization of ‘char *’ from ‘int’ makes pointer from integer without a cast [-Wint-conversion]\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v165/LLM/output_MR/patches/P005/workspace/print_tokens.c:233:25: error: assignment to expression with array type\n  233 | token_ptr->token_string = keyword_token;\n      |                         ^\n",
+          "elapsed_seconds": 0.017,
+          "command": [
+            "/usr/bin/gcc",
+            "-std=c11",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v165/LLM/output_MR/patches/P005/workspace/print_tokens.c",
+            "-o",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v165/LLM/output_MR/patches/P005/workspace/llm_candidate"
+          ],
+          "executable_path": null
+        },
+        "visible_checks": []
+      }
+    }
+  ],
+  "summary": {
+    "requested": 5,
+    "generated": 5,
+    "compile_passed": 1,
+    "visible_checks_passed": 0,
+    "fallback_filled": 0,
+    "duplicates": 0,
+    "failed": 4
+  },
+  "interpretation": "Compilation only proves syntactic/build validity. Semantic repair success requires independent hidden tests or an external evaluator."
+}

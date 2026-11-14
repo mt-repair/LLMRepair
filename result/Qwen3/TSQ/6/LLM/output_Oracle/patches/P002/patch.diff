@@ -1,0 +1,10 @@
+--- a/Mutant6.py
++++ b/Mutant6.py
+@@ -44,4 +44,7 @@
+             area = Max * h / 2
+             symbol = 1
+             return area, symbol
++        
++            symbol = 1
++            return area, symbol
+ 

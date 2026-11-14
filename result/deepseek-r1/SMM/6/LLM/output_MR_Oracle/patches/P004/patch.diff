@@ -1,0 +1,20 @@
+--- a/Mutant6.py
++++ b/Mutant6.py
+@@ -44,14 +44,14 @@
+                         mask[icol_add] = nz
+                         nz = nz + 1
+                     else:
+-                        c[icol] = c[icol] + aij + b[k]
+-                        symbol = 1
++c[icol] = c[icol] + aij * b[k]
++symbol = 1
+             for k in range(ic[i], nz):
+                 mask[jc[k]] = -1
+             ic[i + 1] = nz
+         c = c[:ic[-1]]
+         jc = jc[:ic[-1]]
+-        C = self.Normalization(n, m, c, ic, jc)
++C = self.Normalization(n, m, c, ic, jc)
+         return C, symbol
+ 
+     def CreateSparseMat(self, A):

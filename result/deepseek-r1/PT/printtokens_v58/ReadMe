@@ -1,0 +1,4 @@
+@@ -328,1 +328,1 @@
+-          strcpy(token_ptr->token_string,token_str);
++          (strcpy(token_str , token_str)) ;
+--

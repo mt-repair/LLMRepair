@@ -1,0 +1,4 @@
+@@ -231,1 +231,1 @@
+-   token_ptr->token_id=keyword(next_st);
++   token_ptr->token_id=keyword(-next_st);
+--

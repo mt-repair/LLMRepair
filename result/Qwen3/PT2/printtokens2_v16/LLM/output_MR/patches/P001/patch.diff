@@ -1,0 +1,44 @@
+--- a/print_tokens2.c
++++ b/print_tokens2.c
+@@ -162,7 +162,7 @@
+    if(is_eof_token(buffer)==TRUE)return(buffer);
+    if(is_spec_symbol(buffer)==TRUE)return(buffer); 
+    if(ch =='"')id=1;    /* prepare for string */
+-   if(ch <59)id=2;    /* prepare for comment */
++    if(ch <59)id=2;    /* prepare for comment */
+    ch=get_char(tp);
+ 
+    while (is_token_end(id,ch) == FALSE)/* until meet the end character */
+@@ -222,7 +222,32 @@
+         return(FALSE);
+    }
+ 
++static int is_token_end(str_com_id,ch)
++char ch;
++int str_com_id;
++{ char ch1[2];  /* fixed array declaration MONI */
++ ch1[0]=ch;
++ ch1[1]='\0';
++ if(is_eof_token(ch1)==TRUE)return(TRUE); /* is eof token? */
++ if(str_com_id==1)          /* is string token */
++    { if(ch=='"' || ch=='\n')   /* for string until meet another " */
++         return(TRUE);
++      else
++         return(FALSE);
++    }
++
++ if(str_com_id==2)    /* is comment token */
++   { if(ch=='\n')     /* for comment until meet end of line */
++        return(TRUE);
++      else
++        return(FALSE);
++   }
++
+  if(is_spec_symbol(ch1)==TRUE) return(TRUE); /* is special_symbol? */
++ if(ch ==' ' || ch=='\n' || ch==59) return(TRUE); 
++                               /* others until meet blank or tab or 59 */
++ return(FALSE);               /* other case,return FALSE */
++ }
+  if(ch ==' ' || ch=='\n' || ch==59) return(TRUE); 
+                               /* others until meet blank or tab or 59 */
+  return(FALSE);               /* other case,return FALSE */

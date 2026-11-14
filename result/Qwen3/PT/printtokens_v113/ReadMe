@@ -1,0 +1,4 @@
+@@ -249,1 +249,1 @@
+-           token_ptr->token_id=constant(next_st,token_str,token_ind);
++           token_ptr->token_id=constant(0,token_str,token_ind);
+--

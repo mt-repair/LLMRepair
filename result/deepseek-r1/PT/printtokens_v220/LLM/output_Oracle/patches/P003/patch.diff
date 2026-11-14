@@ -1,0 +1,16 @@
+--- a/print_tokens.c
++++ b/print_tokens.c
+@@ -210,7 +210,12 @@
+ 	      return(numeric_case(tstream_ptr,token_ptr,ch,
+ 				  token_str,token_ind));
+ 	  } else if (next_st == -3) {/* This is the IDENTIFIER case */
+-	      return(numeric_case(tstream_ptr,token_ptr,ch,token_str,token_ind));
++return(keyword(tstream_ptr->state, token_str, token_ind));
++		      unget_char(ch, tstream_ptr->ch_stream);
++		      token_ind--;
++		      get_actual_token(token_str, token_ind);
++		      strcpy(token_ptr->token_string, token_str);
++		      return(token_ptr);
+ 	      unget_char(ch,tstream_ptr->ch_stream);
+ 	      token_ind--;
+ 	      get_actual_token(token_str,token_ind);

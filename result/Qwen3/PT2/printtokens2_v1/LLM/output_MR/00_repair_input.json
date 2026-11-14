@@ -1,0 +1,83 @@
+{
+  "program_path": "/home/ubuntu/LLMRepair/MSBF/code/Qwen3/PT2/printtokens2_v1/print_tokens2.c",
+  "project_root": "/home/ubuntu/LLMRepair/MSBF/code/Qwen3/PT2/printtokens2_v1",
+  "program_function": "\n            ##  FUNCTION DESCRIPTION \n\n            C  lexical analyzer  (tokenizer) , read the input text, and segment it  token  and Print  token  flow. \n             Code by `print_tokens.c` The main program `stream.c` (Character Stream), `tokenizer.c` (Participle logic) composition. \n             Type slug `character_stream`/`token_stream` is the file stream pointer; `token` is a character pointer. \n\n            ##  Input \n\n            -  Command line parameters: `./print_tokens filename` , read the specified file; if no parameter is provided, read from standard input  stdin  Read \n            -  Support  token : Keywords, identifiers, numeric literals, string literals, character literals, comments, special symbols, EOF。\n            -  Keywords: `and or if xor lambda =>`\n            -  Identifier: Starts with a letter, followed by letters  /  Numbers \n            -  numeric literal: digits only \n            -  String literal: enclosed in double quotes \n            -  character literal: `#` Followed by letters \n            -  NOTATION: `;` From the beginning to the line break \n            -  Special Symbols `( ) [ ] ' ` ,`\n\n            ##  Output \n\n             Line-by-line output  token：\n\n            - `keyword,\"xxx\".`\n            - `identifier,\"xxx\".`\n            - `numeric,xxx.`\n            - `string,\"xxx\".`\n            - `character,\"x\".`\n            -  SIGN: `lparen. rparen. lsquare. rsquare. quote. bquote. comma.`\n            - `eof.`  End of Stream \n            - `error,\"xxx\".`  Crime  token\n        ",
+  "requested_mode": "MR",
+  "effective_mode": "MR",
+  "known_fault_lines": [
+    163
+  ],
+  "test_executions": [
+    {
+      "test_id": "source_s3_mr2",
+      "input": ";IF A L  ;tJvMR3\n",
+      "actual_output": "identifier,\"I\".\nidentifier,\"F\".\nidentifier,\"A\".\nidentifier,\"L\".\nidentifier,\"t\".\nidentifier,\"J\".\nidentifier,\"v\".\nidentifier,\"M\".\nidentifier,\"R\".\nnumeric,3.\neof.",
+      "test_status": "unknown"
+    },
+    {
+      "test_id": "followup_s3_mr2",
+      "input": ";\n",
+      "actual_output": "eof.",
+      "test_status": "unknown"
+    },
+    {
+      "test_id": "source_s2_mr4",
+      "input": "xor \n;;bWJ00dn9b10m833oe6s6D5Y2S51Wl8VJHX4\n",
+      "actual_output": "identifier,\"x\".\nidentifier,\"o\".\nidentifier,\"r\".\nidentifier,\"b\".\nidentifier,\"W\".\nidentifier,\"J\".\nnumeric,0.\nnumeric,0.\nidentifier,\"d\".\nidentifier,\"n\".\nnumeric,9.\nidentifier,\"b\".\nnumeric,1.\nnumeric,0.\nidentifier,\"m\".\nnumeric,8.\nnumeric,3.\nnumeric,3.\nidentifier,\"o\".\nidentifier,\"e\".\nnumeric,6.\nidentifier,\"s\".\nnumeric,6.\nidentifier,\"D\".\nnumeric,5.\nidentifier,\"Y\".\nnumeric,2.\nidentifier,\"S\".\nnumeric,5.\nnumeric,1.\nidentifier,\"W\".\nidentifier,\"l\".\nnumeric,8.\nidentifier,\"V\".\nidentifier,\"J\".\nidentifier,\"H\".\nidentifier,\"X\".\nnumeric,4.\neof.",
+      "test_status": "unknown"
+    },
+    {
+      "test_id": "followup_s2_mr4",
+      "input": "xor \n;\n",
+      "actual_output": "identifier,\"x\".\nidentifier,\"o\".\nidentifier,\"r\".\neof.",
+      "test_status": "unknown"
+    },
+    {
+      "test_id": "source_s1_mr5",
+      "input": "=> K3dQ   ;hp7\n",
+      "actual_output": "error,\"=\".\nerror,\">\".\nidentifier,\"K\".\nnumeric,3.\nidentifier,\"d\".\nidentifier,\"Q\".\nidentifier,\"h\".\nidentifier,\"p\".\nnumeric,7.\neof.",
+      "test_status": "unknown"
+    },
+    {
+      "test_id": "followup_s1_mr5",
+      "input": "=> k3Dq   ;\n",
+      "actual_output": "error,\"=\".\nerror,\">\".\nidentifier,\"k\".\nnumeric,3.\nidentifier,\"D\".\nidentifier,\"q\".\neof.",
+      "test_status": "unknown"
+    }
+  ],
+  "mg_relation": [
+    {
+      "mr_id": "MR2",
+      "source_test_id": "source_s3_mr2",
+      "followup_test_id": "followup_s3_mr2",
+      "input_transformation": " For semicolons contained in the source test case ';' For input lines that do not contain single or double quotation marks, retain the line from the beginning to the first semicolon. ';' and delete all characters after the semicolon to construct the follow-up test case. ",
+      "output_relation": " Since the content after the semicolon is a comment, deleting that part should not affect validity. token statistical results. Therefore, the five categories in the outputs of the source test cases and the follow-up test cases token which was . identifier AND: keyword The sum of, string、error、character And numeric ) should be equal. ",
+      "actual_relation_status": "VMG"
+    },
+    {
+      "mr_id": "MR4",
+      "source_test_id": "source_s2_mr4",
+      "followup_test_id": "followup_s2_mr4",
+      "input_transformation": " First, randomly select the rounded-up test cases from the source test cases. 50% Enter a line and switch between uppercase and lowercase English letters; then, for lines containing semicolons, ';' For input lines that do not contain single or double quotation marks, remove all characters after the first semicolon to construct the follow-up test case. ",
+      "output_relation": " Changing between uppercase and lowercase letters and deleting comments after semicolons should not change the five categories. token Therefore, the number of test cases in the output of the source test cases and the follow-up test cases identifier AND: keyword Amount string Medicine Quantity, error Medicine Quantity, character Total Quantity numeric The quantities should be equal. ",
+      "actual_relation_status": "VMG"
+    },
+    {
+      "mr_id": "MR5",
+      "source_test_id": "source_s1_mr5",
+      "followup_test_id": "followup_s1_mr5",
+      "input_transformation": " First, for semicolons included in the source test cases, ';' and do not contain single or double quotation marks, delete all characters after the first semicolon; then randomly select the processed rounded-up 50% Enter a line and switch between uppercase and lowercase English letters to construct follow-up test cases. ",
+      "output_relation": " The deletion of the comment after the semicolon and the subsequent change between uppercase and lowercase should not change the five categories. token (Quantity. Therefore, the number of test cases in the source test case and the follow-up test case output identifier AND: keyword Amount string Medicine Quantity, error Medicine Quantity, character Total Quantity numeric The quantities should be equal. ",
+      "actual_relation_status": "VMG"
+    }
+  ],
+  "patch_budget": 5,
+  "generation_limits": {
+    "num_ctx": 32768,
+    "num_predict": 8192,
+    "max_edits_per_candidate": 3,
+    "max_total_touched_lines_per_candidate": 20,
+    "require_known_line_coverage": true
+  },
+  "policy": "One LLM response performs one shared evidence analysis and returns all patch candidates; no Agent1/Agent2 artifacts are used."
+}

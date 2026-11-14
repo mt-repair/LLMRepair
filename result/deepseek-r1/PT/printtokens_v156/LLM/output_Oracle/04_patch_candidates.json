@@ -1,0 +1,314 @@
+[
+  {
+    "patch_id": "P001",
+    "status": "compile_failed",
+    "proposal": {
+      "diagnosis": "The issue lies in how the DFA transitions are handled when encountering keywords. Specifically, at line 231, the function calls `keyword(80)` with an invalid state value (80), which triggers an exit due to the default case in the keyword switch statement. This occurs because the DFA transition logic doesn't properly handle certain states, leading to invalid state values being passed to `keyword()`. The fix involves validating the state before calling `keyword()` and handling invalid states appropriately.",
+      "evidence_reasoning": {
+        "causal_chain": [
+          "The failing test case 'source_s1_mr4' shows that when processing ';and \"vY\" (', the program outputs an error instead of correctly identifying 'and' as a keyword. This indicates a failure in token recognition.",
+          "In the source code, line 231 calls `keyword(80)`, which is invalid because the `keyword()` function only handles specific states (6,9,11,13,16). The default case exits the program, causing the test to fail with an error output."
+        ],
+        "mr_refs": [],
+        "testcase_refs": [
+          "source_s1_mr4"
+        ]
+      },
+      "uncertainty": "While the analysis points to line 231 as the primary issue, there may be other parts of the DFA transition logic that contribute to invalid states being generated. However, based on the provided evidence and test cases, focusing on state validation at this point is the most direct fix.",
+      "assumption": "The DFA transition logic incorrectly allows invalid states to reach `keyword()`, causing program termination. The fix ensures only valid keyword states are processed.",
+      "edits": [
+        {
+          "end_line": 231,
+          "rationale": "Add validation for the state before calling `keyword()` to prevent invalid state values.",
+          "replacement": "if (cu_state == 6 || cu_state ==9 || cu_state ==11 || cu_state ==13 || cu_state ==16) {\n    token_ptr->token_id=keyword(cu_state);\n} else {\n    return(error_or_eof_case(...));\n}\n",
+          "start_line": 231
+        }
+      ],
+      "expected_effect": "Prevents invalid state values from being passed to `keyword()`, handling them as errors instead of causing program termination.",
+      "preservation_constraints": [
+        "The main token processing logic must remain intact.",
+        "Valid keyword states should still be recognized correctly."
+      ],
+      "repair_intent": "Validate the state before calling `keyword()` to handle invalid states properly."
+    },
+    "proposal_errors": [],
+    "patch_diff": "--- a/print_tokens.c\n+++ b/print_tokens.c\n@@ -228,7 +228,11 @@\n                  case 16 : ch=get_char(tstream_ptr->ch_stream);\n                            if(check_delimiter(ch)==TRUE)\n                            {\n-                                 token_ptr->token_id=keyword(80);\n+if (cu_state == 6 || cu_state ==9 || cu_state ==11 || cu_state ==13 || cu_state ==16) {\n+    token_ptr->token_id=keyword(cu_state);\n+} else {\n+    return(error_or_eof_case(...));\n+}\n                                  unget_char(ch,tstream_ptr->ch_stream);\n                                  token_ptr->token_string[0]='\\0';\n                                  return(token_ptr);\n",
+    "patch_hash": "a89a4aa7b36d4304ba1dbd06a71bdfa2de10c0100f99227dc7130bf4858d4644",
+    "model_candidate_source": "P001",
+    "fallback_copy_of": null,
+    "original_candidate_errors": [],
+    "duplicate_of": null,
+    "validation_reused_from": null,
+    "validation": {
+      "compile": {
+        "attempted": true,
+        "success": false,
+        "return_code": 1,
+        "timed_out": false,
+        "stdout_tail": "",
+        "stderr_tail": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v156/LLM/output_Oracle/patches/P001/workspace/print_tokens.c: In function ‘get_token’:\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v156/LLM/output_Oracle/patches/P001/workspace/print_tokens.c:234:30: error: expected expression before ‘...’ token\n  234 |     return(error_or_eof_case(...));\n      |                              ^~~\n",
+        "elapsed_seconds": 0.009,
+        "command": [
+          "/usr/bin/gcc",
+          "-std=c11",
+          "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v156/LLM/output_Oracle/patches/P001/workspace/print_tokens.c",
+          "-o",
+          "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v156/LLM/output_Oracle/patches/P001/workspace/llm_candidate"
+        ],
+        "executable_path": null
+      },
+      "visible_checks": []
+    }
+  },
+  {
+    "patch_id": "P002",
+    "status": "compile_failed",
+    "proposal": {
+      "diagnosis": "The issue lies in how the DFA transitions are handled when encountering keywords. Specifically, at line 231, the function calls `keyword(80)` with an invalid state value (80), which triggers an exit due to the default case in the keyword switch statement. This occurs because the DFA transition logic doesn't properly handle certain states, leading to invalid state values being passed to `keyword()`. The fix involves validating the state before calling `keyword()` and handling invalid states appropriately.",
+      "evidence_reasoning": {
+        "causal_chain": [
+          "The failing test case 'source_s1_mr4' shows that when processing ';and \"vY\" (', the program outputs an error instead of correctly identifying 'and' as a keyword. This indicates a failure in token recognition.",
+          "In the source code, line 231 calls `keyword(80)`, which is invalid because the `keyword()` function only handles specific states (6,9,11,13,16). The default case exits the program, causing the test to fail with an error output."
+        ],
+        "mr_refs": [],
+        "testcase_refs": [
+          "source_s1_mr4"
+        ]
+      },
+      "uncertainty": "While the analysis points to line 231 as the primary issue, there may be other parts of the DFA transition logic that contribute to invalid states being generated. However, based on the provided evidence and test cases, focusing on state validation at this point is the most direct fix.",
+      "assumption": "The DFA transition function `next_state()` may return invalid states under certain conditions, leading to incorrect processing in `get_token()`. The fix ensures that only valid states are used when determining token types.",
+      "edits": [
+        {
+          "end_line": 231,
+          "rationale": "Modify the state validation logic to ensure only valid keyword states are processed.",
+          "replacement": "switch(cu_state) {\n    case 6: token_ptr->token_id=AND; break;\n    case 9: token_ptr->token_id=OR; break;\n    case 11: token_ptr->token_id=IF; break;\n    case 13: token_ptr->token_id=XOR; break;\n    case 16: token_ptr->token_id=LAMBDA; break;\n    default: return(error_or_eof_case(...));\n}\n",
+          "start_line": 231
+        }
+      ],
+      "expected_effect": "Eliminates the possibility of invalid states being passed to `keyword()`, ensuring all keyword states are handled correctly.",
+      "preservation_constraints": [
+        "The existing DFA transitions must remain functional for valid states.",
+        "All keywords should still be recognized and processed correctly."
+      ],
+      "repair_intent": "Replace the problematic call with direct state-to-token mapping to prevent invalid state usage."
+    },
+    "proposal_errors": [],
+    "patch_diff": "--- a/print_tokens.c\n+++ b/print_tokens.c\n@@ -228,7 +228,14 @@\n                  case 16 : ch=get_char(tstream_ptr->ch_stream);\n                            if(check_delimiter(ch)==TRUE)\n                            {\n-                                 token_ptr->token_id=keyword(80);\n+switch(cu_state) {\n+    case 6: token_ptr->token_id=AND; break;\n+    case 9: token_ptr->token_id=OR; break;\n+    case 11: token_ptr->token_id=IF; break;\n+    case 13: token_ptr->token_id=XOR; break;\n+    case 16: token_ptr->token_id=LAMBDA; break;\n+    default: return(error_or_eof_case(...));\n+}\n                                  unget_char(ch,tstream_ptr->ch_stream);\n                                  token_ptr->token_string[0]='\\0';\n                                  return(token_ptr);\n",
+    "patch_hash": "8f96a85ff5b6d34be1ae2fde82ec7d6dc4e08293e54e8835296e6188875e8229",
+    "model_candidate_source": "P002",
+    "fallback_copy_of": null,
+    "original_candidate_errors": [],
+    "duplicate_of": null,
+    "validation_reused_from": null,
+    "validation": {
+      "compile": {
+        "attempted": true,
+        "success": false,
+        "return_code": 1,
+        "timed_out": false,
+        "stdout_tail": "",
+        "stderr_tail": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v156/LLM/output_Oracle/patches/P002/workspace/print_tokens.c: In function ‘get_token’:\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v156/LLM/output_Oracle/patches/P002/workspace/print_tokens.c:237:39: error: expected expression before ‘...’ token\n  237 |     default: return(error_or_eof_case(...));\n      |                                       ^~~\n",
+        "elapsed_seconds": 0.011,
+        "command": [
+          "/usr/bin/gcc",
+          "-std=c11",
+          "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v156/LLM/output_Oracle/patches/P002/workspace/print_tokens.c",
+          "-o",
+          "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v156/LLM/output_Oracle/patches/P002/workspace/llm_candidate"
+        ],
+        "executable_path": null
+      },
+      "visible_checks": []
+    }
+  },
+  {
+    "patch_id": "P003",
+    "status": "compile_failed",
+    "proposal": {
+      "diagnosis": "The issue lies in how the DFA transitions are handled when encountering keywords. Specifically, at line 231, the function calls `keyword(80)` with an invalid state value (80), which triggers an exit due to the default case in the keyword switch statement. This occurs because the DFA transition logic doesn't properly handle certain states, leading to invalid state values being passed to `keyword()`. The fix involves validating the state before calling `keyword()` and handling invalid states appropriately.",
+      "evidence_reasoning": {
+        "causal_chain": [
+          "The failing test case 'source_s1_mr4' shows that when processing ';and \"vY\" (', the program outputs an error instead of correctly identifying 'and' as a keyword. This indicates a failure in token recognition.",
+          "In the source code, line 231 calls `keyword(80)`, which is invalid because the `keyword()` function only handles specific states (6,9,11,13,16). The default case exits the program, causing the test to fail with an error output."
+        ],
+        "mr_refs": [],
+        "testcase_refs": [
+          "source_s1_mr4"
+        ]
+      },
+      "uncertainty": "While the analysis points to line 231 as the primary issue, there may be other parts of the DFA transition logic that contribute to invalid states being generated. However, based on the provided evidence and test cases, focusing on state validation at this point is the most direct fix.",
+      "assumption": "The DFA transition logic incorrectly allows invalid states to reach `keyword()`, causing program termination. The fix ensures only valid keyword states are processed.",
+      "edits": [
+        {
+          "end_line": 231,
+          "rationale": "Add validation for the state before calling `keyword()` to prevent invalid state values.",
+          "replacement": "if (cu_state == 6 || cu_state ==9 || cu_state ==11 || cu_state ==13 || cu_state ==16) {\n    token_ptr->token_id=keyword(cu_state);\n} else {\n    return(error_or_eof_case(...));\n}\n",
+          "start_line": 231
+        }
+      ],
+      "expected_effect": "Prevents invalid state values from being passed to `keyword()`, handling them as errors instead of causing program termination.",
+      "preservation_constraints": [
+        "The main token processing logic must remain intact.",
+        "Valid keyword states should still be recognized correctly."
+      ],
+      "repair_intent": "Validate the state before calling `keyword()` to handle invalid states properly."
+    },
+    "proposal_errors": [],
+    "patch_diff": "--- a/print_tokens.c\n+++ b/print_tokens.c\n@@ -228,7 +228,11 @@\n                  case 16 : ch=get_char(tstream_ptr->ch_stream);\n                            if(check_delimiter(ch)==TRUE)\n                            {\n-                                 token_ptr->token_id=keyword(80);\n+if (cu_state == 6 || cu_state ==9 || cu_state ==11 || cu_state ==13 || cu_state ==16) {\n+    token_ptr->token_id=keyword(cu_state);\n+} else {\n+    return(error_or_eof_case(...));\n+}\n                                  unget_char(ch,tstream_ptr->ch_stream);\n                                  token_ptr->token_string[0]='\\0';\n                                  return(token_ptr);\n",
+    "patch_hash": "a89a4aa7b36d4304ba1dbd06a71bdfa2de10c0100f99227dc7130bf4858d4644",
+    "model_candidate_source": "P001",
+    "fallback_copy_of": "P001",
+    "original_candidate_errors": [
+      "repair_candidates[2].no edit covers a known fault line"
+    ],
+    "duplicate_of": "P001",
+    "validation_reused_from": "P001",
+    "validation": {
+      "compile": {
+        "attempted": true,
+        "success": false,
+        "return_code": 1,
+        "timed_out": false,
+        "stdout_tail": "",
+        "stderr_tail": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v156/LLM/output_Oracle/patches/P001/workspace/print_tokens.c: In function ‘get_token’:\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v156/LLM/output_Oracle/patches/P001/workspace/print_tokens.c:234:30: error: expected expression before ‘...’ token\n  234 |     return(error_or_eof_case(...));\n      |                              ^~~\n",
+        "elapsed_seconds": 0.009,
+        "command": [
+          "/usr/bin/gcc",
+          "-std=c11",
+          "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v156/LLM/output_Oracle/patches/P001/workspace/print_tokens.c",
+          "-o",
+          "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v156/LLM/output_Oracle/patches/P001/workspace/llm_candidate"
+        ],
+        "executable_path": null
+      },
+      "visible_checks": []
+    }
+  },
+  {
+    "patch_id": "P004",
+    "status": "compile_failed",
+    "proposal": {
+      "diagnosis": "The issue lies in how the DFA transitions are handled when encountering keywords. Specifically, at line 231, the function calls `keyword(80)` with an invalid state value (80), which triggers an exit due to the default case in the keyword switch statement. This occurs because the DFA transition logic doesn't properly handle certain states, leading to invalid state values being passed to `keyword()`. The fix involves validating the state before calling `keyword()` and handling invalid states appropriately.",
+      "evidence_reasoning": {
+        "causal_chain": [
+          "The failing test case 'source_s1_mr4' shows that when processing ';and \"vY\" (', the program outputs an error instead of correctly identifying 'and' as a keyword. This indicates a failure in token recognition.",
+          "In the source code, line 231 calls `keyword(80)`, which is invalid because the `keyword()` function only handles specific states (6,9,11,13,16). The default case exits the program, causing the test to fail with an error output."
+        ],
+        "mr_refs": [],
+        "testcase_refs": [
+          "source_s1_mr4"
+        ]
+      },
+      "uncertainty": "While the analysis points to line 231 as the primary issue, there may be other parts of the DFA transition logic that contribute to invalid states being generated. However, based on the provided evidence and test cases, focusing on state validation at this point is the most direct fix.",
+      "assumption": "The `get_token()` function's error handling is insufficient, leading to program termination when encountering unexpected states. The fix improves the error handling by returning an appropriate token instead of exiting.",
+      "edits": [
+        {
+          "end_line": 231,
+          "rationale": "Modify the code to return an error token when encountering invalid keyword states instead of calling `keyword()` with an invalid state.",
+          "replacement": "if (cu_state !=6 && cu_state !=9 && cu_state !=11 && cu_state !=13 && cu_state !=16) {\n    return(error_or_eof_case(...));\n}\n token_ptr->token_id=keyword(cu_state);\n",
+          "start_line": 231
+        }
+      ],
+      "expected_effect": "Improves error handling by returning an error token for invalid states, preventing program termination.",
+      "preservation_constraints": [
+        "Valid keyword states must still be processed correctly."
+      ],
+      "repair_intent": "Improve error handling in `get_token()` to prevent program exit on invalid keyword states."
+    },
+    "proposal_errors": [],
+    "patch_diff": "--- a/print_tokens.c\n+++ b/print_tokens.c\n@@ -228,7 +228,10 @@\n                  case 16 : ch=get_char(tstream_ptr->ch_stream);\n                            if(check_delimiter(ch)==TRUE)\n                            {\n-                                 token_ptr->token_id=keyword(80);\n+if (cu_state !=6 && cu_state !=9 && cu_state !=11 && cu_state !=13 && cu_state !=16) {\n+    return(error_or_eof_case(...));\n+}\n+ token_ptr->token_id=keyword(cu_state);\n                                  unget_char(ch,tstream_ptr->ch_stream);\n                                  token_ptr->token_string[0]='\\0';\n                                  return(token_ptr);\n",
+    "patch_hash": "eeb60f663fc8f91eea0bb889a5d013bc6a07769affb01b52c4e2246e16619420",
+    "model_candidate_source": "P004",
+    "fallback_copy_of": null,
+    "original_candidate_errors": [],
+    "duplicate_of": null,
+    "validation_reused_from": null,
+    "validation": {
+      "compile": {
+        "attempted": true,
+        "success": false,
+        "return_code": 1,
+        "timed_out": false,
+        "stdout_tail": "",
+        "stderr_tail": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v156/LLM/output_Oracle/patches/P004/workspace/print_tokens.c: In function ‘get_token’:\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v156/LLM/output_Oracle/patches/P004/workspace/print_tokens.c:232:30: error: expected expression before ‘...’ token\n  232 |     return(error_or_eof_case(...));\n      |                              ^~~\n",
+        "elapsed_seconds": 0.008,
+        "command": [
+          "/usr/bin/gcc",
+          "-std=c11",
+          "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v156/LLM/output_Oracle/patches/P004/workspace/print_tokens.c",
+          "-o",
+          "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v156/LLM/output_Oracle/patches/P004/workspace/llm_candidate"
+        ],
+        "executable_path": null
+      },
+      "visible_checks": []
+    }
+  },
+  {
+    "patch_id": "P005",
+    "status": "compile_failed",
+    "proposal": {
+      "diagnosis": "The issue lies in how the DFA transitions are handled when encountering keywords. Specifically, at line 231, the function calls `keyword(80)` with an invalid state value (80), which triggers an exit due to the default case in the keyword switch statement. This occurs because the DFA transition logic doesn't properly handle certain states, leading to invalid state values being passed to `keyword()`. The fix involves validating the state before calling `keyword()` and handling invalid states appropriately.",
+      "evidence_reasoning": {
+        "causal_chain": [
+          "The failing test case 'source_s1_mr4' shows that when processing ';and \"vY\" (', the program outputs an error instead of correctly identifying 'and' as a keyword. This indicates a failure in token recognition.",
+          "In the source code, line 231 calls `keyword(80)`, which is invalid because the `keyword()` function only handles specific states (6,9,11,13,16). The default case exits the program, causing the test to fail with an error output."
+        ],
+        "mr_refs": [],
+        "testcase_refs": [
+          "source_s1_mr4"
+        ]
+      },
+      "uncertainty": "While the analysis points to line 231 as the primary issue, there may be other parts of the DFA transition logic that contribute to invalid states being generated. However, based on the provided evidence and test cases, focusing on state validation at this point is the most direct fix.",
+      "assumption": "The DFA transition logic incorrectly allows invalid states to propagate, leading to errors in token processing. The fix involves adding comprehensive state validation throughout the token processing flow.",
+      "edits": [
+        {
+          "end_line": 231,
+          "rationale": "Add a helper function `is_valid_keyword_state()` to validate keyword states before calling `keyword()`, ensuring only valid states are processed.",
+          "replacement": "if (!is_valid_keyword_state(cu_state)) {\n    return(error_or_eof_case(...));\n}\n token_ptr->token_id=keyword(cu_state);\n",
+          "start_line": 231
+        },
+        {
+          "end_line": 400,
+          "rationale": "Implement `is_valid_keyword_state()` to check if the state is valid for keyword processing.",
+          "replacement": "static BOOLEAN is_valid_keyword_state(state) {\n    return(state ==6 || state ==9 || state ==11 || state ==13 || state ==16);\n}\n",
+          "start_line": 400
+        }
+      ],
+      "expected_effect": "Prevents invalid states from being processed as keywords, reducing the risk of program termination.",
+      "preservation_constraints": [
+        "The existing DFA transitions must remain functional for valid states.",
+        "All keywords should still be recognized and processed correctly."
+      ],
+      "repair_intent": "Add state validation to ensure only valid keyword states are processed."
+    },
+    "proposal_errors": [],
+    "patch_diff": "--- a/print_tokens.c\n+++ b/print_tokens.c\n@@ -228,7 +228,10 @@\n                  case 16 : ch=get_char(tstream_ptr->ch_stream);\n                            if(check_delimiter(ch)==TRUE)\n                            {\n-                                 token_ptr->token_id=keyword(80);\n+if (!is_valid_keyword_state(cu_state)) {\n+    return(error_or_eof_case(...));\n+}\n+ token_ptr->token_id=keyword(cu_state);\n                                  unget_char(ch,tstream_ptr->ch_stream);\n                                  token_ptr->token_string[0]='\\0';\n                                  return(token_ptr);\n@@ -397,6 +400,8 @@\n          default: fprintf(stdout, \"error\\n\");break;\n      }\n      exit(0);\n+static BOOLEAN is_valid_keyword_state(state) {\n+    return(state ==6 || state ==9 || state ==11 || state ==13 || state ==16);\n }\n \n /* **********************************************************************\n",
+    "patch_hash": "758b60614cb47b35a4526573fd268e4fcc5c30c5900d18e795035baa527f324d",
+    "model_candidate_source": "P005",
+    "fallback_copy_of": null,
+    "original_candidate_errors": [],
+    "duplicate_of": null,
+    "validation_reused_from": null,
+    "validation": {
+      "compile": {
+        "attempted": true,
+        "success": false,
+        "return_code": 1,
+        "timed_out": false,
+        "stdout_tail": "",
+        "stderr_tail": "e/patches/P005/workspace/print_tokens.c: In function ‘get_token’:\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v156/LLM/output_Oracle/patches/P005/workspace/print_tokens.c:231:6: warning: implicit declaration of function ‘is_valid_keyword_state’ [-Wimplicit-function-declaration]\n  231 | if (!is_valid_keyword_state(cu_state)) {\n      |      ^~~~~~~~~~~~~~~~~~~~~~\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v156/LLM/output_Oracle/patches/P005/workspace/print_tokens.c:232:30: error: expected expression before ‘...’ token\n  232 |     return(error_or_eof_case(...));\n      |                              ^~~\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v156/LLM/output_Oracle/patches/P005/workspace/print_tokens.c: In function ‘special’:\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v156/LLM/output_Oracle/patches/P005/workspace/print_tokens.c:403:16: error: invalid storage class for function ‘is_valid_keyword_state’\n  403 | static BOOLEAN is_valid_keyword_state(state) {\n      |                ^~~~~~~~~~~~~~~~~~~~~~\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v156/LLM/output_Oracle/patches/P005/workspace/print_tokens.c: In function ‘is_valid_keyword_state’:\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v156/LLM/output_Oracle/patches/P005/workspace/print_tokens.c:403:16: warning: type of ‘state’ defaults to ‘int’ [-Wimplicit-int]\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v156/LLM/output_Oracle/patches/P005/workspace/print_tokens.c: In function ‘special’:\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v156/LLM/output_Oracle/patches/P005/workspace/print_tokens.c:418:13: error: invalid storage class for function ‘skip’\n  418 | static void skip(stream_ptr)\n      |             ^~~~\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v156/LLM/output_Oracle/patches/P005/workspace/print_tokens.c:439:12: error: invalid storage class for function ‘constant’\n  439 | static int constant(state,token_str,token_ind)\n      |            ^~~~~~~~\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v156/LLM/output_Oracle/patches/P005/workspace/print_tokens.c:462:12: error: invalid storage class for function ‘next_state’\n  462 | static int next_state(state,ch)\n      |            ^~~~~~~~~~\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v156/LLM/output_Oracle/patches/P005/workspace/print_tokens.c:555:13: error: invalid storage class for function ‘get_actual_token’\n  555 | static void get_actual_token(token_str,token_ind)\n      |             ^~~~~~~~~~~~~~~~\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v156/LLM/output_Oracle/patches/P005/workspace/print_tokens.c:571:1: error: expected declaration or statement at end of input\n  571 | }\n      | ^\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v156/LLM/output_Oracle/patches/P005/workspace/print_tokens.c: At top level:\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v156/LLM/output_Oracle/patches/P005/workspace/print_tokens.c:22:13: warning: ‘skip’ used but never defined\n   22 | static void skip(character_stream stream_ptr);\n      |             ^~~~\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v156/LLM/output_Oracle/patches/P005/workspace/print_tokens.c:23:12: warning: ‘constant’ used but never defined\n   23 | static int constant(int state,char token_str[],int token_ind);\n      |            ^~~~~~~~\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v156/LLM/output_Oracle/patches/P005/workspace/print_tokens.c:24:12: warning: ‘next_state’ used but never defined\n   24 | static int next_state();\n      |            ^~~~~~~~~~\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v156/LLM/output_Oracle/patches/P005/workspace/print_tokens.c:25:13: warning: ‘get_actual_token’ used but never defined\n   25 | static void get_actual_token(char token_str[],int token_ind);\n      |             ^~~~~~~~~~~~~~~~\n",
+        "elapsed_seconds": 0.011,
+        "command": [
+          "/usr/bin/gcc",
+          "-std=c11",
+          "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v156/LLM/output_Oracle/patches/P005/workspace/print_tokens.c",
+          "-o",
+          "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v156/LLM/output_Oracle/patches/P005/workspace/llm_candidate"
+        ],
+        "executable_path": null
+      },
+      "visible_checks": []
+    }
+  }
+]

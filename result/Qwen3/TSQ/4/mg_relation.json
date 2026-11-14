@@ -1,0 +1,34 @@
+[
+    {
+        "mr_id": "MR1",
+        "source_test_id": "input1",
+        "followup_test_id": "input2",
+        "input_transformation": " Given the three sides of the original triangle [a, b, c] Maintainer a、c Unchanged, will a、c If the angle between  and  becomes the supplementary angle of the original angle, then the corresponding side b becomes: b1 = sqrt(2 * a^2 + 2 * c^2 - b^2)，a1 = a，c1 = c . The transformed input is [a1, b1, c1]。",
+        "output_relation": " Compare the output area of the original input s and the output area of the input after transformation s1 . Keep both values 4  decimal places, the absolute difference abs(s1 - s) <g id=”24170”/> should be less than <g id=”24171”/> 1e-4。",
+        "actual_relation_status": "VMG"
+    },
+    {
+        "mr_id": "MR2",
+        "source_test_id": "input1",
+        "followup_test_id": "input3",
+        "input_transformation": " Given the three sides of the original triangle [a, b, c] Maintainer a、b Unchanged, will a、b If the angle between  and  becomes the supplementary angle of the original angle, then the corresponding side c becomes: c1 = sqrt(2 * a^2 + 2 * b^2 - c^2)，a1 = a，b1 = b . The transformed input is [a1, b1, c1]。",
+        "output_relation": " Compare the output area of the original input s and the output area of the input after transformation s1 . Keep both values 4  decimal places, the absolute difference abs(s1 - s) <g id=”24170”/> should be less than <g id=”24171”/> 1e-4。",
+        "actual_relation_status": "VMG"
+    },
+    {
+        "mr_id": "MR3",
+        "source_test_id": "input1",
+        "followup_test_id": "input4",
+        "input_transformation": " Given the three sides of the original triangle [a, b, c] Maintainer c Unchanged, will b、c If the angle between  and  becomes the supplementary angle of the original angle, then the corresponding side a becomes: a1 = sqrt(2 * b^2 + 2 * c^2 - a^2) , while the edge b becomes: b1 = sqrt(3 * b^2 + 6 * c^2 - 2 * a^2)，c1 = c . The transformed input is [a1, b1, c1]。",
+        "output_relation": " Compare the output area of the original input s and the output area of the input after transformation s1 . Keep both values 4  decimal places, the absolute difference abs(s1 - s) <g id=”24170”/> should be less than <g id=”24171”/> 1e-4。",
+        "actual_relation_status": "VMG"
+    },
+    {
+        "mr_id": "MR4",
+        "source_test_id": "input1",
+        "followup_test_id": "input5",
+        "input_transformation": " Given the three sides of the original triangle [a, b, c] Maintainer b Unchanged, will b、c If the angle between  and  becomes the supplementary angle of the original angle, then the corresponding side a becomes: a1 = sqrt(2 * b^2 + 2 * c^2 - a^2) , while the edge c becomes: c1 = sqrt(6 * b^2 + 3 * c^2 - 2 * a^2)，b1 = b . The transformed input is [a1, b1, c1]。",
+        "output_relation": " Compare the output area of the original input s and the output area of the input after transformation s1 . Keep both values 4  decimal places, the absolute difference abs(s1 - s) <g id=”24170”/> should be less than <g id=”24171”/> 1e-4。",
+        "actual_relation_status": "VMG"
+    }
+]

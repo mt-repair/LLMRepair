@@ -1,0 +1,26 @@
+[
+  {
+    "mr_id": "MR1",
+    "source_test_id": "input1",
+    "followup_test_id": "input2",
+    "input_transformation": "Adjust Own_Tracked_Alt and Other_Tracked_Alt toward their midpoint. For UPWARD_RA, make Own_Tracked_Alt slightly lower than Other_Tracked_Alt; for DOWNWARD_RA, make Own_Tracked_Alt slightly higher; for UNRESOLVED, set them equal to their midpoint. All other inputs remain unchanged.",
+    "output_relation": "The follow-up output should be identical to the source output.",
+    "actual_relation_status": "VMG"
+  },
+  {
+    "mr_id": "MR2",
+    "source_test_id": "input1",
+    "followup_test_id": "input3",
+    "input_transformation": "Modify both the relative aircraft altitudes and vertical separation values. Adjust Own_Tracked_Alt and Other_Tracked_Alt toward their midpoint while preserving the relative altitude configuration associated with the source output, and simultaneously modify Up_Separation and/or Down_Separation so that the corresponding separation condition remains satisfied, considering Climb_Inhibi when applicable.",
+    "output_relation": "The follow-up output should be identical to the source output.",
+    "actual_relation_status": "VMG"
+  },
+  {
+    "mr_id": "MR3",
+    "source_test_id": "input1",
+    "followup_test_id": "input4",
+    "input_transformation": "Modify both vertical separation values and the relative aircraft altitudes. Adjust Up_Separation and/or Down_Separation to preserve the separation condition associated with the source output, considering Climb_Inhibi when applicable, and adjust Own_Tracked_Alt and Other_Tracked_Alt toward their midpoint while preserving the corresponding relative altitude configuration.",
+    "output_relation": "The follow-up output should be identical to the source output.",
+    "actual_relation_status": "VMG"
+  }
+]

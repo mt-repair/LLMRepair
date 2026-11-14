@@ -1,0 +1,75 @@
+[
+  {
+    "name": "02_test_TC007",
+    "attempts": [
+      {
+        "attempt": 1,
+        "kind": "validation",
+        "validation_errors": [],
+        "response_metadata": {
+          "num_ctx": 8192,
+          "num_predict": 1600,
+          "prompt_chars": 6677,
+          "format_mode": "json",
+          "done": true,
+          "done_reason": "stop",
+          "prompt_eval_count": 2073,
+          "eval_count": 1439,
+          "prompt_eval_duration": 1396765000,
+          "eval_duration": 90647353000,
+          "total_duration": 92212713400,
+          "load_duration": 1566800,
+          "client_elapsed_seconds": 94.266,
+          "raw_chars": 639
+        }
+      }
+    ]
+  },
+  {
+    "name": "02_test_TC008",
+    "attempts": [
+      {
+        "attempt": 1,
+        "kind": "json_error",
+        "error": "Invalid JSON: Unterminated string starting at: line 8 column 3 (char 517) (done_reason=length, eval_count=1600, raw_chars=528, head='{\\n  \"observed_behavior\": \"The determinant calculation returns an incorrect value for the given matrix.\",\\n  \"trigger_features\": [\"Matrix with non-zero elements i')",
+        "response_metadata": {
+          "num_ctx": 8192,
+          "num_predict": 1600,
+          "prompt_chars": 6860,
+          "format_mode": "json",
+          "done": true,
+          "done_reason": "length",
+          "prompt_eval_count": 2251,
+          "eval_count": 1600,
+          "prompt_eval_duration": 420248000,
+          "eval_duration": 102186180000,
+          "total_duration": 102626995800,
+          "load_duration": 1561100,
+          "client_elapsed_seconds": 104.687,
+          "raw_chars": 528
+        }
+      },
+      {
+        "attempt": 2,
+        "kind": "validation",
+        "validation_errors": [],
+        "response_metadata": {
+          "num_ctx": 8192,
+          "num_predict": 2560,
+          "prompt_chars": 7067,
+          "format_mode": "json",
+          "done": true,
+          "done_reason": "stop",
+          "prompt_eval_count": 2295,
+          "eval_count": 650,
+          "prompt_eval_duration": 263317999,
+          "eval_duration": 41010627000,
+          "total_duration": 41288359100,
+          "load_duration": 1028500,
+          "client_elapsed_seconds": 43.36,
+          "raw_chars": 684
+        }
+      }
+    ]
+  }
+]

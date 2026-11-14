@@ -1,0 +1,172 @@
+{
+  "repair_anchor": [
+    {
+      "candidate_id": "RC001",
+      "line": 21,
+      "reason": "Incorrectly sums diagonal elements instead of multiplying them for triangular matrices.",
+      "evidence_refs": [
+        "TC007",
+        "MG004"
+      ]
+    },
+    {
+      "candidate_id": "RC002",
+      "line": 41,
+      "reason": "Incorrect sign calculation for cofactor expansion.",
+      "evidence_refs": [
+        "TC008"
+      ]
+    },
+    {
+      "candidate_id": "RC003",
+      "line": 47,
+      "reason": "Incorrect minor construction starting index.",
+      "evidence_refs": [
+        "TC008"
+      ]
+    }
+  ],
+  "observed_facts": [
+    {
+      "fact": "The program returns 22 for a 3x3 upper triangular matrix, but the correct determinant should be 336.",
+      "evidence_refs": [
+        "TC007"
+      ]
+    },
+    {
+      "fact": "MG004 is VMG: under transformation 'Given an n‑order square matrix (flattened one‑dimensional array), convert it to two‑dimensional matrix form. If source matrix determinant is zero, keep original matrix unchanged as follow‑up input; otherwise compute matrix inverse and convert inverse matrix back to flattened one‑dimensional array as follow‑up input.', the stated output relation 'Compare the source and follow‑up actual_output determinant values. For invertible matrix, the product of source determinant and follow‑up(inverse) determinant should equal 1. Check whether abs(source_det * follow_det - 1) < 1e‑4. Skip judgement when source determinant equals zero.' was violated.",
+      "evidence_refs": [
+        "MG004"
+      ]
+    },
+    {
+      "fact": "Incorrect determinant calculation for a 3x3 matrix.",
+      "evidence_refs": [
+        "TC008"
+      ]
+    }
+  ],
+  "fault_hypothesis": [
+    {
+      "candidate_id": "RC001",
+      "statement": "The code incorrectly sums diagonal elements instead of multiplying them for triangular matrices.",
+      "causal_chain": [
+        "Line 21 adds diagonal elements instead of multiplying, leading to incorrect determinant calculation.",
+        "This incorrect summation directly causes wrong determinant values for triangular matrices."
+      ],
+      "confidence": "high",
+      "evidence_refs": [
+        "TC007",
+        "MG004"
+      ]
+    },
+    {
+      "candidate_id": "RC002",
+      "statement": "The sign calculation in the cofactor expansion incorrectly uses 2 + i instead of the correct formula based on row and column indices.",
+      "causal_chain": [
+        "The incorrect sign calculation leads to wrong determinant values for non-triangular matrices.",
+        "This affects the accuracy of the determinant computation for matrices that require cofactor expansion."
+      ],
+      "confidence": "medium",
+      "evidence_refs": [
+        "TC008"
+      ]
+    },
+    {
+      "candidate_id": "RC003",
+      "statement": "The loop in AlgComp starts at n instead of 0, causing incorrect minor construction.",
+      "causal_chain": [
+        "Loop starts at n, skipping the first row.",
+        "Incorrect minor construction excludes necessary elements.",
+        "Determinant calculation fails for non-triangular matrices."
+      ],
+      "confidence": "medium",
+      "evidence_refs": [
+        "TC008"
+      ]
+    }
+  ],
+  "desired_behavior": [
+    {
+      "candidate_id": "RC001",
+      "statement": "The determinant for triangular matrices should be the product of the diagonal elements.",
+      "evidence_refs": [
+        "TC007",
+        "MG004"
+      ]
+    },
+    {
+      "candidate_id": "RC002",
+      "statement": "The sign for each cofactor term should be calculated as (-1) raised to the sum of the row and column indices.",
+      "evidence_refs": [
+        "TC008"
+      ]
+    },
+    {
+      "candidate_id": "RC003",
+      "statement": "Loop iterates over all elements, correctly excluding ith column.",
+      "evidence_refs": [
+        "TC008"
+      ]
+    }
+  ],
+  "repair_intent": [
+    {
+      "candidate_id": "RC001",
+      "statement": "Change the addition operation on line 21 to multiplication to correctly compute the determinant.",
+      "target_lines": [
+        21
+      ],
+      "evidence_refs": [
+        "TC007",
+        "MG004"
+      ]
+    },
+    {
+      "candidate_id": "RC002",
+      "statement": "Modify the exponent in the sign calculation to use i + (i % n) instead of 2 + i.",
+      "target_lines": [
+        41
+      ],
+      "evidence_refs": [
+        "TC008"
+      ]
+    },
+    {
+      "candidate_id": "RC003",
+      "statement": "Adjust loop to start at 0 and check all elements for column exclusion.",
+      "target_lines": [
+        47
+      ],
+      "evidence_refs": [
+        "TC008"
+      ]
+    }
+  ],
+  "preservation_constraints": [
+    "Ensure that the loop correctly multiplies each diagonal element.",
+    "Maintain the loop structure to process all diagonal elements.",
+    "Ensure the change only affects non-triangular matrices handled by DeterComp.",
+    "Maintain correct behavior for triangular matrices processed earlier.",
+    "Maintain correct exclusion of ith column elements.",
+    "Ensure minor construction accuracy.",
+    "Preserve determinant calculation logic."
+  ],
+  "uncertainty": [
+    "nopass is a failure-suspect label, not an exact testcase oracle.",
+    "Uncertainty if other lines might contribute to the issue, though line 21 is the primary cause.",
+    "Uncertainty if the change might affect non-triangular matrix calculations, though the change is specific to triangular matrices.",
+    "Uncertainty if other parts of the code rely on the current sign calculation.",
+    "Possibility of introducing new errors in edge cases not covered by test evidence.",
+    "Unclear if all minor elements are correctly excluded.",
+    "Possibility of other minor construction issues."
+  ],
+  "validation_obligations": [
+    "Test with triangular matrices to verify correct determinant calculation after the change.",
+    "Ensure that the change does not break existing functionality for non-triangular matrices.",
+    "Test with matrices requiring cofactor expansion to verify correct signs.",
+    "Ensure triangular matrices still compute determinants correctly.",
+    "Test with 3x3 matrix to verify minor construction.",
+    "Check determinant correctness after loop adjustment."
+  ]
+}

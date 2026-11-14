@@ -1,0 +1,15 @@
+[
+  {
+    "mg_id": "MG1",
+    "description": "Negating the input should preserve the absolute-value output.",
+    "transformation": "x -> -x",
+    "relation": "P(x) = P(-x)",
+    "source_input": "2 ;nR4\n",
+    "source_actual_output": "0",
+    "source_expected_output": "0",
+    "follow_input": "2 ;nR4\n",
+    "follow_actual_output": "0",
+    "follow_expected_output": "0",
+    "state":"VMG"
+  }
+]

@@ -1,0 +1,15 @@
+{
+  "pipeline": "full_program_per_evidence_v2",
+  "mode": "TC_NO_FRI",
+  "top_n": 45,
+  "repair_candidate_n": 3,
+  "llm_call_shape": {
+    "full_program_llm_calls": 6,
+    "test_calls": 2,
+    "mr_calls": 0,
+    "narrowing_calls": 1,
+    "repair_plan_calls": 3
+  },
+  "source_policy": "complete numbered faulty program is supplied to every LLM reasoning call",
+  "oracle_policy": "result.json status only; nopass is uncertain; no expected_output"
+}

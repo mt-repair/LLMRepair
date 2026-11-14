@@ -1,0 +1,191 @@
+[
+  {
+    "name": "04_candidate_assessment_batch_001",
+    "attempts": [
+      {
+        "attempt": 1,
+        "kind": "validation",
+        "validation_errors": [],
+        "response_metadata": {
+          "num_ctx": 12288,
+          "num_predict": 6400,
+          "prompt_chars": 7634,
+          "format_mode": "json",
+          "done": true,
+          "done_reason": "stop",
+          "prompt_eval_count": 2389,
+          "eval_count": 1546,
+          "prompt_eval_duration": 1387691000,
+          "eval_duration": 55373601000,
+          "total_duration": 60787347300,
+          "load_duration": 4014216000,
+          "client_elapsed_seconds": 62.828,
+          "raw_chars": 3836
+        }
+      }
+    ],
+    "candidate_lines": [
+      11,
+      21,
+      24,
+      30,
+      33
+    ],
+    "evidence_items_per_candidate": 2,
+    "effective_batch_size": 5
+  },
+  {
+    "name": "04_candidate_assessment_batch_002",
+    "attempts": [
+      {
+        "attempt": 1,
+        "kind": "validation",
+        "validation_errors": [],
+        "response_metadata": {
+          "num_ctx": 12288,
+          "num_predict": 6400,
+          "prompt_chars": 7581,
+          "format_mode": "json",
+          "done": true,
+          "done_reason": "stop",
+          "prompt_eval_count": 2367,
+          "eval_count": 1490,
+          "prompt_eval_duration": 810145000,
+          "eval_duration": 53300829000,
+          "total_duration": 54337968500,
+          "load_duration": 4559700,
+          "client_elapsed_seconds": 56.406,
+          "raw_chars": 3653
+        }
+      }
+    ],
+    "candidate_lines": [
+      34,
+      35,
+      36,
+      37,
+      38
+    ],
+    "evidence_items_per_candidate": 2,
+    "effective_batch_size": 5
+  },
+  {
+    "name": "04_candidate_assessment_batch_003",
+    "attempts": [
+      {
+        "attempt": 1,
+        "kind": "validation",
+        "validation_errors": [
+          "$.candidate_assessments[4].test_assessments requires at least 2 items, got 0"
+        ],
+        "response_metadata": {
+          "num_ctx": 12288,
+          "num_predict": 6400,
+          "prompt_chars": 7659,
+          "format_mode": "json",
+          "done": true,
+          "done_reason": "stop",
+          "prompt_eval_count": 2390,
+          "eval_count": 1322,
+          "prompt_eval_duration": 821939000,
+          "eval_duration": 47249101000,
+          "total_duration": 48294152400,
+          "load_duration": 4167800,
+          "client_elapsed_seconds": 50.328,
+          "raw_chars": 3402
+        }
+      },
+      {
+        "attempt": 2,
+        "kind": "validation",
+        "validation_errors": [],
+        "response_metadata": {
+          "num_ctx": 12288,
+          "num_predict": 6400,
+          "prompt_chars": 7863,
+          "format_mode": "json",
+          "done": true,
+          "done_reason": "stop",
+          "prompt_eval_count": 2434,
+          "eval_count": 2063,
+          "prompt_eval_duration": 482523000,
+          "eval_duration": 74426137000,
+          "total_duration": 74931250900,
+          "load_duration": 5075900,
+          "client_elapsed_seconds": 76.969,
+          "raw_chars": 3604
+        }
+      }
+    ],
+    "candidate_lines": [
+      40,
+      41,
+      42,
+      43,
+      46
+    ],
+    "evidence_items_per_candidate": 2,
+    "effective_batch_size": 5
+  },
+  {
+    "name": "04_candidate_assessment_batch_004",
+    "attempts": [
+      {
+        "attempt": 1,
+        "kind": "validation",
+        "validation_errors": [
+          "LINE_0047 cannot be both evidence-supported and unrelated",
+          "LINE_0048 cannot be both evidence-supported and unrelated",
+          "LINE_0051 cannot be both evidence-supported and unrelated",
+          "LINE_0052 cannot be both evidence-supported and unrelated"
+        ],
+        "response_metadata": {
+          "num_ctx": 12288,
+          "num_predict": 6400,
+          "prompt_chars": 7595,
+          "format_mode": "json",
+          "done": true,
+          "done_reason": "stop",
+          "prompt_eval_count": 2364,
+          "eval_count": 1838,
+          "prompt_eval_duration": 828340000,
+          "eval_duration": 66010456000,
+          "total_duration": 67129507100,
+          "load_duration": 4455500,
+          "client_elapsed_seconds": 69.141,
+          "raw_chars": 4301
+        }
+      },
+      {
+        "attempt": 2,
+        "kind": "validation",
+        "validation_errors": [],
+        "response_metadata": {
+          "num_ctx": 12288,
+          "num_predict": 6400,
+          "prompt_chars": 7960,
+          "format_mode": "json",
+          "done": true,
+          "done_reason": "stop",
+          "prompt_eval_count": 2444,
+          "eval_count": 2531,
+          "prompt_eval_duration": 524109000,
+          "eval_duration": 91715869000,
+          "total_duration": 92479270400,
+          "load_duration": 5229300,
+          "client_elapsed_seconds": 94.515,
+          "raw_chars": 4211
+        }
+      }
+    ],
+    "candidate_lines": [
+      47,
+      48,
+      49,
+      51,
+      52
+    ],
+    "evidence_items_per_candidate": 2,
+    "effective_batch_size": 5
+  }
+]

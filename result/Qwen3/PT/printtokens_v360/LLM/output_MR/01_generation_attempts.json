@@ -1,0 +1,26 @@
+[
+  {
+    "attempt": 1,
+    "errors": [
+      "Model output is not valid JSON: Unterminated string starting at: line 41 column 26 (char 3282)"
+    ],
+    "raw_tail": "      return;\\n        return;\\n        return;\\n        return;\\n        return;\\n        return;\\n        return;\\n        return;\\n        return;\\n        return;\\n        return;\\n        return;\\n        return;\\n        return;\\n        return;\\n        return;\\n        return;\\n        return;\\n        return;\\n        return;\\n        return;\\n        return;\\n        return;\\n        return;\\n        return;\\n        return;\\n        return;\\n        return;\\n        return;\\n        return;\\n        return;\\n        return;\\n        return;\\n        return;\\n        return;\\n        return;\\n        return;\\n        return;\\n        return;\\n        return;\\n        return;\\n        return;\\n        return;\\n        return;\\n        return;\\n        return;\\n        return;\\n        return;\\n        return;\\n        return;\\n        return;\\n        return;\\n        return;\\n        return;\\n        return;\\n        return;\\n        return;\\n        return;\\n        return;\\",
+    "response_metadata": {
+      "model": "Qwen3:14b",
+      "temperature": 0.09,
+      "seed": 0,
+      "num_ctx": 32768,
+      "num_predict": 8192,
+      "prompt_chars": 34980,
+      "done": true,
+      "done_reason": "length",
+      "prompt_eval_count": 11440,
+      "eval_count": 8192,
+      "prompt_eval_duration": 1669153000,
+      "eval_duration": 72570100000,
+      "total_duration": 75973966146,
+      "load_duration": 160738175,
+      "client_elapsed_seconds": 75.976
+    }
+  }
+]

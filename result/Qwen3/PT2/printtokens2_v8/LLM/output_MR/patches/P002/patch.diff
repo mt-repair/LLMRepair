@@ -1,0 +1,24 @@
+--- a/print_tokens2.c
++++ b/print_tokens2.c
+@@ -209,13 +209,19 @@
+  ch1[1]='\0';
+  if(is_eof_token(ch1)==TRUE)return(TRUE); /* is eof token? */
+  if(str_com_id==1)          /* is string token */
+-    { if(ch=='"' | ch=='\n')   /* for string until meet another " */
++  if(ch == '"' || ch == '\n')   /* for string until meet another " or newline */
++          return(TRUE);
+          return(TRUE);
+       else
+          return(FALSE);
+     }
+ 
+- if(str_com_id!=2)    /* is comment token */
++  if(str_com_id == 2)    /* is comment token */
++    { if(ch == '\n')     /* for comment until meet end of line */
++         return(TRUE);
++       else
++         return(FALSE);
++    }
+    { if(ch=='\n')     /* for comment until meet end of line */
+         return(TRUE);
+       else

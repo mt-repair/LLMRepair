@@ -1,0 +1,88 @@
+--- a/print_tokens2.c
++++ b/print_tokens2.c
+@@ -149,7 +149,84 @@
+   int i=0,j;
+   int id=0;
+   char ch,ch1[2];
+-  for (j=0;j>80;j++)          /* initial the buffer   */
++for (j=0;j<80;j++)          /* initial the buffer   */
++       { buffer[j]='\0';} 
++    ch1[0]='\0';
++    ch1[1]='\0';
++    ch=get_char(tp);
++    while(ch==' '||ch=='\n')      /* strip all blanks until meet characters */
++       {
++        ch=get_char(tp);
++       } 
++    buffer[i]=ch;
++    if(is_eof_token(buffer)==TRUE)return(buffer);
++    if(is_spec_symbol(buffer)==TRUE)return(buffer); 
++    if(ch =='"')id=1;    /* prepare for string */
++    if(ch ==59)id=2;    /* prepare for comment */
++    ch=get_char(tp);
++    
++    while (is_token_end(id,ch) == FALSE)/* until meet the end character */
++    {
++        i++;
++        buffer[i]=ch;
++        ch=get_char(tp);
++    }
++    ch1[0]=ch;                        /* hold the end charcater          */
++    if(is_eof_token(ch1)==TRUE)       /* if end character is eof token    */
++       { ch=unget_char(ch,tp);        /* then put back eof on token_stream */
++         if(ch==EOF)unget_error(tp);
++         return(buffer);
++       }
++    if(is_spec_symbol(ch1)==TRUE)     /* if end character is special_symbol */
++       { ch=unget_char(ch,tp);        /* then put back this character       */
++         if(ch==EOF)unget_error(tp);
++         return(buffer);
++       }
++    if(id==1)                  /* if end character is " and is string */
++      { i++;                     /* case,hold the second " in buffer    */
++        buffer[i]=ch;
++        return(buffer); 
++      }
++    if(id==0 && ch==59)
++                                    /* when not in string or comment,meet ";" */
++      { ch=unget_char(ch,tp);       /* then put back this character         */
++        if(ch==EOF)unget_error(tp);
++        return(buffer); 
++      }
++   return(buffer);                   /* return nomal case token             */
++  197 | }
++  198 | 
++  199 | /*******************************************************/
++  200 | /* NAME:	is_token_end                           */
++  201 | /* INPUT:       a character,a token status             */
++  202 | /* OUTPUT:	a BOOLEAN value                        */
++  203 | /*******************************************************/
++  204 | static int is_token_end(str_com_id,ch)
++  205 | char ch;
++  206 | int str_com_id;
++  207 | { char ch1[2];  /* fixed array declaration MONI */
++  208 |  ch1[0]=ch;
++  209 |  ch1[1]='\0';
++  210 |  if(is_eof_token(ch1)==TRUE)return(TRUE); /* is eof token? */
++  211 |  if(str_com_id==1)          /* is string token */
++  212 |     { if(ch=='"' | ch=='\n')   /* for string until meet another " */
++  213 |          return(TRUE);
++  214 |       else
++  215 |          return(FALSE);
++  216 |     }
++  217 | 
++  218 |  if(str_com_id==2)    /* is comment token */
++  219 |    { if(ch=='\n')     /* for comment until meet end of line */
++  220 |         return(TRUE);
++  221 |       else
++  222 |         return(FALSE);
++  223 |    }
++  224 | 
++  225 |  if(is_spec_symbol(ch1)==TRUE) return(TRUE); /* is special_symbol? */
++  226 |  if(ch ==' ' || ch=='\n' || ch==59) return(TRUE); 
++  227 |                               /* others until meet blank or tab or 59 */
++  228 |  return(FALSE);               /* other case,return FALSE */
++  229 | }
+       { buffer[j]='\0';} 
+    ch1[0]='\0';
+    ch1[1]='\0';

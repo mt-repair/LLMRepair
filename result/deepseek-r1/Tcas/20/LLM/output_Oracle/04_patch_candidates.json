@@ -1,0 +1,339 @@
+[
+  {
+    "patch_id": "P001",
+    "status": "compile_passed",
+    "proposal": {
+      "diagnosis": "The issue lies in the logic of the `Non_Crossing_Biased_Descend` method, particularly in how the conditions for `need_downward_RA` are determined. The method incorrectly evaluates the conditions under certain input scenarios, leading to an invalid 'DOWNWARD_RA' output when the expected result is 'UNRESOLVED'. The faulty logic stems from improper handling of the `Own_Above_Threat` and `Own_Below_Threat` conditions in combination with separation thresholds.",
+      "evidence_reasoning": {
+        "causal_chain": [
+          "The failing test case `input1` shows that when `Own_Tracked_Alt` is below `Other_Tracked_Alt`, the system incorrectly outputs 'DOWNWARD_RA' instead of 'UNRESOLVED'.",
+          "The root cause is in the `Non_Crossing_Biased_Descend` method where the condition for `need_downward_RA` does not correctly account for the relationship between `Own_Tracked_Alt` and `Other_Tracked_Alt` in combination with separation thresholds."
+        ],
+        "mr_refs": [],
+        "testcase_refs": [
+          "input1"
+        ]
+      },
+      "uncertainty": "There is some uncertainty about whether additional conditions may need to be adjusted in the `Non_Crossing_Biased_Descend` method beyond the identified faulty line. However, the primary issue appears to be the incorrect comparison operator in the `Own_Above_Threat` method, which directly impacts the determination of `need_downward_RA`.",
+      "assumption": "The `need_downward_RA` condition should only be true when the own aircraft is above the threat and certain separation conditions are met.",
+      "edits": [
+        {
+          "end_line": 16,
+          "rationale": "Change the comparison operator to correctly determine if the own aircraft is above the threat.",
+          "replacement": "         return self.Other_Tracked_Alt <= self.Own_Tracked_Alt",
+          "start_line": 16
+        }
+      ],
+      "expected_effect": "Fixes the incorrect evaluation of `need_downward_RA` by properly determining when the own aircraft is above the threat aircraft.",
+      "preservation_constraints": [
+        "Other test cases pass as expected."
+      ],
+      "repair_intent": "Correct the logic for determining if the own aircraft is above the threat."
+    },
+    "proposal_errors": [],
+    "patch_diff": "--- a/Mutant20.py\n+++ b/Mutant20.py\n@@ -13,7 +13,7 @@\n         return self.Own_Tracked_Alt < self.Other_Tracked_Alt\n \n     def Own_Above_Threat(self):\n-        return self.Other_Tracked_Alt <= self.Own_Tracked_Alt\n+         return self.Other_Tracked_Alt <= self.Own_Tracked_Alt\n \n     def Non_Crossing_Biased_Climb(self):\n         self.upward_preferred = self.Inhibit_Biased_Climb() > self.Down_Separation\n",
+    "patch_hash": "4d77c6dc046c01afd6b6460dd48d28c2b76eda9f6996d19edc9a40138c5b0f97",
+    "model_candidate_source": "P001",
+    "fallback_copy_of": null,
+    "original_candidate_errors": [],
+    "duplicate_of": null,
+    "validation_reused_from": null,
+    "validation": {
+      "compile": {
+        "attempted": true,
+        "success": true,
+        "return_code": 0,
+        "timed_out": false,
+        "stdout_tail": "",
+        "stderr_tail": "",
+        "elapsed_seconds": 0.079,
+        "command": [
+          "E:\\Anaconda3\\envs\\llmRepair\\python.exe",
+          "-m",
+          "py_compile",
+          "e:\\LLMProgramRepair\\LLM\\MSBF\\code\\deepseek-r1\\Tcas\\20\\LLM\\output_Oracle\\patches\\P001\\workspace\\Mutant20.py"
+        ],
+        "executable_path": null
+      },
+      "visible_checks": []
+    }
+  },
+  {
+    "patch_id": "P002",
+    "status": "compile_failed",
+    "proposal": {
+      "diagnosis": "The issue lies in the logic of the `Non_Crossing_Biased_Descend` method, particularly in how the conditions for `need_downward_RA` are determined. The method incorrectly evaluates the conditions under certain input scenarios, leading to an invalid 'DOWNWARD_RA' output when the expected result is 'UNRESOLVED'. The faulty logic stems from improper handling of the `Own_Above_Threat` and `Own_Below_Threat` conditions in combination with separation thresholds.",
+      "evidence_reasoning": {
+        "causal_chain": [
+          "The failing test case `input1` shows that when `Own_Tracked_Alt` is below `Other_Tracked_Alt`, the system incorrectly outputs 'DOWNWARD_RA' instead of 'UNRESOLVED'.",
+          "The root cause is in the `Non_Crossing_Biased_Descend` method where the condition for `need_downward_RA` does not correctly account for the relationship between `Own_Tracked_Alt` and `Other_Tracked_Alt` in combination with separation thresholds."
+        ],
+        "mr_refs": [],
+        "testcase_refs": [
+          "input1"
+        ]
+      },
+      "uncertainty": "There is some uncertainty about whether additional conditions may need to be adjusted in the `Non_Crossing_Biased_Descend` method beyond the identified faulty line. However, the primary issue appears to be the incorrect comparison operator in the `Own_Above_Threat` method, which directly impacts the determination of `need_downward_RA`.",
+      "assumption": "The `Non_Crossing_Biased_Descend` method's conditions need to be adjusted to properly handle cases where the own aircraft is below the threat.",
+      "edits": [
+        {
+          "end_line": 16,
+          "rationale": "Ensure that `need_downward_RA` is only triggered when the own aircraft is above the threat and separation conditions are met.",
+          "replacement": "         return self.Other_Tracked_Alt <= self.Own_Tracked_Alt",
+          "start_line": 16
+        },
+        {
+          "end_line": 34,
+          "rationale": "Adjust the condition to properly handle cases where the own aircraft is below the threat.",
+          "replacement": "                         (self.Own_Above_Threat()) and (self.Up_Separation >= self.ALIM()))",
+          "start_line": 34
+        }
+      ],
+      "expected_effect": "Correctly handles cases where the own aircraft is below the threat by ensuring `need_downward_RA` is only triggered when appropriate.",
+      "preservation_constraints": [
+        "Other test cases pass as expected."
+      ],
+      "repair_intent": "Adjust conditions in `Non_Crossing_Biased_Descend` to properly handle threat positioning."
+    },
+    "proposal_errors": [],
+    "patch_diff": "--- a/Mutant20.py\n+++ b/Mutant20.py\n@@ -13,7 +13,7 @@\n         return self.Own_Tracked_Alt < self.Other_Tracked_Alt\n \n     def Own_Above_Threat(self):\n-        return self.Other_Tracked_Alt <= self.Own_Tracked_Alt\n+         return self.Other_Tracked_Alt <= self.Own_Tracked_Alt\n \n     def Non_Crossing_Biased_Climb(self):\n         self.upward_preferred = self.Inhibit_Biased_Climb() > self.Down_Separation\n@@ -31,7 +31,7 @@\n             result = self.Own_Below_Threat() and (self.Cur_Vertical_Sep >= self.MINSEP) and (\n                         self.Down_Separation >= self.ALIM())\n         else:\n-            result = not (self.Own_Above_Threat()) or (\n+                         (self.Own_Above_Threat()) and (self.Up_Separation >= self.ALIM()))\n                         (self.Own_Above_Threat()) and (self.Up_Separation >= self.ALIM()))\n         return result\n \n",
+    "patch_hash": "69d38942d9bde570010cdfb388438d48cddc0496b557ed558896de8009921c69",
+    "model_candidate_source": "P002",
+    "fallback_copy_of": null,
+    "original_candidate_errors": [],
+    "duplicate_of": null,
+    "validation_reused_from": null,
+    "validation": {
+      "compile": {
+        "attempted": true,
+        "success": false,
+        "return_code": 1,
+        "timed_out": false,
+        "stdout_tail": "",
+        "stderr_tail": "  File \"e:\\LLMProgramRepair\\LLM\\MSBF\\code\\deepseek-r1\\Tcas\\20\\LLM\\output_Oracle\\patches\\P002\\workspace\\Mutant20.py\", line 34\n    (self.Own_Above_Threat()) and (self.Up_Separation >= self.ALIM()))\n                                                                     ^\nSyntaxError: unmatched ')'\n",
+        "elapsed_seconds": 0.063,
+        "command": [
+          "E:\\Anaconda3\\envs\\llmRepair\\python.exe",
+          "-m",
+          "py_compile",
+          "e:\\LLMProgramRepair\\LLM\\MSBF\\code\\deepseek-r1\\Tcas\\20\\LLM\\output_Oracle\\patches\\P002\\workspace\\Mutant20.py"
+        ],
+        "executable_path": null
+      },
+      "visible_checks": []
+    }
+  },
+  {
+    "patch_id": "P003",
+    "status": "compile_failed",
+    "proposal": {
+      "diagnosis": "The issue lies in the logic of the `Non_Crossing_Biased_Descend` method, particularly in how the conditions for `need_downward_RA` are determined. The method incorrectly evaluates the conditions under certain input scenarios, leading to an invalid 'DOWNWARD_RA' output when the expected result is 'UNRESOLVED'. The faulty logic stems from improper handling of the `Own_Above_Threat` and `Own_Below_Threat` conditions in combination with separation thresholds.",
+      "evidence_reasoning": {
+        "causal_chain": [
+          "The failing test case `input1` shows that when `Own_Tracked_Alt` is below `Other_Tracked_Alt`, the system incorrectly outputs 'DOWNWARD_RA' instead of 'UNRESOLVED'.",
+          "The root cause is in the `Non_Crossing_Biased_Descend` method where the condition for `need_downward_RA` does not correctly account for the relationship between `Own_Tracked_Alt` and `Other_Tracked_Alt` in combination with separation thresholds."
+        ],
+        "mr_refs": [],
+        "testcase_refs": [
+          "input1"
+        ]
+      },
+      "uncertainty": "There is some uncertainty about whether additional conditions may need to be adjusted in the `Non_Crossing_Biased_Descend` method beyond the identified faulty line. However, the primary issue appears to be the incorrect comparison operator in the `Own_Above_Threat` method, which directly impacts the determination of `need_downward_RA`.",
+      "assumption": "The `Non_Crossing_Biased_Descend` method's logic for determining `need_downward_RA` is flawed in specific edge cases.",
+      "edits": [
+        {
+          "end_line": 16,
+          "rationale": "Fix the comparison operator to correctly determine if the own aircraft is above the threat.",
+          "replacement": "         return self.Other_Tracked_Alt <= self.Own_Tracked_Alt",
+          "start_line": 16
+        },
+        {
+          "end_line": 34,
+          "rationale": "Adjust the condition to properly handle cases where the own aircraft is below the threat.",
+          "replacement": "                         (self.Own_Above_Threat()) and (self.Up_Separation >= self.ALIM()))",
+          "start_line": 34
+        },
+        {
+          "end_line": 35,
+          "rationale": "Ensure that the logic correctly combines the conditions for `need_downward_RA`.",
+          "replacement": "                         (self.Own_Above_Threat()) and (self.Up_Separation >= self.ALIM()))",
+          "start_line": 35
+        }
+      ],
+      "expected_effect": "Ensures that `need_downward_RA` is only triggered when the own aircraft is above the threat and separation conditions are met.",
+      "preservation_constraints": [
+        "Other test cases pass as expected."
+      ],
+      "repair_intent": "Correct the logic for determining `need_downward_RA` in `Non_Crossing_Biased_Descend`."
+    },
+    "proposal_errors": [],
+    "patch_diff": "--- a/Mutant20.py\n+++ b/Mutant20.py\n@@ -13,7 +13,7 @@\n         return self.Own_Tracked_Alt < self.Other_Tracked_Alt\n \n     def Own_Above_Threat(self):\n-        return self.Other_Tracked_Alt <= self.Own_Tracked_Alt\n+         return self.Other_Tracked_Alt <= self.Own_Tracked_Alt\n \n     def Non_Crossing_Biased_Climb(self):\n         self.upward_preferred = self.Inhibit_Biased_Climb() > self.Down_Separation\n@@ -31,8 +31,8 @@\n             result = self.Own_Below_Threat() and (self.Cur_Vertical_Sep >= self.MINSEP) and (\n                         self.Down_Separation >= self.ALIM())\n         else:\n-            result = not (self.Own_Above_Threat()) or (\n-                        (self.Own_Above_Threat()) and (self.Up_Separation >= self.ALIM()))\n+                         (self.Own_Above_Threat()) and (self.Up_Separation >= self.ALIM()))\n+                         (self.Own_Above_Threat()) and (self.Up_Separation >= self.ALIM()))\n         return result\n \n     def Tcas(self, argv):\n",
+    "patch_hash": "a9c6a331248d8f7f95b6bbc98adfcb54eccf133fef63456a40ddcc41392ac1fb",
+    "model_candidate_source": "P003",
+    "fallback_copy_of": null,
+    "original_candidate_errors": [],
+    "duplicate_of": null,
+    "validation_reused_from": null,
+    "validation": {
+      "compile": {
+        "attempted": true,
+        "success": false,
+        "return_code": 1,
+        "timed_out": false,
+        "stdout_tail": "",
+        "stderr_tail": "  File \"e:\\LLMProgramRepair\\LLM\\MSBF\\code\\deepseek-r1\\Tcas\\20\\LLM\\output_Oracle\\patches\\P003\\workspace\\Mutant20.py\", line 34\n    (self.Own_Above_Threat()) and (self.Up_Separation >= self.ALIM()))\n                                                                     ^\nSyntaxError: unmatched ')'\n",
+        "elapsed_seconds": 0.078,
+        "command": [
+          "E:\\Anaconda3\\envs\\llmRepair\\python.exe",
+          "-m",
+          "py_compile",
+          "e:\\LLMProgramRepair\\LLM\\MSBF\\code\\deepseek-r1\\Tcas\\20\\LLM\\output_Oracle\\patches\\P003\\workspace\\Mutant20.py"
+        ],
+        "executable_path": null
+      },
+      "visible_checks": []
+    }
+  },
+  {
+    "patch_id": "P004",
+    "status": "compile_failed",
+    "proposal": {
+      "diagnosis": "The issue lies in the logic of the `Non_Crossing_Biased_Descend` method, particularly in how the conditions for `need_downward_RA` are determined. The method incorrectly evaluates the conditions under certain input scenarios, leading to an invalid 'DOWNWARD_RA' output when the expected result is 'UNRESOLVED'. The faulty logic stems from improper handling of the `Own_Above_Threat` and `Own_Below_Threat` conditions in combination with separation thresholds.",
+      "evidence_reasoning": {
+        "causal_chain": [
+          "The failing test case `input1` shows that when `Own_Tracked_Alt` is below `Other_Tracked_Alt`, the system incorrectly outputs 'DOWNWARD_RA' instead of 'UNRESOLVED'.",
+          "The root cause is in the `Non_Crossing_Biased_Descend` method where the condition for `need_downward_RA` does not correctly account for the relationship between `Own_Tracked_Alt` and `Other_Tracked_Alt` in combination with separation thresholds."
+        ],
+        "mr_refs": [],
+        "testcase_refs": [
+          "input1"
+        ]
+      },
+      "uncertainty": "There is some uncertainty about whether additional conditions may need to be adjusted in the `Non_Crossing_Biased_Descend` method beyond the identified faulty line. However, the primary issue appears to be the incorrect comparison operator in the `Own_Above_Threat` method, which directly impacts the determination of `need_downward_RA`.",
+      "assumption": "The `Non_Crossing_Biased_Descend` method's conditions are too lenient in certain cases, leading to incorrect `DOWNWARD_RA` outputs.",
+      "edits": [
+        {
+          "end_line": 16,
+          "rationale": "Fix the comparison operator to correctly determine if the own aircraft is above the threat.",
+          "replacement": "         return self.Other_Tracked_Alt <= self.Own_Tracked_Alt",
+          "start_line": 16
+        },
+        {
+          "end_line": 34,
+          "rationale": "Adjust the condition to properly handle cases where the own aircraft is below the threat.",
+          "replacement": "                         (self.Own_Above_Threat()) and (self.Up_Separation >= self.ALIM()))",
+          "start_line": 34
+        },
+        {
+          "end_line": 35,
+          "rationale": "Ensure that the logic correctly combines the conditions for `need_downward_RA`.",
+          "replacement": "                         (self.Own_Above_Threat()) and (self.Up_Separation >= self.ALIM()))",
+          "start_line": 35
+        }
+      ],
+      "expected_effect": "Corrects the overly lenient conditions in `Non_Crossing_Biased_Descend` that lead to incorrect `DOWNWARD_RA` outputs.",
+      "preservation_constraints": [
+        "Other test cases pass as expected."
+      ],
+      "repair_intent": "Adjust overly lenient conditions in `Non_Crossing_Biased_Descend`."
+    },
+    "proposal_errors": [],
+    "patch_diff": "--- a/Mutant20.py\n+++ b/Mutant20.py\n@@ -13,7 +13,7 @@\n         return self.Own_Tracked_Alt < self.Other_Tracked_Alt\n \n     def Own_Above_Threat(self):\n-        return self.Other_Tracked_Alt <= self.Own_Tracked_Alt\n+         return self.Other_Tracked_Alt <= self.Own_Tracked_Alt\n \n     def Non_Crossing_Biased_Climb(self):\n         self.upward_preferred = self.Inhibit_Biased_Climb() > self.Down_Separation\n@@ -31,8 +31,8 @@\n             result = self.Own_Below_Threat() and (self.Cur_Vertical_Sep >= self.MINSEP) and (\n                         self.Down_Separation >= self.ALIM())\n         else:\n-            result = not (self.Own_Above_Threat()) or (\n-                        (self.Own_Above_Threat()) and (self.Up_Separation >= self.ALIM()))\n+                         (self.Own_Above_Threat()) and (self.Up_Separation >= self.ALIM()))\n+                         (self.Own_Above_Threat()) and (self.Up_Separation >= self.ALIM()))\n         return result\n \n     def Tcas(self, argv):\n",
+    "patch_hash": "a9c6a331248d8f7f95b6bbc98adfcb54eccf133fef63456a40ddcc41392ac1fb",
+    "model_candidate_source": "P004",
+    "fallback_copy_of": null,
+    "original_candidate_errors": [],
+    "duplicate_of": "P003",
+    "validation_reused_from": "P003",
+    "validation": {
+      "compile": {
+        "attempted": true,
+        "success": false,
+        "return_code": 1,
+        "timed_out": false,
+        "stdout_tail": "",
+        "stderr_tail": "  File \"e:\\LLMProgramRepair\\LLM\\MSBF\\code\\deepseek-r1\\Tcas\\20\\LLM\\output_Oracle\\patches\\P003\\workspace\\Mutant20.py\", line 34\n    (self.Own_Above_Threat()) and (self.Up_Separation >= self.ALIM()))\n                                                                     ^\nSyntaxError: unmatched ')'\n",
+        "elapsed_seconds": 0.078,
+        "command": [
+          "E:\\Anaconda3\\envs\\llmRepair\\python.exe",
+          "-m",
+          "py_compile",
+          "e:\\LLMProgramRepair\\LLM\\MSBF\\code\\deepseek-r1\\Tcas\\20\\LLM\\output_Oracle\\patches\\P003\\workspace\\Mutant20.py"
+        ],
+        "executable_path": null
+      },
+      "visible_checks": []
+    }
+  },
+  {
+    "patch_id": "P005",
+    "status": "compile_failed",
+    "proposal": {
+      "diagnosis": "The issue lies in the logic of the `Non_Crossing_Biased_Descend` method, particularly in how the conditions for `need_downward_RA` are determined. The method incorrectly evaluates the conditions under certain input scenarios, leading to an invalid 'DOWNWARD_RA' output when the expected result is 'UNRESOLVED'. The faulty logic stems from improper handling of the `Own_Above_Threat` and `Own_Below_Threat` conditions in combination with separation thresholds.",
+      "evidence_reasoning": {
+        "causal_chain": [
+          "The failing test case `input1` shows that when `Own_Tracked_Alt` is below `Other_Tracked_Alt`, the system incorrectly outputs 'DOWNWARD_RA' instead of 'UNRESOLVED'.",
+          "The root cause is in the `Non_Crossing_Biased_Descend` method where the condition for `need_downward_RA` does not correctly account for the relationship between `Own_Tracked_Alt` and `Other_Tracked_Alt` in combination with separation thresholds."
+        ],
+        "mr_refs": [],
+        "testcase_refs": [
+          "input1"
+        ]
+      },
+      "uncertainty": "There is some uncertainty about whether additional conditions may need to be adjusted in the `Non_Crossing_Biased_Descend` method beyond the identified faulty line. However, the primary issue appears to be the incorrect comparison operator in the `Own_Above_Threat` method, which directly impacts the determination of `need_downward_RA`.",
+      "assumption": "The `Non_Crossing_Biased_Descend` method's logic for `need_downward_RA` is incorrect in specific edge cases.",
+      "edits": [
+        {
+          "end_line": 16,
+          "rationale": "Fix the comparison operator to correctly determine if the own aircraft is above the threat.",
+          "replacement": "         return self.Other_Tracked_Alt <= self.Own_Tracked_Alt",
+          "start_line": 16
+        },
+        {
+          "end_line": 34,
+          "rationale": "Adjust the condition to properly handle cases where the own aircraft is below the threat.",
+          "replacement": "                         (self.Own_Above_Threat()) and (self.Up_Separation >= self.ALIM()))",
+          "start_line": 34
+        },
+        {
+          "end_line": 35,
+          "rationale": "Ensure that the logic correctly combines the conditions for `need_downward_RA`.",
+          "replacement": "                         (self.Own_Above_Threat()) and (self.Up_Separation >= self.ALIM()))",
+          "start_line": 35
+        }
+      ],
+      "expected_effect": "Corrects the edge case handling in `Non_Crossing_Biased_Descend` that leads to incorrect `DOWNWARD_RA` outputs.",
+      "preservation_constraints": [
+        "Other test cases pass as expected."
+      ],
+      "repair_intent": "Fix edge case handling in `Non_Crossing_Biased_Descend`."
+    },
+    "proposal_errors": [],
+    "patch_diff": "--- a/Mutant20.py\n+++ b/Mutant20.py\n@@ -13,7 +13,7 @@\n         return self.Own_Tracked_Alt < self.Other_Tracked_Alt\n \n     def Own_Above_Threat(self):\n-        return self.Other_Tracked_Alt <= self.Own_Tracked_Alt\n+         return self.Other_Tracked_Alt <= self.Own_Tracked_Alt\n \n     def Non_Crossing_Biased_Climb(self):\n         self.upward_preferred = self.Inhibit_Biased_Climb() > self.Down_Separation\n@@ -31,8 +31,8 @@\n             result = self.Own_Below_Threat() and (self.Cur_Vertical_Sep >= self.MINSEP) and (\n                         self.Down_Separation >= self.ALIM())\n         else:\n-            result = not (self.Own_Above_Threat()) or (\n-                        (self.Own_Above_Threat()) and (self.Up_Separation >= self.ALIM()))\n+                         (self.Own_Above_Threat()) and (self.Up_Separation >= self.ALIM()))\n+                         (self.Own_Above_Threat()) and (self.Up_Separation >= self.ALIM()))\n         return result\n \n     def Tcas(self, argv):\n",
+    "patch_hash": "a9c6a331248d8f7f95b6bbc98adfcb54eccf133fef63456a40ddcc41392ac1fb",
+    "model_candidate_source": "P005",
+    "fallback_copy_of": null,
+    "original_candidate_errors": [],
+    "duplicate_of": "P003",
+    "validation_reused_from": "P003",
+    "validation": {
+      "compile": {
+        "attempted": true,
+        "success": false,
+        "return_code": 1,
+        "timed_out": false,
+        "stdout_tail": "",
+        "stderr_tail": "  File \"e:\\LLMProgramRepair\\LLM\\MSBF\\code\\deepseek-r1\\Tcas\\20\\LLM\\output_Oracle\\patches\\P003\\workspace\\Mutant20.py\", line 34\n    (self.Own_Above_Threat()) and (self.Up_Separation >= self.ALIM()))\n                                                                     ^\nSyntaxError: unmatched ')'\n",
+        "elapsed_seconds": 0.078,
+        "command": [
+          "E:\\Anaconda3\\envs\\llmRepair\\python.exe",
+          "-m",
+          "py_compile",
+          "e:\\LLMProgramRepair\\LLM\\MSBF\\code\\deepseek-r1\\Tcas\\20\\LLM\\output_Oracle\\patches\\P003\\workspace\\Mutant20.py"
+        ],
+        "executable_path": null
+      },
+      "visible_checks": []
+    }
+  }
+]

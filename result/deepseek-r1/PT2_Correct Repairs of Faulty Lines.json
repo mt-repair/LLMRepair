@@ -1,0 +1,107 @@
+[
+  {
+    "version": 1,
+    "fault_line": 163,
+    "repaired_code": "   if(is_spec_symbol(buffer)==TRUE)return(buffer); "
+  },
+  {
+    "version": 2,
+    "fault_line": 164,
+    "repaired_code": "   if(ch =='\"')id=1;"
+  },
+  {
+    "version": 3,
+    "fault_line": 165,
+    "repaired_code": "   if(ch ==59)id=2;"
+  },
+  {
+    "version": 4,
+    "fault_line": 185,
+    "repaired_code": "   if(id==1) "
+  },
+  {
+    "version": 5,
+    "fault_line": 190,
+    "repaired_code": "   if(id==0 && ch==59)"
+  },
+  {
+    "version": 6,
+    "fault_line": 190,
+    "repaired_code": "   if(id==0 && ch==59)"
+  },
+  {
+    "version": 7,
+    "fault_line": 211,
+    "repaired_code": " if(str_com_id==1)"
+  },
+  {
+    "version": 8,
+    "fault_line": 218,
+    "repaired_code": " if(str_com_id==2)"
+  },
+  {
+    "version": 9,
+    "fault_line": 219,
+    "repaired_code": "   { if(ch=='\\n') "
+  },
+  {
+    "version": 10,
+    "fault_line": 226,
+    "repaired_code": " if(ch ==' ' || ch=='\\n' || ch==59) return(TRUE); "
+  },
+  {
+    "version": 11,
+    "fault_line": 226,
+    "repaired_code": " if(ch ==' ' || ch=='\\n' || ch==59) return(TRUE); "
+  },
+  {
+    "version": 12,
+    "fault_line": 339,
+    "repaired_code": "  if ((*str)=='#' && isalpha(*(str+1)))"
+  },
+  {
+    "version": 13,
+    "fault_line": 380,
+    "repaired_code": "  if ( *str =='\"')"
+  },
+  {
+    "version": 14,
+    "fault_line": 152,
+    "repaired_code": "  for (j=0;j<=80;j++)"
+  },
+  {
+    "version": 15,
+    "fault_line": 165,
+    "repaired_code": "   if(ch ==59)id=2;"
+  },
+  {
+    "version": 16,
+    "fault_line": 165,
+    "repaired_code": "   if(ch ==59)id=2;"
+  },
+  {
+    "version": 17,
+    "fault_line": 211,
+    "repaired_code": " if(str_com_id==1) "
+  },
+  {
+    "version": 18,
+    "fault_line": 212,
+    "repaired_code": " if(ch=='\"' | ch=='\\n')"
+  },
+  {
+    "version": 19,
+    "fault_line": 218,
+    "repaired_code": " if(str_com_id==2)"
+  },
+  {
+    "version": 20,
+    "fault_line": 218,
+    "repaired_code": " if(str_com_id==2)"
+  },
+  {
+    "version": 21,
+    "fault_line": 339,
+    "repaired_code": "  if ((*str)=='#' && isalpha(*(str+1)))"
+  }
+]

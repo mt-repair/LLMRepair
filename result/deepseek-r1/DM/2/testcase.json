@@ -1,0 +1,44 @@
+[
+  {
+    "test_id": "input1",
+    "input": "[9, 1, 5, 1, 7, 0, 7, 0, 0]",
+    "actual_output": "245",
+    "expected_output": "missing",
+    "test_status": "unknown"
+  },
+  {
+    "test_id": "input2",
+    "input": "[1.2335811384723961e-17, 0.0, 0.14285714285714285, 0.0, 0.14285714285714285, -0.020408163265306124, 0.19999999999999998, -0.028571428571428567, -0.25306122448979596]",
+    "actual_output": "-0.004081632653061225",
+    "expected_output": "missing",
+    "test_status": "unknown"
+  },
+  {
+    "test_id": "input3",
+    "input": "[6, 9, 4, 2, 8, 0, 4, 0, 0]",
+    "actual_output": "128",
+    "expected_output": "missing",
+    "test_status": "unknown"
+  },
+  {
+    "test_id": "input4",
+    "input": "[6, 9, 4, 4, 0, 0, 2, 8, 0]",
+    "actual_output": "128",
+    "expected_output": "missing",
+    "test_status": "unknown"
+  },
+  {
+    "test_id": "input5",
+    "input": "[7, 4, 8, 2, 7, 0, 8, 0, 0]",
+    "actual_output": "448",
+    "expected_output": "missing",
+    "test_status": "unknown"
+  },
+  {
+    "test_id": "input6",
+    "input": "[7, 4, 8, 2, -21, 0, 2, 7, 0]",
+    "actual_output": "448",
+    "expected_output": "missing",
+    "test_status": "unknown"
+  }
+]

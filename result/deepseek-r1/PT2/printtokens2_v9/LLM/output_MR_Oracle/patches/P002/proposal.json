@@ -1,0 +1,32 @@
+{
+  "diagnosis": "The primary issue lies in how the tokenizer handles comments starting with ';' when subsequent characters are absent or improperly managed. Specifically, line 219's condition incorrectly processes tokens following semicolons, leading to erroneous outputs and unhandled EOF scenarios.",
+  "evidence_reasoning": {
+    "causal_chain": [
+      "Test cases show incorrect tokenization after ';', indicating a flaw in comment handling.",
+      "Line 219's logic improperly extends token processing beyond available characters when comments are at the input's end."
+    ],
+    "mr_refs": [
+      "MR2",
+      "MR3"
+    ],
+    "testcase_refs": [
+      "source_s3_mr2",
+      "followup_s3_mr2"
+    ]
+  },
+  "uncertainty": "While the proposed edits address observed issues, alternative interpretations of token boundaries may exist. However, the evidence strongly supports these changes as they directly align with failing test cases and MR violations.",
+  "assumption": "Modify is_token_end() to correctly terminate comment tokens at EOF.",
+  "edits": [
+    {
+      "end_line": 219,
+      "rationale": "Adjust condition to end token when encountering EOF after ';'.",
+      "replacement": "if (ch != '\\n' && ch != EOF) return(TRUE);",
+      "start_line": 219
+    }
+  ],
+  "expected_effect": "Properly terminate comment tokens at EOF, preventing erroneous reads.",
+  "preservation_constraints": [
+    "print_token() correctly handles comment terminations."
+  ],
+  "repair_intent": "Ensure comment tokens end appropriately when no newline follows."
+}

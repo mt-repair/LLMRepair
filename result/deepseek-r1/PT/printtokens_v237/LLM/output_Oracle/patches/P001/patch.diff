@@ -1,0 +1,21 @@
+--- a/print_tokens.c
++++ b/print_tokens.c
+@@ -359,16 +359,14 @@
+ static int keyword(state)
+ int state;
+ {
+-      switch(0)
++switch(state)
+       {   /* Return the respective macro for the Keyword. */
+           case 6 : return(LAMBDA);
+           case 9 : return(AND);
+           case 11: return(OR);
+           case 13: return(IF);
+           case 16: return(XOR);
+-          default: fprintf(stdout, "error\n");break;
+-      }
+-      exit(0);
++default: return(ERROR);
+ }
+ 
+ /* ********************************************************************

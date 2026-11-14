@@ -1,0 +1,153 @@
+[
+  {
+    "name": "06_repair_plan_RC001",
+    "attempts": [
+      {
+        "attempt": 1,
+        "kind": "validation",
+        "validation_errors": [],
+        "response_metadata": {
+          "num_ctx": 8192,
+          "num_predict": 6400,
+          "prompt_chars": 7239,
+          "format_mode": "json",
+          "done": true,
+          "done_reason": "stop",
+          "prompt_eval_count": 2098,
+          "eval_count": 4437,
+          "prompt_eval_duration": 1229732000,
+          "eval_duration": 163772436000,
+          "total_duration": 168961120300,
+          "load_duration": 3946313600,
+          "client_elapsed_seconds": 170.984,
+          "raw_chars": 1110
+        }
+      }
+    ]
+  },
+  {
+    "name": "06_repair_plan_RC002",
+    "attempts": [
+      {
+        "attempt": 1,
+        "kind": "validation",
+        "validation_errors": [],
+        "response_metadata": {
+          "num_ctx": 8192,
+          "num_predict": 6400,
+          "prompt_chars": 7271,
+          "format_mode": "json",
+          "done": true,
+          "done_reason": "stop",
+          "prompt_eval_count": 2107,
+          "eval_count": 575,
+          "prompt_eval_duration": 822579000,
+          "eval_duration": 20386344000,
+          "total_duration": 21561609400,
+          "load_duration": 4873100,
+          "client_elapsed_seconds": 23.578,
+          "raw_chars": 1261
+        }
+      }
+    ]
+  },
+  {
+    "name": "06_repair_plan_RC003",
+    "attempts": [
+      {
+        "attempt": 1,
+        "kind": "validation",
+        "validation_errors": [],
+        "response_metadata": {
+          "num_ctx": 8192,
+          "num_predict": 6400,
+          "prompt_chars": 8552,
+          "format_mode": "json",
+          "done": true,
+          "done_reason": "stop",
+          "prompt_eval_count": 2515,
+          "eval_count": 595,
+          "prompt_eval_duration": 1018607000,
+          "eval_duration": 21337150000,
+          "total_duration": 22520534800,
+          "load_duration": 4505700,
+          "client_elapsed_seconds": 24.547,
+          "raw_chars": 1204
+        }
+      }
+    ]
+  },
+  {
+    "name": "06_repair_plan_RC004",
+    "attempts": [
+      {
+        "attempt": 1,
+        "kind": "validation",
+        "validation_errors": [],
+        "response_metadata": {
+          "num_ctx": 8192,
+          "num_predict": 6400,
+          "prompt_chars": 8484,
+          "format_mode": "json",
+          "done": true,
+          "done_reason": "stop",
+          "prompt_eval_count": 2497,
+          "eval_count": 683,
+          "prompt_eval_duration": 1067199000,
+          "eval_duration": 25262080000,
+          "total_duration": 26512349100,
+          "load_duration": 3194300,
+          "client_elapsed_seconds": 28.531,
+          "raw_chars": 1799
+        }
+      }
+    ]
+  },
+  {
+    "name": "06_repair_plan_RC005",
+    "attempts": [
+      {
+        "attempt": 1,
+        "kind": "json_error",
+        "error": "Invalid JSON: Expecting value: line 1 column 1 (char 0) (done_reason=length, eval_count=6400, raw_chars=0, head='')",
+        "response_metadata": {
+          "num_ctx": 8192,
+          "num_predict": 6400,
+          "prompt_chars": 8581,
+          "format_mode": "json",
+          "done": true,
+          "done_reason": "length",
+          "prompt_eval_count": 2535,
+          "eval_count": 6400,
+          "prompt_eval_duration": 1063516000,
+          "eval_duration": 241626186000,
+          "total_duration": 242879064200,
+          "load_duration": 4346200,
+          "client_elapsed_seconds": 244.938,
+          "raw_chars": 0
+        }
+      },
+      {
+        "attempt": 2,
+        "kind": "validation",
+        "validation_errors": [],
+        "response_metadata": {
+          "num_ctx": 8192,
+          "num_predict": 10000,
+          "prompt_chars": 8703,
+          "format_mode": "json",
+          "done": true,
+          "done_reason": "stop",
+          "prompt_eval_count": 2562,
+          "eval_count": 663,
+          "prompt_eval_duration": 1069241000,
+          "eval_duration": 23651156000,
+          "total_duration": 25090875000,
+          "load_duration": 5081200,
+          "client_elapsed_seconds": 27.141,
+          "raw_chars": 1046
+        }
+      }
+    ]
+  }
+]

@@ -1,0 +1,15 @@
+--- a/print_tokens2.c
++++ b/print_tokens2.c
+@@ -160,7 +160,11 @@
+       } 
+    buffer[i]=ch;
+    if(is_eof_token(buffer)==TRUE)return(buffer);   /* Fault */
+-   if(is_spec_symbol(buffer)!=TRUE)return(buffer); 
++if (ch == ';') {
++    id = 2;
++    ch = get_char(tp);
++}
++else if (is_spec_symbol(buffer) != TRUE)
+    if(ch =='"')id=1;    /* prepare for string */
+    if(ch ==59)id=2;    /* prepare for comment */
+    ch=get_char(tp);

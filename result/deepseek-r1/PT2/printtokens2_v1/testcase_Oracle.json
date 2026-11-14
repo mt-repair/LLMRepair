@@ -1,0 +1,44 @@
+[
+  {
+    "test_id": "source_s3_mr2",
+    "input": ";IF A L  ;tJvMR3\n",
+    "actual_output": "identifier,\"I\".\nidentifier,\"F\".\nidentifier,\"A\".\nidentifier,\"L\".\nidentifier,\"t\".\nidentifier,\"J\".\nidentifier,\"v\".\nidentifier,\"M\".\nidentifier,\"R\".\nnumeric,3.\neof.",
+    "expected_output": "eof.",
+    "test_status": "nopass"
+  },
+  {
+    "test_id": "followup_s3_mr2",
+    "input": ";\n",
+    "actual_output": "eof.",
+    "expected_output": "eof.",
+    "test_status": "pass"
+  },
+  {
+    "test_id": "source_s2_mr4",
+    "input": "xor \n;;bWJ00dn9b10m833oe6s6D5Y2S51Wl8VJHX4\n",
+    "actual_output": "identifier,\"x\".\nidentifier,\"o\".\nidentifier,\"r\".\nidentifier,\"b\".\nidentifier,\"W\".\nidentifier,\"J\".\nnumeric,0.\nnumeric,0.\nidentifier,\"d\".\nidentifier,\"n\".\nnumeric,9.\nidentifier,\"b\".\nnumeric,1.\nnumeric,0.\nidentifier,\"m\".\nnumeric,8.\nnumeric,3.\nnumeric,3.\nidentifier,\"o\".\nidentifier,\"e\".\nnumeric,6.\nidentifier,\"s\".\nnumeric,6.\nidentifier,\"D\".\nnumeric,5.\nidentifier,\"Y\".\nnumeric,2.\nidentifier,\"S\".\nnumeric,5.\nnumeric,1.\nidentifier,\"W\".\nidentifier,\"l\".\nnumeric,8.\nidentifier,\"V\".\nidentifier,\"J\".\nidentifier,\"H\".\nidentifier,\"X\".\nnumeric,4.\neof.",
+    "expected_output": "keyword,\"xor\".\neof.",
+    "test_status": "nopass"
+  },
+  {
+    "test_id": "followup_s2_mr4",
+    "input": "xor \n;\n",
+    "actual_output": "identifier,\"x\".\nidentifier,\"o\".\nidentifier,\"r\".\neof.",
+    "expected_output": "keyword,\"xor\".\neof.",
+    "test_status": "nopass"
+  },
+  {
+    "test_id": "source_s1_mr5",
+    "input": "=> K3dQ   ;hp7\n",
+    "actual_output": "error,\"=\".\nerror,\">\".\nidentifier,\"K\".\nnumeric,3.\nidentifier,\"d\".\nidentifier,\"Q\".\nidentifier,\"h\".\nidentifier,\"p\".\nnumeric,7.\neof.",
+    "expected_output": "keyword,\"=>\".\nidentifier,\"K3dQ\".\neof.",
+    "test_status": "nopass"
+  },
+  {
+    "test_id": "followup_s1_mr5",
+    "input": "=> k3Dq   ;\n",
+    "actual_output": "error,\"=\".\nerror,\">\".\nidentifier,\"k\".\nnumeric,3.\nidentifier,\"D\".\nidentifier,\"q\".\neof.",
+    "expected_output": "keyword,\"=>\".\nidentifier,\"k3Dq\".\neof.",
+    "test_status": "nopass"
+  }
+]

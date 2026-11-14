@@ -1,0 +1,30 @@
+[
+  {
+    "test_id": "input1",
+    "input": "[958, 1, 1, 2597, 574, 4253, 0, 399, 400, 0, 0, 1]",
+    "actual_output": "DOWNWARD_RA",
+    "expected_output": "UNRESOLVED",
+    "test_status": "nopass"
+  },
+  {
+    "test_id": "input2",
+    "input": "[958, 1, 1, 3425.0, 574, 3425.0, 0, 399, 400, 0, 0, 1]",
+    "actual_output": "UNRESOLVED",
+    "expected_output": "UNRESOLVED",
+    "test_status": "pass"
+  },
+  {
+    "test_id": "input3",
+    "input": "[958, 1, 1, 3425.0, 574, 3425.0, 0, 389, 479, 0, 0, 1]",
+    "actual_output": "UNRESOLVED",
+    "expected_output": "UNRESOLVED",
+    "test_status": "pass"
+  },
+  {
+    "test_id": "input4",
+    "input": "[958, 1, 1, 3425.0, 574, 3425.0, 0, 389, 479, 0, 0, 1]",
+    "actual_output": "UNRESOLVED",
+    "expected_output": "UNRESOLVED",
+    "test_status": "pass"
+  }
+]

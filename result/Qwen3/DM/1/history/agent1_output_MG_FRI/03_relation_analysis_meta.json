@@ -1,0 +1,28 @@
+[
+  {
+    "name": "03_mr_MG004",
+    "attempts": [
+      {
+        "attempt": 1,
+        "kind": "validation",
+        "validation_errors": [],
+        "response_metadata": {
+          "num_ctx": 8192,
+          "num_predict": 1200,
+          "prompt_chars": 7989,
+          "format_mode": "json",
+          "done": true,
+          "done_reason": "stop",
+          "prompt_eval_count": 2334,
+          "eval_count": 894,
+          "prompt_eval_duration": 1996920000,
+          "eval_duration": 57075372000,
+          "total_duration": 59287534600,
+          "load_duration": 1027100,
+          "client_elapsed_seconds": 61.359,
+          "raw_chars": 690
+        }
+      }
+    ]
+  }
+]

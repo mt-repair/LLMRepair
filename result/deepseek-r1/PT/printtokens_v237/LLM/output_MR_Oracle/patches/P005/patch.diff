@@ -1,0 +1,19 @@
+--- a/print_tokens.c
++++ b/print_tokens.c
+@@ -359,7 +359,15 @@
+ static int keyword(state)
+ int state;
+ {
+-      switch(0)
++static const int keyword_map[] = {
++    [6] = LAMBDA,
++    [9] = AND,
++    [11] = OR,
++    [13] = IF,
++    [16] = XOR,
++    [25] = EQUALGREATER
++};
++return (state < sizeof(keyword_map) / sizeof(*keyword_map)) ? keyword_map[state] : ERROR;
+       {   /* Return the respective macro for the Keyword. */
+           case 6 : return(LAMBDA);
+           case 9 : return(AND);

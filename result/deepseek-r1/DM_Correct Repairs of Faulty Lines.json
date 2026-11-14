@@ -1,0 +1,27 @@
+[
+  {
+    "version": 1
+    "fault_line": 21,
+    "repaired_code": "        result *= A[i*n+i] "
+  },
+  {
+    "version": 2,
+    "fault_line": 24,
+    "repaired_code": "        int(math.pow(-1,n*(n-1)/2)) "
+  },
+  {
+    "version": 3,
+    "fault_line": 21,
+    "repaired_code": "          result *= A[i*n+i] "
+  },
+  {
+    "version": 4,
+    "fault_line": 21,
+    "repaired_code": "           result *= A[i*n+i] "
+  },
+  {
+    "version": 5,
+    "fault_line": 27,
+    "repaired_code": "           result *= A[i*n+(n-1-i)] "
+  }
+]

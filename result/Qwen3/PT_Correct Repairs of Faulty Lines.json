@@ -1,0 +1,277 @@
+[
+  {
+    "version": 2,
+    "fault_line": 465,
+    "repaired_code": "        if(check[base[state]+ch] == state)
+  },
+  {
+    "version": 32,
+    "fault_line": 418,
+    "repaired_code": "        while((c=get_char(stream_ptr))!='\\n' &&"
+  },
+  {
+    "version": 58,
+    "fault_line": 328,
+    "repaired_code": "          strcpy(token_ptr->token_string,token_str);"
+  },
+  {
+    "version": 98,
+    "fault_line": 232,
+    "repaired_code": "           unget_char(ch,tstream_ptr->ch_stream);"
+  },
+  {
+    "version": 100,
+    "fault_line": 228,
+    "repaired_code": "           ch=get_char(tstream_ptr->ch_stream);"
+  },
+  {
+    "version": 110,
+    "fault_line": 232,
+    "repaired_code": "           unget_char(ch,tstream_ptr->ch_stream);"
+  },
+  {
+    "version": 113,
+    "fault_line": 249,
+    "repaired_code": "           token_ptr->token_id=constant(next_st,token_str,token_ind);"
+  },
+  {
+    "version": 124,
+    "fault_line": 228,
+    "repaired_code": "           ch=get_char(tstream_ptr->ch_stream);"
+  },
+  {
+    "version": 134,
+    "fault_line": 245,
+    "repaired_code": "   token_ptr->token_id=special(next_st);"
+  },
+  {
+    "version": 135,
+    "fault_line": 231,
+    "repaired_code": "   token_ptr->token_id=keyword(next_st);"
+  },
+  {
+    "version": 136,
+    "fault_line": 231,
+    "repaired_code": "   token_ptr->token_id=keyword(next_st);"
+  },
+  {
+    "version": 141,
+    "fault_line": 232,
+    "repaired_code": "   unget_char(ch,tstream_ptr->ch_stream);"
+  },
+  {
+    "version": 143,
+    "fault_line": 231,
+    "repaired_code": "   token_ptr->token_id=keyword(next_st);"
+  },
+  {
+    "version": 147,
+    "fault_line": 231,
+    "repaired_code": "   token_ptr->token_id=keyword(next_st);"
+  },
+  {
+    "version": 156,
+    "fault_line": 231,
+    "repaired_code": "   token_ptr->token_id=keyword(next_st);"
+  },
+  {
+    "version": 161,
+    "fault_line": 213,
+    "repaired_code": "   token_ptr->token_id=IDENTIFIER;"
+  },
+  {
+    "version": 165,
+    "fault_line": 232,
+    "repaired_code": "   unget_char(ch,tstream_ptr->ch_stream);"
+  },
+  {
+    "version": 167,
+    "fault_line": 231,
+    "repaired_code": "   token_ptr->token_id=keyword(next_st);"
+  },
+  {
+    "version": 174,
+    "fault_line": 213,
+    "repaired_code": "   token_ptr->token_id=IDENTIFIER;"
+  },
+  {
+    "version": 187,
+    "fault_line": 213,
+    "repaired_code": "   token_ptr->token_id=IDENTIFIER;"
+  },
+  {
+    "version": 192,
+    "fault_line": 213,
+    "repaired_code": "   token_ptr->token_id=IDENTIFIER;"
+  },
+  {
+    "version": 193,
+    "fault_line": 232,
+    "repaired_code": "   unget_char(ch,tstream_ptr->ch_stream);"
+  },
+  {
+    "version": 201,
+    "fault_line": 245,
+    "repaired_code": "   token_ptr->token_id=special(next_st);"
+  },
+  {
+    "version": 202,
+    "fault_line": 245,
+    "repaired_code": "   token_ptr->token_id=special(next_st);"
+  },
+  {
+    "version": 205,
+    "fault_line": 209,
+    "repaired_code": "   else if (next_st == -2)"
+  },
+  {
+    "version": 210,
+    "fault_line": 254,
+    "repaired_code": "   skip(tstream_ptr->ch_stream);"
+  },
+  {
+    "version": 215,
+    "fault_line": 245,
+    "repaired_code": "   token_ptr->token_id=special(next_st);"
+  },
+  {
+    "version": 217,
+    "fault_line": 228,
+    "repaired_code": "   ch=get_char(tstream_ptr->ch_stream);"
+  },
+  {
+    "version": 220,
+    "fault_line": 213,
+    "repaired_code": "   token_ptr->token_id=IDENTIFIER;"
+  },
+  {
+    "version": 237,
+    "fault_line": 362,
+    "repaired_code": "   switch(state)"
+  },
+  {
+    "version": 240,
+    "fault_line": 465,
+    "repaired_code": "   if(check[base[state]+ch] == state)"
+  },
+  {
+    "version": 260,
+    "fault_line": 463,
+    "repaired_code": "   if(check[base[state]+ch] == state)"
+  },
+  {
+    "version": 284,
+    "fault_line": 293,
+    "repaired_code": "   strcpy(token_ptr->token_string,token_str);"
+  },
+  {
+    "version": 333,
+    "fault_line": 513,
+    "repaired_code": "   fprintf(stdout, "\"keyword,\\t\\\"and\\\".\"");return(TRUE); "
+  },
+  {
+    "version": 350,
+    "fault_line": 385,
+    "repaired_code": "   switch(state)"
+  },
+  {
+    "version": 351,
+    "fault_line": 209,
+    "repaired_code": "   else if (next_st == -2)"
+  },
+  {
+    "version": 352,
+    "fault_line": 209,
+    "repaired_code": "   else if (next_st == -2)"
+  },
+  {
+    "version": 353,
+    "fault_line": 209,
+    "repaired_code": "   else if (next_st == -2)"
+  },
+  {
+    "version": 354,
+    "fault_line": 463,
+    "repaired_code": "    if(base[state]+ch >= 0)"
+  },
+  {
+    "version": 355,
+    "fault_line": 465,
+    "repaired_code": "        if(check[base[state]+ch] == state)"
+  },
+  {
+    "version": 356,
+    "fault_line": 229,
+    "repaired_code": "     if(check_delimiter(ch)==TRUE)"
+  },
+  {
+    "version": 357,
+    "fault_line": 280,
+    "repaired_code": "      while(check_delimiter(ch)==FALSE)"
+  },
+  {
+    "version": 358,
+    "fault_line": 463,
+    "repaired_code": "    if(base[state]+ch >= 0)"
+  },
+  {
+    "version": 359,
+    "fault_line": 282,
+    "repaired_code": "	if(token_ind >= 80) break;"
+  },
+  {
+    "version": 360,
+    "fault_line": 463,
+    "repaired_code": "    if(base[state]+ch >= 0)"
+  },
+  {
+    "version": 361,
+    "fault_line": 556,
+    "repaired_code": "          for(ind=token_ind;ind>0 && isspace(token_str[ind-1]);--ind);"
+  },
+  {
+    "version": 362,
+    "fault_line": 562,
+    "repaired_code": "          for(start=0;ind<=token_ind;++start,++ind)"
+  },
+  {
+    "version": 363,
+    "fault_line": 562,
+    "repaired_code": "          for(start=0;ind<=token_ind;++start,++ind)"
+  },
+  {
+    "version": 364,
+    "fault_line": 197,
+    "repaired_code": "	  if(token_ind < 80)"
+  },
+  {
+    "version": 365,
+    "fault_line": 559,
+    "repaired_code": "          for(ind=0;ind<token_ind;++ind)"
+  },
+  {
+    "version": 366,
+    "fault_line": 197,
+    "repaired_code": "  if(token_ind < 80)"
+  },
+  {
+    "version": 367,
+    "fault_line": 277,
+    "repaired_code": "        if(check_delimiter(ch)!=TRUE)"
+  },
+  {
+    "version": 368,
+    "fault_line": 418,
+    "repaired_code": "        while((c=get_char(stream_ptr))!='\\n' &&"
+  },
+  {
+    "version": 369,
+    "fault_line": 441,
+    "repaired_code": "         case 29 : token_str[token_ind-2]=' '; return(CHARACTER_CONSTANT);"
+  },
+  {
+    "version": 370,
+    "fault_line": 556,
+    "repaired_code": "          for(ind=token_ind;ind>0 && isspace(token_str[ind-1]);--ind);"
+  }
+]

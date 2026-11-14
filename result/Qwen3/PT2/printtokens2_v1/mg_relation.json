@@ -1,0 +1,26 @@
+[
+  {
+    "mr_id": "MR2",
+    "source_test_id": "source_s3_mr2",
+    "followup_test_id": "followup_s3_mr2",
+    "input_transformation": "For input lines in the source test case that contain semicolons ';' and no single or double quotation marks, retain the content from the start of the line up to the first semicolon ';' and delete all characters after the semicolon to construct the follow-up test case.",
+    "output_relation": "Since content after the semicolon is a comment, removing this part should not change the statistical count of valid tokens. Therefore, the counts of the five token categories (sum of identifiers and keywords, strings, errors, characters, and numerics) in the outputs of the source test case and follow-up test case should be equal respectively.",
+    "actual_relation_status": "VMG"
+  },
+  {
+    "mr_id": "MR4",
+    "source_test_id": "source_s2_mr4",
+    "followup_test_id": "followup_s2_mr4",
+    "input_transformation": "First, randomly select 50% (rounded up) of the input lines in the source test case and swap the case of English letters. Then, for input lines containing semicolons ';' and no single or double quotation marks, delete all characters after the first semicolon to construct the follow-up test case.",
+    "output_relation": "Case swapping and removal of comment content after semicolons should not alter the counts of the five token categories. Therefore, the total count of identifiers and keywords, the count of strings, errors, characters, and numerics in the outputs of the source test case and follow-up test case should be equal respectively.",
+    "actual_relation_status": "VMG"
+  },
+  {
+    "mr_id": "MR5",
+    "source_test_id": "source_s1_mr5",
+    "followup_test_id": "followup_s1_mr5",
+    "input_transformation": "First, for input lines in the source test case that contain semicolons ';' and no single or double quotation marks, delete all characters after the first semicolon. Then, randomly select 50% (rounded up) of the processed input lines and swap the case of English letters to construct the follow-up test case.",
+    "output_relation": "Removing comment content after semicolons and subsequent case swapping should not change the counts of the five token categories. Therefore, the total count of identifiers and keywords, the count of strings, errors, characters, and numerics in the outputs of the source test case and follow-up test case should be equal respectively.",
+    "actual_relation_status": "VMG"
+  }
+]

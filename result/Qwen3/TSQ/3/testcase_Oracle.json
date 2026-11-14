@@ -1,0 +1,58 @@
+[
+    {
+    "test_id": "input1",
+    "input": "[5, 9, 5]",
+    "actual_output": "9.807522622966516",
+    "expected_output": "9.807522622966516",
+    "test_status": "pass"  
+  },
+  {
+    "test_id": "input2",
+    "input": "[5, 4.358898943540674, 5]",
+    "actual_output": "627.3050128578548",
+    "expected_output": "9.807522622966514",
+    "test_status": "nopass"  
+  },
+  {
+    "test_id": "input3",
+    "input": "[7, 9, 6]",
+    "actual_output": "1471.4754500160714",
+    "expected_output": "20.97617696340303",
+    "test_status": "nopass"  
+  },
+  {
+    "test_id": "input4", 
+    "input": "[13.601470508735444, 9, 6]",
+    "actual_output": "20.976176963403017",
+    "expected_output": "20.97617696340298",
+    "test_status": "pass"
+  },
+  {
+    "test_id": "input5",
+    "input": "[7, 9.433981132056603, 6]",
+    "actual_output": "20.97617696340298",
+    "expected_output": "20.97617696340298",
+    "test_status": "pass"
+  },
+  {
+    "test_id": "input6",
+    "input": "[7, 9, 14.966629547095765]",
+    "actual_output": "20.97617696340298",
+    "expected_output": "20.97617696340298",
+    "test_status": "pass"
+  },
+  {
+    "test_id": "input7",
+    "input": "[13.601470508735444, 19.0, 6]",
+    "actual_output": "20.97617696340319",
+    "expected_output": "20.97617696340319",
+    "test_status": "pass"
+  },
+  {
+    "test_id": "input8",
+    "input": "[13.601470508735444, 9, 22.271057451320086]",
+    "actual_output": "20.97617696340332",
+    "expected_output": "20.97617696340332",
+    "test_status": "pass"
+  }
+]

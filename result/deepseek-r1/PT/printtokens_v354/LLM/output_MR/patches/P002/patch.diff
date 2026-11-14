@@ -1,0 +1,20 @@
+--- a/print_tokens.c
++++ b/print_tokens.c
+@@ -460,7 +460,7 @@
+ {
+     if(state < 0)
+       return(state);
+-    if(base[state]-ch >= 0)
++if (state == INITIAL && ch == ';') { return(COMMENT_STATE); } else if(base[state]-ch >=0)
+     {
+         if(check[base[state]+ch] == state) /* Check for the right state */
+              return(next[base[state]+ch]);
+@@ -469,7 +469,7 @@
+     }
+     else
+         return(next_state(default1[state],ch));
+-}
++static int next_state(state, ch) { ... case COMMENT_STATE: { get_char(...); if(ch == '\n') return(INITIAL); else return(COMMENT_STATE); } ... }
+ 
+ /* *********************************************************************
+    Function name : is_eof_token

@@ -1,0 +1,341 @@
+{
+  "workflow": "single_llm_direct_repair",
+  "effective_mode": "MR",
+  "program_path": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v147/print_tokens.c",
+  "output_dir": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v147/LLM/output_MR",
+  "llm_call_attempts": 1,
+  "normal_llm_calls_per_scenario": 1,
+  "patch_candidates": [
+    {
+      "patch_id": "P001",
+      "status": "compile_passed",
+      "proposal": {
+        "diagnosis": "The issue lies in the `get_token` function where a negative state is passed to `keyword()`, leading to incorrect token identification. The fix involves removing the negative sign from `-next_st` on line 231.",
+        "evidence_reasoning": {
+          "causal_chain": [
+            "Calling `keyword(-next_st)` with a negative value causes invalid state checks in `keyword()` function."
+          ],
+          "mr_refs": [
+            "MR4"
+          ],
+          "testcase_refs": [
+            "source_s1_mr4",
+            "followup_s1_mr4"
+          ]
+        },
+        "uncertainty": "While multiple approaches are possible, the simplest fix is to correct the state value passed to keyword().",
+        "assumption": "Negative state values are invalid for keyword lookup.",
+        "edits": [
+          {
+            "end_line": 231,
+            "rationale": "Remove negative sign to pass correct state value.",
+            "replacement": "token_ptr->token_id=keyword(next_st);",
+            "start_line": 231
+          }
+        ],
+        "expected_effect": "Fixes token identification by passing valid keyword states.",
+        "preservation_constraints": [
+          "print_token",
+          "is_eof_token"
+        ],
+        "repair_intent": "Correct state value passed to keyword function."
+      },
+      "proposal_errors": [],
+      "patch_diff": "--- a/print_tokens.c\n+++ b/print_tokens.c\n@@ -228,7 +228,7 @@\n                  case 16 : ch=get_char(tstream_ptr->ch_stream);\n                            if(check_delimiter(ch)==TRUE)\n                            {\n-                                 token_ptr->token_id=keyword(-next_st);\n+token_ptr->token_id=keyword(next_st);\n                                  unget_char(ch,tstream_ptr->ch_stream);\n                                  token_ptr->token_string[0]='\\0';\n                                  return(token_ptr);\n",
+      "patch_hash": "01b2e6e8face15ac2559267a3b79345698bd18d362c3c89c48545617b5a5b250",
+      "model_candidate_source": "P001",
+      "fallback_copy_of": null,
+      "original_candidate_errors": [],
+      "duplicate_of": null,
+      "validation_reused_from": null,
+      "validation": {
+        "compile": {
+          "attempted": true,
+          "success": true,
+          "return_code": 0,
+          "timed_out": false,
+          "stdout_tail": "",
+          "stderr_tail": "",
+          "elapsed_seconds": 0.054,
+          "command": [
+            "/usr/bin/gcc",
+            "-std=c11",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v147/LLM/output_MR/patches/P001/workspace/print_tokens.c",
+            "-o",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v147/LLM/output_MR/patches/P001/workspace/llm_candidate"
+          ],
+          "executable_path": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v147/LLM/output_MR/patches/P001/workspace/llm_candidate"
+        },
+        "visible_checks": []
+      }
+    },
+    {
+      "patch_id": "P002",
+      "status": "compile_failed",
+      "proposal": {
+        "diagnosis": "The issue lies in the `get_token` function where a negative state is passed to `keyword()`, leading to incorrect token identification. The fix involves removing the negative sign from `-next_st` on line 231.",
+        "evidence_reasoning": {
+          "causal_chain": [
+            "Calling `keyword(-next_st)` with a negative value causes invalid state checks in `keyword()` function."
+          ],
+          "mr_refs": [
+            "MR4"
+          ],
+          "testcase_refs": [
+            "source_s1_mr4",
+            "followup_s1_mr4"
+          ]
+        },
+        "uncertainty": "While multiple approaches are possible, the simplest fix is to correct the state value passed to keyword().",
+        "assumption": "State validation needed before keyword lookup.",
+        "edits": [
+          {
+            "end_line": 231,
+            "rationale": "Add bounds checking on next_st before calling keyword().",
+            "replacement": "if(next_st >0 && next_st <17) token_ptr->token_id=keyword(next_st); else return error;",
+            "start_line": 231
+          }
+        ],
+        "expected_effect": "Prevents invalid state values from causing errors.",
+        "preservation_constraints": [
+          "print_token",
+          "is_eof_token"
+        ],
+        "repair_intent": "Add validation for keyword state."
+      },
+      "proposal_errors": [],
+      "patch_diff": "--- a/print_tokens.c\n+++ b/print_tokens.c\n@@ -228,7 +228,7 @@\n                  case 16 : ch=get_char(tstream_ptr->ch_stream);\n                            if(check_delimiter(ch)==TRUE)\n                            {\n-                                 token_ptr->token_id=keyword(-next_st);\n+if(next_st >0 && next_st <17) token_ptr->token_id=keyword(next_st); else return error;\n                                  unget_char(ch,tstream_ptr->ch_stream);\n                                  token_ptr->token_string[0]='\\0';\n                                  return(token_ptr);\n",
+      "patch_hash": "dde5716e3312ea12d631ac5907b96c728312f3ae5ea1644c9a8477be638f7496",
+      "model_candidate_source": "P002",
+      "fallback_copy_of": null,
+      "original_candidate_errors": [],
+      "duplicate_of": null,
+      "validation_reused_from": null,
+      "validation": {
+        "compile": {
+          "attempted": true,
+          "success": false,
+          "return_code": 1,
+          "timed_out": false,
+          "stdout_tail": "",
+          "stderr_tail": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v147/LLM/output_MR/patches/P002/workspace/print_tokens.c: In function ‘get_token’:\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v147/LLM/output_MR/patches/P002/workspace/print_tokens.c:231:81: error: ‘error’ undeclared (first use in this function); did you mean ‘perror’?\n  231 | if(next_st >0 && next_st <17) token_ptr->token_id=keyword(next_st); else return error;\n      |                                                                                 ^~~~~\n      |                                                                                 perror\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v147/LLM/output_MR/patches/P002/workspace/print_tokens.c:231:81: note: each undeclared identifier is reported only once for each function it appears in\n",
+          "elapsed_seconds": 0.016,
+          "command": [
+            "/usr/bin/gcc",
+            "-std=c11",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v147/LLM/output_MR/patches/P002/workspace/print_tokens.c",
+            "-o",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v147/LLM/output_MR/patches/P002/workspace/llm_candidate"
+          ],
+          "executable_path": null
+        },
+        "visible_checks": []
+      }
+    },
+    {
+      "patch_id": "P003",
+      "status": "compile_passed",
+      "proposal": {
+        "diagnosis": "The issue lies in the `get_token` function where a negative state is passed to `keyword()`, leading to incorrect token identification. The fix involves removing the negative sign from `-next_st` on line 231.",
+        "evidence_reasoning": {
+          "causal_chain": [
+            "Calling `keyword(-next_st)` with a negative value causes invalid state checks in `keyword()` function."
+          ],
+          "mr_refs": [
+            "MR4"
+          ],
+          "testcase_refs": [
+            "source_s1_mr4",
+            "followup_s1_mr4"
+          ]
+        },
+        "uncertainty": "While multiple approaches are possible, the simplest fix is to correct the state value passed to keyword().",
+        "assumption": "State transitions need adjustment to avoid negative states.",
+        "edits": [
+          {
+            "end_line": 231,
+            "rationale": "Adjust next_state() upstream to prevent negative states here.",
+            "replacement": "token_ptr->token_id=keyword(next_st);",
+            "start_line": 231
+          }
+        ],
+        "expected_effect": "Fixes root cause by ensuring next_st is positive.",
+        "preservation_constraints": [
+          "print_token",
+          "is_eof_token"
+        ],
+        "repair_intent": "Adjust state transitions to prevent negatives."
+      },
+      "proposal_errors": [],
+      "patch_diff": "--- a/print_tokens.c\n+++ b/print_tokens.c\n@@ -228,7 +228,7 @@\n                  case 16 : ch=get_char(tstream_ptr->ch_stream);\n                            if(check_delimiter(ch)==TRUE)\n                            {\n-                                 token_ptr->token_id=keyword(-next_st);\n+token_ptr->token_id=keyword(next_st);\n                                  unget_char(ch,tstream_ptr->ch_stream);\n                                  token_ptr->token_string[0]='\\0';\n                                  return(token_ptr);\n",
+      "patch_hash": "01b2e6e8face15ac2559267a3b79345698bd18d362c3c89c48545617b5a5b250",
+      "model_candidate_source": "P003",
+      "fallback_copy_of": null,
+      "original_candidate_errors": [],
+      "duplicate_of": "P001",
+      "validation_reused_from": "P001",
+      "validation": {
+        "compile": {
+          "attempted": true,
+          "success": true,
+          "return_code": 0,
+          "timed_out": false,
+          "stdout_tail": "",
+          "stderr_tail": "",
+          "elapsed_seconds": 0.054,
+          "command": [
+            "/usr/bin/gcc",
+            "-std=c11",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v147/LLM/output_MR/patches/P001/workspace/print_tokens.c",
+            "-o",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v147/LLM/output_MR/patches/P001/workspace/llm_candidate"
+          ],
+          "executable_path": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v147/LLM/output_MR/patches/P001/workspace/llm_candidate"
+        },
+        "visible_checks": []
+      }
+    },
+    {
+      "patch_id": "P004",
+      "status": "compile_failed",
+      "proposal": {
+        "diagnosis": "The issue lies in the `get_token` function where a negative state is passed to `keyword()`, leading to incorrect token identification. The fix involves removing the negative sign from `-next_st` on line 231.",
+        "evidence_reasoning": {
+          "causal_chain": [
+            "Calling `keyword(-next_st)` with a negative value causes invalid state checks in `keyword()` function."
+          ],
+          "mr_refs": [
+            "MR4"
+          ],
+          "testcase_refs": [
+            "source_s1_mr4",
+            "followup_s1_mr4"
+          ]
+        },
+        "uncertainty": "While multiple approaches are possible, the simplest fix is to correct the state value passed to keyword().",
+        "assumption": "Handle negative states gracefully in keyword() function.",
+        "edits": [
+          {
+            "end_line": 231,
+            "rationale": "Modify keyword() to accept absolute values of states.",
+            "replacement": "token_ptr->token_id=keyword(abs(next_st));",
+            "start_line": 231
+          },
+          {
+            "end_line": 369,
+            "rationale": "Update keyword() to handle absolute state values.",
+            "replacement": "switch(abs(state)) { ... }",
+            "start_line": 364
+          }
+        ],
+        "expected_effect": "Makes keyword() robust against negative states.",
+        "preservation_constraints": [
+          "print_token",
+          "is_eof_token"
+        ],
+        "repair_intent": "Make keyword() handle negative inputs."
+      },
+      "proposal_errors": [],
+      "patch_diff": "--- a/print_tokens.c\n+++ b/print_tokens.c\n@@ -228,7 +228,7 @@\n                  case 16 : ch=get_char(tstream_ptr->ch_stream);\n                            if(check_delimiter(ch)==TRUE)\n                            {\n-                                 token_ptr->token_id=keyword(-next_st);\n+token_ptr->token_id=keyword(abs(next_st));\n                                  unget_char(ch,tstream_ptr->ch_stream);\n                                  token_ptr->token_string[0]='\\0';\n                                  return(token_ptr);\n@@ -361,12 +361,7 @@\n {\n       switch(state)\n       {   /* Return the respective macro for the Keyword. */\n-          case 6 : return(LAMBDA);\n-          case 9 : return(AND);\n-          case 11: return(OR);\n-          case 13: return(IF);\n-          case 16: return(XOR);\n-          default: fprintf(stdout, \"error\\n\");break;\n+switch(abs(state)) { ... }\n       }\n       exit(0);\n }\n",
+      "patch_hash": "56f664eec1fe3b1cbdda1e3b47afd194b83a9178097c2ab7cd2a06fb3979ed6e",
+      "model_candidate_source": "P004",
+      "fallback_copy_of": null,
+      "original_candidate_errors": [],
+      "duplicate_of": null,
+      "validation_reused_from": null,
+      "validation": {
+        "compile": {
+          "attempted": true,
+          "success": false,
+          "return_code": 1,
+          "timed_out": false,
+          "stdout_tail": "",
+          "stderr_tail": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v147/LLM/output_MR/patches/P004/workspace/print_tokens.c: In function ‘keyword’:\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v147/LLM/output_MR/patches/P004/workspace/print_tokens.c:364:22: error: expected expression before ‘...’ token\n  364 | switch(abs(state)) { ... }\n      |                      ^~~\n/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v147/LLM/output_MR/patches/P004/workspace/print_tokens.c:364:8: warning: statement will never be executed [-Wswitch-unreachable]\n  364 | switch(abs(state)) { ... }\n      |        ^~~~~~~~~~\n",
+          "elapsed_seconds": 0.015,
+          "command": [
+            "/usr/bin/gcc",
+            "-std=c11",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v147/LLM/output_MR/patches/P004/workspace/print_tokens.c",
+            "-o",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v147/LLM/output_MR/patches/P004/workspace/llm_candidate"
+          ],
+          "executable_path": null
+        },
+        "visible_checks": []
+      }
+    },
+    {
+      "patch_id": "P005",
+      "status": "compile_passed",
+      "proposal": {
+        "diagnosis": "The issue lies in the `get_token` function where a negative state is passed to `keyword()`, leading to incorrect token identification. The fix involves removing the negative sign from `-next_st` on line 231.",
+        "evidence_reasoning": {
+          "causal_chain": [
+            "Calling `keyword(-next_st)` with a negative value causes invalid state checks in `keyword()` function."
+          ],
+          "mr_refs": [
+            "MR4"
+          ],
+          "testcase_refs": [
+            "source_s1_mr4",
+            "followup_s1_mr4"
+          ]
+        },
+        "uncertainty": "While multiple approaches are possible, the simplest fix is to correct the state value passed to keyword().",
+        "assumption": "Alternative error handling for invalid states.",
+        "edits": [
+          {
+            "end_line": 231,
+            "rationale": "Return error token if state is invalid.",
+            "replacement": "token_ptr->token_id=ERROR;",
+            "start_line": 231
+          }
+        ],
+        "expected_effect": "Prevents incorrect tokens by marking as errors.",
+        "preservation_constraints": [
+          "print_token",
+          "is_eof_token"
+        ],
+        "repair_intent": "Handle invalid states gracefully."
+      },
+      "proposal_errors": [],
+      "patch_diff": "--- a/print_tokens.c\n+++ b/print_tokens.c\n@@ -228,7 +228,7 @@\n                  case 16 : ch=get_char(tstream_ptr->ch_stream);\n                            if(check_delimiter(ch)==TRUE)\n                            {\n-                                 token_ptr->token_id=keyword(-next_st);\n+token_ptr->token_id=ERROR;\n                                  unget_char(ch,tstream_ptr->ch_stream);\n                                  token_ptr->token_string[0]='\\0';\n                                  return(token_ptr);\n",
+      "patch_hash": "e7628c1e6ae5b496baced90b40d0bbf5ca596ecf92fcc05ce6d9a4b5bc468c3d",
+      "model_candidate_source": "P005",
+      "fallback_copy_of": null,
+      "original_candidate_errors": [],
+      "duplicate_of": null,
+      "validation_reused_from": null,
+      "validation": {
+        "compile": {
+          "attempted": true,
+          "success": true,
+          "return_code": 0,
+          "timed_out": false,
+          "stdout_tail": "",
+          "stderr_tail": "",
+          "elapsed_seconds": 0.049,
+          "command": [
+            "/usr/bin/gcc",
+            "-std=c11",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v147/LLM/output_MR/patches/P005/workspace/print_tokens.c",
+            "-o",
+            "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v147/LLM/output_MR/patches/P005/workspace/llm_candidate"
+          ],
+          "executable_path": "/home/ubuntu/LLMRepair/MSBF/code/deepseek-r1/PT/printtokens_v147/LLM/output_MR/patches/P005/workspace/llm_candidate"
+        },
+        "visible_checks": []
+      }
+    }
+  ],
+  "summary": {
+    "requested": 5,
+    "generated": 5,
+    "compile_passed": 3,
+    "visible_checks_passed": 0,
+    "fallback_filled": 0,
+    "duplicates": 1,
+    "failed": 2
+  },
+  "interpretation": "Compilation only proves syntactic/build validity. Semantic repair success requires independent hidden tests or an external evaluator."
+}

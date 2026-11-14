@@ -1,0 +1,18 @@
+--- a/print_tokens.c
++++ b/print_tokens.c
+@@ -228,7 +228,14 @@
+                  case 16 : ch=get_char(tstream_ptr->ch_stream);
+                            if(check_delimiter(ch)==TRUE)
+                            {
+-                                 token_ptr->token_id=keyword(80);
++switch(cu_state) {
++    case 6: token_ptr->token_id=AND; break;
++    case 9: token_ptr->token_id=OR; break;
++    case 11: token_ptr->token_id=IF; break;
++    case 13: token_ptr->token_id=XOR; break;
++    case 16: token_ptr->token_id=LAMBDA; break;
++    default: return(error_or_eof_case(...));
++}
+                                  unget_char(ch,tstream_ptr->ch_stream);
+                                  token_ptr->token_string[0]='\0';
+                                  return(token_ptr);

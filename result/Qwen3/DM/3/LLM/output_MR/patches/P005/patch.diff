@@ -1,0 +1,14 @@
+--- a/Mutant3.py
++++ b/Mutant3.py
+@@ -16,9 +16,9 @@
+                 if f4 and i + j > n - 1 and A[i * n + j] != 0:
+                     f4 = False
+         if f1 or f2:  #  The main diagonal contains non- 0 Triangular matrix of elements 
+-            result = 1
++result = 1 if all(A[i * n + i] != 0 for i in range(n)) else 0
+             for i in range(n):
+-                result *= A[i * n]
++result *= A[i * n + i]
+                 symbol = 1
+             return result, symbol
+         elif f3 or f4:  #  The anti-diagonal contains non- 0 Triangular matrix of elements ( Full main diagonal 0)

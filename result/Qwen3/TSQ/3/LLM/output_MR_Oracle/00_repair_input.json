@@ -1,0 +1,127 @@
+{
+  "program_path": "e:\\LLMProgramRepair\\LLM\\MSBF\\code\\Qwen3\\TSQ\\Mutant3.py",
+  "project_root": "e:\\LLMProgramRepair\\LLM\\MSBF\\code\\Qwen3\\TSQ",
+  "program_function": "\n            Program name: Trisquare\n            Function: Calculate the area of a triangle given three side lengths.\n\n            Input: argv, a list containing three numeric side lengths [a, b, c].\n            Output: returns a tuple (area, symbol). symbol is always 0.\n\n            Behavior:\n            1. If any side ≤ 0 or triangle‑inequality is violated, print \"Not a triangle\" and return (0, 0).\n            2. For valid triangle sides: classify triangle as acute, right‑angled or obtuse.\n            Use corresponding formulas to compute area for isosceles and scalene cases.\n        ",
+  "requested_mode": "ORACLE_MR",
+  "effective_mode": "ORACLE_MR",
+  "known_fault_lines": [
+    29
+  ],
+  "test_executions": [
+    {
+      "test_id": "input1",
+      "input": "[5, 9, 5]",
+      "actual_output": "9.807522622966516",
+      "expected_output": "9.807522622966516",
+      "test_status": "pass"
+    },
+    {
+      "test_id": "input2",
+      "input": "[5, 4.358898943540674, 5]",
+      "actual_output": "627.3050128578548",
+      "expected_output": "9.807522622966514",
+      "test_status": "nopass"
+    },
+    {
+      "test_id": "input3",
+      "input": "[7, 9, 6]",
+      "actual_output": "1471.4754500160714",
+      "expected_output": "20.97617696340303",
+      "test_status": "nopass"
+    },
+    {
+      "test_id": "input4",
+      "input": "[13.601470508735444, 9, 6]",
+      "actual_output": "20.976176963403017",
+      "expected_output": "20.97617696340298",
+      "test_status": "pass"
+    },
+    {
+      "test_id": "input5",
+      "input": "[7, 9.433981132056603, 6]",
+      "actual_output": "20.97617696340298",
+      "expected_output": "20.97617696340298",
+      "test_status": "pass"
+    },
+    {
+      "test_id": "input6",
+      "input": "[7, 9, 14.966629547095765]",
+      "actual_output": "20.97617696340298",
+      "expected_output": "20.97617696340298",
+      "test_status": "pass"
+    },
+    {
+      "test_id": "input7",
+      "input": "[13.601470508735444, 19.0, 6]",
+      "actual_output": "20.97617696340319",
+      "expected_output": "20.97617696340319",
+      "test_status": "pass"
+    },
+    {
+      "test_id": "input8",
+      "input": "[13.601470508735444, 9, 22.271057451320086]",
+      "actual_output": "20.97617696340332",
+      "expected_output": "20.97617696340332",
+      "test_status": "pass"
+    }
+  ],
+  "mg_relation": [
+    {
+      "mr_id": "MR1",
+      "source_test_id": "input1",
+      "followup_test_id": "input2",
+      "input_transformation": " Given the three sides of the original triangle [a, b, c] Maintainer a、c Unchanged, will a、c If the angle between  and  becomes the supplementary angle of the original angle, then the corresponding side b becomes: b1 = sqrt(2 * a^2 + 2 * c^2 - b^2)，a1 = a，c1 = c . The transformed input is [a1, b1, c1]。",
+      "output_relation": " Compare the output area of the original input s and the output area of the input after transformation s1 . Keep both values 4  decimal places, the absolute difference abs(s1 - s) <g id=”24170”/> should be less than <g id=”24171”/> 1e-4。",
+      "actual_relation_status": "VMG"
+    },
+    {
+      "mr_id": "MR2",
+      "source_test_id": "input3",
+      "followup_test_id": "input4",
+      "input_transformation": " Given the three sides of the original triangle [a, b, c] Maintainer b、c Unchanged, will b、c If the angle between  and  becomes the supplementary angle of the original angle, then the corresponding side a becomes: a1 = sqrt(2 * b^2 + 2 * c^2 - a^2)，b1 = b，c1 = c . The transformed input is [a1, b1, c1]。",
+      "output_relation": " Compare the output area of the original input s and the output area of the input after transformation s1 . Keep both values 4  decimal places, the absolute difference abs(s1 - s) <g id=”24170”/> should be less than <g id=”24171”/> 1e-4。",
+      "actual_relation_status": "VMG"
+    },
+    {
+      "mr_id": "MR3",
+      "source_test_id": "input3",
+      "followup_test_id": "input5",
+      "input_transformation": " Given the three sides of the original triangle [a, b, c] Maintainer a、c Unchanged, will a、c If the angle between  and  becomes the supplementary angle of the original angle, then the corresponding side b becomes: b1 = sqrt(2 * a^2 + 2 * c^2 - b^2)，a1 = a，c1 = c . The transformed input is [a1, b1, c1]。",
+      "output_relation": " Compare the output area of the original input s and the output area of the input after transformation s1 . Keep both values 4  decimal places, the absolute difference abs(s1 - s) <g id=”24170”/> should be less than <g id=”24171”/> 1e-4。",
+      "actual_relation_status": "VMG"
+    },
+    {
+      "mr_id": "MR4",
+      "source_test_id": "input3",
+      "followup_test_id": "input6",
+      "input_transformation": " Given the three sides of the original triangle [a, b, c] Maintainer a、b Unchanged, will a、b If the angle between  and  becomes the supplementary angle of the original angle, then the corresponding side c becomes: c1 = sqrt(2 * a^2 + 2 * b^2 - c^2)，a1 = a，b1 = b . The transformed input is [a1, b1, c1]。",
+      "output_relation": " Compare the output area of the original input s and the output area of the input after transformation s1 . Keep both values 4  decimal places, the absolute difference abs(s1 - s) <g id=”24170”/> should be less than <g id=”24171”/> 1e-4。",
+      "actual_relation_status": "VMG"
+    },
+    {
+      "mr_id": "MR5",
+      "source_test_id": "input3",
+      "followup_test_id": "input7",
+      "input_transformation": " Given the three sides of the original triangle [a, b, c] Maintainer c Unchanged, will b、c If the angle between  and  becomes the supplementary angle of the original angle, then the corresponding side a becomes: a1 = sqrt(2 * b^2 + 2 * c^2 - a^2) , while the edge b becomes: b1 = sqrt(3 * b^2 + 6 * c^2 - 2 * a^2)，c1 = c . The transformed input is [a1, b1, c1]。",
+      "output_relation": " Compare the output area of the original input s and the output area of the input after transformation s1 . Keep both values 4  decimal places, the absolute difference abs(s1 - s) <g id=”24170”/> should be less than <g id=”24171”/> 1e-4。",
+      "actual_relation_status": "VMG"
+    },
+    {
+      "mr_id": "MR6",
+      "source_test_id": "input3",
+      "followup_test_id": "input8",
+      "input_transformation": " Given the three sides of the original triangle [a, b, c] Maintainer b Unchanged, will b、c If the angle between  and  becomes the supplementary angle of the original angle, then the corresponding side a becomes: a1 = sqrt(2 * b^2 + 2 * c^2 - a^2) , while the edge c becomes: c1 = sqrt(6 * b^2 + 3 * c^2 - 2 * a^2)，b1 = b . The transformed input is [a1, b1, c1]。",
+      "output_relation": " Compare the output area of the original input s and the output area of the input after transformation s1 . Keep both values 4  decimal places, the absolute difference abs(s1 - s) <g id=”24170”/> should be less than <g id=”24171”/> 1e-4。",
+      "actual_relation_status": "VMG"
+    }
+  ],
+  "patch_budget": 5,
+  "generation_limits": {
+    "num_ctx": 32768,
+    "num_predict": 8192,
+    "max_edits_per_candidate": 3,
+    "max_total_touched_lines_per_candidate": 20,
+    "require_known_line_coverage": true
+  },
+  "policy": "One LLM response performs one shared evidence analysis and returns all patch candidates; no Agent1/Agent2 artifacts are used."
+}

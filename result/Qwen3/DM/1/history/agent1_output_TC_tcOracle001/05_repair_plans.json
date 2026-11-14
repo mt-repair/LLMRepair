@@ -1,0 +1,118 @@
+{
+  "RC001": {
+    "fault_hypothesis": "Incorrect minor matrix formation in AlgComp due to improper exclusion of ith row and jth column",
+    "causal_chain": [
+      "The AlgComp method fails to exclude the ith row entirely when forming the minor matrix.",
+      "This leads to incorrect minor matrices during recursive determinant calculation.",
+      "The incorrect minors cause wrong determinant values in non-triangular matrices."
+    ],
+    "desired_behavior": "Form correct minor matrices by excluding both ith row and jth column.",
+    "repair_intent": "Modify AlgComp to correctly exclude the ith row and jth column when forming minors.",
+    "preservation_constraints": [
+      "Preserve checks for upper and lower triangular matrices.",
+      "Maintain recursive expansion logic for determinant calculation.",
+      "Ensure correct handling of cofactor signs."
+    ],
+    "uncertainty": [
+      "Uncertainty exists regarding whether other minor matrix usages are affected.",
+      "Depends on correct implementation of minor matrix formation in AlgComp."
+    ],
+    "validation_obligations": [
+      "Test with known triangular matrices to ensure correct determinant calculation.",
+      "Validate with non-triangular matrices to confirm correct minor formation.",
+      "Check for correct handling of edge cases and base cases."
+    ]
+  },
+  "RC002": {
+    "fault_hypothesis": "Incorrect minor matrix initialization in AlgComp method",
+    "causal_chain": [
+      "The minor matrix is incorrectly formed by only excluding the ith column instead of both ith row and column.",
+      "This leads to an invalid minor matrix used in the determinant calculation.",
+      "The invalid minor matrix causes an incorrect determinant value."
+    ],
+    "desired_behavior": "The minor matrix should exclude both the ith row and ith column to correctly compute the determinant.",
+    "repair_intent": "Modify the array initialization to exclude both the ith row and ith column.",
+    "preservation_constraints": [
+      "Maintain the recursive cofactor expansion logic.",
+      "Ensure correct handling of matrix dimensions."
+    ],
+    "uncertainty": [
+      "Uncertainty exists regarding the exact line causing the minor matrix formation error, but the root cause likely lies in the AlgComp method."
+    ],
+    "validation_obligations": [
+      "Re-run the test case with the fixed minor matrix initialization to verify the determinant calculation."
+    ]
+  },
+  "RC003": {
+    "fault_hypothesis": "The minor matrix formation in AlgComp excludes only the ith column instead of both ith row and column, causing incorrect determinant calculation.",
+    "causal_chain": [
+      "Incorrect column exclusion in minor matrix formation",
+      "Faulty minor matrix leads to incorrect determinant calculation",
+      "Determinant calculation fails for non-triangular matrices"
+    ],
+    "desired_behavior": "Minor matrix excludes both ith row and column correctly.",
+    "repair_intent": "Modify condition to exclude elements where row or column index equals i.",
+    "preservation_constraints": [
+      "Maintain correct handling of triangular matrices.",
+      "Preserve recursive cofactor expansion logic.",
+      "Ensure base case for n=1 remains functional."
+    ],
+    "uncertainty": [
+      "Uncertainty exists regarding exact impact on determinant calculation for non-triangular matrices.",
+      "Test cases indicate failure but lack exact expected output for validation."
+    ],
+    "validation_obligations": [
+      "Verify determinant calculation for triangular matrices post-repair.",
+      "Validate determinant calculation for non-triangular matrices.",
+      "Ensure test cases TC007 and TC008 pass with correct outputs."
+    ]
+  },
+  "RC004": {
+    "fault_hypothesis": "The AlgComp method incorrectly forms minor matrices by excluding only the ith column instead of both the ith row and column, leading to invalid determinant calculations.",
+    "causal_chain": [
+      "The code only skips elements where j % n == i, which removes the ith column but not the ith row.",
+      "This results in incorrect minor matrices during the recursive determinant calculation.",
+      "The incorrect minor matrices cause the determinant to be miscalculated."
+    ],
+    "desired_behavior": "The minor matrices should exclude both the ith row and ith column to correctly compute the determinant.",
+    "repair_intent": "Modify the AlgComp method to exclude elements from both the ith row and ith column when forming the minor matrix.",
+    "preservation_constraints": [
+      "Preserve the recursive determinant calculation logic.",
+      "Ensure the base case for n=1 remains correct."
+    ],
+    "uncertainty": [
+      "Uncertainty exists regarding whether all test cases will pass after the fix.",
+      "The exact impact of the change on other test cases is unknown."
+    ],
+    "validation_obligations": [
+      "Re-run TC007 to verify the determinant is correctly calculated as 336.",
+      "Re-run TC008 to ensure the determinant is accurate for non-triangular matrices."
+    ]
+  },
+  "RC005": {
+    "fault_hypothesis": "The code incorrectly identifies the matrix as lower triangular when it is actually upper triangular, leading to an incorrect determinant calculation.",
+    "causal_chain": [
+      "The elif condition on line 24 checks for f3 or f4, which are meant for lower triangular matrices.",
+      "The test case input is an upper triangular matrix with non-zero elements above the diagonal.",
+      "The code proceeds to the DeterComp method instead of correctly handling the upper triangular case.",
+      "This leads to an incorrect determinant calculation resulting in 0 instead of 336."
+    ],
+    "desired_behavior": "The program correctly identifies the matrix as upper triangular and calculates the determinant using the appropriate method for upper triangular matrices.",
+    "repair_intent": "Modify the condition on line 24 to check for f1 or f2 instead of f3 or f4 to correctly identify upper triangular matrices.",
+    "preservation_constraints": [
+      "Ensure that the code correctly handles lower triangular matrices by preserving the f3 or f4 condition in the appropriate section.",
+      "Maintain the logic for the DeterComp method as it is correctly used for non-triangular matrices.",
+      "Preserve the calculation of the determinant for upper triangular matrices using the sum of diagonal elements."
+    ],
+    "uncertainty": [
+      "The test case may not cover all edge cases of upper triangular matrices.",
+      "There might be other parts of the code that rely on the incorrect condition which could be affected by this change.",
+      "The repair may not address other potential issues in the determinant calculation logic."
+    ],
+    "validation_obligations": [
+      "Run the test case TC007 to verify that the determinant is now correctly calculated as 336.",
+      "Check other test cases to ensure that lower triangular matrices are still handled correctly.",
+      "Review the determinant calculation logic for any other potential issues introduced by the repair."
+    ]
+  }
+}

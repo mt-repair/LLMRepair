@@ -1,0 +1,20 @@
+--- a/print_tokens.c
++++ b/print_tokens.c
+@@ -210,7 +210,7 @@
+ 	      return(numeric_case(tstream_ptr,token_ptr,ch,
+ 				  token_str,token_ind));
+ 	  } else if (next_st == -3) {/* This is the IDENTIFIER case */
+-	      token_ptr->token_id='\0';
++/* These are all special SPECIAL character */
+ 	      unget_char(ch,tstream_ptr->ch_stream);
+ 	      token_ind--;
+ 	      get_actual_token(token_str,token_ind);
+@@ -462,7 +462,7 @@
+       return(state);
+     if(base[state]+ch >= 0)
+     {
+-        if(check[base[state]+ch] == state) /* Check for the right state */
++if(check[base[state]+tolower(ch)] == state)
+              return(next[base[state]+ch]);
+         else
+               return(next_state(default1[state],ch));

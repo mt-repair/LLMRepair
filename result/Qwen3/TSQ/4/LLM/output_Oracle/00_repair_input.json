@@ -1,0 +1,57 @@
+{
+  "program_path": "e:\\LLMProgramRepair\\LLM\\MSBF\\code\\Qwen3\\TSQ\\Mutant4.py",
+  "project_root": "e:\\LLMProgramRepair\\LLM\\MSBF\\code\\Qwen3\\TSQ",
+  "program_function": "\n            Program name: Trisquare\n            Function: Calculate the area of a triangle given three side lengths.\n\n            Input: argv, a list containing three numeric side lengths [a, b, c].\n            Output: returns a tuple (area, symbol). symbol is always 0.\n\n            Behavior:\n            1. If any side ≤ 0 or triangle‑inequality is violated, print \"Not a triangle\" and return (0, 0).\n            2. For valid triangle sides: classify triangle as acute, right‑angled or obtuse.\n            Use corresponding formulas to compute area for isosceles and scalene cases.\n        ",
+  "requested_mode": "ORACLE",
+  "effective_mode": "ORACLE",
+  "known_fault_lines": [
+    34
+  ],
+  "test_executions": [
+    {
+      "test_id": "input1",
+      "input": "[5, 3, 4]",
+      "actual_output": "12",
+      "expected_output": "6",
+      "test_status": "nopass"
+    },
+    {
+      "test_id": "input2",
+      "input": "[5, 8.54400374531753, 4]",
+      "actual_output": "6",
+      "expected_output": "6",
+      "test_status": "pass"
+    },
+    {
+      "test_id": "input3",
+      "input": "[5, 3, 7.211102550927978]",
+      "actual_output": "6",
+      "expected_output": "6",
+      "test_status": "pass"
+    },
+    {
+      "test_id": "input4",
+      "input": "[5.0, 8.54400374531753, 4]",
+      "actual_output": "6",
+      "expected_output": "6",
+      "test_status": "pass"
+    },
+    {
+      "test_id": "input5",
+      "input": "[5.0, 3, 7.211102550927978]",
+      "actual_output": "6",
+      "expected_output": "6",
+      "test_status": "pass"
+    }
+  ],
+  "mg_relation": [],
+  "patch_budget": 5,
+  "generation_limits": {
+    "num_ctx": 32768,
+    "num_predict": 8192,
+    "max_edits_per_candidate": 3,
+    "max_total_touched_lines_per_candidate": 20,
+    "require_known_line_coverage": true
+  },
+  "policy": "One LLM response performs one shared evidence analysis and returns all patch candidates; no Agent1/Agent2 artifacts are used."
+}

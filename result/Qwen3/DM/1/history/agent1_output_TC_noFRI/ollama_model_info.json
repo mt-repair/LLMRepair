@@ -1,0 +1,9 @@
+{
+  "model": "deepcoder:14b",
+  "available_models": [
+    "deepseek-r1:14b",
+    "deepcoder:latest",
+    "deepcoder:14b",
+    "granite3.3:8b"
+  ]
+}

@@ -1,0 +1,26 @@
+[
+  {
+    "attempt": 1,
+    "errors": [
+      "Model output is not valid JSON: Unterminated string starting at: line 41 column 26 (char 2451)"
+    ],
+    "raw_tail": "paration >= self.ALIM()) and (self.Own_Tracked_Alt < self.Other_Tracked_Alt - self.MINSEP) and (self.Down_Separation >= self.ALIM()) and (self.Own_Tracked_Alt < self.Other_Tracked_Alt - self.MINSEP) and (self.Down_Separation >= self.ALIM()) and (self.Own_Tracked_Alt < self.Other_Tracked_Alt - self.MINSEP) and (self.Down_Separation >= self.ALIM()) and (self.Own_Tracked_Alt < self.Other_Tracked_Alt - self.MINSEP) and (self.Down_Separation >= self.ALIM()) and (self.Own_Tracked_Alt < self.Other_Tracked_Alt - self.MINSEP) and (self.Down_Separation >= self.ALIM()) and (self.Own_Tracked_Alt < self.Other_Tracked_Alt - self.MINSEP) and (self.Down_Separation >= self.ALIM()) and (self.Own_Tracked_Alt < self.Other_Tracked_Alt - self.MINSEP) and (self.Down_Separation >= self.ALIM()) and (self.Own_Tracked_Alt < self.Other_Tracked_Alt - self.MINSEP) and (self.Down_Separation >= self.ALIM()) and (self.Own_Tracked_Alt < self.Other_Tracked_Alt - self.MINSEP) and (self.Down_Separation >= self.ALIM()) and",
+    "response_metadata": {
+      "model": "Qwen3:14b",
+      "temperature": 0.05,
+      "seed": 0,
+      "num_ctx": 32768,
+      "num_predict": 8192,
+      "prompt_chars": 13650,
+      "done": true,
+      "done_reason": "length",
+      "prompt_eval_count": 4243,
+      "eval_count": 8192,
+      "prompt_eval_duration": 1881660000,
+      "eval_duration": 324831373000,
+      "total_duration": 327157648800,
+      "load_duration": 20676400,
+      "client_elapsed_seconds": 329.188
+    }
+  }
+]

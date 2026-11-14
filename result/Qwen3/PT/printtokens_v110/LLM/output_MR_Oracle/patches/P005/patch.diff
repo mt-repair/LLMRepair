@@ -1,0 +1,21 @@
+--- a/print_tokens.c
++++ b/print_tokens.c
+@@ -229,7 +229,7 @@
+                            if(check_delimiter(ch)==TRUE)
+                            {
+                                  token_ptr->token_id=keyword(next_st);
+-                                 unget_char(cu_state,tstream_ptr->ch_stream);
++unget_char(ch,tstream_ptr->ch_stream);
+                                  token_ptr->token_string[0]='\0';
+                                  return(token_ptr);
+                            }
+@@ -342,7 +342,8 @@
+ static int check_delimiter(ch)
+ char ch;
+ {
+-      if(!isalpha(ch) && !isdigit(ch)) /* Check for digit and alpha */
++if(!isalpha(ch) && !isdigit(ch) && ch != '\"') /* Check for digit, alpha, and string delimiter */
++           return(TRUE);
+           return(TRUE);
+       return(FALSE);
+ }

@@ -1,0 +1,48 @@
+{
+  "candidates": [
+    {
+      "line": 18,
+      "selection_reason": "Flag check determines triangular matrix handling",
+      "fault_mechanism": "Incorrect flag evaluation leading to wrong determinant method",
+      "test_evidence_refs": [
+        "TC008"
+      ],
+      "mr_evidence_refs": [
+        "MG004"
+      ],
+      "confidence": "high",
+      "candidate_id": "RC001"
+    },
+    {
+      "line": 24,
+      "selection_reason": "Alternative triangular matrix handling",
+      "fault_mechanism": "Incorrect flag evaluation leading to wrong determinant method",
+      "test_evidence_refs": [
+        "TC008"
+      ],
+      "mr_evidence_refs": [
+        "MG004"
+      ],
+      "confidence": "medium",
+      "candidate_id": "RC002"
+    },
+    {
+      "line": 41,
+      "selection_reason": "Cofactor expansion implementation",
+      "fault_mechanism": "Indexing error in recursive calculation",
+      "test_evidence_refs": [
+        "TC008"
+      ],
+      "mr_evidence_refs": [
+        "MG004"
+      ],
+      "confidence": "medium",
+      "candidate_id": "RC003"
+    }
+  ],
+  "summary": "The primary issues stem from incorrect flag evaluation and potential indexing errors in the recursive determinant calculation. The flags determine the matrix type, and incorrect evaluation leads to wrong methods. The recursive method may have indexing issues affecting non-triangular matrices.",
+  "uncertainties": [
+    "Uncertainty in exact cause due to limited test case outputs",
+    "Potential interaction between flag checks and recursive method"
+  ]
+}

@@ -1,0 +1,142 @@
+[
+  {
+    "name": "04_candidate_assessment_batch_001",
+    "attempts": [
+      {
+        "attempt": 1,
+        "kind": "validation",
+        "validation_errors": [],
+        "response_metadata": {
+          "num_ctx": 12288,
+          "num_predict": 6400,
+          "prompt_chars": 10030,
+          "format_mode": "json",
+          "done": true,
+          "done_reason": "stop",
+          "prompt_eval_count": 2956,
+          "eval_count": 2036,
+          "prompt_eval_duration": 1759428000,
+          "eval_duration": 74277610000,
+          "total_duration": 80250757800,
+          "load_duration": 4198763000,
+          "client_elapsed_seconds": 82.297,
+          "raw_chars": 5082
+        }
+      }
+    ],
+    "candidate_lines": [
+      11,
+      21,
+      24,
+      30,
+      33
+    ],
+    "evidence_items_per_candidate": 3,
+    "effective_batch_size": 5
+  },
+  {
+    "name": "04_candidate_assessment_batch_002",
+    "attempts": [
+      {
+        "attempt": 1,
+        "kind": "validation",
+        "validation_errors": [],
+        "response_metadata": {
+          "num_ctx": 12288,
+          "num_predict": 6400,
+          "prompt_chars": 9977,
+          "format_mode": "json",
+          "done": true,
+          "done_reason": "stop",
+          "prompt_eval_count": 2934,
+          "eval_count": 1827,
+          "prompt_eval_duration": 1191509000,
+          "eval_duration": 66486023000,
+          "total_duration": 67955117500,
+          "load_duration": 4983600,
+          "client_elapsed_seconds": 70.0,
+          "raw_chars": 5304
+        }
+      }
+    ],
+    "candidate_lines": [
+      34,
+      35,
+      36,
+      37,
+      38
+    ],
+    "evidence_items_per_candidate": 3,
+    "effective_batch_size": 5
+  },
+  {
+    "name": "04_candidate_assessment_batch_003",
+    "attempts": [
+      {
+        "attempt": 1,
+        "kind": "validation",
+        "validation_errors": [],
+        "response_metadata": {
+          "num_ctx": 12288,
+          "num_predict": 6400,
+          "prompt_chars": 10055,
+          "format_mode": "json",
+          "done": true,
+          "done_reason": "stop",
+          "prompt_eval_count": 2957,
+          "eval_count": 2090,
+          "prompt_eval_duration": 1221003000,
+          "eval_duration": 76682045000,
+          "total_duration": 78175395600,
+          "load_duration": 3211500,
+          "client_elapsed_seconds": 80.188,
+          "raw_chars": 5746
+        }
+      }
+    ],
+    "candidate_lines": [
+      40,
+      41,
+      42,
+      43,
+      46
+    ],
+    "evidence_items_per_candidate": 3,
+    "effective_batch_size": 5
+  },
+  {
+    "name": "04_candidate_assessment_batch_004",
+    "attempts": [
+      {
+        "attempt": 1,
+        "kind": "validation",
+        "validation_errors": [],
+        "response_metadata": {
+          "num_ctx": 12288,
+          "num_predict": 6400,
+          "prompt_chars": 9991,
+          "format_mode": "json",
+          "done": true,
+          "done_reason": "stop",
+          "prompt_eval_count": 2931,
+          "eval_count": 2222,
+          "prompt_eval_duration": 1145924000,
+          "eval_duration": 81241451000,
+          "total_duration": 82665180400,
+          "load_duration": 1019900,
+          "client_elapsed_seconds": 84.688,
+          "raw_chars": 5272
+        }
+      }
+    ],
+    "candidate_lines": [
+      47,
+      48,
+      49,
+      51,
+      52
+    ],
+    "evidence_items_per_candidate": 3,
+    "effective_batch_size": 5
+  }
+]

@@ -1,0 +1,11 @@
+--- a/Mutant2.py
++++ b/Mutant2.py
+@@ -23,7 +23,7 @@
+                 area = Min * h / 2
+                 return area, symbol
+             elif Min == mid:  #  Vertex angle greater than 60 Isosceles triangle with an angle of  [4, 4, 5]
+-                h = math.sqrt(pow(Min, 2) - pow(mid / 2, 2))
++h = math.sqrt(pow(Min, 2) - pow(Max / 2, 2))
+                 symbol = 1
+                 area = Max * h / 2
+                 return area, symbol

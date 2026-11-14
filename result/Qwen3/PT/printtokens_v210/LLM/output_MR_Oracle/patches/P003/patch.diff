@@ -1,0 +1,14 @@
+--- a/print_tokens.c
++++ b/print_tokens.c
+@@ -251,7 +251,10 @@
+                            strcpy(token_ptr->token_string,token_str);
+                            return(token_ptr);
+                  case 30 :  /* This is COMMENT case */
+-                           return(error_or_eof_case(tstream_ptr,token_ptr,cu_state,token_str,token_ind,ch));
++skip(tstream_ptr->ch_stream); /* Skip the comment line */
++            token_ind=next_st=0;
++            break;
++        }
+                            token_ind=next_st=0;
+                            break;
+             }

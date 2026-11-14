@@ -1,0 +1,16 @@
+--- a/print_tokens.c
++++ b/print_tokens.c
+@@ -228,7 +228,12 @@
+                  case 16 : ch=get_char(tstream_ptr->ch_stream);
+                            if(check_delimiter(ch)==TRUE)
+                            {
+-                                 token_ptr->token_id=keyword(80);
++if (cu_state == 6 || cu_state ==9 || cu_state ==11 || cu_state ==13 || cu_state ==16) {
++    token_ptr->token_id=keyword(cu_state);
++} else {
++    //  Handle Invalid Status 
++    token_ptr->token_id = ERROR;
++}
+                                  unget_char(ch,tstream_ptr->ch_stream);
+                                  token_ptr->token_string[0]='\0';
+                                  return(token_ptr);
